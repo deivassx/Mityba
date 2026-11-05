@@ -19,16 +19,16 @@ test('archyvas išlaiko visas savaites, rūšiuoja naujausias pirmas ir atnaujin
   await assert.rejects(()=>archiveMenu({meta:{weekStart:'../invalid'},days:[]},dir));
 });
 test('puslapis atidaro naujausią, perjungia visą meniu ir grįžta iš istorijos',async()=>{
-  const old=structuredClone(current); old.meta.weekStart='2026-11-02';old.days=old.days.map((day,i)=>({...day,date:new Date(Date.parse('2026-11-02T00:00:00Z')+i*86400000).toISOString().slice(0,10)}));old.recipes[0].title='Ankstesnės savaitės receptas';
+  const old=structuredClone(current); old.meta.weekStart='2026-10-26';old.days=old.days.map((day,i)=>({...day,date:new Date(Date.parse('2026-10-26T00:00:00Z')+i*86400000).toISOString().slice(0,10)}));old.recipes[0].title='Ankstesnės savaitės receptas';
   const nodes=new Map();
   const node=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',addEventListener(){}});return nodes.get(id);};
-  const files={'./data/menu.json':current,'./data/history/index.json':[current,old].map(m=>({weekStart:m.meta.weekStart,weekEnd:m.days.at(-1).date,recipes:m.recipes.map(r=>r.title)})),'./data/history/2026-11-02.json':old};
+  const files={'./data/menu.json':current,'./data/history/index.json':[current,old].map(m=>({weekStart:m.meta.weekStart,weekEnd:m.days.at(-1).date,recipes:m.recipes.map(r=>r.title)})),'./data/history/2026-10-26.json':old};
   const context=vm.createContext({URL,Intl,Date,console,location:{href:'https://example.test/Mityba/',protocol:'https:'},window:{addEventListener(){},history:{pushState(){}}},document:{getElementById:node},localStorage:{getItem(){return null;}},fetch:async url=>({ok:!!files[url],status:files[url]?200:404,json:async()=>structuredClone(files[url])})});
   vm.runInContext(await fs.readFile(new URL('../js/app.js',import.meta.url),'utf8'),context);
   await new Promise(resolve=>setImmediate(resolve));
   assert.match(node('selected-week').innerHTML,/Artimiausia \/ einamoji savaitė/);
   assert.match(node('history-list').innerHTML,/aria-current="page"/);
-  await vm.runInContext("selectWeek('2026-11-02')",context);
+  await vm.runInContext("selectWeek('2026-10-26')",context);
   assert.match(node('recipes').innerHTML,/Ankstesnės savaitės receptas/);
   assert.match(node('selected-week').innerHTML,/8 savaičių|Vienas iš 8/);
   await vm.runInContext('selectWeek()',context);
