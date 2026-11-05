@@ -38,6 +38,10 @@ Bibliotekoje yra **48 unikalūs receptai** – po 8 kalakutienos, vištienos, š
 
 **Apsipirkimo būklė:** naujiems ingredientams (`cheese`, `feta`, `beef_steak`, `beef_strips`, `beef_roast`, `tomato`, `onion`, `cabbage`, `sauerkraut`) dar nėra patikrintų SKU kainų ir ūkio tiekimo, todėl planai lieka `purchaseReady=false` ir nepatvirtintų produktų krepšelyje nėra. `data/catalog.json` jų maistingumas – apytiksliai 100 g produktų įverčiai, ne gamintojų etikečių skaičiai. Griežta 2 parduotuvių riba išlieka.
 
+## Tikslios instrukcijos pagal ingredientus
+
+Visų 48 patiekalų gaminimo žingsniai perrašyti taip, kad būtų nurodyti *visi ir tik* recepte esantys ingredientai: tikslūs vienos porcijos gramai, paruošimas, kepimo seka, vidinė temperatūra, sūrio ir šaltų priedų pridėjimo laikas. Jei pavadinimas žadėjo recepto sąraše nesančią citriną arba česnaką, jis pakeistas. `scripts/recipe-instructions.mjs` yra vienintelis instrukcijų generavimo šaltinis; `validateRecipePreferences` bei `tests/recipe-instructions.test.mjs` tikrina tikslų ingredientų ir instrukcijų suderinamumą. Atlikus ingredientų pakeitimus, atnaujink ir jų tekstinę kopiją kiekvienoje savaitėje.
+
 ## Receptų gaminimas ir daržovių pirmenybės
 
 Nuo šiol nauji receptai ruošiami **orkaitėje, vienoje didelėje skardoje vienam kepimui**, be papildomo kepimo keptuvėje. Per sekmadienio ir trečiadienio gaminimą ruošiami du skirtingi patiekalai; kiekvienam patiekalui gali reikėti atskiro skardos kepimo arba kelių etapų su ta pačia skarda, jeigu vienu sluoksniu 3–4 porcijos netelpa. Maisto saugai būtinas termometras.

@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { archiveMenu } from './history.mjs';
 import { selectWeeklyRecipes } from './rotation.mjs';
+import { buildInstructions } from './recipe-instructions.mjs';
 
 export const vegetables = ['broccoli','carrot','beet','pepper','mushroom','tomato','onion','cabbage','sauerkraut'];
 const assert = (condition, message) => { if (!condition) throw Error(message); };
@@ -30,6 +31,9 @@ export function validateRecipePreferences(menu, rules=readRules()) {
     for (const [id,g] of Object.entries(recipe.ingredients)) {
       assert(!restricted.has(id),'Nemėgstamas ingredientas '+id+': '+recipe.id);
       if(maximum[id]!=null)assert(g<=maximum[id],'Viršyta vienos porcijos '+id+' riba ('+g+' > '+maximum[id]+' g): '+recipe.id);
+    }
+    if(recipe.instructionsFollowIngredients===true) {
+      assert(JSON.stringify(recipe.steps)===JSON.stringify(buildInstructions(recipe)),'Gaminimo instrukcijos neatitinka ingredientų: '+recipe.id);
     }
   }
   return menu;

@@ -7,6 +7,9 @@
 
 ## Privalomas darbo procesas
 
+- **Ingredientų ir instrukcijų vienovė:** kiekvieno recepto `steps` turi būti perkurti naudojant `scripts/recipe-instructions.mjs`, jei kinta jo `ingredients`. Visi produktai turi turėti gramus ir būti panaudoti kepimo ar patiekimo etape. Jokių česnakų, citrinų, prieskonių, druskos, padažų ingredientų ar kitų produktų, jeigu jų nėra ingredientų sąraše. Ši taisyklė taikoma visiems 48 receptams, `data/menu.json` ir visoms 8 savaitėms.
+
+
 - Remkis naujausia `config/planavimo-taisykles.json` versija GitHub saugykloje, **ne** ankstesniu pokalbiu ar modelio atmintimi.
 - Generuojant naują savaitę pirmenybę teik **sotumui, pakankamiems baltymams, daržovėms, maisto paruošimui du kartus per savaitę**. Pietums palik didesnę krakmolingų produktų dalį.
 - **NAUJA GAMINIMO TAISYKLĖ:** kiekvienas receptas – vienos didelės orkaitės skardos patiekalas, be keptuvės, puodo ar garinimo kaip papildomų gaminimo etapų. Kietesnes daržoves dėk anksčiau, mėsą ar žuvį ir minkštas daržoves – vėliau, jogurto/varškės/raugintus priedus patiek šaltus. 3–4 porcijų kiekiui, jei viena skarda per maža, kepk keliais etapais ta pačia skarda, o ne perkrauk ją.

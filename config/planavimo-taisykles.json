@@ -370,6 +370,13 @@
       "noRecipeRepeatedWithinEightWeeks": true,
       "details": "2 pietų patiekalai iš kalakutienos, vištienos, ėrienos ar kiaulienos; 2 vakarienės iš šamo, jautienos, lašišos ar menkės",
       "priceNote": "Nauji produktai be realių kainų yra tik planavimo juodraščiai"
+    },
+    "instructionIngredientIntegrity": {
+      "enabled": true,
+      "generatedBy": "scripts/recipe-instructions.mjs",
+      "policy": "Visi Kaip pagaminti veiksmai tik iš recepto ingredients. Kiekvienas ingredientas su gramais išvardytas ir panaudotas konkrečiame etape. Jei keiti ingredients, perkurk steps. Nenaudok neįrašytų prieskonių, česnako, citrinos ar papildomų produktų.",
+      "appliedTo": "48 receptai, 8 savaitiniai meniu ir data/menu.json",
+      "validatedBy": "scripts/planner.mjs"
     }
   },
   "implementationStatus": {
