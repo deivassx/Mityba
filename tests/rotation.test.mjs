@@ -14,6 +14,10 @@ function weeklyPlan(n) {
   const m=structuredClone(catalog);
   m.meta.weekStart=weekStart;
   m.recipes=recipes;
+  const allowedNew=['turkey','beef','chicken','beef_steak','beef_strips','beef_roast','cheese','feta','tomato','onion','cabbage','sauerkraut','cucumber'];
+  m.meta={...m.meta,isPlanningSeries:true,purchaseReady:false,recipePreferencesApplied:true,
+    unresolvedIngredientIds:[...new Set(recipes.flatMap(r=>Object.keys(r.ingredients)).filter(id=>allowedNew.includes(id)))]};
+  m.products=m.products.filter(p=>!m.meta.unresolvedIngredientIds.includes(p.id));
   m.days=dates.map((date,i)=>({date,lunch:pairs[i<3?0:1][0],dinner:pairs[i<3?0:1][1]}));
   m.sessions=pairs.map((pair,i)=>({servings:Object.fromEntries(pair.map(id=>[id,i===0?3:4]))}));
   return m;
