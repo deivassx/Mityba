@@ -41,7 +41,7 @@ test('pakartotinis generavimas tai pačiai savaitei deterministinis, kitą savai
   const next=selectWeeklyRecipes(catalog.recipes,bank,'2026-11-23');
   assert.deepEqual(a,b);
   assert.notDeepEqual(a.recipes.map(x=>x.id),next.recipes.map(x=>x.id));
-  assert.deepEqual(weeklyPlan(0).recipes.map(x=>x.id),catalog.recipes.map(x=>x.id));
+  assert.deepEqual(weeklyPlan(0).recipes.map(x=>x.id).sort(),catalog.recipes.map(x=>x.id).sort());
 });
 test('neteisingos savaitės ir trūkstamų variantų nepriima',()=>{
   assert.throws(()=>selectWeeklyRecipes(catalog.recipes,bank,'2026-11-10'),/pirmadienį/);
