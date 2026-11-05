@@ -131,21 +131,16 @@ export async function generate(now=new Date()) {
   menu.meta={...menu.meta,weekStart:week,generatedAt:now.toISOString(),status:'Automatiškai patikrinta savaitė',pricingNotice:'Prekių kainos patikrintos '+now.toISOString()+'. Galutinės kainos ir pristatymo sąlygos gali pasikeisti.'};
   menu.sessions=pairs.map((pair,i)=>({title:i?'Trečiadienis':'Sekmadienis',subtitle:i?'IV–VII dienoms':'I–III dienoms',summary:pair.map(id=>menu.recipes.find(r=>r.id===id).title).join(' + '),servings:Object.fromEntries(pair.map(id=>[id,i?4:3])),steps:['Kiekvieno recepto ingredientus padaugink iš nurodyto porcijų skaičiaus.','Gamink pagal žemiau pateiktas receptų instrukcijas, naudok atskiras skardas.','Per 2 val. atvėsink ir padėk į šaldytuvą. Ketvirtai ir vėlesnėms dienoms skirtas porcijas iškart užšaldyk; atitirpink šaldytuve.'],duration:'Apie 70–90 min.'}));
   validate(menu,false);
+  // Tikrinti esamus ir kitų ūkių patvirtintus SKU, apskaičiuoti visas pakuotes ir
+  // rinktis viso krepšelio kainą griežtai iš daugiausia DVIEJŲ atsiskaitymo vietų.
+  const {compareFarmOffers,writeComparisonReport}=await import('./compare-farms.mjs');
+  const {choice,report}=await compareFarmOffers(menu);
+  await writeComparisonReport(report);
+  if(!choice.ok) throw Error('Nėra patikrinto 1–2 parduotuvių krepšelio: '+choice.reason);
+  menu.products=choice.chosen.map(({packs,lineEur,...product})=>product);
+  menu.stores=choice.stores;
+  menu.meta={...menu.meta,shoppingTotalEstimateEur:choice.totalEur,shoppingWithinTolerance:choice.withinTolerance,shoppingCheckedAt:report.generatedAt};
   const failures=[];
-  await Promise.all(menu.products.map(async p => {
-    try {
-      const html=await get(p.url), offer=extractOffer(html,p.url);
-      // Pack size remains a reviewed catalog value. Record the exact matching product evidence.
-      const normalize=s=>s.toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}]/gu,'');
-      if(offer.packAmount) {
-        const expected=p.packLitres || p.packGrams/1000;
-        assert(offer.unit===(p.packLitres?'l':'kg') && Math.abs(offer.packAmount-expected)<0.005,'Pasikeitusi pakuotė: '+p.id);
-        p.name=offer.name;
-      } else assert(normalize(offer.name)===normalize(p.sourceName||p.name),'Pasikeitęs produkto pavadinimas / pakuotė: '+p.id);
-      p.priceEur=offer.price;
-      p.verification={url:p.url,checkedAt:new Date().toISOString(),method:offer.method,productName:offer.name};
-    } catch(e) { failures.push(e.message); }
-  }));
   await Promise.all(menu.recipes.map(async r => {try { await get(r.photo,'image'); } catch(e) { failures.push(e.message); }}));
   assert(!failures.length,failures.join('\n'));
   validate(menu);

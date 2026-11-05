@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "notes": "Tai kandidatų patikrai skirtas failas, NE kainoraštis. Tik paskelbti ir atskirai patikrinti SKU gali būti parinkti. Naujus ūkininkus ir konkrečias jų prekes pildyti čia, ne spėlioti URL. Galutinę kainą, pristatymą ir pakuotes lyginti visame max 2 parduotuvių krepšelyje.",
+  "stores": [
+    {
+      "id": "pilnaspuodas",
+      "name": "Pilnas puodas (Baltuonių ūkio produkcijos pardavėjas)",
+      "emoji": "🌾",
+      "description": "Ne tiesioginis ūkio puslapis, o atskira parduotuvė",
+      "deliveryFeeEur": null,
+      "packingFeeEur": null,
+      "feesVerified": false,
+      "notes": "Tikslią pristatymo kainą į Vilnių ir kintamo svorio pakuotes būtina patikrinti prieš pasirenkant."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "broccoli",
+      "store": "barbora",
+      "name": "Šaldyti brokoliai WELL DONE, 400 g",
+      "url": "https://barbora.lt/produktai/saldyti-brokoliai-well-done-400-g",
+      "packGrams": 400,
+      "sourceName": "Šaldyti brokoliai WELL DONE, 400 g",
+      "nutritionallyEquivalentReviewed": true,
+      "reason": "Be priedų, tačiau 100 g maistinė vertė kiek skiriasi; katalogo maistinė vertė yra apytikslė."
+    },
+    {
+      "id": "beef",
+      "store": "farmlio",
+      "name": "Ekologiška smulkinta jautiena",
+      "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai/prekes/ekologiska-smulkinta-jautiena",
+      "packGrams": 1000,
+      "sourceName": "Ekologiška smulkinta jautiena",
+      "nutritionallyEquivalentReviewed": false,
+      "reason": "10 % riebalų vietoje iki 15 %, produktas pažymėtas išparduotu: neparinkti, kol nepatikrinta sudėtis, pakuotė ir atsargos."
+    },
+    {
+      "id": "turkey",
+      "store": "pilnaspuodas",
+      "name": "Baltuonių kalakuto krūtinėlės filė be kaulo ir be odos",
+      "url": "https://pilnaspuodas.lt/kategorija/mesa/kalakutiena/",
+      "packGrams": null,
+      "sourceName": "Kalakuto krūtinėlės filė be odos ir be kaulo",
+      "nutritionallyEquivalentReviewed": true,
+      "reason": "Ūkio produkcijos kategorija, ne konkretaus SKU, kintantis 600–800 g svoris ir nežinoma pristatymo kaina. Tik paieškos kandidatas – automatiškai neparinkti."
+    },
+    {
+      "id": "lamb_sausage",
+      "store": "sesuoleliuukis",
+      "name": "Šešuolėlių ūkio šviežios ėrienos dešrelės",
+      "url": "https://sesuoleliuukis.lt/produktas/sviezios-erienos-desreles/",
+      "packGrams": null,
+      "nutritionallyEquivalentReviewed": false,
+      "reason": "Pavyzdys kitam receptui; nėra dabartiniame meniu, reikia tikros pakuotės ir maistingumo."
+    }
+  ]
+}

@@ -29,6 +29,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Nuolatinių ūkių ir pirkinių taisyklių peržiūra
+        run: |
+          test -s AGENTS.md
+          test -s config/planavimo-taisykles.json
+          test -s data/offer-candidates.json
       - name: Testai
         run: node --test
       - name: Generuoti ir patikrinti naują meniu

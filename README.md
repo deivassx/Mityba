@@ -13,6 +13,9 @@ Svetainė: https://deivassx.github.io/Mityba/
 
 **Nauja apsipirkimo politika:** tiesioginiai ūkiai → Farmlio (su palyginimu) → Barbora tik daržovėms ir priedams, vištienai tik kai kitur nėra. Savaitės tikslas **100 EUR**, iki **110 EUR** tolerancija su visomis pakuotėmis ir pristatymu. `scripts/shopping-audit.mjs` per kiekvieną CI vykdymą suskaičiuoja numatomą krepšelį ir pažymi dabartinio katalogo neatitikimus, bet dar neieško alternatyvų internetu. Kad taisyklė būtų įvykdyta, turi būti pakeistos kataloge esančios kalakutienos ir jautienos nuorodos iš Barbora į patikrintus ūkius.
 
+**Kelių ūkių SKU kainų palyginimas:** `data/offer-candidates.json` turi patikrintinas kitų ūkių ir parduotuvių produkto nuorodas. `scripts/compare-farms.mjs` kiekvieną kartą mėgina patikrinti aktualią kainą ir prieinamumą, o `scripts/basket-optimizer.mjs` globaliai išrenka pigiausią leistiną **1–2 parduotuvių krepšelį** (pakuotės + preliminarūs pristatymo mokesčiai). Nežinomų pristatymo mokesčių, neatitinkančio produkto, nepatvirtinto svorio ir išparduotų prekių nepasirenka. Jei ūkių pasiūlymų visoms recepto prekėms trūksta, planavimo workflow **nepaskelbia naujo netaisyklingo meniu**, palieka ankstesnį ir parodo trūkstamus SKU. Reikalinga toliau papildyti tikrų gamintojų prekių nuorodomis (ypač jautiena ir kalakutiena).
+**Riba:** sistema nenaudoja mokamos interneto paieškos API ir pati neatranda naujų ūkių SKU URL iš viso interneto; ją gali papildyti Codex naudodamas agento instrukcijas.
+
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 

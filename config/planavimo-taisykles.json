@@ -36,7 +36,8 @@
       "baltuoniu.kalakutai.lt",
       "kazlauskuekoukis.lt",
       "elnienosprodukcija.lt",
-      "sesuoleliuukis.lt"
+      "sesuoleliuukis.lt",
+      "pilnaspuodas.lt"
     ],
     "deliveryDestination": "Vilnius, Lietuva",
     "selectionPriorities": [
@@ -188,6 +189,20 @@
       ],
       "fallbackEvidenceRequired": true,
       "note": "Šis apribojimas taikomas naujai planuojamiems pirkiniams; istorinių meniu nekeisti. Dabartiniame kataloge dar yra kalakutiena ir jautiena iš Barbora – tai neatitikimas, kurį reikia ištaisyti, prieš teigiant, kad visa automatika laikosi taisyklės."
+    },
+    "comparison": {
+      "maxCheckoutStores": 2,
+      "groupFarmlioVendorsUnderOneCheckout": true,
+      "rankBy": "full_cart_purchased_packs_plus_estimated_delivery_packing_and_small_order_fees",
+      "onlyVerifiedSkuUrls": true,
+      "onlyNutritionallyEquivalentAlternatives": true,
+      "excludeUnknownDeliveryCosts": true,
+      "excludeOutOfStock": true,
+      "fallbackPolicy": "Never break two-store limit or Barbora meat rules just to publish a fresh menu. If no feasible verified 1-2-store basket exists, do not replace the previously published menu; open a GitHub Actions issue explaining missing offers.",
+      "evidencePolicy": "For new offers, require exact product URL, compatible ingredient, weight, confirmed in-stock EUR price and current product name. Variable-weight products, unverified shipping, unknown minimum orders, or out-of-stock offers are research leads, not usable buying options.",
+      "candidateFile": "data/offer-candidates.json",
+      "farmerRegistry": "shopping.supplierCandidates",
+      "knownLimitations": "Automatic discovery of arbitrary new farm product URLs is not available without an external search/API; curated URLs are checked each run. Farmlio sellers' individual minimum orders and delivery-date combinations may require manual confirmation."
     }
   },
   "recipePreferences": {
@@ -224,7 +239,9 @@
       "shopping.allowedProductDomains",
       "shopping.verifiedPriceMaxAgeHours",
       "shopping.budget (automatinis krepšelio perspėjimas, ne ribojantis validatorius)",
-      "shopping.barboraRestriction (automatinis neatitikimo perspėjimas)"
+      "shopping.barboraRestriction (automatinis neatitikimo perspėjimas)",
+      "shopping.comparison.maxCheckoutStores",
+      "shopping.comparison.rankBy (only verified candidate pool)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
@@ -236,7 +253,9 @@
       "shopping.farmlioDirectProducerComparison",
       "shopping.sourcingOrder",
       "shopping.budget.priceValueAssessment",
-      "shopping.barboraRestriction"
+      "shopping.barboraRestriction",
+      "shopping.comparison.farmerRegistry",
+      "shopping.comparison.knownLimitations"
     ]
   }
 }
