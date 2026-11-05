@@ -19,7 +19,7 @@ test('archyvas išlaiko visas savaites, rūšiuoja naujausias pirmas ir atnaujin
   await assert.rejects(()=>archiveMenu({meta:{weekStart:'../invalid'},days:[]},dir));
 });
 test('puslapis atidaro naujausią, perjungia visą meniu ir grįžta iš istorijos',async()=>{
-  const old=structuredClone(current); old.meta.weekStart='2026-11-02';old.recipes[0].title='Ankstesnės savaitės receptas';
+  const old=structuredClone(current); old.meta.weekStart='2026-11-02';old.days=old.days.map((day,i)=>({...day,date:new Date(Date.parse('2026-11-02T00:00:00Z')+i*86400000).toISOString().slice(0,10)}));old.recipes[0].title='Ankstesnės savaitės receptas';
   const nodes=new Map();
   const node=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',addEventListener(){}});return nodes.get(id);};
   const files={'./data/menu.json':current,'./data/history/index.json':[current,old].map(m=>({weekStart:m.meta.weekStart,weekEnd:m.days.at(-1).date,recipes:m.recipes.map(r=>r.title)})),'./data/history/2026-11-02.json':old};

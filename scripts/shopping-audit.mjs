@@ -66,7 +66,7 @@ if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href){
   console.log((a.complete?'Pirkinių krepšelis':'NEPILNO krepšelio dalinė suma')+': '+a.estimatedTotalEur.toFixed(2)+' EUR (tikslas '+a.targetEur+' EUR; tolerancija '+a.softLimitEur+' EUR).');
   for(const m of a.warnings)console.log('::warning::'+m);
   if(process.env.GITHUB_STEP_SUMMARY){
-    const lines=['### Pirkinių politikos patikra','','(a.complete?'Preliminarus krepšelis':'NEPILNAS krepšelis – tik dalinė suma')+': **'+a.estimatedTotalEur.toFixed(2)+' EUR** (tikslas '+a.targetEur+' EUR, tolerancija '+a.softLimitEur+' EUR).','Pristatymo ir pakavimo mokesčiai yra katalogo įverčiai, ne patikrinta atsiskaitymo suma.',''];
+    const lines=['### Pirkinių politikos patikra','',(a.complete?'Preliminarus krepšelis':'NEPILNAS krepšelis – tik dalinė suma')+': **'+a.estimatedTotalEur.toFixed(2)+' EUR** (tikslas '+a.targetEur+' EUR, tolerancija '+a.softLimitEur+' EUR).','Pristatymo ir pakavimo mokesčiai yra katalogo įverčiai, ne patikrinta atsiskaitymo suma.',''];
     for(const s of a.stores) lines.push('- '+s.name+': prekės '+s.subtotalEur.toFixed(2)+' EUR, kiti mokesčiai '+round(s.totalEur-s.subtotalEur).toFixed(2)+' EUR.');
     for(const m of a.warnings)lines.push('- ⚠️ '+m);
     await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
