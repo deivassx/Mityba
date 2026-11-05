@@ -142,7 +142,8 @@ function renderHistory() {
   document.getElementById('history-list').innerHTML=historyEntries.map(entry=>{
     const latest=entry.weekStart===latestMenu.meta.weekStart;
     const current=entry.weekStart===state.input.meta.weekStart;
-    return `<a class="history-card" href="${latest?'./':'?week='+encodeURIComponent(entry.weekStart)}" data-week="${safe(entry.weekStart)}"${current?' aria-current="page"':''}>${entry.photo?`<img src="${safe(safeUrl(entry.photo))}" alt="" loading="lazy" onerror="this.hidden=true">`:''}<div class="history-card-body">${latest?'<span class="pillgreen">Naujausias meniu</span>':''}<strong>${safe(weekLabel(entry.weekStart,entry.weekEnd))}</strong><small>${safe(entry.recipes.length)} patiekalai · 7 dienos</small><small>${safe(entry.recipes.join(' · '))}</small></div></a>`;
+    const exampleBadge=entry.isExample?'<span class="pillgreen">Pavyzdinis meniu</span>':'';
+    return `<a class="history-card" href="${latest?'./':'?week='+encodeURIComponent(entry.weekStart)}" data-week="${safe(entry.weekStart)}"${current?' aria-current="page"':''}>${entry.photo?`<img src="${safe(safeUrl(entry.photo))}" alt="" loading="lazy" onerror="this.hidden=true">`:''}<div class="history-card-body">${latest?'<span class="pillgreen">Naujausias meniu</span>':''}${exampleBadge}<strong>${safe(weekLabel(entry.weekStart,entry.weekEnd))}</strong><small>${safe(entry.recipes.length)} patiekalai · 7 dienos</small><small>${safe(entry.recipes.join(' · '))}</small></div></a>`;
   }).join('');
 }
 async function selectWeek(week, updateUrl=true) {
@@ -159,7 +160,7 @@ async function selectWeek(week, updateUrl=true) {
     state=next; render(); renderHistory();
     document.getElementById('selected-week').innerHTML=latest
       ? `Naujausias meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}`
-      : `Ankstesnės savaitės meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}<a href="./" data-latest>Grįžti į naujausią →</a><div class="sub">Rodomos to meto kainos ir produktai.</div>`;
+      : `Ankstesnės savaitės meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}<a href="./" data-latest>Grįžti į naujausią →</a><div class="sub">${menu.meta.isExample?'Pavyzdinis praeities meniu. Kainos nėra istorinės – jų patikros data nurodyta pirkinių skiltyje.':'Rodomos to meto kainos ir produktai.'}</div>`;
     message.textContent='';
     if(updateUrl) {
       const url=new URL(location.href); url.searchParams.delete('week');

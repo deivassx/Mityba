@@ -1,0 +1,460 @@
+{
+  "meta": {
+    "name": "Sotus planas",
+    "weekStart": "2026-10-26",
+    "generatedAt": "2026-11-05T11:48:18.761Z",
+    "status": "Pavyzdinis praeities meniu",
+    "kcalLimit": 2100,
+    "maxStores": 2,
+    "targetMealsPerDay": 2,
+    "targetCookSessions": 2,
+    "pricingNotice": "Pavyzdinis meniu, sukurtas retrospektyviai. Kainos paimtos iš 2026-11-05 patikrinto plano; tai nėra šios praeities savaitės kainos.",
+    "isExample": true
+  },
+  "nutrients": {
+    "turkey": {
+      "kcal": 110,
+      "protein": 24,
+      "carbs": 0,
+      "fat": 1.5
+    },
+    "catfish": {
+      "kcal": 115,
+      "protein": 18,
+      "carbs": 0,
+      "fat": 5
+    },
+    "chicken": {
+      "kcal": 110,
+      "protein": 23,
+      "carbs": 0,
+      "fat": 2
+    },
+    "beef": {
+      "kcal": 215,
+      "protein": 19,
+      "carbs": 0,
+      "fat": 15
+    },
+    "potato": {
+      "kcal": 77,
+      "protein": 2,
+      "carbs": 17,
+      "fat": 0.1
+    },
+    "sweetpotato": {
+      "kcal": 86,
+      "protein": 1.6,
+      "carbs": 20,
+      "fat": 0.1
+    },
+    "broccoli": {
+      "kcal": 26,
+      "protein": 2,
+      "carbs": 2.4,
+      "fat": 0.4
+    },
+    "carrot": {
+      "kcal": 41,
+      "protein": 0.9,
+      "carbs": 9.6,
+      "fat": 0.2
+    },
+    "beet": {
+      "kcal": 43,
+      "protein": 1.6,
+      "carbs": 10,
+      "fat": 0.2
+    },
+    "zucchini": {
+      "kcal": 17,
+      "protein": 1.2,
+      "carbs": 3.1,
+      "fat": 0.3
+    },
+    "pepper": {
+      "kcal": 31,
+      "protein": 1,
+      "carbs": 6,
+      "fat": 0.3
+    },
+    "mushroom": {
+      "kcal": 22,
+      "protein": 3.1,
+      "carbs": 3.3,
+      "fat": 0.3
+    },
+    "oil": {
+      "kcal": 900,
+      "protein": 0,
+      "carbs": 0,
+      "fat": 100
+    },
+    "yogurt": {
+      "kcal": 82,
+      "protein": 11,
+      "carbs": 3.9,
+      "fat": 2.5
+    },
+    "cottage": {
+      "kcal": 102,
+      "protein": 11,
+      "carbs": 3.2,
+      "fat": 5
+    },
+    "walnut": {
+      "kcal": 704,
+      "protein": 17,
+      "carbs": 3.5,
+      "fat": 68
+    }
+  },
+  "ingredientLabels": {
+    "turkey": "Kalakutienos krūtinėlės filė",
+    "catfish": "Afrikinio šamo filė",
+    "chicken": "Vištienos krūtinėlės filė",
+    "beef": "Smulkinta jautiena (≤15 % riebumo)",
+    "potato": "Bulvės",
+    "sweetpotato": "Saldžiosios bulvės",
+    "broccoli": "Brokoliai",
+    "carrot": "Morkos",
+    "beet": "Burokėliai",
+    "zucchini": "Cukinijos",
+    "pepper": "Saldžiosios paprikos",
+    "mushroom": "Pievagrybiai",
+    "oil": "Alyvuogių aliejus",
+    "yogurt": "Baltyminis graikiško stiliaus jogurtas",
+    "cottage": "Varškė grūdeliais",
+    "walnut": "Graikiniai riešutai"
+  },
+  "recipes": [
+    {
+      "id": "samas",
+      "slot": "VAKARIENĖ",
+      "title": "Šamas su šiltomis daržovėmis",
+      "subtitle": "Cukinija · brokoliai · burokėliai · grūdėta varškė",
+      "mins": 35,
+      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "credit": "Solin Fitness / iliustracinė nuotrauka",
+      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "ingredients": {
+        "catfish": 285,
+        "broccoli": 238,
+        "zucchini": 285,
+        "beet": 143,
+        "oil": 10,
+        "cottage": 238,
+        "walnut": 19
+      },
+      "steps": [
+        "Burokėlius išvirk arba iškepk orkaitėje iš anksto (supjaustytus kubeliais užtruks ~30–40 min.).",
+        "Šamą nusausink, pagardink citrina, pipirais ir trupučiu druskos. Kepk orkaitėje 190 °C apie 15–20 min., iki 63 °C vidinės temperatūros.",
+        "Supjaustytą cukiniją apkepk su aliejumi 6–8 min.; brokolius išgarink.",
+        "Lėkštėje sudėk žuvį, šiltas daržoves ir varškę grūdeliais. Pabarstyk pasvertais graikiniais riešutais."
+      ],
+      "tag": "Lengva vakarienė"
+    },
+    {
+      "id": "vistiena",
+      "slot": "PIETŪS",
+      "title": "Vištiena su saldžiomis bulvėmis",
+      "subtitle": "Brokoliai · morkos · švelnus jogurto padažas",
+      "mins": 50,
+      "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+      "credit": "Gimme Delicious / iliustracinė nuotrauka",
+      "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+      "ingredients": {
+        "chicken": 285,
+        "sweetpotato": 238,
+        "broccoli": 190,
+        "carrot": 143,
+        "oil": 10,
+        "yogurt": 190
+      },
+      "steps": [
+        "Orkaitę įkaitink iki 210 °C. Saldžiąsias bulves ir morkas supjaustyk gabaliukais; vienodai paskirstyk ant skardos.",
+        "Apšlakstyk aliejumi, prieskoniais ir kepk apie 15 min.",
+        "Ant tos pačios ar kitos skardos sudėk vištieną, brokolius ir kepk dar apie 20 min., kol vištiena pasieks 74 °C viduje.",
+        "Jogurtą sumaišyk su citrina, druska ir krapais; porcijuok atskirai, kad mėsa neišmirktų."
+      ],
+      "tag": "Didesnė angliavandenių dalis"
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-10-26",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    },
+    {
+      "date": "2026-10-27",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    },
+    {
+      "date": "2026-10-28",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    },
+    {
+      "date": "2026-10-29",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    },
+    {
+      "date": "2026-10-30",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    },
+    {
+      "date": "2026-10-31",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    },
+    {
+      "date": "2026-11-01",
+      "lunch": "vistiena",
+      "dinner": "samas"
+    }
+  ],
+  "stores": [
+    {
+      "id": "farmlio",
+      "name": "Farmlio",
+      "emoji": "🌾",
+      "description": "Ūkiai ir šviežia žuvis",
+      "deliveryFeeEur": 4.99,
+      "freeDeliveryFromEur": 79,
+      "packingFeeEur": 1.49,
+      "notes": "Siuntimo kaina ir bendro pristatymo galimybė priklauso nuo pardavėjų, datų bei temperatūros režimo."
+    },
+    {
+      "id": "barbora",
+      "name": "Barbora",
+      "emoji": "🛒",
+      "description": "Mėsa, pieno produktai, šaldytos daržovės",
+      "deliveryFeeEur": 2.79,
+      "freeDeliveryFromEur": 69.99,
+      "packingTiers": [
+        {
+          "from": 0,
+          "fee": 2.39
+        },
+        {
+          "from": 40,
+          "fee": 2.69
+        },
+        {
+          "from": 70,
+          "fee": 2.99
+        },
+        {
+          "from": 100,
+          "fee": 3.29
+        },
+        {
+          "from": 140,
+          "fee": 3.69
+        },
+        {
+          "from": 200,
+          "fee": 3.99
+        }
+      ],
+      "smallBasketFeeBelowEur": 39.99,
+      "smallBasketFeeEur": 4,
+      "notes": "Pristatymo ir pakavimo kainos priklauso nuo užsakymo, laiko ir aptarnavimo zonos."
+    }
+  ],
+  "products": [
+    {
+      "id": "catfish",
+      "store": "farmlio",
+      "name": "Afrikinio šamo filė su oda",
+      "packGrams": 300,
+      "priceEur": 3.88,
+      "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda",
+      "verification": {
+        "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda",
+        "checkedAt": "2026-11-05T11:35:46.649Z",
+        "method": "schema.org/Product/Offer",
+        "productName": "Afrikinio šamo filė su oda"
+      }
+    },
+    {
+      "id": "carrot",
+      "store": "farmlio",
+      "name": "Morkos, 1 kg",
+      "packGrams": 1000,
+      "priceEur": 2,
+      "url": "https://farmlio.lt/pardavejai/andzej/prekes/morkos",
+      "sourceName": "Morkos",
+      "verification": {
+        "url": "https://farmlio.lt/pardavejai/andzej/prekes/morkos",
+        "checkedAt": "2026-11-05T11:35:52.213Z",
+        "method": "schema.org/Product/Offer",
+        "productName": "Morkos"
+      }
+    },
+    {
+      "id": "beet",
+      "store": "farmlio",
+      "name": "Burokai, 1 kg",
+      "packGrams": 1000,
+      "priceEur": 1.5,
+      "url": "https://farmlio.lt/pardavejai/andzej/prekes/burokai",
+      "sourceName": "Burokėliai",
+      "verification": {
+        "url": "https://farmlio.lt/pardavejai/andzej/prekes/burokai",
+        "checkedAt": "2026-11-05T11:35:47.377Z",
+        "method": "schema.org/Product/Offer",
+        "productName": "Burokėliai"
+      }
+    },
+    {
+      "id": "chicken",
+      "store": "barbora",
+      "name": "Lietuviška šviežia viščiukų broilerių filė WELL DONE, 500 g",
+      "packGrams": 500,
+      "priceEur": 3.49,
+      "url": "https://barbora.lt/produktai/lietuviska-sviezia-visciuku-broileriu-file-well-done-500-g",
+      "verification": {
+        "url": "https://barbora.lt/produktai/lietuviska-sviezia-visciuku-broileriu-file-well-done-500-g",
+        "checkedAt": "2026-11-05T11:35:46.797Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Lietuviška šviežia viščiukų broilerių filė WELL DONE, 500 g"
+      }
+    },
+    {
+      "id": "broccoli",
+      "store": "barbora",
+      "name": "Šaldyti brokoliai BONDUELLE VAPEUR, 400 g",
+      "packGrams": 400,
+      "priceEur": 1.99,
+      "url": "https://barbora.lt/produktai/saldyti-brokoliai-bonduelle-vapeur-400-g",
+      "verification": {
+        "url": "https://barbora.lt/produktai/saldyti-brokoliai-bonduelle-vapeur-400-g",
+        "checkedAt": "2026-11-05T11:35:46.808Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Šaldyti brokoliai BONDUELLE VAPEUR, 400 g"
+      }
+    },
+    {
+      "id": "cottage",
+      "store": "barbora",
+      "name": "Varškė grūdeliais  Farm Milk, 500 g",
+      "packGrams": 500,
+      "priceEur": 1.79,
+      "url": "https://barbora.lt/produktai/varske-grudeliais-farm-milk-500-g",
+      "verification": {
+        "url": "https://barbora.lt/produktai/varske-grudeliais-farm-milk-500-g",
+        "checkedAt": "2026-11-05T11:35:46.806Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Varškė grūdeliais  Farm Milk, 500 g"
+      }
+    },
+    {
+      "id": "yogurt",
+      "store": "barbora",
+      "name": "Baltyminis graikiško stiliaus jogurtas ALMA, 2,5 % rieb., 370 g",
+      "packGrams": 370,
+      "priceEur": 1.69,
+      "url": "https://barbora.lt/produktai/baltyminis-graikisko-stiliaus-jogurtas-alma-2-5-proc-rieb-370-g",
+      "verification": {
+        "url": "https://barbora.lt/produktai/baltyminis-graikisko-stiliaus-jogurtas-alma-2-5-proc-rieb-370-g",
+        "checkedAt": "2026-11-05T11:35:46.770Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Baltyminis graikiško stiliaus jogurtas ALMA, 2,5 % rieb., 370 g"
+      }
+    },
+    {
+      "id": "sweetpotato",
+      "store": "barbora",
+      "name": "Saldžiosios bulvės, 1 kg",
+      "packGrams": 1000,
+      "priceEur": 2.39,
+      "url": "https://barbora.lt/produktai/saldziosios-bulves-1-kg",
+      "verification": {
+        "url": "https://barbora.lt/produktai/saldziosios-bulves-1-kg",
+        "checkedAt": "2026-11-05T11:35:46.536Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Saldžiosios bulvės, 1 kg"
+      }
+    },
+    {
+      "id": "zucchini",
+      "store": "barbora",
+      "name": "Žaliosios cukinijos, 1 kg",
+      "packGrams": 1000,
+      "priceEur": 1.75,
+      "url": "https://barbora.lt/produktai/zaliosios-cukinijos-1-kg",
+      "verification": {
+        "url": "https://barbora.lt/produktai/zaliosios-cukinijos-1-kg",
+        "checkedAt": "2026-11-05T11:35:46.475Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Žaliosios cukinijos, 1 kg"
+      }
+    },
+    {
+      "id": "oil",
+      "store": "barbora",
+      "name": "Alyvuogių aliejus NATURALISIMO (0,2 % rūgštingumas), 500 ml",
+      "packGrams": 455,
+      "priceEur": 10.99,
+      "url": "https://barbora.lt/produktai/alyvuogiu-aliejus-naturalisimo-0-2-proc-rugstingumas-500-ml",
+      "packLitres": 0.5,
+      "verification": {
+        "url": "https://barbora.lt/produktai/alyvuogiu-aliejus-naturalisimo-0-2-proc-rugstingumas-500-ml",
+        "checkedAt": "2026-11-05T11:35:46.823Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Alyvuogių aliejus NATURALISIMO (0,2 % rūgštingumas), 500 ml"
+      }
+    },
+    {
+      "id": "walnut",
+      "store": "barbora",
+      "name": "Graikiniai riešutai WELL DONE, 200 g",
+      "packGrams": 200,
+      "priceEur": 2.69,
+      "url": "https://barbora.lt/produktai/graikiniai-riesutai-well-done-200-g",
+      "verification": {
+        "url": "https://barbora.lt/produktai/graikiniai-riesutai-well-done-200-g",
+        "checkedAt": "2026-11-05T11:35:46.818Z",
+        "method": "Barbora primary product cart data (EUR)",
+        "productName": "Graikiniai riešutai WELL DONE, 200 g"
+      }
+    }
+  ],
+  "sessions": [
+    {
+      "title": "Sekmadienis",
+      "subtitle": "I–III dienoms",
+      "summary": "Vištiena su saldžiomis bulvėmis + Šamas su šiltomis daržovėmis",
+      "servings": {
+        "vistiena": 3,
+        "samas": 3
+      },
+      "steps": [
+        "Kiekvieno recepto ingredientus padaugink iš nurodyto porcijų skaičiaus.",
+        "Gamink pagal žemiau pateiktas receptų instrukcijas, naudok atskiras skardas.",
+        "Per 2 val. atvėsink ir padėk į šaldytuvą. Ketvirtai ir vėlesnėms dienoms skirtas porcijas iškart užšaldyk; atitirpink šaldytuve."
+      ],
+      "duration": "Apie 70–90 min."
+    },
+    {
+      "title": "Trečiadienis",
+      "subtitle": "IV–VII dienoms",
+      "summary": "Vištiena su saldžiomis bulvėmis + Šamas su šiltomis daržovėmis",
+      "servings": {
+        "vistiena": 4,
+        "samas": 4
+      },
+      "steps": [
+        "Kiekvieno recepto ingredientus padaugink iš nurodyto porcijų skaičiaus.",
+        "Gamink pagal žemiau pateiktas receptų instrukcijas, naudok atskiras skardas.",
+        "Per 2 val. atvėsink ir padėk į šaldytuvą. Ketvirtai ir vėlesnėms dienoms skirtas porcijas iškart užšaldyk; atitirpink šaldytuve."
+      ],
+      "duration": "Apie 70–90 min."
+    }
+  ]
+}

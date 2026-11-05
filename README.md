@@ -77,3 +77,8 @@ Pilni meniu saugomi `data/history/YYYY-MM-DD.json`, kortelių sąrašas –
 `data/history/index.json`. Kiekvieną kartą sėkmingai generuojant išsaugoma ankstesnė
 ir nauja savaitė. Pakartotinai generuojant tą pačią savaitę atnaujinamas jos meniu;
 kitų savaičių failai išlieka. Senesnių savaičių kainos iš naujo netikrinamos.
+
+Istorijoje taip pat yra 8 retrospektyvūs pavyzdžiai (2026-09-14–2026-11-08),
+pažymėti „Pavyzdinis meniu“. Jie sukurti iš patikrinto dabartinio katalogo:
+rodomos kainos nėra istorinės. `node scripts/create-examples.mjs` atkuria šiuos
+pavyzdžius pagal naujausio plano datą ir neleidžia perrašyti tikrų planų.
