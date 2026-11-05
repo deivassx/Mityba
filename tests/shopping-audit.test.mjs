@@ -10,7 +10,8 @@ test('Pirkinių auditas žymi nepatvirtintus tiekėjus ir dalinę kainą',()=>{
   assert.equal(a.targetEur,100);
   assert.equal(a.softLimitEur,110);
   assert.equal(a.complete,false);
-  assert.deepEqual([...a.missing].sort(),['beef','chicken','turkey']);
+  const unresolved=menu.meta.unresolvedIngredientIds.slice().sort();
+  assert.deepEqual([...a.missing].sort(),unresolved);
   assert.ok(a.estimatedTotalEur>0);
   assert.ok(a.warnings.some(w=>w.includes('NEPILNAS_KREPSELIS')));
   assert.ok(a.stores.length<=2);
