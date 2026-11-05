@@ -39,6 +39,9 @@ jobs:
       - name: Generuoti ir patikrinti naują meniu
         if: github.event_name != 'push'
         run: node scripts/planner.mjs generate
+      - name: Palyginti ūkių pasiūlymus ir paskelbti trūkstamų SKU ataskaitą
+        if: github.event_name == 'push'
+        run: node scripts/compare-farms.mjs
       - name: Patikrinti išsaugotą meniu ir istoriją
         if: github.event_name == 'push'
         run: node scripts/planner.mjs archive

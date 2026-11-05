@@ -74,6 +74,8 @@ pakeitimus per `push`, publikuojamas jau išsaugotas ir patikrintas meniu su ist
 neužklausiant visų parduotuvių dar kartą. Laikinai nepasiekiami šaltiniai tikrinami
 iki trijų kartų.
 
+Pradėjus naują meniu, ūkių prekių pasiūlymai tikrinami atskirai per `compare-farms.mjs`; keičiant kodą `push` į `main` papildomai atliekamas pasiūlymų palyginimas ir į **Actions job summary** išvedama ataskaita net jeigu dabartiniams receptams dar trūksta patikrintų ūkininkų SKU. `schedule` paleidimo metu nesant leistino 1–2 parduotuvių krepšelio, naujas meniu negeneruojamas – ankstesnis paskelbtas meniu išlieka. Esamo katalogo kalakutiena ir jautiena iš Barbora neatitinka naujos politikos, todėl iki alternatyvų patikrinimo gali nebūti naujo meniu.
+
 ## Vietinės komandos (Node.js 24+)
 
 ```sh

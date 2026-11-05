@@ -54,9 +54,11 @@ export async function writeComparisonReport(report){
   await fs.writeFile(dir,JSON.stringify(report,null,2)+'\n');
   console.log('Palyginta '+report.compared.length+' pasiūlymų. ' +(report.chosen?'Geriausias leistinas krepšelis: '+report.chosen.totalEur+' EUR, '+report.chosen.stores.length+' parduotuvės.':'Nerastas taisykles atitinkantis krepšelis: '+report.failure));
   if(report.failure)note(report.failure);
+  if(report.chosen && !report.chosen.withinTolerance)note('Geriausias 1–2 parduotuvių krepšelis '+report.chosen.totalEur+' EUR viršija 110 EUR ribą. Reikia kitų produktų / receptų arba tiekėjų.');
   if(process.env.GITHUB_STEP_SUMMARY){
     const lines=['### Ūkininkų pasiūlymų palyginimas','',report.chosen?'**'+report.chosen.totalEur+' EUR**, parduotuvės: '+report.chosen.stores.join(', '):'⚠️ '+report.failure,'','*Tai konkrečių SKU palyginimas, ne automatinė interneto paieška.*','',''];
     for(const p of report.compared)lines.push('- '+p.id+' / '+p.store+': '+(p.verified?p.euroPerKg+' EUR/kg':'netinkama: '+p.reason));
+    if(report.chosen && !report.chosen.withinTolerance)lines.push('⚠️ Biudžetas viršytas net ir optimizavus: svarbu ieškoti pigesnių alternatyvų.');
     await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
   }
 }

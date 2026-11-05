@@ -140,6 +140,7 @@ export async function generate(now=new Date()) {
   menu.products=choice.chosen.map(({packs,lineEur,...product})=>product);
   menu.stores=choice.stores;
   menu.meta={...menu.meta,shoppingTotalEstimateEur:choice.totalEur,shoppingWithinTolerance:choice.withinTolerance,shoppingCheckedAt:report.generatedAt};
+  if(!choice.withinTolerance) menu.meta.pricingNotice+=' Dėmesio: net pigiausias patikrintas 1–2 parduotuvių krepšelis viršija 110 EUR biudžeto toleranciją. Prieš perkant ieškok pigesnių alternatyvų.';
   const failures=[];
   await Promise.all(menu.recipes.map(async r => {try { await get(r.photo,'image'); } catch(e) { failures.push(e.message); }}));
   assert(!failures.length,failures.join('\n'));
