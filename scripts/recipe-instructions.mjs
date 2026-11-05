@@ -58,7 +58,7 @@ export function buildInstructions(r){
    if(vegB.length)out.push(`Likus 15–20 min. iki kepimo pabaigos, ${chopping(vegB)} ir sudėk į tą pačią skardą. Patiekiant mėsą pjaustyk skersai skaidulų.`);
  }else{
    out.push(vegA.length?`Įkaitink orkaitę iki 200 °C. ${chopping(vegA)} ir paskleisk vienu sluoksniu ant vienos didelės skardos. ${oil} Kepk 15–20 min., kad pradėtų minkštėti.`:`Įkaitink orkaitę iki 200 °C ir pasiruošk vieną didelę skardą. ${oil} Toliau laikykis tikslios kepimo sekos.`);
-   if(vegB.length)out.push(`${vegA.length?"Prie apkeptų daržovių":"Pirmiausia ant skardos"} ${chopping(vegB)} ir išdėliok vienu sluoksniu. ${vegA.length?"Pridėk pagrindinį ingredientą ir kepk kartu.":"Kepk 10–12 min., tada pridėk pagrindinį ingredientą."}`);
+   if(vegB.length)out.push(`Paruošk minkštesnes daržoves: ${chopping(vegB)}. ${vegA.length?"Sudėk jas prie apkeptų daržovių":"Sudėk jas ant skardos"} vienu sluoksniu. ${vegA.length?"Dabar pridėk pagrindinį ingredientą ir kepk kartu.":"Pakepk 10–12 min., tada pridėk pagrindinį ingredientą."}`);
    if(p==="turkey"||p==="chicken")out.push(`${q(p)} supjaustyk 2–3 cm gabaliukais. Sudėk į laisvą tos pačios skardos dalį ir kepk apie 18–25 min., kol viduje bus bent 74 °C.`);
    else if(["catfish","salmon","cod"].includes(p))out.push(`${q(p)} į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre.${p==="cod"?" Menkę tikrink anksčiau, kad neišsausėtų.":""}`);
    else if(p==="beef")out.push(`Iš ${q(p)} suformuok ${r.id.includes("burger")?"plokščius paplotėlius":"vienodo dydžio kotletukus"}. ${ing.cheese&&r.id.includes("kotletukai")?`Į kotletų vidų įspausk ${q("cheese")}, tvirtai užspausk kraštus. `:""}Dėk į laisvą tos pačios skardos dalį ir kepk apie 18–25 min., kol centre bus bent 71 °C.`);
@@ -70,7 +70,7 @@ export function buildInstructions(r){
  if(ing.cheese&&!(p==="beef"&&r.id.includes("kotletukai")))out.push(`Likus 3–5 min. iki kepimo pabaigos, užberk ${q("cheese")} ir kaitink, kol išsilydys.`);
  if(ing.feta)out.push(`Išėmus skardą iš orkaitės ant patiekalo užtrupink ${q("feta")}; fetos papildomai nekepti nereikia.`);
  const cold=["yogurt","cottage","sauerkraut","walnut"].filter(k=>ing[k]>0);
- if(cold.length)out.push(`Patiekiant nekaitintus, atskirai pridėk ${cold.map(q).join(", ")}.${ing.yogurt?" Jogurtą naudok kaip vieno ingrediento padažą.":""}${ing.walnut?" Graikinius riešutus paskleisk ant patiekalo.":""}`);
+ if(cold.length)out.push(`Patiekiant, atskirai ir be kaitinimo pridėk ${cold.map(q).join(", ")}.${ing.yogurt?" Jogurtą naudok kaip vieno ingrediento padažą.":""}${ing.walnut?" Graikinius riešutus paskleisk ant patiekalo.":""}`);
  out.push("Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve.");
  return out;
 }
