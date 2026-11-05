@@ -32,9 +32,8 @@ export function validateRecipePreferences(menu, rules=readRules()) {
       assert(!restricted.has(id),'Nemėgstamas ingredientas '+id+': '+recipe.id);
       if(maximum[id]!=null)assert(g<=maximum[id],'Viršyta vienos porcijos '+id+' riba ('+g+' > '+maximum[id]+' g): '+recipe.id);
     }
-    if(recipe.instructionsFollowIngredients===true) {
-      assert(JSON.stringify(recipe.steps)===JSON.stringify(buildInstructions(recipe)),'Gaminimo instrukcijos neatitinka ingredientų: '+recipe.id);
-    }
+    assert(recipe.instructionsFollowIngredients===true,'Trūksta ingredientų ir gaminimo instrukcijų patikros: '+recipe.id);
+    assert(JSON.stringify(recipe.steps)===JSON.stringify(buildInstructions(recipe)),'Gaminimo instrukcijos neatitinka ingredientų: '+recipe.id);
   }
   return menu;
 }
