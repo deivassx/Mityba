@@ -21,6 +21,10 @@
 - Neskelbk, kad užsakymai pateikti, ir niekada **nepirk automatiškai** be atskiro aiškaus naudotojo leidimo.
 - Vieša GitHub saugykla: nerašyk API raktų, slaptažodžių, tikslaus gyvenamosios vietos adreso, medicininės istorijos ar kitų privačių duomenų.
 
+## Automatinis kitų ūkių pasiūlymų atradimas
+
+`scripts/farm-discovery.mjs` tikrina nurodytų ūkių viešus WooCommerce produktų katalogus ir XML sitemap, jei prieinami, bei pateikia kandidatų ataskaitą GitHub Actions vykdyme. Tai **tik atradimo ataskaita**, ne leidimas automatiškai keisti recepto ingredientą. Jei pasiūlymas tinkamas, patikrink konkretų SKU, pakuotę, maistingumą, atsargas, pristatymą ir rankiniu / Codex veiksmu įtrauk į `data/offer-candidates.json`. Tik po to globalus optimizatorius gali jį parinkti, **griežtai iš daugiausia 2 parduotuvių**. Nekurk netikrų produktų kainų ir nelaikyk nepatikrintų WooCommerce/WordPress duomenų pilnai patvirtintais.
+
 ## Ką dabar sistema padaro ir ko dar nedaro
 
 GitHub Actions naudoja **Node.js** planuoklį, o ne generatyvinį AI. Jo `validate` funkcija programiškai perskaito taisyklių JSON kiekvieno paleidimo metu ir tikrina ten nurodytus *implementationStatus.enforcedByNodePlanner* kriterijus. Naujų ūkininkų SKU paieška internete, nekonfigūruotų svetainių kainų išgavimas ir Farmlio pardavėjų individualių pristatymo sąlygų patikrinimas tebėra **agento darbo instrukcijos**. Jau įdiegta patvirtintų konkrečių SKU palyginimo ir globalios 1–2 parduotuvių krepšelio kainos optimizacija. Node.js auditas `scripts/shopping-audit.mjs` apskaičiuoja preliminarų krepšelį ir išveda biudžeto / Barbora politikos perspėjimus, tačiau pats neieško pigesnių prekių ir jų nepakeičia. Nepristatyk šio patikrinimo kaip pilnai automatinio optimizavimo. Nepateik to vartotojui kaip jau realizuoto.

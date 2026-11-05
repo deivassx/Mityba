@@ -202,7 +202,20 @@
       "evidencePolicy": "For new offers, require exact product URL, compatible ingredient, weight, confirmed in-stock EUR price and current product name. Variable-weight products, unverified shipping, unknown minimum orders, or out-of-stock offers are research leads, not usable buying options.",
       "candidateFile": "data/offer-candidates.json",
       "farmerRegistry": "shopping.supplierCandidates",
-      "knownLimitations": "Automatic discovery of arbitrary new farm product URLs is not available without an external search/API; curated URLs are checked each run. Farmlio sellers' individual minimum orders and delivery-date combinations may require manual confirmation."
+      "knownLimitations": "Automatic discovery of arbitrary new farm product URLs is not available without an external search/API; curated URLs are checked each run. Farmlio sellers' individual minimum orders and delivery-date combinations may require manual confirmation.",
+      "automaticFarmDiscovery": {
+        "enabled": true,
+        "schedule": "Vykdyti GitHub Actions metu: viešų ūkių parduotuvių siūlomų prekių paieškos ataskaita, be mokamo API",
+        "sources": "shopping.supplierCandidates (be Facebook, Farmlio, Barbora)",
+        "methods": [
+          "Vieša WooCommerce Store API, jeigu paskelbta",
+          "Viešas XML sitemap kaip nuorodų šaltinis, jeigu prieinamas"
+        ],
+        "onlyShortlist": true,
+        "autoSelection": false,
+        "warning": "Nežinomas pakuotės svoris, sudėtis, priklausymas receptui ir pristatymas neleidžia automatiškai įtraukti į galutinį 2 parduotuvių krepšelį. AI agentas turi juos patikrinti ir papildyti data/offer-candidates.json.",
+        "failOpen": true
+      }
     }
   },
   "recipePreferences": {
@@ -241,7 +254,8 @@
       "shopping.budget (automatinis krepšelio perspėjimas, ne ribojantis validatorius)",
       "shopping.barboraRestriction (automatinis neatitikimo perspėjimas)",
       "shopping.comparison.maxCheckoutStores",
-      "shopping.comparison.rankBy (only verified candidate pool)"
+      "shopping.comparison.rankBy (only verified candidate pool)",
+      "shopping.comparison.automaticFarmDiscovery (tik naujų pasiūlymų paieškos ataskaita, ne automatinė atranka)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
