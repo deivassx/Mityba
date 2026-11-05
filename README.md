@@ -30,6 +30,12 @@ Svetainės `#dvi-savaites` skiltis nuo pasirinktos savaitės įkelia tos ir **ki
 
 **Griežtos ribos:** iki **2 atskirų parduotuvių visam 14 dienų laikotarpiui**, 2 savaičių biudžeto tikslas 200 € (tolerancija iki 220 €). Kol nepatikrintos kalakutienos, vištienos ir jautienos ūkių kainos arba bent vieno produkto kaina, svetainė rodo tik **dalinį senų katalogo kainų įvertį be pristatymo**, niekada nevadina jo galutiniu pirkinių krepšeliu ir nepatvirtina biudžeto ar parduotuvių ribos. Šviežios prekės perkamos savaitėmis, mėsa/žuvis į šaldiklį –18 °C. Jei pasirinkta paskutinė savaitė ir kitos nėra, skiltis rodo, kad pilnam 14 d. užsakymui trūksta plano. **Svetainė nenusiperka prekių pati**.
 
+## 32 patiekalų įvairovė (atnaujinta 2026-11-05)
+
+Bibliotekoje yra **32 unikalūs receptai** – po 8 kiekvienoje kalakutienos, vištienos, šamo ir jautienos grupėje. Per pirmąsias 8 savaites **nei vienas tas pats receptas nepasikartoja** (4 per savaitę), vėlesniuose cikluose maišomi kiti deriniai. Jautiena neapsiriboja maltiniais: yra nugarinės kepsnys, juostelės, lėtai kepama mentė, rostbifas, burgerio paplotėliai ir sūriu užkepti kotletai. Yra kietojo sūrio bei fetos. Ir toliau galioja dvi gaminimo dienos, vienos skardos principas, daržovių ir maistingumo ribos.
+
+**Apsipirkimo būklė:** naujiems ingredientams (`cheese`, `feta`, `beef_steak`, `beef_strips`, `beef_roast`, `tomato`, `onion`, `cabbage`, `sauerkraut`) dar nėra patikrintų SKU kainų ir ūkio tiekimo, todėl planai lieka `purchaseReady=false` ir nepatvirtintų produktų krepšelyje nėra. `data/catalog.json` jų maistingumas – apytiksliai 100 g produktų įverčiai, ne gamintojų etikečių skaičiai. Griežta 2 parduotuvių riba išlieka.
+
 ## Receptų gaminimas ir daržovių pirmenybės
 
 Nuo šiol nauji receptai ruošiami **orkaitėje, vienoje didelėje skardoje vienam kepimui**, be papildomo kepimo keptuvėje. Per sekmadienio ir trečiadienio gaminimą ruošiami du skirtingi patiekalai; kiekvienam patiekalui gali reikėti atskiro skardos kepimo arba kelių etapų su ta pačia skarda, jeigu vienu sluoksniu 3–4 porcijos netelpa. Maisto saugai būtinas termometras.

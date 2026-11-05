@@ -20,8 +20,10 @@ test('Liko tiksliai 8 skirtingos savaites nuo 2026-11-09',async()=>{
   assert.equal(m.days.length,7);
   assert.equal(m.recipes.length,4);
   assert.ok(m.stores.length<=2);
-  assert.deepEqual([...m.meta.unresolvedIngredientIds].sort(),['beef','chicken','turkey']);
-  assert.ok(m.products.every(p=>!['turkey','beef','chicken'].includes(p.id)));
+  assert.ok(m.meta.unresolvedIngredientIds.includes('chicken') && m.meta.unresolvedIngredientIds.includes('turkey'));
+  assert.ok(m.meta.unresolvedIngredientIds.some(x=>x.startsWith('beef')));
+  assert.ok(m.meta.unresolvedIngredientIds.every(id=>!m.products.some(p=>p.id===id)));
+  assert.ok(m.products.every(p=>!m.meta.unresolvedIngredientIds.includes(p.id)));
   assert.ok(ix.some(x=>x.weekStart===week));
   const signature=m.recipes.map(r=>r.id).join(',');
   assert.ok(!signatures.has(signature));signatures.add(signature);

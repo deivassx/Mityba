@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { archiveMenu } from './history.mjs';
 import { selectWeeklyRecipes } from './rotation.mjs';
 
-export const vegetables = ['broccoli','carrot','beet','zucchini','pepper','mushroom'];
+export const vegetables = ['broccoli','carrot','beet','pepper','mushroom','tomato','onion','cabbage','sauerkraut'];
 const assert = (condition, message) => { if (!condition) throw Error(message); };
 const positive = n => Number.isFinite(n) && n > 0;
 export function readRules() {
@@ -52,7 +52,7 @@ export function validate(menu, verified = true, rules = readRules()) {
   const unresolved=new Set(isDraft?menu.meta.unresolvedIngredientIds||[]:[]);
   if(isDraft){
     assert(menu.meta.purchaseReady===false,'Juodraštis negali būti paruoštas pirkimui');
-    assert([...unresolved].every(id=>['turkey','beef','chicken'].includes(id)),'Neleistinas nepatvirtintas produktas');
+    assert([...unresolved].every(id=>(rules.recipePreferences?.unverifiedIngredientIds||[]).includes(id)),'Neleistinas nepatvirtintas produktas');
   }
   const used = new Set(), counts = {};
   for (const [i,day] of menu.days.entries()) {

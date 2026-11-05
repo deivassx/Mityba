@@ -18,7 +18,7 @@ function weeklyPlan(n) {
   m.sessions=pairs.map((pair,i)=>({servings:Object.fromEntries(pair.map(id=>[id,i===0?3:4]))}));
   return m;
 }
-test('16 skirtingų realių receptų ir 256 skirtingos savaitinės kombinacijos',()=>{
+test('32 skirtingi patiekalai ir bent 256 unikalios savaitės',()=>{
   const seen=new Set(), allRecipes=new Set();
   for(let n=0;n<256;n++){
     const week=weeklyPlan(n);
@@ -33,7 +33,7 @@ test('16 skirtingų realių receptų ir 256 skirtingos savaitinės kombinacijos'
       assert.ok(calc(day.lunch)>=calc(day.dinner), 'Angliavandenių daugiau vakarienei: '+n);
     }
   }
-  assert.equal(allRecipes.size,16);
+  assert.equal(allRecipes.size,32);
   assert.equal(seen.size,256);
 });
 test('pakartotinis generavimas tai pačiai savaitei deterministinis, kitą savaitę keičia receptus',()=>{
@@ -61,4 +61,13 @@ test('atmeta nemėgstamas daržoves, per daug bulvių ir keptuvėje kepamą nauj
  recipe.ingredients.potato=180;
  recipe.method='stovetop';
  assert.throws(()=>validateRecipePreferences(menu),/vienai skardai/);
+});
+
+test('Per aštuonias savaites nei vienas patiekalas nepasikartoja savo grupėje',()=>{
+ const seen=new Set();
+ for(let n=0;n<8;n++)for(const r of weeklyPlan(n).recipes){assert.ok(!seen.has(r.id),r.id);seen.add(r.id);}
+ assert.equal(seen.size,32);
+ const beef=[...new Set(Array.from({length:8},(_,i)=>weeklyPlan(i).recipes.find(r=>r.slot==='VAKARIENĖ'&&Object.keys(r.ingredients).some(k=>k.startsWith('beef')))).map(r=>Object.keys(r.ingredients).find(k=>k.startsWith('beef'))))];
+ assert.ok(beef.length>=4);
+ assert.ok([...seen].some(id=>id.includes('surin')));
 });

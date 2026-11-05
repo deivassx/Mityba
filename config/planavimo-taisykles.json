@@ -172,7 +172,9 @@
         "oil",
         "yogurt",
         "cottage",
-        "walnut"
+        "walnut",
+        "cheese",
+        "feta"
       ],
       "chickenIngredientIds": [
         "chicken"
@@ -224,6 +226,9 @@
         "turkey",
         "chicken",
         "beef",
+        "beef_steak",
+        "beef_strips",
+        "beef_roast",
         "catfish"
       ],
       "purchaseProteinAndFishOnceForTwoWeeks": true,
@@ -305,11 +310,10 @@
     ],
     "preferredVegetablesNotYetCatalogued": [
       "tomato",
-      "cucumber",
       "onion",
-      "garlic",
       "cabbage",
-      "fermented_vegetables"
+      "sauerkraut",
+      "cucumber"
     ],
     "foodPreparation": {
       "preferredMethod": "one_large_sheet_pan_oven",
@@ -323,7 +327,44 @@
       "realWorldCapacity": "3–4 porcijų receptas gali netilpti viename skardos sluoksnyje. Nedėk produktų vienas ant kito – geriau kartoti kepimą ta pačia skarda, nei kepti grūstyje arba naudoti keptuvę. Dviems skirtingiems receptams per gaminimo sesiją gali prireikti atskirų skardos kepimo etapų.",
       "foodSafety": "Naudok mėsos termometrą, paukštiena iki 74 °C, malta jautiena iki 71 °C, žuvis iki 63 °C; porcijas greitai atvėsink ir tinkamai laikyk šaldytuve arba užšaldyk."
     },
-    "instructionScope": "Taikyti visiems naujai generuojamiems receptams ir savaitiniams meniu. Senų meniu istorijos nekeisti."
+    "instructionScope": "Taikyti visiems naujai generuojamiems receptams ir savaitiniams meniu. Senų meniu istorijos nekeisti.",
+    "unverifiedIngredientIds": [
+      "turkey",
+      "beef",
+      "chicken",
+      "beef_steak",
+      "beef_strips",
+      "beef_roast",
+      "cheese",
+      "feta",
+      "tomato",
+      "onion",
+      "cabbage",
+      "sauerkraut"
+    ],
+    "menuDiversity": {
+      "recipeLibraryCount": 32,
+      "recipesPerWeek": 4,
+      "minimumDistinctWeeklyCombosInEightWeeks": 8,
+      "noRecipeRepeatedWithinEightWeeksPerProteinGroup": true,
+      "proteinGroups": [
+        "kalakutiena",
+        "vistiena",
+        "samas",
+        "jautiena"
+      ],
+      "includeCheeses": [
+        "cheese",
+        "feta"
+      ],
+      "includeBeefCuts": [
+        "beef",
+        "beef_steak",
+        "beef_strips",
+        "beef_roast"
+      ],
+      "note": "Tai receptų įvairovės, ne kainų patvirtinimo taisyklės. Iš naujų produktų be patikrintų tiekėjų sudaromi tik neapsipirkimui skirti planai."
+    }
   },
   "implementationStatus": {
     "enforcedByNodePlanner": [
@@ -347,7 +388,8 @@
       "recipePreferences.excludedIngredientIds (generuojamiems meniu)",
       "recipePreferences.maxGramsPerServing (generuojamiems meniu)",
       "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)",
-      "shopping.bulkPurchase (14 dienu saraso ir kiekiu formavimas interneto svetaines JavaScript, tik su zinomais kandidatais)"
+      "shopping.bulkPurchase (14 dienu saraso ir kiekiu formavimas interneto svetaines JavaScript, tik su zinomais kandidatais)",
+      "recipePreferences.menuDiversity (32 receptai, nevienodi 8 savaičių planai)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
