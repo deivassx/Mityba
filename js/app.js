@@ -134,7 +134,9 @@ function render() {
 let latestMenu, historyEntries=[], selectionRequest=0;
 const weekLabel = (start,end) => `${start} – ${end}`;
 function preferredWeek() {
-  const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'});
+  const dateParts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Vilnius',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const parts=Object.fromEntries(dateParts.map(p=>[p.type,p.value]));
+  const today=`${parts.year}-${parts.month}-${parts.day}`;
   const sorted=[...historyEntries].sort((a,b)=>a.weekStart.localeCompare(b.weekStart));
   return sorted.find(e=>e.weekStart<=today&&e.weekEnd>=today)?.weekStart
     || sorted.find(e=>e.weekStart>today)?.weekStart
@@ -146,7 +148,9 @@ async function loadJson(path) {
   return response.json();
 }
 function renderHistory() {
-  const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'});
+  const dateParts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Vilnius',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const parts=Object.fromEntries(dateParts.map(p=>[p.type,p.value]));
+  const today=`${parts.year}-${parts.month}-${parts.day}`;
   const preferred=preferredWeek();
   document.getElementById('history-list').innerHTML=[...historyEntries]
     .sort((a,b)=>a.weekStart.localeCompare(b.weekStart)).map(entry=>{
