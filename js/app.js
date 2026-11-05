@@ -131,9 +131,61 @@ function render() {
   if(!counter){counter=document.createElement('span');counter.id='checkcount';counter.className='checknote noprint';document.querySelector('#pirkiniai .controls').appendChild(counter);}
   updateCount();
 }
-fetch('./data/menu.json', {cache:'no-store'})
- .then(response=>{if(!response.ok)throw Error('Nerastas data/menu.json ('+response.status+').');return response.json();})
- .then(data=>{state=makeData(data); render();})
+let latestMenu, historyEntries=[], selectionRequest=0;
+const weekLabel = (start,end) => `${start} – ${end}`;
+async function loadJson(path) {
+  const response=await fetch(path,{cache:'no-store'});
+  if(!response.ok) throw Error(`Nepavyko įkelti ${path} (${response.status}).`);
+  return response.json();
+}
+function renderHistory() {
+  document.getElementById('history-list').innerHTML=historyEntries.map(entry=>{
+    const latest=entry.weekStart===latestMenu.meta.weekStart;
+    const current=entry.weekStart===state.input.meta.weekStart;
+    return `<a class="history-card" href="${latest?'./':'?week='+encodeURIComponent(entry.weekStart)}" data-week="${safe(entry.weekStart)}"${current?' aria-current="page"':''}>${entry.photo?`<img src="${safe(safeUrl(entry.photo))}" alt="" loading="lazy" onerror="this.hidden=true">`:''}<div class="history-card-body">${latest?'<span class="pillgreen">Naujausias meniu</span>':''}<strong>${safe(weekLabel(entry.weekStart,entry.weekEnd))}</strong><small>${safe(entry.recipes.length)} patiekalai · 7 dienos</small><small>${safe(entry.recipes.join(' · '))}</small></div></a>`;
+  }).join('');
+}
+async function selectWeek(week, updateUrl=true) {
+  const request=++selectionRequest;
+  const message=document.getElementById('history-message');
+  message.textContent='';
+  try {
+    const latest=!week || week===latestMenu.meta.weekStart;
+    if(!latest && !historyEntries.some(entry=>entry.weekStart===week)) throw Error('Šios savaitės meniu istorijoje nėra.');
+    message.textContent=latest?'':'Kraunamas pasirinktos savaitės meniu…';
+    const menu=latest ? latestMenu : await loadJson('./data/history/'+week+'.json');
+    if(request!==selectionRequest) return;
+    const next=makeData(menu);
+    state=next; render(); renderHistory();
+    document.getElementById('selected-week').innerHTML=latest
+      ? `Naujausias meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}`
+      : `Ankstesnės savaitės meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}<a href="./" data-latest>Grįžti į naujausią →</a><div class="sub">Rodomos to meto kainos ir produktai.</div>`;
+    message.textContent='';
+    if(updateUrl) {
+      const url=new URL(location.href); url.searchParams.delete('week');
+      if(!latest) url.searchParams.set('week',week);
+      url.hash=''; window.history.pushState({},'',url);
+    }
+  } catch(error) { if(request===selectionRequest) message.textContent=error.message+' Rodomas ankstesnis pasirinkimas.'; }
+}
+document.getElementById('history-list').addEventListener('click',event=>{
+  const card=event.target.closest('a[data-week]');
+  if(!card || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button!==0) return;
+  event.preventDefault(); selectWeek(card.dataset.week);
+});
+document.getElementById('selected-week').addEventListener('click',event=>{
+  if(!event.target.closest('[data-latest]')) return;
+  event.preventDefault(); selectWeek();
+});
+window.addEventListener('popstate',()=>selectWeek(new URL(location.href).searchParams.get('week'),false));
+loadJson('./data/menu.json')
+ .then(async data=>{
+   latestMenu=data; state=makeData(data); render();
+   try { historyEntries=await loadJson('./data/history/index.json'); }
+   catch(error) { document.getElementById('history-message').textContent='Nepavyko įkelti meniu istorijos. Bandyk dar kartą vėliau.'; }
+   if(!historyEntries.length) historyEntries=[{weekStart:data.meta.weekStart,weekEnd:data.days.at(-1).date,recipes:data.recipes.map(r=>r.title),photo:data.recipes[0]?.photo}];
+   renderHistory(); await selectWeek(new URL(location.href).searchParams.get('week'),false);
+ })
  .catch(error=>{
    const target=document.getElementById('days');
    if(target)target.innerHTML=`<div style="padding:24px"><strong>Nepavyko atidaryti meniu.</strong><p>${safe(error.message)}</p><p>Šią versiją atidaryk per GitHub Pages (arba vietinį HTTP serverį), ne tiesiogiai per <code>file://</code>.</p></div>`;

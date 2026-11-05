@@ -60,3 +60,15 @@ Generavimui reikalingas internetas. Kainos šaltinis, laikas ir metodas saugomi
 produkto `verification` lauke; patikros galiojimo langas – 24 valandos.
 Senesnis publikuotas meniu lieka istoriniu pasiūlymu; kainos gali keistis vėliau.
 Pirkinių varnelės saugomos tik toje naršyklėje ir atskirai kiekvienai savaitei.
+
+## Savaičių istorija
+
+Šoninėje juostoje matomos visų išsaugotų savaičių kortelės, naujausios pirmiausia.
+Atidarius svetainę rodomas naujausias meniu; paspaudus kortelę – visas tos savaitės
+planas, receptai, pirkiniai ir gaminimas. Nuoroda su `?week=YYYY-MM-DD` leidžia
+pasidalyti pasirinkta savaite. Telefone korteles galima slinkti horizontaliai.
+
+Pilni meniu saugomi `data/history/YYYY-MM-DD.json`, kortelių sąrašas –
+`data/history/index.json`. Kiekvieną kartą sėkmingai generuojant išsaugoma ankstesnė
+ir nauja savaitė. Pakartotinai generuojant tą pačią savaitę atnaujinamas jos meniu;
+kitų savaičių failai išlieka. Senesnių savaičių kainos iš naujo netikrinamos.

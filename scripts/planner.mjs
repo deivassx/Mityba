@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
+import { archiveMenu } from './history.mjs';
 
 export const vegetables = ['broccoli','carrot','beet','zucchini','pepper','mushroom'];
 const assert = (condition, message) => { if (!condition) throw Error(message); };
@@ -115,6 +116,10 @@ export async function generate(now=new Date()) {
   await Promise.all(menu.recipes.map(async r => {try { await get(r.photo,'image'); } catch(e) { failures.push(e.message); }}));
   assert(!failures.length,failures.join('\n'));
   validate(menu);
+  // Save the previous published week before replacing it, including the first migration.
+  try { await archiveMenu(JSON.parse(await fs.readFile('data/menu.json','utf8'))); }
+  catch(e) { if(e.code!=='ENOENT') throw e; }
+  await archiveMenu(menu);
   await fs.writeFile('data/menu.json',JSON.stringify(menu,null,2)+'\n');
   return menu;
 }
@@ -127,7 +132,13 @@ export async function verifyPublished(base, attempts=20) {
       const root=base.replace(/\/$/,'')+'/';
       const actual=await get(root+'data/menu.json?revision='+Date.now());
       assert(JSON.stringify(JSON.parse(actual))===JSON.stringify(JSON.parse(expected)),'Publikuotas meniu nesutampa');
-      const html=await get(root); assert(html.includes('id="days"') && html.includes('./js/app.js'),'Svetainės HTML netinkamas');
+      const index=JSON.parse(await fs.readFile('data/history/index.json','utf8'));
+      assert(JSON.stringify(JSON.parse(await get(root+'data/history/index.json?revision='+Date.now())))===JSON.stringify(index),'Publikuota istorija nesutampa');
+      for(const entry of index) {
+        const file='data/history/'+entry.weekStart+'.json';
+        assert(JSON.stringify(JSON.parse(await get(root+file)))===JSON.stringify(JSON.parse(await fs.readFile(file,'utf8'))),'Archyvo meniu nesutampa: '+entry.weekStart);
+      }
+      const html=await get(root); assert(html.includes('id="days"') && html.includes('./js/app.js') && html.includes('id="history-list"'),'Svetainės HTML netinkamas');
       for(const file of ['js/app.js','css/style.css']) assert((await get(root+file)).length>0,'Tuščias failas');
       return;
     } catch(e) { error=e; if(i<attempts-1) await new Promise(r=>setTimeout(r,15000)); }
