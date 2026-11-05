@@ -4,7 +4,6 @@
     "weekEnd": "2027-01-03",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutiena su morkomis ir paprikomis vienoje skardoje",
       "Vištienos kepsneliai su grybais ir morkomis",
@@ -18,7 +17,6 @@
     "weekEnd": "2026-12-27",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutienos skarda su batatais ir pievagrybiais",
       "Citrininė vištiena su batatais ir burokėliais",
@@ -32,7 +30,6 @@
     "weekEnd": "2026-12-20",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutienos kąsneliai su burokėliais ir morkomis",
       "Vištienos skarda su paprikomis ir pievagrybiais",
@@ -46,7 +43,6 @@
     "weekEnd": "2026-12-13",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutienos iešmeliai su paprikomis ir grybais",
       "Vištiena su saldžiomis bulvėmis ir paprikomis",
@@ -60,7 +56,6 @@
     "weekEnd": "2026-12-06",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutienos skarda su batatais ir pievagrybiais",
       "Vištienos kepsneliai su grybais ir morkomis",
@@ -74,7 +69,6 @@
     "weekEnd": "2026-11-29",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutienos kąsneliai su burokėliais ir morkomis",
       "Citrininė vištiena su batatais ir burokėliais",
@@ -88,7 +82,6 @@
     "weekEnd": "2026-11-22",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutienos iešmeliai su paprikomis ir grybais",
       "Vištienos skarda su paprikomis ir pievagrybiais",
@@ -102,7 +95,6 @@
     "weekEnd": "2026-11-15",
     "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
-    "isPlanningSeries": true,
     "recipes": [
       "Kalakutiena su morkomis ir paprikomis vienoje skardoje",
       "Vištiena su saldžiomis bulvėmis ir paprikomis",
