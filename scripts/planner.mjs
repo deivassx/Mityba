@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { archiveMenu } from './history.mjs';
+import { selectWeeklyRecipes } from './rotation.mjs';
 
 export const vegetables = ['broccoli','carrot','beet','zucchini','pepper','mushroom'];
 const assert = (condition, message) => { if (!condition) throw Error(message); };
@@ -100,8 +101,13 @@ export async function generate(now=new Date()) {
   const menu=JSON.parse(await fs.readFile('data/catalog.json','utf8'));
   const date=new Date(now.toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'})+'T00:00:00Z');
   date.setUTCDate(date.getUTCDate()+((8-date.getUTCDay())%7 || 7));
-  const week=date.toISOString().slice(0,10), offset=Math.floor(+date/604800000)%2;
-  const pairs=offset ? [['vistiena','jautiena'],['kalakutiena','samas']] : [['kalakutiena','samas'],['vistiena','jautiena']];
+  const week=date.toISOString().slice(0,10);
+  const bank=JSON.parse(await fs.readFile('data/recipe-library.json','utf8'));
+  const {recipes,pairs}=selectWeeklyRecipes(menu.recipes,bank,week);
+  menu.recipes=recipes;
+  // Tikrinamos tik šiai savaitei reikalingos prekės: nebūtinos prekės negali sustabdyti plano.
+  const usedProducts=new Set(recipes.flatMap(r=>Object.keys(r.ingredients)));
+  menu.products=menu.products.filter(p=>usedProducts.has(p.id));
   menu.days=Array.from({length:7},(_,i)=>({date:new Date(+date+i*86400000).toISOString().slice(0,10),lunch:pairs[i<3?0:1][0],dinner:pairs[i<3?0:1][1]}));
   menu.meta={...menu.meta,weekStart:week,generatedAt:now.toISOString(),status:'Automatiškai patikrinta savaitė',pricingNotice:'Prekių kainos patikrintos '+now.toISOString()+'. Galutinės kainos ir pristatymo sąlygos gali pasikeisti.'};
   menu.sessions=pairs.map((pair,i)=>({title:i?'Trečiadienis':'Sekmadienis',subtitle:i?'IV–VII dienoms':'I–III dienoms',summary:pair.map(id=>menu.recipes.find(r=>r.id===id).title).join(' + '),servings:Object.fromEntries(pair.map(id=>[id,i?4:3])),steps:['Kiekvieno recepto ingredientus padaugink iš nurodyto porcijų skaičiaus.','Gamink pagal žemiau pateiktas receptų instrukcijas, naudok atskiras skardas.','Per 2 val. atvėsink ir padėk į šaldytuvą. Ketvirtai ir vėlesnėms dienoms skirtas porcijas iškart užšaldyk; atitirpink šaldytuve.'],duration:'Apie 70–90 min.'}));

@@ -10,9 +10,14 @@ per **Actions → Savaitės meniu ir GitHub Pages → Run workflow**.
 GitHub grafikas gali vėluoti; po ilgo viešos saugyklos neaktyvumo gali būti išjungtas.
 
 1. Testuojama planavimo ir kainų tikrinimo logika.
-2. Iš `data/catalog.json` sudaroma artimiausio būsimo pirmadienio savaitė.
-   Keturi receptai kas savaitę sukeičia savo savaitės dalis.
-3. Tiesiogiai patikrinamos visos prekių nuorodos, kainos ir nuotraukos.
+2. Iš `data/catalog.json` ir `data/recipe-library.json` sudaroma artimiausio būsimo pirmadienio savaitė.
+   Bibliotekoje yra **16 skirtingų receptų** (4 baziniai + 12 alternatyvų).
+   Kiekvieną savaitę parenkami **4 receptai**: 2 pietums ir 2 vakarienei.
+   Keturių variantų kiekvienoje grupėje deterministinis 4-ainių ciklas sudaro
+   **256 skirtingas savaitines kombinacijas**, todėl gretimos savaitės nesikartoja.
+   Taip pat kaitaliojama, kuri pora ruošiama sekmadienį, o kuri trečiadienį.
+   Tai yra **receptų bibliotekos rotacija, ne generatyvinis AI** – veikia be mokamų API.
+3. Tiesiogiai patikrinamos tik pasirinktiems receptams reikalingų prekių nuorodos, kainos ir pasirinktos iliustracijų nuotraukos.
    Barbora naudojami pagrindinės prekės duomenys, aktyvumo būsena, pakuotės
    ir vieneto kainos santykis. Farmlio – Product/Offer pasiūlymas EUR valiuta,
    InStock būsena ir peržiūrėtas prekės pavadinimas.
