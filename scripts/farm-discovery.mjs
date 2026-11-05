@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-const norm=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^\\p{L}\\p{N}\\s-]/gu,'');
+const norm=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}\s-]/gu,'');
 export function classify(name){
   const s=norm(name);
   if(/kalakut/.test(s))return 'turkey';
@@ -11,7 +11,7 @@ export function classify(name){
 }
 export function weightGrams(name){
   const s=String(name||'');
-  const m=s.match(/(?:^|\\s)(\\d+(?:[.,]\\d+)?)\\s*(kg|g)(?:\\b|\\s|$)/i);
+  const m=s.match(/(?:^|\s)(\d+(?:[.,]\d+)?)\s*(kg|g)(?:\b|\s|$)/i);
   if(!m)return null;
   const grams=Number(m[1].replace(',','.'))*(m[2].toLowerCase()==='kg'?1000:1);
   return grams>0&&grams<=25000?grams:null;
@@ -54,7 +54,7 @@ export async function discoverFarms(rules) {
     for(const path of ['/product-sitemap.xml','/sitemap_index.xml','/wp-sitemap.xml']){
       try{
         const xml=await read(root+path);
-        const urls=[...xml.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&')).filter(u=>sameHost(u,root));
+        const urls=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&')).filter(u=>sameHost(u,root));
         const found=urls.map(url=>({url,family:classify(decodeURIComponent(new URL(url).pathname.replaceAll('-',' '))),name:null,priceEur:null,packGrams:null,requiresManualReview:true})).filter(x=>x.family);
         if(found.length){item.offers=found.slice(0,60);item.method='Viešos XML svetainės nuorodos';break;}
       } catch(_error){ /* Viešas sitemap gali neegzistuoti */ }
@@ -69,12 +69,12 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   try {
     const rules=JSON.parse(await fs.readFile(new URL('../config/planavimo-taisykles.json',import.meta.url),'utf8'));
     const report=await discoverFarms(rules);
-    await fs.writeFile(new URL('../data/farm-discovery-report.json',import.meta.url),JSON.stringify(report,null,2)+'\\n');
+    await fs.writeFile(new URL('../data/farm-discovery-report.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
     for(const f of report.farms)console.log(f.name+': '+f.offers.length+' kandidatų, metodas '+(f.method||'nerastas'));
     if(process.env.GITHUB_STEP_SUMMARY){
       const lines=['### Kitų ūkių prekių atradimas','','Rasti nauji kandidatai savaime nėra patvirtintos prekės ar nauja parduotuvė krepšelyje.',''];
       for(const f of report.farms)lines.push('- '+f.name+': '+f.offers.length+' kandidatų ('+(f.method||'be rezultatų')+').');
-      await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\\n')+'\\n');
+      await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
     }
   }catch(e){console.log('::warning::Ūkių prekių atradimas nepavyko: '+e.message);}
 }
