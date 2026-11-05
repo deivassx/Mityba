@@ -20,6 +20,14 @@ Svetainė: https://deivassx.github.io/Mityba/
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 
+## Receptų gaminimas ir daržovių pirmenybės
+
+Nuo šiol nauji receptai ruošiami **orkaitėje, vienoje didelėje skardoje vienam kepimui**, be papildomo kepimo keptuvėje. Per sekmadienio ir trečiadienio gaminimą ruošiami du skirtingi patiekalai; kiekvienam patiekalui gali reikėti atskiro skardos kepimo arba kelių etapų su ta pačia skarda, jeigu vienu sluoksniu 3–4 porcijos netelpa. Maisto saugai būtinas termometras.
+
+Receptuose **nėra cukinijų ir artišokų**. Vienoje porcijoje bulvių ir batatų – ne daugiau kaip 200 g kiekvienų, brokolių – iki 150 g. Mėgstamiausios daržovės: paprikos, pievagrybiai, burokai, morkos, batatai, bulvės, pomidorai, agurkai, svogūnai, česnakai, kopūstai, rauginti produktai. Receptų katalogas išsaugo 16 skirtingų variantų; dar nerandamos kataloge daržovės gali būti įtrauktos tik pridėjus patikrintus produktų šaltinius.
+
+`scripts/planner.mjs` tikrina šias naujų meniu taisykles prieš generavimą ir su `recipePreferencesApplied` žyma pakartotinai tikrina validuojant. **Ankstesnių savaičių archyvas neperrašomas**, todėl senose savaitėse dar gali matytis cukinijų ar daugiau brokolių.
+
 ## Automatinis ciklas
 
 `.github/workflows/weekly-menu.yml` vykdomas trečiadieniais 06:17 UTC

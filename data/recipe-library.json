@@ -6,174 +6,191 @@
       {
         "id": "kalakutiena_iesmeliai",
         "slot": "PIETŪS",
-        "title": "Kalakutienos iešmeliai su bulvėmis",
-        "subtitle": "Orkaitės iešmeliai · paprikos · cukinijos · jogurtas",
+        "title": "Kalakutienos iešmeliai su paprikomis ir grybais",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
         "mins": 50,
         "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "credit": "Gimme Delicious / paukštienos patiekimo iliustracija (recepto varianto iliustracija)",
         "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "ingredients": {
           "turkey": 310,
-          "potato": 280,
-          "pepper": 230,
-          "zucchini": 220,
+          "potato": 180,
+          "pepper": 250,
+          "carrot": 180,
+          "mushroom": 180,
           "yogurt": 200,
           "oil": 10
         },
         "steps": [
-          "Kalakutieną supjaustyk stambiais kubeliais, sumaišyk su džiovintu česnaku ir paprika; suverk ant iešmelių arba dėk į skardą.",
-          "Bulvių skilteles su 10 g aliejaus kepk 205 °C apie 20 min., tada šalia sudėk paprikas ir cukinijas.",
-          "Kalakutieną kepk dar apie 18–22 min., kol storiausio gabalėlio vidinė temperatūra pasieks bent 74 °C.",
-          "Jogurtą sumaišyk su česnaku ir žolelėmis, padalink porcijomis ir laikyk atskirai."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Pagardink kalakutieną česnaku, paprika ir pipirais. Sudėk gabaliukus vienu sluoksniu į tos pačios skardos atskirą dalį, šalia paprikas ir pievagrybius. Kepk dar maždaug 18–25 min., kol storiausio gabaliuko temperatūra pasieks bent 74 °C. Nenaudok keptuvės.",
+          "Kepimo pabaigoje patikrink, kad daržovės apskrudo, o mėsa / žuvis pasiekė tinkamą vidinę temperatūrą. Viską kepk vienoje skardoje, ne keptuvėje.",
+          "Jogurtinį padažą su česnaku ir citrina patiek šaltą atskirai. Kepant 3–4 porcijas neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Skardos pietūs"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "kalakutiena_darzelese",
         "slot": "PIETŪS",
-        "title": "Kalakutienos kąsneliai su burokėliais",
-        "subtitle": "Skrudinti morkų ir burokėlių kubeliai · bulvės · jogurtas",
-        "mins": 55,
+        "title": "Kalakutienos kąsneliai su burokėliais ir morkomis",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "credit": "Gimme Delicious / paukštienos patiekimo iliustracija (recepto varianto iliustracija)",
         "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "ingredients": {
           "turkey": 320,
-          "potato": 250,
-          "carrot": 250,
+          "potato": 180,
+          "carrot": 230,
           "beet": 200,
-          "broccoli": 150,
+          "mushroom": 160,
+          "broccoli": 100,
           "yogurt": 200,
           "oil": 10
         },
         "steps": [
-          "Bulves, burokėlius ir morkas supjaustyk smulkiais kubeliais, apvoliok 10 g aliejaus ir kepk 210 °C apie 20 min.",
-          "Kalakutienos filė supjaustyk kąsneliais ir pagardink česnaku, pipirais, rozmarinu.",
-          "Sudėk mėsą į atskirą skardą ir kepk, kol viduje pasieks bent 74 °C; brokolius išgarink 6–8 min.",
-          "Patiekiant sudėk keptus šakniavaisius ir mėsą, jogurtą su krapais patiek atskirai."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Pagardink kalakutieną česnaku, paprika ir pipirais. Sudėk gabaliukus vienu sluoksniu į tos pačios skardos atskirą dalį, šalia paprikas ir pievagrybius. Kepk dar maždaug 18–25 min., kol storiausio gabaliuko temperatūra pasieks bent 74 °C. Nenaudok keptuvės.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Jogurtinį padažą su česnaku ir citrina patiek šaltą atskirai. Kepant 3–4 porcijas neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Sotūs šakniavaisiai"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "kalakutiena_keptuve",
         "slot": "PIETŪS",
-        "title": "Kalakutienos juostelės su batatais",
-        "subtitle": "Keptuvėje troškinta kalakutiena · batatai · cukinija",
-        "mins": 45,
+        "title": "Kalakutienos skarda su batatais ir pievagrybiais",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "credit": "Gimme Delicious / paukštienos patiekimo iliustracija (recepto varianto iliustracija)",
         "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "ingredients": {
           "turkey": 310,
-          "sweetpotato": 250,
-          "pepper": 200,
-          "zucchini": 250,
+          "sweetpotato": 180,
+          "pepper": 230,
+          "mushroom": 230,
+          "carrot": 140,
           "yogurt": 180,
           "oil": 12
         },
         "steps": [
-          "Saldžiąsias bulves supjaustyk kubeliais ir kepk orkaitėje 200 °C apie 25–30 min. su dalimi aliejaus.",
-          "Kalakutieną supjaustyk juostelėmis; apkepk likusiame aliejuje su paprika ir česnaku.",
-          "Pridėk papriką ir cukiniją, troškink 8–10 min. ir įsitikink, kad kalakutiena viduje pasiekė 74 °C.",
-          "Patiekiant dubenėlyje sudėk batatus, mėsą, daržoves ir atskirai pagardintą jogurtą."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Pagardink kalakutieną česnaku, paprika ir pipirais. Sudėk gabaliukus vienu sluoksniu į tos pačios skardos atskirą dalį, šalia paprikas ir pievagrybius. Kepk dar maždaug 18–25 min., kol storiausio gabaliuko temperatūra pasieks bent 74 °C. Nenaudok keptuvės.",
+          "Kepimo pabaigoje patikrink, kad daržovės apskrudo, o mėsa / žuvis pasiekė tinkamą vidinę temperatūrą. Viską kepk vienoje skardoje, ne keptuvėje.",
+          "Jogurtinį padažą su česnaku ir citrina patiek šaltą atskirai. Kepant 3–4 porcijas neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Daugiau angliavandenių pietums"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       }
     ],
     "vistiena": [
       {
         "id": "vistiena_paprikos",
         "slot": "PIETŪS",
-        "title": "Vištienos paprikų keptuvė",
-        "subtitle": "Bulvės · pievagrybiai · brokoliai · jogurtas",
-        "mins": 45,
+        "title": "Vištienos skarda su paprikomis ir pievagrybiais",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "credit": "Gimme Delicious / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "ingredients": {
           "chicken": 320,
-          "potato": 300,
+          "potato": 180,
           "pepper": 250,
-          "mushroom": 150,
-          "broccoli": 200,
+          "mushroom": 230,
+          "carrot": 150,
           "yogurt": 170,
           "oil": 10
         },
         "steps": [
-          "Bulves supjaustyk skiltelėmis, pasūdyk ir kepk su 10 g aliejaus 205 °C apie 30–35 min.",
-          "Vištienos filė supjaustyk juostelėmis; keptuvėje apkepk kartu su paprika ir pievagrybiais.",
-          "Brokolius išgarink; vištieną termiškai apdorok iki bent 74 °C viduje.",
-          "Sujunk su bulvėmis, o jogurtą, pagardintą pipirais ir česnaku, įdėk patiekiant."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Pagardink vištieną česnaku, paprika ir pipirais. Sudėk gabaliukus vienu sluoksniu į tos pačios skardos atskirą dalį, šalia paprikas ir pievagrybius. Kepk dar maždaug 18–25 min., kol storiausio gabaliuko temperatūra pasieks bent 74 °C. Nenaudok keptuvės.",
+          "Kepimo pabaigoje patikrink, kad daržovės apskrudo, o mėsa / žuvis pasiekė tinkamą vidinę temperatūrą. Viską kepk vienoje skardoje, ne keptuvėje.",
+          "Jogurtinį padažą su česnaku ir citrina patiek šaltą atskirai. Kepant 3–4 porcijas neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Pietų keptuvė"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "vistiena_citrinine",
         "slot": "PIETŪS",
-        "title": "Citrininė vištiena su batatais",
-        "subtitle": "Saldžiosios bulvės · burokėliai · morkos · brokoliai",
-        "mins": 55,
+        "title": "Citrininė vištiena su batatais ir burokėliais",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "credit": "Gimme Delicious / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "ingredients": {
           "chicken": 330,
-          "sweetpotato": 220,
-          "carrot": 250,
-          "beet": 200,
+          "sweetpotato": 180,
+          "carrot": 230,
+          "beet": 180,
           "broccoli": 100,
+          "mushroom": 120,
           "yogurt": 180,
           "oil": 10
         },
         "steps": [
-          "Burokėlius ir morkas supjaustyk smulkiai, su dalimi aliejaus kepk 205 °C 15 min.",
-          "Pridėk saldžiąsias bulves; vištieną pagardink citrinos žievele, pipirais ir česnaku.",
-          "Vištieną kepk atskiroje skardoje iki 74 °C; brokolius išgarink arba pridėk kepimo pabaigoje.",
-          "Jogurtą sumaišyk su citrinos sultimis ir krapais, patiek atskirai."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Pagardink vištieną česnaku, paprika ir pipirais. Sudėk gabaliukus vienu sluoksniu į tos pačios skardos atskirą dalį, šalia paprikas ir pievagrybius. Kepk dar maždaug 18–25 min., kol storiausio gabaliuko temperatūra pasieks bent 74 °C. Nenaudok keptuvės.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Jogurtinį padažą su česnaku ir citrina patiek šaltą atskirai. Kepant 3–4 porcijas neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Orkaitės patiekalas"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "vistiena_grybai",
         "slot": "PIETŪS",
-        "title": "Vištienos dubenėlis su grybais",
-        "subtitle": "Traškios bulvės · paprikos · cukinija · jogurto padažas",
-        "mins": 45,
+        "title": "Vištienos kepsneliai su grybais ir morkomis",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "credit": "Gimme Delicious / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
         "ingredients": {
           "chicken": 310,
-          "potato": 250,
-          "mushroom": 200,
+          "potato": 180,
+          "mushroom": 260,
           "pepper": 220,
-          "zucchini": 200,
+          "carrot": 150,
           "yogurt": 220,
           "oil": 12
         },
         "steps": [
-          "Bulves supjaustyk plonais gabalėliais ir kepk orkaitėje su 6 g aliejaus 205 °C iki apskrus.",
-          "Vištienos juosteles su likusiu aliejumi apkepk kartu su pievagrybiais ir paprika.",
-          "Pridėk cukiniją ir dar kelias minutes patroškink, kol vištienos vidinė temperatūra bus bent 74 °C.",
-          "Sudėk į dubenėlį su bulvėmis, užpilk jogurtu su česnaku tik patiekiant."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Pagardink vištieną česnaku, paprika ir pipirais. Sudėk gabaliukus vienu sluoksniu į tos pačios skardos atskirą dalį, šalia paprikas ir pievagrybius. Kepk dar maždaug 18–25 min., kol storiausio gabaliuko temperatūra pasieks bent 74 °C. Nenaudok keptuvės.",
+          "Kepimo pabaigoje patikrink, kad daržovės apskrudo, o mėsa / žuvis pasiekė tinkamą vidinę temperatūrą. Viską kepk vienoje skardoje, ne keptuvėje.",
+          "Jogurtinį padažą su česnaku ir citrina patiek šaltą atskirai. Kepant 3–4 porcijas neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Baltyminis dubenėlis"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       }
     ],
     "samas": [
       {
         "id": "samas_jogurtinis",
         "slot": "VAKARIENĖ",
-        "title": "Šamas su jogurtiniu padažu",
-        "subtitle": "Šiltos morkos · brokoliai · cukinijos · varškė",
-        "mins": 40,
+        "title": "Šamas su morkomis, grybais ir jogurto padažu",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "ingredients": {
           "catfish": 320,
-          "broccoli": 300,
-          "zucchini": 300,
+          "broccoli": 100,
+          "mushroom": 200,
+          "pepper": 170,
           "carrot": 150,
           "cottage": 220,
           "yogurt": 100,
@@ -181,18 +198,20 @@
           "walnut": 10
         },
         "steps": [
-          "Šamo filė pagardink citrina, pipirais ir čiobreliais, kepk orkaitėje 190 °C apie 15–20 min., iki 63 °C viduje.",
-          "Morkas supjaustyk plonais gabalėliais, cukiniją troškink su 10 g aliejaus, brokolius išgarink.",
-          "Jogurtą sumaišyk su česnaku ir krapais; grūdėtą varškę padalink atskiromis porcijomis.",
-          "Žuvį patiek su šiltomis daržovėmis, jogurtiniu padažu, varške ir 10 g riešutų."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Į tos pačios skardos laisvą galą dėk nusausintą, citrina ir pipirais pagardintą šamą; greta sudėk paprikas ir pievagrybius. Kepk dar apie 15–20 min., kol žuvis pasieks bent 63 °C viduje. Nei keptuvės, nei puodo nereikia.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Patiek su atskirai laikoma grūdėta varške ir, jei numatyta, jogurtiniu padažu bei pasvertais riešutais. 3–4 porcijas ruošk kepimo etapais, jeigu viena skarda netalpina vieno sluoksnio."
         ],
-        "tag": "Žuvis vakarienei"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "samas_burokeliai",
         "slot": "VAKARIENĖ",
-        "title": "Keptas šamas su burokėlių salotomis",
-        "subtitle": "Paprikos · brokoliai · cukinija · grūdėta varškė",
+        "title": "Keptas šamas su burokėliais ir paprikomis",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
         "mins": 50,
         "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
@@ -201,124 +220,139 @@
           "catfish": 310,
           "beet": 220,
           "pepper": 230,
-          "broccoli": 200,
-          "zucchini": 150,
+          "broccoli": 100,
+          "mushroom": 150,
           "cottage": 250,
           "oil": 12,
           "walnut": 12
         },
         "steps": [
-          "Burokėlius išvirk arba supjaustytus kubeliais iškepk 200 °C, kol suminkštės.",
-          "Šamą pagardink citrina ir pipirais; orkaitėje kepk 190 °C iki bent 63 °C žuvies viduje.",
-          "Brokolius išgarink, papriką ir cukiniją trumpai apkepk su 12 g aliejaus.",
-          "Daržoves sumaišyk su burokėliais, šalia dėk žuvį bei varškę ir pabarstyk 12 g riešutų."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Į tos pačios skardos laisvą galą dėk nusausintą, citrina ir pipirais pagardintą šamą; greta sudėk paprikas ir pievagrybius. Kepk dar apie 15–20 min., kol žuvis pasieks bent 63 °C viduje. Nei keptuvės, nei puodo nereikia.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Patiek su atskirai laikoma grūdėta varške ir, jei numatyta, jogurtiniu padažu bei pasvertais riešutais. 3–4 porcijas ruošk kepimo etapais, jeigu viena skarda netalpina vieno sluoksnio."
         ],
-        "tag": "Spalvinga vakarienė"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "samas_grybai",
         "slot": "VAKARIENĖ",
-        "title": "Šamas su grybų ir cukinijų troškiniu",
-        "subtitle": "Brokoliai · pievagrybiai · varškė · graikiniai riešutai",
-        "mins": 40,
+        "title": "Šamas su pievagrybiais ir keptais burokėliais",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "ingredients": {
           "catfish": 320,
-          "mushroom": 240,
-          "zucchini": 300,
-          "broccoli": 300,
+          "mushroom": 260,
+          "pepper": 220,
+          "beet": 150,
+          "broccoli": 100,
           "cottage": 230,
           "oil": 12,
           "walnut": 15
         },
         "steps": [
-          "Šamo filė pabarstyk pipirais, džiovintais žalumynais; orkaitėje kepk 190 °C apie 15–20 min. iki 63 °C.",
-          "Pievagrybius apkepk su 12 g aliejaus, įmaišyk cukiniją ir troškink, kol suminkštės.",
-          "Brokolius garink 6–8 min. ir sumaišyk su keptomis daržovėmis.",
-          "Patiekiant dėk šamą, grūdėtą varškę ir 15 g pasvertų graikinių riešutų."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Į tos pačios skardos laisvą galą dėk nusausintą, citrina ir pipirais pagardintą šamą; greta sudėk paprikas ir pievagrybius. Kepk dar apie 15–20 min., kol žuvis pasieks bent 63 °C viduje. Nei keptuvės, nei puodo nereikia.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Patiek su atskirai laikoma grūdėta varške ir, jei numatyta, jogurtiniu padažu bei pasvertais riešutais. 3–4 porcijas ruošk kepimo etapais, jeigu viena skarda netalpina vieno sluoksnio."
         ],
-        "tag": "Lengva žuvis"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       }
     ],
     "jautiena": [
       {
         "id": "jautiena_burokeliai",
         "slot": "VAKARIENĖ",
-        "title": "Jautiena su burokėliais ir grybais",
-        "subtitle": "Cukinija · brokoliai · grūdėta varškė",
-        "mins": 45,
+        "title": "Jautienos kukuliai su burokėliais ir grybais",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "ingredients": {
           "beef": 200,
           "mushroom": 220,
-          "zucchini": 250,
-          "beet": 160,
-          "broccoli": 300,
+          "beet": 200,
+          "pepper": 220,
+          "carrot": 120,
+          "broccoli": 100,
           "cottage": 200,
           "oil": 10
         },
         "steps": [
-          "Burokėlius supjaustyk mažais gabalėliais ir išvirk ar iškepk iki minkštumo.",
-          "Maltą jautieną kruopščiai apskrudink ir termiškai apdorok iki bent 71 °C viduje.",
-          "Atskirai su 10 g aliejaus apkepk pievagrybius ir cukiniją, brokolius išgarink.",
-          "Sujunk jautieną ir daržoves, įdėk burokėlius, o grūdėtą varškę patiek šalia."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Iš maltos jautienos suformuok plokščius kukulius ar kotletukus. Dėk juos į laisvą tos pačios skardos dalį; vienu sluoksniu paskirstyk paprikas ir pievagrybius. Kepk dar apie 15–20 min., kol kukulių viduje bus bent 71 °C. Keptuvės nereikia.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Patiekiant šalia įdėk grūdėtos varškės. Gaminant 3–4 porcijas vienu kartu, neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Daug daržovių"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "jautiena_troskinys",
         "slot": "VAKARIENĖ",
-        "title": "Jautienos paprikų troškinys",
-        "subtitle": "Pievagrybiai · morkos · brokoliai · grūdėta varškė",
-        "mins": 45,
+        "title": "Jautienos paprikų kepsneliai vienoje skardoje",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "ingredients": {
           "beef": 210,
           "pepper": 260,
-          "mushroom": 200,
-          "carrot": 180,
-          "broccoli": 220,
+          "mushroom": 220,
+          "carrot": 200,
+          "broccoli": 100,
+          "beet": 120,
           "cottage": 220,
           "oil": 10
         },
         "steps": [
-          "Morkas supjaustyk plonais pusžiedžiais, paprikas kubeliais, pievagrybius riekelėmis.",
-          "Maltą jautieną apkepk gilioje keptuvėje ir kaitink iki bent 71 °C, nupilk išsiskyrusių riebalų perteklių.",
-          "Pridėk 10 g aliejaus, morkas, paprikas ir grybus; įpilk šlakelį vandens ir troškink 10–15 min.",
-          "Brokolius išgarink atskirai; patiek su troškiniu ir grūdėta varške."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Iš maltos jautienos suformuok plokščius kukulius ar kotletukus. Dėk juos į laisvą tos pačios skardos dalį; vienu sluoksniu paskirstyk paprikas ir pievagrybius. Kepk dar apie 15–20 min., kol kukulių viduje bus bent 71 °C. Keptuvės nereikia.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Patiekiant šalia įdėk grūdėtos varškės. Gaminant 3–4 porcijas vienu kartu, neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Šiltas troškinys"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       },
       {
         "id": "jautiena_kotletukai",
         "slot": "VAKARIENĖ",
-        "title": "Jautienos kotletukai su cukinija",
-        "subtitle": "Orkaitėje kepti kotletukai · brokoliai · paprika",
-        "mins": 40,
+        "title": "Jautienos kotletukai su keptomis daržovėmis",
+        "subtitle": "Vienos didelės skardos patiekalas · orkaitė 200 °C · be keptuvės",
+        "mins": 50,
         "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "ingredients": {
           "beef": 200,
-          "broccoli": 320,
-          "zucchini": 300,
-          "pepper": 150,
+          "broccoli": 100,
+          "pepper": 200,
+          "mushroom": 240,
+          "beet": 180,
+          "carrot": 130,
           "cottage": 230,
           "oil": 12
         },
         "steps": [
-          "Maltą jautieną pagardink česnaku ir pipirais, suformuok nedidelius kotletukus be džiūvėsėlių.",
-          "Kotletukus kepk 200 °C apie 15–20 min., kol vidinė temperatūra pasieks bent 71 °C.",
-          "Cukiniją ir papriką su 12 g aliejaus kepk atskiroje skardoje, brokolius garink 6–8 min.",
-          "Sudėk į dėžutes, šalia pridėk grūdėtos varškės; laikyk atskirai nuo karšto maisto iki patiekimo."
+          "Įkaitink orkaitę iki 200 °C. Ant VIENOS didelės skardos su kepimo popieriumi paskleisk smulkiai pjaustytus šakniavaisius ir bulves / batatus, jei yra recepte; apvoliok dalyje nurodyto aliejaus ir prieskoniuose. Kepk 15–20 min., kad kietesnės daržovės suminkštėtų.",
+          "Iš maltos jautienos suformuok plokščius kukulius ar kotletukus. Dėk juos į laisvą tos pačios skardos dalį; vienu sluoksniu paskirstyk paprikas ir pievagrybius. Kepk dar apie 15–20 min., kol kukulių viduje bus bent 71 °C. Keptuvės nereikia.",
+          "Jeigu naudojami brokoliai, mažus žiedynus sudėk ant tos pačios skardos paskutinėms 8–10 min., kad neperkeptų. Pasuk skardą ir patikrink visų daržovių bei mėsos / žuvies iškepimą.",
+          "Patiekiant šalia įdėk grūdėtos varškės. Gaminant 3–4 porcijas vienu kartu, neperkrauk skardos: prireikus kepk keliais etapais su ta pačia skarda."
         ],
-        "tag": "Be pridėtinio cukraus"
+        "tag": "Vienos skardos patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena didelė skarda su kepimo popieriumi; mėsos termometras"
       }
     ]
   }

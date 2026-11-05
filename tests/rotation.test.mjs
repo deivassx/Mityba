@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {selectWeeklyRecipes} from '../scripts/rotation.mjs';
-import {validate} from '../scripts/planner.mjs';
+import {validate,validateRecipePreferences} from '../scripts/planner.mjs';
 
 const catalog=JSON.parse(await fs.readFile(new URL('../data/catalog.json',import.meta.url),'utf8'));
 const bank=JSON.parse(await fs.readFile(new URL('../data/recipe-library.json',import.meta.url),'utf8'));
@@ -27,6 +27,7 @@ test('16 skirtingų realių receptų ir 256 skirtingos savaitinės kombinacijos'
     seen.add(signature);
     for(const r of week.recipes) allRecipes.add(r.id);
     validate(week,false);
+    validateRecipePreferences(week);
     for(const day of week.days) {
       const calc=id=>{const r=week.recipes.find(x=>x.id===id);return Object.entries(r.ingredients).reduce((sum,[k,g])=>sum + g*week.nutrients[k].carbs/100,0);};
       assert.ok(calc(day.lunch)>=calc(day.dinner), 'Angliavandenių daugiau vakarienei: '+n);
@@ -46,4 +47,18 @@ test('pakartotinis generavimas tai pačiai savaitei deterministinis, kitą savai
 test('neteisingos savaitės ir trūkstamų variantų nepriima',()=>{
   assert.throws(()=>selectWeeklyRecipes(catalog.recipes,bank,'2026-11-10'),/pirmadienį/);
   assert.throws(()=>selectWeeklyRecipes(catalog.recipes,{variants:{}},'2026-11-16'),/Trūksta/);
+});
+
+test('atmeta nemėgstamas daržoves, per daug bulvių ir keptuvėje kepamą naują receptą',()=>{
+ const recipe=structuredClone(catalog.recipes[0]);
+ const menu={recipes:[recipe]};
+ assert.doesNotThrow(()=>validateRecipePreferences(menu));
+ recipe.ingredients.zucchini=10;
+ assert.throws(()=>validateRecipePreferences(menu),/Nemėgstamas ingredientas/);
+ delete recipe.ingredients.zucchini;
+ recipe.ingredients.potato=201;
+ assert.throws(()=>validateRecipePreferences(menu),/Viršyta vienos porcijos/);
+ recipe.ingredients.potato=180;
+ recipe.method='stovetop';
+ assert.throws(()=>validateRecipePreferences(menu),/vienai skardai/);
 });

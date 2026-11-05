@@ -17,6 +17,23 @@ export function readRules() {
   assert(Array.isArray(s.allowedProductDomains) && s.allowedProductDomains.length>0,'Nėra leistinų produktų šaltinių');
   return rules;
 }
+export function validateRecipePreferences(menu, rules=readRules()) {
+  const prefs=rules.recipePreferences||{};
+  const restricted=new Set(prefs.excludedIngredientIds||[]);
+  const maximum=prefs.maxGramsPerServing||{};
+  const ovenOnly=prefs.foodPreparation?.preferredMethod==='one_large_sheet_pan_oven';
+  for(const recipe of menu.recipes){
+    if(ovenOnly) {
+      assert(recipe.method==='one_sheet_pan','Receptas netinka vienai skardai: '+recipe.id);
+      assert(!recipe.steps.some(step=>/keptuvėje|keptuvę|garink|troškink puode/i.test(step)),'Receptas reikalauja keptuvės ar puodo: '+recipe.id);
+    }
+    for (const [id,g] of Object.entries(recipe.ingredients)) {
+      assert(!restricted.has(id),'Nemėgstamas ingredientas '+id+': '+recipe.id);
+      if(maximum[id]!=null)assert(g<=maximum[id],'Viršyta vienos porcijos '+id+' riba ('+g+' > '+maximum[id]+' g): '+recipe.id);
+    }
+  }
+  return menu;
+}
 export function validate(menu, verified = true, rules = readRules()) {
   const ids = list => { const m = new Map(list.map(x => [x.id,x])); assert(m.size === list.length,'Pasikartojantys ID'); return m; };
   const recipes = ids(menu.recipes), products = ids(menu.products), stores = ids(menu.stores);
@@ -24,6 +41,7 @@ export function validate(menu, verified = true, rules = readRules()) {
   assert(menu.days.length===m.days && menu.sessions.length===m.cookSessions && m.mealsPerDay===2,'Neteisingas savaites dienų / valgių / gaminimų skaičius');
   assert(stores.size>=1 && stores.size<=s.maxStoresPerWeek,'Per daug tiekėjų');
   assert(menu.meta.kcalLimit===n.maxKcalPerDay,'Kalorijų riba nesutampa su taisyklėmis');
+  if(menu.meta?.recipePreferencesApplied===true)validateRecipePreferences(menu,rules);
   for (const p of products.values()) {
     const hostname=new URL(p.url).hostname;
     assert(s.allowedProductDomains.some(d=>hostname===d || hostname.endsWith('.'+d)),'Neleistina produkto parduotuvė: '+p.url);
@@ -128,8 +146,8 @@ export async function generate(now=new Date()) {
   const usedProducts=new Set(recipes.flatMap(r=>Object.keys(r.ingredients)));
   menu.products=menu.products.filter(p=>usedProducts.has(p.id));
   menu.days=Array.from({length:7},(_,i)=>({date:new Date(+date+i*86400000).toISOString().slice(0,10),lunch:pairs[i<3?0:1][0],dinner:pairs[i<3?0:1][1]}));
-  menu.meta={...menu.meta,weekStart:week,generatedAt:now.toISOString(),status:'Automatiškai patikrinta savaitė',pricingNotice:'Prekių kainos patikrintos '+now.toISOString()+'. Galutinės kainos ir pristatymo sąlygos gali pasikeisti.'};
-  menu.sessions=pairs.map((pair,i)=>({title:i?'Trečiadienis':'Sekmadienis',subtitle:i?'IV–VII dienoms':'I–III dienoms',summary:pair.map(id=>menu.recipes.find(r=>r.id===id).title).join(' + '),servings:Object.fromEntries(pair.map(id=>[id,i?4:3])),steps:['Kiekvieno recepto ingredientus padaugink iš nurodyto porcijų skaičiaus.','Gamink pagal žemiau pateiktas receptų instrukcijas, naudok atskiras skardas.','Per 2 val. atvėsink ir padėk į šaldytuvą. Ketvirtai ir vėlesnėms dienoms skirtas porcijas iškart užšaldyk; atitirpink šaldytuve.'],duration:'Apie 70–90 min.'}));
+  menu.meta={...menu.meta,recipePreferencesApplied:true,weekStart:week,generatedAt:now.toISOString(),status:'Automatiškai patikrinta savaitė',pricingNotice:'Prekių kainos patikrintos '+now.toISOString()+'. Galutinės kainos ir pristatymo sąlygos gali pasikeisti.'};
+  menu.sessions=pairs.map((pair,i)=>({title:i?'Trečiadienis':'Sekmadienis',subtitle:i?'IV–VII dienoms':'I–III dienoms',summary:pair.map(id=>menu.recipes.find(r=>r.id===id).title).join(' + '),servings:Object.fromEntries(pair.map(id=>[id,i?4:3])),steps:['Padaugink kiekvieno recepto ingredientus iš jo porcijų skaičiaus.','Kiekvieną receptą iškepk orkaitėje vienoje didelėje skardoje; jeigu 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda, be keptuvės.','Gatavas porcijas per 2 val. atvėsink; vėlesnėms dienoms skirtas porcijas užšaldyk ir atitirpink šaldytuve.'],duration:'Apie 70–90 min.'}));
   validate(menu,false);
   // Tikrinti esamus ir kitų ūkių patvirtintus SKU, apskaičiuoti visas pakuotes ir
   // rinktis viso krepšelio kainą griežtai iš daugiausia DVIEJŲ atsiskaitymo vietų.

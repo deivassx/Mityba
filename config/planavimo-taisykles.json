@@ -235,7 +235,64 @@
     "largerStarchPortionAtLunch": true,
     "minimizeFoodWaste": true,
     "useFreezerForLaterServings": true,
-    "recipeImagesIllustrativeUnlessVerified": true
+    "recipeImagesIllustrativeUnlessVerified": true,
+    "preferredVegetables": [
+      "paprikos",
+      "pievagrybiai",
+      "burokėliai",
+      "morkos",
+      "saldžiosios bulvės",
+      "bulvės",
+      "pomidorai",
+      "agurkai",
+      "svogūnai",
+      "česnakai",
+      "kopūstai",
+      "raugintos daržovės / rauginti produktai"
+    ],
+    "dislikedVegetables": [
+      "cukinijos",
+      "artišokai"
+    ],
+    "excludedIngredientIds": [
+      "zucchini",
+      "artichoke"
+    ],
+    "maxGramsPerServing": {
+      "potato": 200,
+      "sweetpotato": 200,
+      "broccoli": 150
+    },
+    "gramsLimitScope": "Kiekvienam patiekalui vienai porcijai: tiek įprastų, tiek saldžiųjų bulvių ne daugiau 200 g; brokolių ne daugiau 150 g. Tai ne visos dienos riba.",
+    "preferredVegetableIdsAlreadyInCatalog": [
+      "pepper",
+      "mushroom",
+      "beet",
+      "carrot",
+      "sweetpotato",
+      "potato"
+    ],
+    "preferredVegetablesNotYetCatalogued": [
+      "tomato",
+      "cucumber",
+      "onion",
+      "garlic",
+      "cabbage",
+      "fermented_vegetables"
+    ],
+    "foodPreparation": {
+      "preferredMethod": "one_large_sheet_pan_oven",
+      "maxTraysPerRecipePerOvenRound": 1,
+      "avoidStovetopAndPanFrying": true,
+      "batchCookingDays": [
+        "sekmadienis",
+        "trečiadienis"
+      ],
+      "instructions": "Kiekvieną pasirinktą receptą gamink orkaitėje vienoje didelėje skardoje, nedėk atskirų kepimo keptuvėje ar garinimo puode etapų. Daržoves ir baltymus dėk etapais ant tos pačios skardos, kai reikia skirtingos kepimo trukmės. Padažus, varškę, salotas ar raugintas daržoves patiek šaltus atskirai.",
+      "realWorldCapacity": "3–4 porcijų receptas gali netilpti viename skardos sluoksnyje. Nedėk produktų vienas ant kito – geriau kartoti kepimą ta pačia skarda, nei kepti grūstyje arba naudoti keptuvę. Dviems skirtingiems receptams per gaminimo sesiją gali prireikti atskirų skardos kepimo etapų.",
+      "foodSafety": "Naudok mėsos termometrą, paukštiena iki 74 °C, malta jautiena iki 71 °C, žuvis iki 63 °C; porcijas greitai atvėsink ir tinkamai laikyk šaldytuve arba užšaldyk."
+    },
+    "instructionScope": "Taikyti visiems naujai generuojamiems receptams ir savaitiniams meniu. Senų meniu istorijos nekeisti."
   },
   "implementationStatus": {
     "enforcedByNodePlanner": [
@@ -255,7 +312,10 @@
       "shopping.barboraRestriction (automatinis neatitikimo perspėjimas)",
       "shopping.comparison.maxCheckoutStores",
       "shopping.comparison.rankBy (only verified candidate pool)",
-      "shopping.comparison.automaticFarmDiscovery (tik naujų pasiūlymų paieškos ataskaita, ne automatinė atranka)"
+      "shopping.comparison.automaticFarmDiscovery (tik naujų pasiūlymų paieškos ataskaita, ne automatinė atranka)",
+      "recipePreferences.excludedIngredientIds (generuojamiems meniu)",
+      "recipePreferences.maxGramsPerServing (generuojamiems meniu)",
+      "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
@@ -269,7 +329,8 @@
       "shopping.budget.priceValueAssessment",
       "shopping.barboraRestriction",
       "shopping.comparison.farmerRegistry",
-      "shopping.comparison.knownLimitations"
+      "shopping.comparison.knownLimitations",
+      "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)"
     ]
   }
 }
