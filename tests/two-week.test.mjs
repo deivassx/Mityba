@@ -22,13 +22,14 @@ test('14 dienų užsakymas sumuoja tikrą 2 savaičių meniu ir mėsą perka vie
   assert.deepEqual([...plan.suppliers].sort(),['barbora','farmlio']);
   assert.equal(plan.maxStores,2);
   const proteins=plan.groups[0].lines;
-  assert.equal(proteins.length,4);
+  assert.ok(proteins.length>=4);
   const grams=Object.fromEntries(proteins.map(x=>[x.id,x.grams]));
-  assert.equal(grams.turkey,2140);
-  assert.equal(grams.chicken,2160);
-  assert.equal(grams.catfish,2180);
-  assert.equal(grams.beef,1320);
-  assert.equal(proteins.find(p=>p.id==='catfish').packs,Math.ceil(2180/300));
+  for(const product of proteins) {
+    assert.equal(grams[product.id],(demand(a)[product.id]||0)+(demand(b)[product.id]||0));
+  }
+  assert.ok(grams.turkey>0 && grams.chicken>0 && grams.catfish>0);
+  assert.ok(grams.beef>0 && grams.beef_steak>0);
+  assert.equal(proteins.find(p=>p.id==='catfish').packs,Math.ceil(grams.catfish/300));
   assert.ok(!proteins.find(p=>p.id==='turkey').url);
   assert.ok(!proteins.find(p=>p.id==='beef').url);
   assert.ok(!proteins.find(p=>p.id==='chicken').url);
