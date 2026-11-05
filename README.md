@@ -20,6 +20,10 @@ Svetainė: https://deivassx.github.io/Mityba/
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 
+## Nuorodos, kai ūkyje nerasta kainos
+
+`data/sourcing-links.json` saugo ūkininkų ir „Farmlio“ alternatyvias nuorodas. Jei nėra patvirtintos mėsos kainos, dviejų savaičių lentelėje galima atidaryti abi svetaines ir rankiniu būdu palyginti jų pasiūlymus. Bendras „Farmlio“ katalogas nėra konkreti prekė, o išparduota smulkinta jautiena iš „Kinderio limuzinų“ negali būti automatiškai įtraukta į krepšelį. Nuorodos savaime neužsako ir nėra realiojo laiko kainos patikra; galutinis pasirinkimas vis dar iki 2 parduotuvių.
+
 ## Dviejų savaičių pirkinių užsakymo planas
 
 Svetainės `#dvi-savaites` skiltis nuo pasirinktos savaitės įkelia tos ir **kitos turimos savaitės** meniu. Iš jų susumuoja visus 28 valgymus, atskirai išveda **mėsos ir žuvies užsakymą vienu kartu 14 dienų**, o daržoves, pieno produktus ir priedus – atskirais sąrašais kiekvienai savaitei. Pakuotės apvalinamos iš viso 14 dienų poreikio baltymams, o šviežiems produktams – per savaitę. Mygtuku nukopijuojami užsakymo sąrašai su gramais, kiekiais ir SKU nuorodomis, kur jos iš tiesų yra. Galima pažymėti nupirktus produktus savo naršyklėje.

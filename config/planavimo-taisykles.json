@@ -235,7 +235,18 @@
       "temperatureStorage": "Mėsa ir žuvis 2 savaitems gali būti perkamos iškart TIK jei atsargiai ir laiku užšaldomos -18 C ar žemiau. Atitirpinti šaldytuve. Daržoves ir šviežius priedus planuoti atskirai kiekvienai savaitei.",
       "productEvidence": "Nepatikrintos mesos/zuves prekes turi buti parodytos su bendru 14 dienu kiekiu, bet be isgalvotos kainos, pakuotes, pardavejo arba atsiskaitymo nuorodos.",
       "priceVerification": "Prieš užsakant patikrink SKU ir galutinį prekių bei pristatymo krepšelį; orientacinės katalogo kainos netampa patvirtintomis 2 savaičių kainomis.",
-      "uiBehavior": "2 savaiciu pirkiniu skiltis turi pradeti nuo siuo metu pasirinktos savaites ir apimti kita turima savaite. Jei kitos savaites meniu nera, nerodyti apsimetamo 14 dienu krepselio. Produktus skirstyti i 14 dienu baltymus ir atskirus svieziu prekiu savaitinius pirkinius. Vien tik spaudziamos prekiu nuorodos nieko neuzsako."
+      "uiBehavior": "2 savaiciu pirkiniu skiltis turi pradeti nuo siuo metu pasirinktos savaites ir apimti kita turima savaite. Jei kitos savaites meniu nera, nerodyti apsimetamo 14 dienu krepselio. Produktus skirstyti i 14 dienu baltymus ir atskirus svieziu prekiu savaitinius pirkinius. Vien tik spaudziamos prekiu nuorodos nieko neuzsako.",
+      "farmlioFallback": {
+        "enabled": true,
+        "priority": [
+          "farmer_direct",
+          "farmlio",
+          "barbora_chicken_exception_only"
+        ],
+        "sourceFile": "data/sourcing-links.json",
+        "showBothDirectFarmerAndFarmlioUrls": true,
+        "description": "Kai tiesioginis ūkininkas nepateikia patikrinamos kainos, papildomai peržiūrėk visą Farmlio katalogą ir pateik abi nuorodas. Paieškos / kategorijos nuoroda nėra patvirtinta prekė ar kaina; išparduoti SKU negalimi. Nuorodos nepadidina faktinių pasirinktų parduotuvių skaičiaus, vis dar ne daugiau kaip dvi."
+      }
     }
   },
   "recipePreferences": {
@@ -352,7 +363,8 @@
       "shopping.comparison.farmerRegistry",
       "shopping.comparison.knownLimitations",
       "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)",
-      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI patikra ir uzsakymo blokavimas kai nepatvirtinta, ne automatine tiekėju paieska)"
+      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI patikra ir uzsakymo blokavimas kai nepatvirtinta, ne automatine tiekėju paieska)",
+      "shopping.bulkPurchase.farmlioFallback (naujų SKU paieška ir kainų tikrinimas neautomatizuoti)"
     ]
   }
 }

@@ -34,6 +34,7 @@ jobs:
           test -s AGENTS.md
           test -s config/planavimo-taisykles.json
           test -s data/offer-candidates.json
+          test -s data/sourcing-links.json
       - name: Testai
         run: node --test
       - name: Generuoti ir patikrinti naują meniu
@@ -68,6 +69,7 @@ jobs:
           cp -r css js _site/
           mkdir -p _site/data
           cp data/menu.json _site/data/
+          cp data/sourcing-links.json _site/data/
           cp -r data/history _site/data/
       - uses: actions/upload-pages-artifact@v3
         with:

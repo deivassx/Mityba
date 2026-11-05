@@ -74,3 +74,19 @@ test('Sąraše nėra sugalvotų kainų ar nuorodų ir atskiriami 2 savaitės por
  }
  assert.match(copyText(plan),/KAINA NEŽINOMA/);
 });
+
+test('Be kainos rodomos Farmlio ir ūkininko nuorodos, ne išgalvotas SKU',async()=>{
+ const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ const plan=build(a,b,sources),turkey=plan.groups[0].lines.find(p=>p.id==='turkey');
+ const beef=plan.groups[0].lines.find(p=>p.id==='beef');
+ assert.equal(turkey.cost,null);
+ assert.equal(turkey.url,null);
+ assert.equal(turkey.packs,null);
+ assert.match(turkey.sourcing.farmlio.url,/farmlio.lt\/prekes/);
+ assert.ok(turkey.sourcing.farmers.some(p=>p.url.includes('baltuoniu')));
+ assert.match(beef.sourcing.farmlio.url,/smulkinta-jautiena/);
+ assert.equal(plan.suppliers.length,2);
+ assert.match(copyText(plan),/Farmlio/);
+ assert.match(copyText(plan),/Baltuonių kalakutai/);
+ assert.equal(plan.orderReady,false);
+});

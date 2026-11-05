@@ -26,7 +26,7 @@
     return needed;
   }
   const productKey=p=>p && [p.store,p.url,p.packGrams].join('|');
-  function build(first,second) {
+  function build(first,second,sources={products:{}}) {
     const start=new Date(first?.meta?.weekStart+'T00:00:00Z').getTime();
     const next=new Date(second?.meta?.weekStart+'T00:00:00Z').getTime();
     if(!Number.isFinite(start)||!Number.isFinite(next)||next-start!==7*86400000)throw Error('Pasirinktos savaitės turi eiti iš eilės.');
@@ -54,7 +54,8 @@
         productName:product?.name||null,store:product?.store||null,
         url:product?link(product.url):null,packGrams:product?.packGrams||null,packs,
         cost,priceFresh,missingOffer,conflictingOffers:conflicts,
-        unavailable:!product,needsReview:!product || !priceFresh
+        unavailable:!product,needsReview:!product || !priceFresh,
+        sourcing:PROTEINS.has(id)?(sources.products?.[id]||null):null
       };
     }
     const proteins=[...new Set(Object.keys(needs[0]).concat(Object.keys(needs[1])))]
@@ -95,15 +96,22 @@
         ?'I sav. '+num(line.weekQuantities[0])+' g · II sav. '+num(line.weekQuantities[1])+' g'
         :'Reikia '+num(line.grams)+' g');
       const status=line.unavailable
-        ?'<span class="fortnight-pill">Ūkio prekė nepatvirtinta</span>'
+        ?'<span class="fortnight-pill">Kaina ir ūkio prekė nepatvirtinta</span>'
         :line.cost===null?'<span class="fortnight-pill">Kaina nežinoma</span>'
         :line.priceFresh?'<small>Patikrinta neseniai – pakartok prieš pirkdamas</small>'
         :'<span class="fortnight-pill">Sena katalogo kaina</span>';
       const product=escapeHtml(line.name);
       const price=line.cost===null?'—':eur(line.cost)+(line.priceFresh?'':'*');
-      const url=line.url
-        ?'<a href="'+escapeHtml(line.url)+'" target="_blank" rel="noopener noreferrer">Prekė ↗</a>'
-        :'Reikia patvirtinti';
+      const links=[];
+      if(line.url)links.push('<a href="'+escapeHtml(line.url)+'" target="_blank" rel="noopener noreferrer">Katalogo prekė ↗</a>');
+      if(line.sourcing?.farmlio?.url && link(line.sourcing.farmlio.url) && line.sourcing.farmlio.url!==line.url){
+        links.push('<a href="'+escapeHtml(link(line.sourcing.farmlio.url))+'" target="_blank" rel="noopener noreferrer">Farmlio ↗</a>');
+      }
+      for(const farm of line.sourcing?.farmers||[]){
+        const href=link(farm.url);
+        if(href&&href!==line.url)links.push('<a href="'+escapeHtml(href)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(farm.name)+' ↗</a>');
+      }
+      const url=links.length?'<div class="fortnight-links">'+links.join('')+'</div>':'Reikia patvirtinti';
       return '<tr class="'+(done?'is-complete':'')+'"><td><input type="checkbox" class="fortnight-check" aria-label="Įsigyta: '+product+'" data-group="'+groupId+'" data-id="'+itemId+'" '+(done?'checked':'')+'></td>'
        +'<td><div class="product-name">'+product+'</div><div class="product-sub">'+description+'</div>'+status+'</td>'
        +'<td>'+size+'</td><td><strong>'+price+'</strong></td><td>'+url+'</td></tr>';
@@ -122,8 +130,10 @@
         const packs=p.packs!==null?' · '+p.packs+' × '+p.packGrams+' g':' · pakuotė ir tiekėjas nepatvirtinti';
         const amount=p.group==='baltymai'?' (I sav. '+p.weekQuantities[0]+' g, II sav. '+p.weekQuantities[1]+' g)':'';
         out.push('☐ '+p.name+' — '+p.grams+' g'+amount+packs+
-          (p.url?' · '+p.url:' · reikia patikrinti ūkį')+
+          (p.url?' · katalogas: '+p.url:' · konkretaus SKU nėra')+
           (p.cost===null?' · KAINA NEŽINOMA':' · sena katalogo kaina ~'+eur(p.cost)));
+        if(p.sourcing?.farmlio?.url)out.push('    Farmlio: '+p.sourcing.farmlio.url+' (kaina / likutis nepatvirtinti)');
+        for(const farm of p.sourcing?.farmers||[])out.push('    Ūkis: '+farm.name+' – '+farm.url+' (kaina nepatvirtinta)');
       }
       out.push('');
     }
@@ -152,7 +162,7 @@
       +'<div class="fortnight-toolbar"><p id="fortnight-count">Pažymėta: '+checkedCount+'/'+plan.items.length+'</p><button type="button" id="fortnight-copy" class="btn">⧉ Kopijuoti 14 dienų pirkinių sąrašą</button></div>'
       +plan.groups.map(groupedHtml).join('')
       +'<div class="fortnight-summary"><b>Ko dar reikia:</b> '+(plan.missing.length?escapeHtml(plan.missing.map(x=>x.name).join(', ')):'Tiekėjų SKU sąrašas užpildytas, dar patikrink kainas ir pristatymą.')
-      +'<br>Žinomi tiekėjai: '+escapeHtml(plan.suppliers.join(', ')||'nėra')+' (maks. 2 per 14 dienų).'
+      +'<br>Žinomi tiekėjai: '+escapeHtml(plan.suppliers.join(', ')||'nėra')+' (maks. 2 per 14 dienų). Ūkininkų ir Farmlio paieškos nuorodos nėra papildomi pasirinkti tiekėjai.'
       +'<br>* Suma – tik orientacinis senų katalogo kainų įvertis; vienos mėsos/žuvies pakuotės apvalinamos dviem savaitėms, šviežių prekių – atskirai kiekvienai savaitei. Pristatymas neįskaičiuotas.</div>';
     if(container.dataset.fortnightBound!=='yes'){
       container.addEventListener('change',event=>{

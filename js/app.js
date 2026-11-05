@@ -174,9 +174,12 @@ async function renderTwoWeekShopping(menu,request) {
   output.setAttribute('aria-busy','true');
   output.innerHTML='<div class="card fortnight-loading">Skaičiuojami dviejų savaičių produktai…</div>';
   try {
-    const nextMenu=await loadJson('./data/history/'+nextDate+'.json');
+    const [nextMenu,sources]=await Promise.all([
+      loadJson('./data/history/'+nextDate+'.json'),
+      loadJson('./data/sourcing-links.json').catch(()=>({products:{}}))
+    ]);
     if(request!==selectionRequest)return;
-    const plan=window.TwoWeekShop.build(menu,nextMenu);
+    const plan=window.TwoWeekShop.build(menu,nextMenu,sources);
     window.TwoWeekShop.render(plan);
   }catch(error){
     if(request===selectionRequest)output.innerHTML='<div class="card fortnight-empty">Dviejų savaičių sąrašo nepavyko atidaryti: '+safe(error.message)+'.</div>';
