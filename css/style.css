@@ -37,3 +37,9 @@
 .fortnight-notice{margin:14px 0;background:#fff3e4;padding:14px 17px;border-left:4px solid #c59453;border-radius:0 12px 12px 0;font-size:13px}
 @media(max-width:670px){.fortnight-overview{grid-template-columns:1fr}.fortnight-group{padding:15px 13px}.fortnight-table th,.fortnight-table td{padding:8px 6px}.fortnight-table .product-name{min-width:110px}.fortnight-toolbar .btn{width:100%}}
 @media print{#dvi-savaites .fortnight-toolbar{display:none}.fortnight-group{break-inside:avoid}}
+
+/* Separate verified product links from fallback discovery links. */
+.fortnight-links{display:flex;flex-direction:column;gap:6px;min-width:105px}
+.fortnight-links a{display:block;font-size:12px;font-weight:750;line-height:1.25;white-space:normal;overflow-wrap:anywhere}
+.fortnight-links a:hover{text-decoration:underline}
+@media(max-width:670px){.fortnight-table td:last-child{min-width:116px}.fortnight-links a{font-size:12px}}
