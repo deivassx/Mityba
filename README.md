@@ -20,6 +20,10 @@ Svetainė: https://deivassx.github.io/Mityba/
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 
+## Barbora atsarginės produktų nuorodos
+
+Kai nei tiesioginio ūkio puslapyje, nei „Farmlio“ nepavyksta patvirtinti konkretaus SKU ir jo kainos, dviejų savaičių skiltyje papildomai rodomas **Barbora konkretus produkto pasiūlymas** (`data/sourcing-links.json` laukas `barbora`) arba aiškiai pažymėtas kategorijos puslapis. Pvz., `salmon` turi tiesioginę šviežios lašišos filė su oda 1 kg nuorodą. 2026-11-05 kategorijoje matyta **13,99 €/kg** – tai tik kainos pavyzdys, o ne garantuota šios minutės ar būsimos savaitės kaina. Pasiūlymai **nepridedami prie krepšelio automatiškai**, neįskaičiuojami į dalinę sumą ir nekeičia faktiškai pasirinktų parduotuvių skaičiaus (maks. dvi). Nėra automatinio svetainės prisijungimo prie Barbora ar realiojo laiko kainų patikros; naujus patvirtintus SKU/nuorodas turi papildyti planavimo agentas arba duomenų rinkimo procesas.
+
 ## Nuorodos, kai ūkyje nerasta kainos
 
 `data/sourcing-links.json` saugo ūkininkų ir „Farmlio“ alternatyvias nuorodas. Jei nėra patvirtintos mėsos kainos, dviejų savaičių lentelėje galima atidaryti abi svetaines ir rankiniu būdu palyginti jų pasiūlymus. Bendras „Farmlio“ katalogas nėra konkreti prekė, o išparduota smulkinta jautiena iš „Kinderio limuzinų“ negali būti automatiškai įtraukta į krepšelį. Nuorodos savaime neužsako ir nėra realiojo laiko kainos patikra; galutinis pasirinkimas vis dar iki 2 parduotuvių.

@@ -93,3 +93,31 @@ test('Be kainos rodomos Farmlio ir ūkininko nuorodos, ne išgalvotas SKU',async
  assert.match(copyText(plan),/Baltuonių kalakutai/);
  assert.equal(plan.orderReady,false);
 });
+
+
+test('Jei ūkininkų SKU ar kaina nepatvirtinti, prie lašišos rodoma tikra Barbora filė nuoroda (ne krepšelio kaina)',async()=>{
+ const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ const plan=build(a,b,sources), salmon=plan.groups[0].lines.find(x=>x.id==='salmon');
+ assert.ok(salmon,'Salmon planned for the first two weeks');
+ assert.equal(salmon.cost,null);
+ assert.equal(salmon.needsReview,true);
+ assert.equal(salmon.url,null);
+ assert.equal(salmon.sourcing.barbora.kind,'exact_sku');
+ assert.match(salmon.sourcing.barbora.url,/^https:\/\/barbora\.lt\/produktai\/sviezia-atlantiniu-lasisu-file/);
+ assert.equal(salmon.sourcing.barbora.priceObservedEurPerKg,13.99);
+ assert.equal(plan.suppliers.length,2,'Barbora fallback does not become a third checkout store');
+ assert.equal(plan.partialGoodsEstimateEur,build(a,b).partialGoodsEstimateEur,'Observation price must not enter totals');
+ assert.match(copyText(plan),/BARBORA ATSARGINIS VARIANTAS: Šviežia atlantinių lašišų filė/);
+ assert.match(copyText(plan),/2026-11-05/);
+ assert.equal(plan.orderReady,false);
+});
+
+test('Nepatikrinta pakaitinė žuvis ir kategorijos nėra laikomos patvirtintais SKU',async()=>{
+ const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ const plan=build(a,b,sources),cod=plan.items.find(x=>x.id==='cod');
+ assert.equal(cod.sourcing.barbora.kind,'similar_sku');
+ assert.equal(cod.unavailable,true);
+ assert.equal(cod.cost,null);
+ assert.match(cod.sourcing.barbora.confidence,/ne ta pati rūšis/);
+ assert.ok(plan.items.find(x=>x.id==='lamb').sourcing.barbora.kind==='category');
+});

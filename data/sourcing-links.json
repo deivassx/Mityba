@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "updatedAt": "2026-11-05",
-  "notes": "Nuorodos į realius paieškos / kategorijų puslapius; tai nėra patvirtinti 14 dienų produktų pasiūlymai, kainos ar atsargos. Nenaudoti kaip SKU optimizatoriuje be patikros.",
+  "notes": "Pirmiausia tikrink ūkininko tiesioginę parduotuvę ir Farmlio. Jei ten nepatvirtintas tikslus SKU ar kaina, gali pateikti atsarginę Barbora nuorodą, net pagrindiniams baltymams. Nuorodos ir kainų pavyzdžiai nereiškia realaus laiko patvirtinto pirkinių krepšelio; iki dviejų pasirinktų parduotuvių visam 14 d. užsakymui.",
   "products": {
     "turkey": {
       "primary": "farmer",
@@ -18,7 +18,15 @@
           "kind": "farmer_home",
           "priceVerified": false
         }
-      ]
+      ],
+      "barbora": {
+        "name": "Kalakutienos filė gabaliukai WELL DONE, 250 g",
+        "url": "https://barbora.lt/produktai/kalakutienos-file-gabaliukai-well-done-250-g",
+        "kind": "exact_sku",
+        "packGrams": 250,
+        "confidence": "100 % kalakutų krūtinėlė, tinkama gabaliukų receptams, prieš perkant patikrinti kainą.",
+        "priceVerified": false
+      }
     },
     "chicken": {
       "primary": "farmer",
@@ -35,7 +43,15 @@
           "kind": "seller_directory",
           "priceVerified": false
         }
-      ]
+      ],
+      "barbora": {
+        "name": "Šviežia viščiukų broilerių filė be vidinės filė, 1 kg",
+        "url": "https://barbora.lt/produktai/sv-visc-broil-file-be-vidines-file-uzauginta-be-antib-1-kg",
+        "kind": "exact_sku",
+        "packGrams": 1000,
+        "confidence": "Žalia vištienos filė, kaina ir likutis prieš užsakymą tikrinami.",
+        "priceVerified": false
+      }
     },
     "beef": {
       "primary": "farmer",
@@ -58,7 +74,15 @@
           "kind": "farmlio_seller",
           "priceVerified": false
         }
-      ]
+      ],
+      "barbora": {
+        "name": "Smulkinta jautiena, riebumas ne daugiau kaip 15 %, 1 kg",
+        "url": "https://barbora.lt/produktai/sviezia-smulkinta-jautiena-riebumas-ne-didesnis-kaip-15-proc-1-kg",
+        "kind": "exact_sku",
+        "packGrams": 1000,
+        "confidence": "Palyginti riebumą ir kainą, prieš perkant patikrinti prieinamumą.",
+        "priceVerified": false
+      }
     },
     "catfish": {
       "primary": "farmer",
@@ -75,7 +99,14 @@
           "kind": "farmlio_seller",
           "priceVerified": false
         }
-      ]
+      ],
+      "barbora": {
+        "name": "Šviežių afrikinių šamų filė su oda – šviežios žuvies kategorija",
+        "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-zuvis-juru-gerybes-ir-zuvu-gaminiai/sviezia-zuvis-ir-juros-gerybes",
+        "kind": "category",
+        "priceVerified": false,
+        "confidence": "Bendras katalogas; tiesioginio SKU ir kainos dar reikia ieškoti."
+      }
     },
     "beef_steak": {
       "primary": "farmer",
@@ -99,7 +130,14 @@
           "priceVerified": false
         }
       ],
-      "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos."
+      "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos.",
+      "barbora": {
+        "name": "Mėsos skyrius – ieškoti jautienos nugarinės",
+        "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-mesa-ir-paukstiena",
+        "kind": "category",
+        "priceVerified": false,
+        "confidence": "Reikia rasti tikslų jautienos gabalą, nėra nustatytos kainos."
+      }
     },
     "beef_strips": {
       "primary": "farmer",
@@ -123,7 +161,14 @@
           "priceVerified": false
         }
       ],
-      "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos."
+      "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos.",
+      "barbora": {
+        "name": "Mėsos skyrius – ieškoti jautienos juostelių",
+        "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-mesa-ir-paukstiena",
+        "kind": "category",
+        "priceVerified": false,
+        "confidence": "Reikia rasti tikslų jautienos gabalą, nėra nustatytos kainos."
+      }
     },
     "beef_roast": {
       "primary": "farmer",
@@ -147,7 +192,14 @@
           "priceVerified": false
         }
       ],
-      "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos."
+      "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos.",
+      "barbora": {
+        "name": "Mėsos skyrius – ieškoti jautienos mentės",
+        "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-mesa-ir-paukstiena",
+        "kind": "category",
+        "priceVerified": false,
+        "confidence": "Reikia rasti konkrečią jautienos mentę, nėra nustatytos kainos."
+      }
     },
     "lamb": {
       "primary": "farmer",
@@ -165,7 +217,14 @@
           "priceVerified": false
         }
       ],
-      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
+      "barbora": {
+        "name": "Mėsos ir paukštienos skyrius – ieškoti ėrienos",
+        "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-mesa-ir-paukstiena",
+        "kind": "category",
+        "priceVerified": false,
+        "confidence": "Ne konkretus SKU; ėrienos prieinamumas nežinomas."
+      }
     },
     "salmon": {
       "primary": "farmer",
@@ -183,7 +242,17 @@
           "priceVerified": false
         }
       ],
-      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
+      "barbora": {
+        "name": "Šviežia atlantinių lašišų filė su oda, 1 kg",
+        "url": "https://barbora.lt/produktai/sviezia-atlantiniu-lasisu-file-su-oda-1-kg-49174",
+        "kind": "exact_sku",
+        "priceObservedEurPerKg": 13.99,
+        "priceSeenOn": "2026-11-05",
+        "packGrams": 1000,
+        "confidence": "Produktas atitinka žalią lašišos filė (su oda). Kainą ir likutį pasitikrinti krepšelyje.",
+        "priceVerified": false
+      }
     },
     "cod": {
       "primary": "farmer",
@@ -201,7 +270,15 @@
           "priceVerified": false
         }
       ],
-      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
+      "barbora": {
+        "name": "Atšildyta ledjūrio menkės filė WELL DONE, 250 g",
+        "url": "https://barbora.lt/produktai/atsild-ledjur-menkes-file-well-done-lot-pollachius-virens-250-g",
+        "kind": "similar_sku",
+        "packGrams": 250,
+        "confidence": "Ledjūrio menkė (Pollachius virens) – ne ta pati rūšis kaip atlantinė menkė; naudok tik patikrinęs recepto ir maistingumo tinkamumą. Atšildytos žuvies neužšaldyk pakartotinai.",
+        "priceVerified": false
+      }
     },
     "pork_tenderloin": {
       "primary": "farmer",
@@ -219,7 +296,15 @@
           "priceVerified": false
         }
       ],
-      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
+      "barbora": {
+        "name": "LIETUVIŠKA kiaulienos išpjova, atšaldyta, 1 kg",
+        "url": "https://barbora.lt/produktai/lietuviska-kiaulienos-ispjova-atsaldyta-1-kg",
+        "kind": "exact_sku",
+        "packGrams": 1000,
+        "confidence": "Atšaldyta kiaulienos išpjova, kaina ir likutis kintantys.",
+        "priceVerified": false
+      }
     }
   }
 }

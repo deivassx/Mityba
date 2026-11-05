@@ -44,7 +44,7 @@
       "Pirmiausia ieškoti produktu tiesioginiuose ūkininkų puslapiuose; jei negalima – Farmlio su privalomu palyginimu su ūkiu",
       "Tikrinant kainą neapsiriboti pirmu rastu pasiūlymu: palyginti alternatyvas ir ar kokybės skirtumas pagrindžia permoką",
       "Siekti iki 100 EUR savaitei, leidžiant iki 10% paklaidą; įtraukti visą realiai apmokamą krepšelį su pristatymu ir pakavimu",
-      "Barbora naudoti tik daržovėms ir priedams; vištienai tik kai nėra patikrinto tinkamo ūkininko pasiūlymo",
+      "Barbora pirmiausia daržovėms ir priedams; bet KIEKVIENAM nerastam tiksliam ar neįkainotam ūkininkų/Farmlio produktui (įskaitant lašišos filė, menkę, jautieną, ėrieną) pateikti tiesioginę Barbora produkto nuorodą kaip papildomą atsarginį variantą, jeigu toks SKU tikrai rastas. Nurodyti matytą kainą ir patikrinimo datą, nevadinti garantuota kaina.",
       "Patikrintas tinkamas produktas ir prieinamumas",
       "Produktas atitinka recepta ir mitybos taisykles",
       "Pries renkantis preke is Farmlio, palyginti to paties ukininko oficialaus puslapio ta pati produkta ir visa galutine krepselio kaina",
@@ -128,7 +128,7 @@
     "sourcingOrder": [
       "farmer_official_websites",
       "farmlio_with_direct_farm_comparison",
-      "barbora_restricted"
+      "barbora_fallback_if_farmer_and_farmlio_exact_product_or_price_unavailable"
     ],
     "budget": {
       "targetWeeklyTotalEur": 100,
@@ -156,7 +156,8 @@
         "riešutai",
         "priedai",
         "prieskoniai",
-        "kiti receptų priedai"
+        "kiti receptų priedai",
+        "pagrindiniai baltymai tik atsarginiam variantui, kai ūkyje ir Farmlio nepavyko patvirtinti produkto bei kainos"
       ],
       "allowedVegetableIngredientIds": [
         "potato",
@@ -180,17 +181,10 @@
         "chicken"
       ],
       "chickenOnlyIf": "Ūkių puslapiuose (tiesiogiai ir Farmlio) nerasta tinkamos, prieinamos vištienos; užfiksuoti, kas tikrinta",
-      "prohibitedMainProteins": [
-        "kalakutiena",
-        "jautiena",
-        "žuvys",
-        "elniena",
-        "ėriena",
-        "kiauliena",
-        "kitos pagrindinės mėsos"
-      ],
+      "prohibitedMainProteins": [],
       "fallbackEvidenceRequired": true,
-      "note": "Šis apribojimas taikomas naujai planuojamiems pirkiniams; istorinių meniu nekeisti. Dabartiniame kataloge dar yra kalakutiena ir jautiena iš Barbora – tai neatitikimas, kurį reikia ištaisyti, prieš teigiant, kad visa automatika laikosi taisyklės."
+      "note": "Barbora lieka antrinis mėsos ir žuvies kanalas. Kai tiesioginio ūkio ir Farmlio realiai nėra tikslaus patikrinto SKU/kainos, BARBORA alternatyvi nuoroda leidžiama visiems baltymams. Tačiau ji NEĮTRAUKIAMA automatiškai į patvirtintą krepšelį, kol neįvertinta galutinė kaina, prieinamumas, mėsa/žuvies forma, maistingumas ir 2 parduotuvių ribojimas. Istorinės taisyklės nebegalioja naujai paieškai.",
+      "proteinFallbackAllowed": true
     },
     "comparison": {
       "maxCheckoutStores": 2,
@@ -200,7 +194,7 @@
       "onlyNutritionallyEquivalentAlternatives": true,
       "excludeUnknownDeliveryCosts": true,
       "excludeOutOfStock": true,
-      "fallbackPolicy": "Never break two-store limit or Barbora meat rules just to publish a fresh menu. If no feasible verified 1-2-store basket exists, do not replace the previously published menu; open a GitHub Actions issue explaining missing offers.",
+      "fallbackPolicy": "Leisti Barbora kaip papildomą atsarginę nuorodą, jeigu ūkio ir Farmlio SKU ar tiksli kaina nerasti. Niekada nepateikti kaip automatiškai patvirtintos kainos, nekeisti krepšelio tyliai ir neviršyti 2 faktinių atsiskaitymo parduotuvių. Neatitikęs arba išparduotas SKU tik paieškos kandidatas.",
       "evidencePolicy": "For new offers, require exact product URL, compatible ingredient, weight, confirmed in-stock EUR price and current product name. Variable-weight products, unverified shipping, unknown minimum orders, or out-of-stock offers are research leads, not usable buying options.",
       "candidateFile": "data/offer-candidates.json",
       "farmerRegistry": "shopping.supplierCandidates",
@@ -250,11 +244,20 @@
         "priority": [
           "farmer_direct",
           "farmlio",
-          "barbora_chicken_exception_only"
+          "barbora_all_products_fallback_only"
         ],
         "sourceFile": "data/sourcing-links.json",
         "showBothDirectFarmerAndFarmlioUrls": true,
-        "description": "Kai tiesioginis ūkininkas nepateikia patikrinamos kainos, papildomai peržiūrėk visą Farmlio katalogą ir pateik abi nuorodas. Paieškos / kategorijos nuoroda nėra patvirtinta prekė ar kaina; išparduoti SKU negalimi. Nuorodos nepadidina faktinių pasirinktų parduotuvių skaičiaus, vis dar ne daugiau kaip dvi."
+        "description": "Jei tiesioginiuose ūkiuose ir Farmlio nepavyksta rasti tikslaus konkretaus produkto ir patikimos kainos, rasti Barbora tokio pat žaliavinio produkto SKU ir pateikti jo nuorodą PAPILDOMAI (pvz. šviežia lašišos filė). Jeigu Barbora rasta tik kategorija, pažymėti, kad nėra konkretaus SKU. Parodyti matytą orientacinę kainą ir datą, bet niekada nevadinti realiojo laiko patvirtinta kaina ir neįtraukti į pirkimo sumą be patvirtinimo. Barbora alternatyva pati savaime neužima papildomos atsiskaitymo vietos – tik pasirinktas pasiūlymas. 14 dienų apsipirkimui ne daugiau kaip 2 parduotuvės.",
+        "showBarboraProductUrlWhenFarmerAndFarmlioUnverified": true,
+        "example": {
+          "ingredientId": "salmon",
+          "barboraUrl": "https://barbora.lt/produktai/sviezia-atlantiniu-lasisu-file-su-oda-1-kg-49174",
+          "observedPriceEurPerKg": 13.99,
+          "observedOn": "2026-11-05",
+          "availability": "Patikrink prieš pirkdamas",
+          "verifiedCheckoutPrice": false
+        }
       }
     }
   },

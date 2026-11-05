@@ -111,6 +111,18 @@
         const href=link(farm.url);
         if(href&&href!==line.url)links.push('<a href="'+escapeHtml(href)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(farm.name)+' ↗</a>');
       }
+      // Barbora yra tik atsarginis kanalas: rodome nuorodą,
+      // bet neatliekame jokio automatinio trečios parduotuvės pasirinkimo.
+      const barbora=line.needsReview&&line.sourcing?.barbora;
+      const barboraUrl=barbora&&link(barbora.url);
+      if(barboraUrl&&barboraUrl!==line.url){
+        const reference=barbora.kind==='exact_sku'?'Barbora – prekė ↗'
+          :barbora.kind==='similar_sku'?'Barbora – panaši prekė ↗':'Barbora – ieškoti ↗';
+        const hint=Number.isFinite(barbora.priceObservedEurPerKg)&&barbora.priceSeenOn
+          ?'<small>Matyta '+escapeHtml(eur(barbora.priceObservedEurPerKg))+'/kg ('+escapeHtml(barbora.priceSeenOn)+'), kainą patikrink</small>'
+          :'<small>Alternatyvi nuoroda, kaina nepatvirtinta</small>';
+        links.push('<span class="fortnight-fallback"><a href="'+escapeHtml(barboraUrl)+'" target="_blank" rel="noopener noreferrer">'+reference+'</a>'+hint+'</span>');
+      }
       const url=links.length?'<div class="fortnight-links">'+links.join('')+'</div>':'Reikia patvirtinti';
       return '<tr class="'+(done?'is-complete':'')+'"><td><input type="checkbox" class="fortnight-check" aria-label="Įsigyta: '+product+'" data-group="'+groupId+'" data-id="'+itemId+'" '+(done?'checked':'')+'></td>'
        +'<td><div class="product-name">'+product+'</div><div class="product-sub">'+description+'</div>'+status+'</td>'
@@ -134,6 +146,12 @@
           (p.cost===null?' · KAINA NEŽINOMA':' · sena katalogo kaina ~'+eur(p.cost)));
         if(p.sourcing?.farmlio?.url)out.push('    Farmlio: '+p.sourcing.farmlio.url+' (kaina / likutis nepatvirtinti)');
         for(const farm of p.sourcing?.farmers||[])out.push('    Ūkis: '+farm.name+' – '+farm.url+' (kaina nepatvirtinta)');
+        if(p.needsReview&&p.sourcing?.barbora?.url){
+          const option=p.sourcing.barbora;
+          out.push('    BARBORA ATSARGINIS VARIANTAS: '+option.name+' – '+option.url
+            +' (dar neįtrauktas į krepšelį'+(Number.isFinite(option.priceObservedEurPerKg)
+              ?', matyta '+eur(option.priceObservedEurPerKg)+'/kg '+(option.priceSeenOn||''):'; kaina nežinoma')+')');
+        }
       }
       out.push('');
     }
@@ -162,7 +180,7 @@
       +'<div class="fortnight-toolbar"><p id="fortnight-count">Pažymėta: '+checkedCount+'/'+plan.items.length+'</p><button type="button" id="fortnight-copy" class="btn">⧉ Kopijuoti 14 dienų pirkinių sąrašą</button></div>'
       +plan.groups.map(groupedHtml).join('')
       +'<div class="fortnight-summary"><b>Ko dar reikia:</b> '+(plan.missing.length?escapeHtml(plan.missing.map(x=>x.name).join(', ')):'Tiekėjų SKU sąrašas užpildytas, dar patikrink kainas ir pristatymą.')
-      +'<br>Žinomi tiekėjai: '+escapeHtml(plan.suppliers.join(', ')||'nėra')+' (maks. 2 per 14 dienų). Ūkininkų ir Farmlio paieškos nuorodos nėra papildomi pasirinkti tiekėjai.'
+      +'<br>Žinomi tiekėjai: '+escapeHtml(plan.suppliers.join(', ')||'nėra')+' (maks. 2 per 14 dienų). Ūkių, Farmlio ir Barbora atsarginės nuorodos nėra papildomi pasirinkti tiekėjai.'
       +'<br>* Suma – tik orientacinis senų katalogo kainų įvertis; vienos mėsos/žuvies pakuotės apvalinamos dviem savaitėms, šviežių prekių – atskirai kiekvienai savaitei. Pristatymas neįskaičiuotas.</div>';
     if(container.dataset.fortnightBound!=='yes'){
       container.addEventListener('change',event=>{
