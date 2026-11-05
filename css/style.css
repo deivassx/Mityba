@@ -43,3 +43,106 @@
 .fortnight-links a{display:block;font-size:12px;font-weight:750;line-height:1.25;white-space:normal;overflow-wrap:anywhere}
 .fortnight-links a:hover{text-decoration:underline}
 @media(max-width:670px){.fortnight-table td:last-child{min-width:116px}.fortnight-links a{font-size:12px}}
+
+/* Telefonai: viršesnė nei ankstesnė @media(max-width:1100px) taisyklė.
+   Dienos eilutė visada vienu stulpeliu, patiekalai visu kortelės pločiu. */
+@media screen and (max-width:670px){
+  html,body{max-width:100%;overflow-x:clip}
+  .page-shell,.page-shell .layout,.calendar{min-width:0}
+  .calendar{padding:2px 13px 7px}
+  .dayline{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:9px;
+    align-items:stretch;
+    padding:17px 0 19px;
+  }
+  .dayline > .dayhead,
+  .dayline > .meallink,
+  .dayline > .meallink:nth-child(3),
+  .dayline > .macro{
+    grid-column:1 / -1;
+    width:100%;
+    min-width:0;
+  }
+  .dayhead{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    padding:0 3px 2px;
+  }
+  .dayhead strong{font-size:17px;line-height:1.3}
+  .dayhead small{font-size:12px;white-space:nowrap}
+  .dayline .meallink{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-height:70px;
+    padding:12px 13px;
+    border-radius:13px;
+  }
+  .dayline .meallink .circle{
+    flex:none;
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    font-size:19px;
+  }
+  .dayline .meallink > span:last-child{flex:1;min-width:0}
+  .dayline .meallink .name{
+    font-size:14px;
+    font-weight:760;
+    line-height:1.35;
+    overflow-wrap:break-word;
+    word-break:normal;
+  }
+  .dayline .meallink small{font-size:12px;margin-top:4px}
+  .dayline .macro{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:3px 12px;
+    padding:10px 4px 0;
+    border-top:1px dashed var(--line);
+    text-align:left;
+    font-size:18px;
+    line-height:1.3;
+    white-space:normal;
+  }
+  .dayline .macro small{font-size:12px;line-height:1.45}
+  .nav{gap:6px;padding:8px 0;scrollbar-width:thin}
+  .nav a{flex:none;padding:9px 12px;font-size:12px}
+  .fortnight-group .table-wrap{overflow:visible}
+  .fortnight-table{display:block}
+  .fortnight-table thead{display:none}
+  .fortnight-table tbody{display:grid;gap:10px}
+  .fortnight-table tr{
+    display:grid;
+    grid-template-columns:26px minmax(0,1fr);
+    gap:5px 10px;
+    padding:13px 11px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fafbf8;
+  }
+  .fortnight-table td,
+  .fortnight-table td:last-child{
+    border:0;
+    padding:0;
+    min-width:0;
+    grid-column:2;
+    overflow-wrap:anywhere;
+  }
+  .fortnight-table td:first-child{
+    grid-column:1;
+    grid-row:1 / span 4;
+    align-self:start;
+    padding-top:3px;
+  }
+  .fortnight-table td:nth-child(3){color:var(--muted);font-size:12px}
+  .fortnight-table td:nth-child(4){font-weight:800}
+  .fortnight-table td:nth-child(5){margin-top:4px}
+  .fortnight-links{display:flex;flex-direction:row;flex-wrap:wrap;gap:7px 14px}
+}
