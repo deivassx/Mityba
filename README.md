@@ -9,6 +9,7 @@ Svetainė: https://deivassx.github.io/Mityba/
 - [`AGENTS.md`](AGENTS.md) – instrukcijos Codex ir AI agentams: kiekvieną darbą pradėti nuo taisyklių perskaitymo.
 - [`config/planavimo-taisykles.json`](config/planavimo-taisykles.json) – vienas redaguojamas taisyklių šaltinis: mityba, produktai, tiekėjai, prioritetai ir kokybės patikra.
 - `scripts/planner.mjs` kiekvieną kartą perskaito JSON ir vykdo automatiškai patikrinamas skaitines bei domenų taisykles. Kai kurie pirkinių optimizavimo pageidavimai dar įgyvendinti **tik kaip agento instrukcijos**.
+- **Farmlio → tiesioginis ūkis:** kai produktas rastas Farmlio, prieš renkantis būtina paieškoti jo gamintojo oficialios parduotuvės ir palyginti *visą krepšelio kainą*, ne tik prekės kainą. Tiksli taisyklė ir naudotojo pateiktas Šešuolėlių ūkio pavyzdys saugomi `shopping.farmlioDirectProducerComparison`. Automatinis Node.js planuoklis kol kas šios paieškos nevykdo – tai Codex / AI agento nurodymas.
 
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.

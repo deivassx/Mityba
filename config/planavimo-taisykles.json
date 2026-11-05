@@ -35,12 +35,14 @@
       "barbora.lt",
       "baltuoniu.kalakutai.lt",
       "kazlauskuekoukis.lt",
-      "elnienosprodukcija.lt"
+      "elnienosprodukcija.lt",
+      "sesuoleliuukis.lt"
     ],
     "deliveryDestination": "Vilnius, Lietuva",
     "selectionPriorities": [
       "Patikrintas tinkamas produktas ir prieinamumas",
       "Produktas atitinka recepta ir mitybos taisykles",
+      "Pries renkantis preke is Farmlio, palyginti to paties ukininko oficialaus puslapio ta pati produkta ir visa galutine krepselio kaina",
       "Krepselio pilna kaina: produktai, pristatymas ir pakavimas",
       "Daugiausia 1-2 parduotuves",
       "Ukio mesa, zuvis ir sezonines darzoves, kai kaina ir logistika racionali",
@@ -52,6 +54,12 @@
         "url": "https://farmlio.lt/",
         "role": "ukininkai, zuvis, darzoves",
         "status": "esamas_kataloge"
+      },
+      {
+        "name": "Šešuolėlių ūkis",
+        "url": "https://sesuoleliuukis.lt/",
+        "role": "Tiesioginis to paties Farmlio ūkininko kanalas – palyginti, ar prekė pigesnė nei Farmlio",
+        "status": "pavyzdys_naudotojo_pateiktas_nepatikrintas"
       },
       {
         "name": "Baltuoniu kalakutai",
@@ -93,7 +101,27 @@
     "requireDirectProductLinks": true,
     "doNotInventPricesOrDeliveryFees": true,
     "accountForPackagingAndDelivery": true,
-    "neverPurchaseWithoutExplicitUserApproval": true
+    "neverPurchaseWithoutExplicitUserApproval": true,
+    "farmlioDirectProducerComparison": {
+      "enabled": true,
+      "trigger": "Kiekvienai Farmlio pasirinktai ar kandidatuojanciai prekei ieskoti ir patikrinti to pacio pardavejo oficialia tiesiogine parduotuve.",
+      "steps": [
+        "Farmlio produkto puslapyje nustatyti konkretu pardaveja / uki.",
+        "Surasti tikra to paties ukio oficialia svetaine ir joje ta pacia arba realiai palyginama preke.",
+        "Abiejuose kanaluose tikrinti aktualia kaina, akcijas, parduodama kieki, €/kg arba €/vnt., sudeti, sviezuma, prieinamuma ir pristatyma i Vilniu.",
+        "Palyginti viso savaitinio krepselio galutine kaina, iskaitant pakuociu kieki, minimali uzsakyma, pristatyma, pakavima ir galimus papildomus pardavejus.",
+        "Jeigu tiesiai is ukio pigiau ar patogiau, rinktis tiesiogini tiekima, jeigu abu pasiulymai tikrai palyginami ir patikrinti.",
+        "Jeigu tiesioginio pardavejo puslapio, kainos ar pristatymo nepavyksta patikrinti, tai aiskiai pazymeti; negalima laikyti, kad Farmlio yra pigiausias.",
+        "Jeigu pasirenkamas naujas oficialus ukio domenas, po tikro saltinio patikros itraukti ji i shopping.allowedProductDomains pries diegiant nauja kataloga."
+      ],
+      "example": {
+        "farm": "Šešuolėlių ūkis",
+        "farmlioProductUrl": "https://farmlio.lt/pardavejai/mb-sesuoleliu-ukis/prekes/erienos-6-menesiu-sviezios-desreles",
+        "producerProductUrl": "https://sesuoleliuukis.lt/produktas/sviezios-erienos-desreles/",
+        "suppliedByUser": true,
+        "note": "Nuorodos naudotojo pateiktos kaip galimai pigesnio tiesioginio tiekimo pavyzdys. Kainos, sutampanti sudetis, pakuotes ir pristatymas sio taisykliu atnaujinimo metu nepatvirtinti."
+      }
+    }
   },
   "recipePreferences": {
     "primaryProteins": [
@@ -135,7 +163,8 @@
       "shopping.accountForPackagingAndDelivery",
       "shopping.neverPurchaseWithoutExplicitUserApproval",
       "nutrition.avoidAddedSugar",
-      "recipePreferences"
+      "recipePreferences",
+      "shopping.farmlioDirectProducerComparison"
     ]
   }
 }
