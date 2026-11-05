@@ -3,7 +3,7 @@ import {pathToFileURL} from 'node:url';
 import {get,extractOffer,readRules} from './planner.mjs';
 import {optimizeBasket,neededIngredients} from './basket-optimizer.mjs';
 const good=n=>Number.isFinite(n)&&n>0;
-const normalize=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^\\p{L}\\p{N}]/gu,'');
+const normalize=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}]/gu,'');
 const note=msg=>console.log('::warning::'+msg);
 export async function compareFarmOffers(menu,{verify=true}={}) {
   const rules=readRules();
@@ -51,13 +51,13 @@ export async function compareFarmOffers(menu,{verify=true}={}) {
 }
 export async function writeComparisonReport(report){
   const dir=new URL('../data/offer-comparison-report.json',import.meta.url);
-  await fs.writeFile(dir,JSON.stringify(report,null,2)+'\\n');
+  await fs.writeFile(dir,JSON.stringify(report,null,2)+'\n');
   console.log('Palyginta '+report.compared.length+' pasiūlymų. ' +(report.chosen?'Geriausias leistinas krepšelis: '+report.chosen.totalEur+' EUR, '+report.chosen.stores.length+' parduotuvės.':'Nerastas taisykles atitinkantis krepšelis: '+report.failure));
   if(report.failure)note(report.failure);
   if(process.env.GITHUB_STEP_SUMMARY){
     const lines=['### Ūkininkų pasiūlymų palyginimas','',report.chosen?'**'+report.chosen.totalEur+' EUR**, parduotuvės: '+report.chosen.stores.join(', '):'⚠️ '+report.failure,'','*Tai konkrečių SKU palyginimas, ne automatinė interneto paieška.*','',''];
     for(const p of report.compared)lines.push('- '+p.id+' / '+p.store+': '+(p.verified?p.euroPerKg+' EUR/kg':'netinkama: '+p.reason));
-    await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\\n')+'\\n');
+    await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
   }
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
