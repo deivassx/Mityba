@@ -2,13 +2,13 @@
   "meta": {
     "name": "Sotus planas",
     "weekStart": "2026-11-09",
-    "generatedAt": "2026-11-05T11:33:29.973Z",
+    "generatedAt": "2026-11-05T11:35:45.936Z",
     "status": "Automatiškai patikrinta savaitė",
     "kcalLimit": 2100,
     "maxStores": 2,
     "targetMealsPerDay": 2,
     "targetCookSessions": 2,
-    "pricingNotice": "Prekių kainos patikrintos 2026-11-05T11:33:29.973Z. Galutinės kainos ir pristatymo sąlygos gali pasikeisti."
+    "pricingNotice": "Prekių kainos patikrintos 2026-11-05T11:35:45.936Z. Galutinės kainos ir pristatymo sąlygos gali pasikeisti."
   },
   "nutrients": {
     "turkey": {
@@ -326,7 +326,7 @@
       "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda",
       "verification": {
         "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda",
-        "checkedAt": "2026-11-05T11:33:30.750Z",
+        "checkedAt": "2026-11-05T11:35:46.649Z",
         "method": "schema.org/Product/Offer",
         "productName": "Afrikinio šamo filė su oda"
       }
@@ -340,7 +340,7 @@
       "url": "https://farmlio.lt/pardavejai/sergejus-antuchevicius/prekes/bulves",
       "verification": {
         "url": "https://farmlio.lt/pardavejai/sergejus-antuchevicius/prekes/bulves",
-        "checkedAt": "2026-11-05T11:33:34.844Z",
+        "checkedAt": "2026-11-05T11:35:46.693Z",
         "method": "schema.org/Product/Offer",
         "productName": "Bulvės 5 kg"
       }
@@ -355,7 +355,7 @@
       "sourceName": "Morkos",
       "verification": {
         "url": "https://farmlio.lt/pardavejai/andzej/prekes/morkos",
-        "checkedAt": "2026-11-05T11:33:30.861Z",
+        "checkedAt": "2026-11-05T11:35:52.213Z",
         "method": "schema.org/Product/Offer",
         "productName": "Morkos"
       }
@@ -370,7 +370,7 @@
       "sourceName": "Burokėliai",
       "verification": {
         "url": "https://farmlio.lt/pardavejai/andzej/prekes/burokai",
-        "checkedAt": "2026-11-05T11:33:30.857Z",
+        "checkedAt": "2026-11-05T11:35:47.377Z",
         "method": "schema.org/Product/Offer",
         "productName": "Burokėliai"
       }
@@ -384,7 +384,7 @@
       "url": "https://barbora.lt/produktai/sviezi-kalakutu-krutineliu-pjausniai-well-done-400-g",
       "verification": {
         "url": "https://barbora.lt/produktai/sviezi-kalakutu-krutineliu-pjausniai-well-done-400-g",
-        "checkedAt": "2026-11-05T11:33:30.408Z",
+        "checkedAt": "2026-11-05T11:35:46.828Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Švieži kalakutų krūtinėlių pjausniai WELL DONE, 400 g"
       }
@@ -398,7 +398,7 @@
       "url": "https://barbora.lt/produktai/lietuviska-sviezia-visciuku-broileriu-file-well-done-500-g",
       "verification": {
         "url": "https://barbora.lt/produktai/lietuviska-sviezia-visciuku-broileriu-file-well-done-500-g",
-        "checkedAt": "2026-11-05T11:33:30.415Z",
+        "checkedAt": "2026-11-05T11:35:46.797Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Lietuviška šviežia viščiukų broilerių filė WELL DONE, 500 g"
       }
@@ -412,7 +412,7 @@
       "url": "https://barbora.lt/produktai/sviezia-smulkinta-jautiena-riebumas-ne-didesnis-kaip-15-proc-1-kg",
       "verification": {
         "url": "https://barbora.lt/produktai/sviezia-smulkinta-jautiena-riebumas-ne-didesnis-kaip-15-proc-1-kg",
-        "checkedAt": "2026-11-05T11:33:30.405Z",
+        "checkedAt": "2026-11-05T11:35:46.784Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Šviežia smulkinta jautiena, riebumas ne didesnis kaip 15 %, 1 kg"
       }
@@ -426,7 +426,7 @@
       "url": "https://barbora.lt/produktai/saldyti-brokoliai-bonduelle-vapeur-400-g",
       "verification": {
         "url": "https://barbora.lt/produktai/saldyti-brokoliai-bonduelle-vapeur-400-g",
-        "checkedAt": "2026-11-05T11:33:30.421Z",
+        "checkedAt": "2026-11-05T11:35:46.808Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Šaldyti brokoliai BONDUELLE VAPEUR, 400 g"
       }
@@ -440,7 +440,7 @@
       "url": "https://barbora.lt/produktai/varske-grudeliais-farm-milk-500-g",
       "verification": {
         "url": "https://barbora.lt/produktai/varske-grudeliais-farm-milk-500-g",
-        "checkedAt": "2026-11-05T11:33:30.407Z",
+        "checkedAt": "2026-11-05T11:35:46.806Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Varškė grūdeliais  Farm Milk, 500 g"
       }
@@ -454,7 +454,7 @@
       "url": "https://barbora.lt/produktai/baltyminis-graikisko-stiliaus-jogurtas-alma-2-5-proc-rieb-370-g",
       "verification": {
         "url": "https://barbora.lt/produktai/baltyminis-graikisko-stiliaus-jogurtas-alma-2-5-proc-rieb-370-g",
-        "checkedAt": "2026-11-05T11:33:30.409Z",
+        "checkedAt": "2026-11-05T11:35:46.770Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Baltyminis graikiško stiliaus jogurtas ALMA, 2,5 % rieb., 370 g"
       }
@@ -468,7 +468,7 @@
       "url": "https://barbora.lt/produktai/saldziosios-bulves-1-kg",
       "verification": {
         "url": "https://barbora.lt/produktai/saldziosios-bulves-1-kg",
-        "checkedAt": "2026-11-05T11:33:30.407Z",
+        "checkedAt": "2026-11-05T11:35:46.536Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Saldžiosios bulvės, 1 kg"
       }
@@ -482,7 +482,7 @@
       "url": "https://barbora.lt/produktai/zaliosios-cukinijos-1-kg",
       "verification": {
         "url": "https://barbora.lt/produktai/zaliosios-cukinijos-1-kg",
-        "checkedAt": "2026-11-05T11:33:30.404Z",
+        "checkedAt": "2026-11-05T11:35:46.475Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Žaliosios cukinijos, 1 kg"
       }
@@ -496,7 +496,7 @@
       "url": "https://barbora.lt/produktai/geltonos-saldziosios-paprikos-80-100-mm-1-kl-1-kg",
       "verification": {
         "url": "https://barbora.lt/produktai/geltonos-saldziosios-paprikos-80-100-mm-1-kl-1-kg",
-        "checkedAt": "2026-11-05T11:33:30.408Z",
+        "checkedAt": "2026-11-05T11:35:46.819Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Geltonos saldžiosios paprikos, 90-110 mm, 1 kg"
       }
@@ -510,7 +510,7 @@
       "url": "https://barbora.lt/produktai/pievagrybiai-1-kg",
       "verification": {
         "url": "https://barbora.lt/produktai/pievagrybiai-1-kg",
-        "checkedAt": "2026-11-05T11:33:30.405Z",
+        "checkedAt": "2026-11-05T11:35:46.657Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Pievagrybiai, 1 kg"
       }
@@ -525,7 +525,7 @@
       "packLitres": 0.5,
       "verification": {
         "url": "https://barbora.lt/produktai/alyvuogiu-aliejus-naturalisimo-0-2-proc-rugstingumas-500-ml",
-        "checkedAt": "2026-11-05T11:33:30.408Z",
+        "checkedAt": "2026-11-05T11:35:46.823Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Alyvuogių aliejus NATURALISIMO (0,2 % rūgštingumas), 500 ml"
       }
@@ -539,7 +539,7 @@
       "url": "https://barbora.lt/produktai/graikiniai-riesutai-well-done-200-g",
       "verification": {
         "url": "https://barbora.lt/produktai/graikiniai-riesutai-well-done-200-g",
-        "checkedAt": "2026-11-05T11:33:30.418Z",
+        "checkedAt": "2026-11-05T11:35:46.818Z",
         "method": "Barbora primary product cart data (EUR)",
         "productName": "Graikiniai riešutai WELL DONE, 200 g"
       }
