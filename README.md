@@ -47,6 +47,11 @@ ankstesnis meniu nepakeičiamas. Pakeiskite katalogo prekę patikrinta alternaty
 jos pakuotę ir maistingumą, tada paleiskite workflow iš naujo.
 Po publikavimo patikros klaidos automatinio grąžinimo į ankstesnį leidimą nėra.
 
+Trečiadienio ir rankinis paleidimas generuoja naują meniu. Įkeliant svetainės
+pakeitimus per `push`, publikuojamas jau išsaugotas ir patikrintas meniu su istorija,
+neužklausiant visų parduotuvių dar kartą. Laikinai nepasiekiami šaltiniai tikrinami
+iki trijų kartų.
+
 ## Vietinės komandos (Node.js 24+)
 
 ```sh

@@ -32,7 +32,11 @@ jobs:
       - name: Testai
         run: node --test
       - name: Generuoti ir patikrinti naują meniu
+        if: github.event_name != 'push'
         run: node scripts/planner.mjs generate
+      - name: Patikrinti išsaugotą meniu ir istoriją
+        if: github.event_name == 'push'
+        run: node scripts/planner.mjs archive
       - name: Git commit ir push į main
         run: |
           git config user.name 'github-actions[bot]'

@@ -48,6 +48,14 @@ export function validate(menu, verified = true) {
 }
 
 export async function get(url, type='text') {
+  let error;
+  for(let attempt=0;attempt<3;attempt++) {
+    try { return await getOnce(url,type); }
+    catch(e) { error=e; if(attempt<2) await new Promise(resolve=>setTimeout(resolve,2000)); }
+  }
+  throw Error(`${error.message}: ${url}`);
+}
+async function getOnce(url, type) {
   assert(url.startsWith('https://'),'Reikalinga HTTPS nuoroda');
   const r=await fetch(url,{signal:AbortSignal.timeout(30000),headers:{'User-Agent':'MitybaPlanner/1.0 (+https://github.com/deivassx/Mityba)'}});
   assert(r.ok,`HTTP ${r.status}: ${url}`);
@@ -148,6 +156,11 @@ export async function verifyPublished(base, attempts=20) {
 if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
   try {
     if(process.argv[2]==='generate') await generate();
+    else if(process.argv[2]==='archive') {
+      const menu=validate(JSON.parse(await fs.readFile('data/menu.json','utf8')),false);
+      assert(menu.products.every(p=>positive(p.priceEur) && p.verification?.url===p.url),'Išsaugotame meniu nėra kainų patikros įrodymų');
+      await archiveMenu(menu);
+    }
     else if(process.argv[2]==='published') await verifyPublished(process.argv[3]);
     else validate(JSON.parse(await fs.readFile('data/menu.json','utf8')));
     console.log('Patikra sėkminga');
