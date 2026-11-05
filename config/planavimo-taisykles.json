@@ -216,6 +216,26 @@
         "warning": "Nežinomas pakuotės svoris, sudėtis, priklausymas receptui ir pristatymas neleidžia automatiškai įtraukti į galutinį 2 parduotuvių krepšelį. AI agentas turi juos patikrinti ir papildyti data/offer-candidates.json.",
         "failOpen": true
       }
+    },
+    "bulkPurchase": {
+      "enabled": true,
+      "planningHorizonDays": 14,
+      "proteinIngredientIds": [
+        "turkey",
+        "chicken",
+        "beef",
+        "catfish"
+      ],
+      "purchaseProteinAndFishOnceForTwoWeeks": true,
+      "purchaseFreshVegetablesAndAddonsWeekly": true,
+      "maxDistinctCheckoutStoresAcrossHorizon": 2,
+      "twoWeekBudgetTargetEur": 200,
+      "twoWeekBudgetToleranceEur": 220,
+      "budgetInterpretation": "Bendra realiai perkamu 2 savaiciu produktu pakuociu, pristatymo ir pakavimo suma. Jau turimi produktai/likuciai gali mazinti moketina suma, bet juos reikia suvesti ir tiksliai atskaityti. Nepilno krepselio daline suma NIEKADA nera visu 2 sav. kaina.",
+      "temperatureStorage": "Mėsa ir žuvis 2 savaitems gali būti perkamos iškart TIK jei atsargiai ir laiku užšaldomos -18 C ar žemiau. Atitirpinti šaldytuve. Daržoves ir šviežius priedus planuoti atskirai kiekvienai savaitei.",
+      "productEvidence": "Nepatikrintos mesos/zuves prekes turi buti parodytos su bendru 14 dienu kiekiu, bet be isgalvotos kainos, pakuotes, pardavejo arba atsiskaitymo nuorodos.",
+      "priceVerification": "Prieš užsakant patikrink SKU ir galutinį prekių bei pristatymo krepšelį; orientacinės katalogo kainos netampa patvirtintomis 2 savaičių kainomis.",
+      "uiBehavior": "2 savaiciu pirkiniu skiltis turi pradeti nuo siuo metu pasirinktos savaites ir apimti kita turima savaite. Jei kitos savaites meniu nera, nerodyti apsimetamo 14 dienu krepselio. Produktus skirstyti i 14 dienu baltymus ir atskirus svieziu prekiu savaitinius pirkinius. Vien tik spaudziamos prekiu nuorodos nieko neuzsako."
     }
   },
   "recipePreferences": {
@@ -315,7 +335,8 @@
       "shopping.comparison.automaticFarmDiscovery (tik naujų pasiūlymų paieškos ataskaita, ne automatinė atranka)",
       "recipePreferences.excludedIngredientIds (generuojamiems meniu)",
       "recipePreferences.maxGramsPerServing (generuojamiems meniu)",
-      "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)"
+      "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)",
+      "shopping.bulkPurchase (14 dienu saraso ir kiekiu formavimas interneto svetaines JavaScript, tik su zinomais kandidatais)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
@@ -330,7 +351,8 @@
       "shopping.barboraRestriction",
       "shopping.comparison.farmerRegistry",
       "shopping.comparison.knownLimitations",
-      "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)"
+      "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)",
+      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI patikra ir uzsakymo blokavimas kai nepatvirtinta, ne automatine tiekėju paieska)"
     ]
   }
 }

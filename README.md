@@ -20,6 +20,12 @@ Svetainė: https://deivassx.github.io/Mityba/
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 
+## Dviejų savaičių pirkinių užsakymo planas
+
+Svetainės `#dvi-savaites` skiltis nuo pasirinktos savaitės įkelia tos ir **kitos turimos savaitės** meniu. Iš jų susumuoja visus 28 valgymus, atskirai išveda **mėsos ir žuvies užsakymą vienu kartu 14 dienų**, o daržoves, pieno produktus ir priedus – atskirais sąrašais kiekvienai savaitei. Pakuotės apvalinamos iš viso 14 dienų poreikio baltymams, o šviežiems produktams – per savaitę. Mygtuku nukopijuojami užsakymo sąrašai su gramais, kiekiais ir SKU nuorodomis, kur jos iš tiesų yra. Galima pažymėti nupirktus produktus savo naršyklėje.
+
+**Griežtos ribos:** iki **2 atskirų parduotuvių visam 14 dienų laikotarpiui**, 2 savaičių biudžeto tikslas 200 € (tolerancija iki 220 €). Kol nepatikrintos kalakutienos, vištienos ir jautienos ūkių kainos arba bent vieno produkto kaina, svetainė rodo tik **dalinį senų katalogo kainų įvertį be pristatymo**, niekada nevadina jo galutiniu pirkinių krepšeliu ir nepatvirtina biudžeto ar parduotuvių ribos. Šviežios prekės perkamos savaitėmis, mėsa/žuvis į šaldiklį –18 °C. Jei pasirinkta paskutinė savaitė ir kitos nėra, skiltis rodo, kad pilnam 14 d. užsakymui trūksta plano. **Svetainė nenusiperka prekių pati**.
+
 ## Receptų gaminimas ir daržovių pirmenybės
 
 Nuo šiol nauji receptai ruošiami **orkaitėje, vienoje didelėje skardoje vienam kepimui**, be papildomo kepimo keptuvėje. Per sekmadienio ir trečiadienio gaminimą ruošiami du skirtingi patiekalai; kiekvienam patiekalui gali reikėti atskiro skardos kepimo arba kelių etapų su ta pačia skarda, jeigu vienu sluoksniu 3–4 porcijos netelpa. Maisto saugai būtinas termometras.

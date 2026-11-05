@@ -9,3 +9,31 @@
 @media(max-width:670px){.recipes{grid-template-columns:1fr}.selected-week a{float:none;display:block;margin-top:5px}}
 @media print{.page-shell{display:block}.selected-week a{display:none}}
 .history-sidebar{position:sticky;top:0}@media(max-width:800px){.history-sidebar{position:static}}
+
+/* Two-week procurement planner: accessible, mobile-first, scoped cards */
+#dvi-savaites .fortnight-loading,#dvi-savaites .fortnight-empty{padding:24px;color:var(--muted)}
+.fortnight-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.fortnight-metric{border-radius:16px;background:#fff;border:1px solid var(--line);padding:17px}
+.fortnight-metric small{display:block;color:var(--muted);font-size:12px}
+.fortnight-metric strong{display:block;font-size:22px;letter-spacing:-.04em;overflow-wrap:anywhere}
+.fortnight-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:12px 0 15px}
+.fortnight-toolbar p{margin:0;color:var(--muted);font-size:12px}
+.fortnight-group{padding:19px 22px;margin-bottom:14px}
+.fortnight-group h3{margin:0 0 3px;letter-spacing:-.03em;font-size:19px}
+.fortnight-group p{color:var(--muted);margin:0 0 13px;font-size:12px}
+.fortnight-table{width:100%;border-collapse:collapse}
+.fortnight-table th{text-align:left;padding:9px 8px;color:var(--muted);font-size:11px;border-bottom:1px solid var(--line)}
+.fortnight-table td{padding:11px 8px;font-size:13px;border-bottom:1px solid #eff2ed;vertical-align:top}
+.fortnight-table tr:last-child td{border-bottom:0}
+.fortnight-table .product-name{font-weight:760}
+.fortnight-table .product-sub{font-size:11px;color:var(--muted)}
+.fortnight-table .is-complete{opacity:.52}
+.fortnight-table .is-complete .product-name{text-decoration:line-through}
+.fortnight-table input{accent-color:var(--green);width:18px;height:18px;cursor:pointer}
+.fortnight-pill{display:inline-block;border-radius:9px;background:#fff0d8;padding:3px 8px;font-size:10px;font-weight:760;color:#7f5825}
+.fortnight-summary{font-size:12px;border:1px solid var(--line);background:#f8faf6;padding:14px 17px;border-radius:13px;margin-top:14px}
+.fortnight-group .table-wrap{margin:0 -4px}
+.fortnight-table a{font-size:12px;font-weight:800;white-space:nowrap}
+.fortnight-notice{margin:14px 0;background:#fff3e4;padding:14px 17px;border-left:4px solid #c59453;border-radius:0 12px 12px 0;font-size:13px}
+@media(max-width:670px){.fortnight-overview{grid-template-columns:1fr}.fortnight-group{padding:15px 13px}.fortnight-table th,.fortnight-table td{padding:8px 6px}.fortnight-table .product-name{min-width:110px}.fortnight-toolbar .btn{width:100%}}
+@media print{#dvi-savaites .fortnight-toolbar{display:none}.fortnight-group{break-inside:avoid}}
