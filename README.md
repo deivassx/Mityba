@@ -111,7 +111,4 @@ Pilni meniu saugomi `data/history/YYYY-MM-DD.json`, kortelių sąrašas –
 ir nauja savaitė. Pakartotinai generuojant tą pačią savaitę atnaujinamas jos meniu;
 kitų savaičių failai išlieka. Senesnių savaičių kainos iš naujo netikrinamos.
 
-Istorijoje taip pat yra 8 retrospektyvūs pavyzdžiai (2026-09-14–2026-11-08),
-pažymėti „Pavyzdinis meniu“. Jie sukurti iš patikrinto dabartinio katalogo:
-rodomos kainos nėra istorinės. `node scripts/create-examples.mjs` atkuria šiuos
-pavyzdžius pagal naujausio plano datą ir neleidžia perrašyti tikrų planų.
+Ankstesni rugsėjo–lapkričio pavyzdiniai meniu pašalinti; vietoje jų sukurti 8 nauji planai nuo 2026-11-09 iki 2026-12-28. Produktų kainos ir ūkių tiekimas šiems būsimiems planams dar nėra patikrinti. Savaitės turi 4 skirtingus vienos skardos receptus, 2 valgymus kasdien, 2 gaminimus per savaitę. `meta.isPlanningSeries=true` planai nėra pirkimui patvirtinti; kalakutienai, jautienai ir vištienai prekių URL laukiama ūkininkų patikros. Šie produktai nebus klaidingai rodomi kaip pirkimas iš Barbora. `node scripts/planner.mjs archive` saugo tokius aiškiai pažymėtus planus tik kaip nepatvirtintą pirkinių sąrašą. Savaitės biudžeto negalima patvirtinti, kol trūksta ūkininkų kainų.

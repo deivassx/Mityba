@@ -48,6 +48,12 @@ export function validate(menu, verified = true, rules = readRules()) {
   }
   const start = new Date(menu.meta.weekStart+'T00:00:00Z');
   assert(start.getUTCDay() === 1,'Savaitė turi prasidėti pirmadienį');
+  const isDraft=!verified && menu.meta?.isPlanningSeries===true;
+  const unresolved=new Set(isDraft?menu.meta.unresolvedIngredientIds||[]:[]);
+  if(isDraft){
+    assert(menu.meta.purchaseReady===false,'Juodraštis negali būti paruoštas pirkimui');
+    assert([...unresolved].every(id=>['turkey','beef','chicken'].includes(id)),'Neleistinas nepatvirtintas produktas');
+  }
   const used = new Set(), counts = {};
   for (const [i,day] of menu.days.entries()) {
     assert(day.date === new Date(+start+i*86400000).toISOString().slice(0,10),'Nenuoseklios dienų datos');
@@ -59,9 +65,10 @@ export function validate(menu, verified = true, rules = readRules()) {
       let mealKcal=0,mealCarbs=0;
       for(const [key,g] of Object.entries(r.ingredients)) {
         const n=menu.nutrients[key], p=products.get(key);
-        assert(positive(g) && n && p && stores.has(p.store),'Trūksta ingrediento: '+key);
+        assert(positive(g) && n && (p && stores.has(p.store) || unresolved.has(key)),'Trūksta ingrediento: '+key);
+        if(unresolved.has(key))assert(!p,'Nepatikrintas šaltinis negali būti pirkinių sąraše: '+key);
         assert(['kcal','protein','carbs','fat'].every(k=>Number.isFinite(n[k]) && n[k]>=0),'Blogas maistingumas: '+key);
-        assert(positive(p.packGrams),'Bloga pakuotė: '+key);
+        if(p)assert(positive(p.packGrams),'Bloga pakuotė: '+key);
         mealKcal+=g*n.kcal/100; mealCarbs+=g*n.carbs/100; protein+=g*n.protein/100;
         if(vegetables.includes(key)) veg+=g;
         if(verified) {
@@ -196,12 +203,17 @@ if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
   try {
     if(process.argv[2]==='generate') await generate();
     else if(process.argv[2]==='archive') {
-      const menu=validate(JSON.parse(await fs.readFile('data/menu.json','utf8')),false);
-      assert(menu.products.every(p=>positive(p.priceEur) && p.verification?.url===p.url),'Išsaugotame meniu nėra kainų patikros įrodymų');
+      const menu=JSON.parse(await fs.readFile('data/menu.json','utf8'));
+      const isDraft=menu.meta?.isPlanningSeries===true;
+      validate(menu,!isDraft);
+      if(!isDraft)assert(menu.products.every(p=>positive(p.priceEur) && p.verification?.url===p.url),'Išsaugotame meniu nėra kainų patikros įrodymų');
       await archiveMenu(menu);
     }
     else if(process.argv[2]==='published') await verifyPublished(process.argv[3]);
-    else validate(JSON.parse(await fs.readFile('data/menu.json','utf8')));
+    else {
+      const menu=JSON.parse(await fs.readFile('data/menu.json','utf8'));
+      validate(menu,!menu.meta?.isPlanningSeries);
+    }
     console.log('Patikra sėkminga');
   } catch(e) { console.error(e.message); process.exitCode=1; }
 }

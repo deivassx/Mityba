@@ -1,109 +1,113 @@
 [
   {
+    "weekStart": "2026-12-28",
+    "weekEnd": "2027-01-03",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutiena su morkomis ir paprikomis vienoje skardoje",
+      "Vištienos kepsneliai su grybais ir morkomis",
+      "Šamas su pievagrybiais ir keptais burokėliais",
+      "Jautienos kotletukai su keptomis daržovėmis"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
+    "weekStart": "2026-12-21",
+    "weekEnd": "2026-12-27",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutienos skarda su batatais ir pievagrybiais",
+      "Citrininė vištiena su batatais ir burokėliais",
+      "Keptas šamas su burokėliais ir paprikomis",
+      "Jautienos paprikų kepsneliai vienoje skardoje"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
+    "weekStart": "2026-12-14",
+    "weekEnd": "2026-12-20",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutienos kąsneliai su burokėliais ir morkomis",
+      "Vištienos skarda su paprikomis ir pievagrybiais",
+      "Šamas su morkomis, grybais ir jogurto padažu",
+      "Jautienos kukuliai su burokėliais ir grybais"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
+    "weekStart": "2026-12-07",
+    "weekEnd": "2026-12-13",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutienos iešmeliai su paprikomis ir grybais",
+      "Vištiena su saldžiomis bulvėmis ir paprikomis",
+      "Orkaitėje keptas šamas su burokėliais ir grybais",
+      "Orkaitės jautienos kukuliai su paprikomis"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
+    "weekStart": "2026-11-30",
+    "weekEnd": "2026-12-06",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutienos skarda su batatais ir pievagrybiais",
+      "Vištienos kepsneliai su grybais ir morkomis",
+      "Šamas su pievagrybiais ir keptais burokėliais",
+      "Jautienos kotletukai su keptomis daržovėmis"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
+    "weekStart": "2026-11-23",
+    "weekEnd": "2026-11-29",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutienos kąsneliai su burokėliais ir morkomis",
+      "Citrininė vištiena su batatais ir burokėliais",
+      "Keptas šamas su burokėliais ir paprikomis",
+      "Jautienos paprikų kepsneliai vienoje skardoje"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
+    "weekStart": "2026-11-16",
+    "weekEnd": "2026-11-22",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutienos iešmeliai su paprikomis ir grybais",
+      "Vištienos skarda su paprikomis ir pievagrybiais",
+      "Šamas su morkomis, grybais ir jogurto padažu",
+      "Jautienos kukuliai su burokėliais ir grybais"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
     "weekStart": "2026-11-09",
     "weekEnd": "2026-11-15",
-    "generatedAt": "2026-11-05T11:35:45.936Z",
+    "generatedAt": "2026-11-05T13:30:00.000Z",
     "isExample": false,
+    "isPlanningSeries": true,
     "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Šamas su šiltomis daržovėmis",
-      "Vištiena su saldžiomis bulvėmis",
-      "Jautienos ir daržovių keptuvė"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-11-02",
-    "weekEnd": "2026-11-08",
-    "generatedAt": "2026-11-05T11:48:18.739Z",
-    "isExample": true,
-    "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Šamas su šiltomis daržovėmis",
-      "Vištiena su saldžiomis bulvėmis",
-      "Jautienos ir daržovių keptuvė"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-10-26",
-    "weekEnd": "2026-11-01",
-    "generatedAt": "2026-11-05T11:48:18.761Z",
-    "isExample": true,
-    "recipes": [
-      "Šamas su šiltomis daržovėmis",
-      "Vištiena su saldžiomis bulvėmis"
-    ],
-    "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh"
-  },
-  {
-    "weekStart": "2026-10-19",
-    "weekEnd": "2026-10-25",
-    "generatedAt": "2026-11-05T11:48:18.774Z",
-    "isExample": true,
-    "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Jautienos ir daržovių keptuvė"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-10-12",
-    "weekEnd": "2026-10-18",
-    "generatedAt": "2026-11-05T11:48:18.786Z",
-    "isExample": true,
-    "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Šamas su šiltomis daržovėmis",
-      "Vištiena su saldžiomis bulvėmis",
-      "Jautienos ir daržovių keptuvė"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-10-05",
-    "weekEnd": "2026-10-11",
-    "generatedAt": "2026-11-05T11:48:18.797Z",
-    "isExample": true,
-    "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Šamas su šiltomis daržovėmis"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-09-28",
-    "weekEnd": "2026-10-04",
-    "generatedAt": "2026-11-05T11:48:18.808Z",
-    "isExample": true,
-    "recipes": [
-      "Vištiena su saldžiomis bulvėmis",
-      "Jautienos ir daržovių keptuvė"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-09-21",
-    "weekEnd": "2026-09-27",
-    "generatedAt": "2026-11-05T11:48:18.819Z",
-    "isExample": true,
-    "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Šamas su šiltomis daržovėmis",
-      "Vištiena su saldžiomis bulvėmis"
-    ],
-    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
-  },
-  {
-    "weekStart": "2026-09-14",
-    "weekEnd": "2026-09-20",
-    "generatedAt": "2026-11-05T11:48:18.830Z",
-    "isExample": true,
-    "recipes": [
-      "Orkaitėje kepta kalakutiena",
-      "Šamas su šiltomis daržovėmis",
-      "Vištiena su saldžiomis bulvėmis",
-      "Jautienos ir daržovių keptuvė"
+      "Kalakutiena su morkomis ir paprikomis vienoje skardoje",
+      "Vištiena su saldžiomis bulvėmis ir paprikomis",
+      "Orkaitėje keptas šamas su burokėliais ir grybais",
+      "Orkaitės jautienos kukuliai su paprikomis"
     ],
     "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
   }
