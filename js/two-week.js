@@ -2,7 +2,7 @@
    neįdedama į išorinį krepšelį ir nėra mokamų API. */
 (function(root) {
   'use strict';
-  const PROTEINS = new Set(['turkey','chicken','beef','beef_steak','beef_strips','beef_roast','catfish']);
+  const PROTEINS = new Set(['turkey','chicken','beef','beef_steak','beef_strips','beef_roast','catfish','lamb','salmon','cod','pork_tenderloin']);
   const round = n => Math.round((n+Number.EPSILON)*100)/100;
   const num = n => new Intl.NumberFormat('lt-LT').format(n);
   const eur = n => new Intl.NumberFormat('lt-LT',{style:'currency',currency:'EUR'}).format(n);

@@ -229,7 +229,11 @@
         "beef_steak",
         "beef_strips",
         "beef_roast",
-        "catfish"
+        "catfish",
+        "lamb",
+        "salmon",
+        "cod",
+        "pork_tenderloin"
       ],
       "purchaseProteinAndFishOnceForTwoWeeks": true,
       "purchaseFreshVegetablesAndAddonsWeekly": true,
@@ -257,9 +261,13 @@
   "recipePreferences": {
     "primaryProteins": [
       "kalakutiena",
+      "vištiena",
       "jautiena",
-      "zuvis",
-      "vistiena"
+      "šamas",
+      "ėriena",
+      "kiaulienos išpjova",
+      "lašiša",
+      "menkė"
     ],
     "plentyOfVegetables": true,
     "starchExamples": [
@@ -340,30 +348,28 @@
       "tomato",
       "onion",
       "cabbage",
-      "sauerkraut"
+      "sauerkraut",
+      "lamb",
+      "salmon",
+      "cod",
+      "pork_tenderloin"
     ],
     "menuDiversity": {
-      "recipeLibraryCount": 32,
+      "recipeLibraryCount": 48,
       "recipesPerWeek": 4,
-      "minimumDistinctWeeklyCombosInEightWeeks": 8,
-      "noRecipeRepeatedWithinEightWeeksPerProteinGroup": true,
       "proteinGroups": [
         "kalakutiena",
         "vistiena",
         "samas",
-        "jautiena"
+        "jautiena",
+        "eriena",
+        "kiauliena",
+        "lasisa",
+        "menke"
       ],
-      "includeCheeses": [
-        "cheese",
-        "feta"
-      ],
-      "includeBeefCuts": [
-        "beef",
-        "beef_steak",
-        "beef_strips",
-        "beef_roast"
-      ],
-      "note": "Tai receptų įvairovės, ne kainų patvirtinimo taisyklės. Iš naujų produktų be patikrintų tiekėjų sudaromi tik neapsipirkimui skirti planai."
+      "noRecipeRepeatedWithinEightWeeks": true,
+      "details": "2 pietų patiekalai iš kalakutienos, vištienos, ėrienos ar kiaulienos; 2 vakarienės iš šamo, jautienos, lašišos ar menkės",
+      "priceNote": "Nauji produktai be realių kainų yra tik planavimo juodraščiai"
     }
   },
   "implementationStatus": {

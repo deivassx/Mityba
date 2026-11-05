@@ -148,6 +148,78 @@
         }
       ],
       "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos."
+    },
+    "lamb": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Ieškoti Farmlio kataloge",
+        "url": "https://farmlio.lt/prekes",
+        "kind": "catalog_search",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Šešuolėlių ūkis",
+          "url": "https://sesuoleliuukis.lt/",
+          "kind": "farmer_home",
+          "priceVerified": false
+        }
+      ],
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+    },
+    "salmon": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Ieškoti Farmlio kataloge",
+        "url": "https://farmlio.lt/prekes",
+        "kind": "catalog_search",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Farmlio tiekėjų sąrašas",
+          "url": "https://farmlio.lt/pardavejai",
+          "kind": "seller_directory",
+          "priceVerified": false
+        }
+      ],
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+    },
+    "cod": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Ieškoti Farmlio kataloge",
+        "url": "https://farmlio.lt/prekes",
+        "kind": "catalog_search",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Farmlio tiekėjų sąrašas",
+          "url": "https://farmlio.lt/pardavejai",
+          "kind": "seller_directory",
+          "priceVerified": false
+        }
+      ],
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
+    },
+    "pork_tenderloin": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Ieškoti Farmlio kataloge",
+        "url": "https://farmlio.lt/prekes",
+        "kind": "catalog_search",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Farmlio tiekėjų sąrašas",
+          "url": "https://farmlio.lt/pardavejai",
+          "kind": "seller_directory",
+          "priceVerified": false
+        }
+      ],
+      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos."
     }
   }
 }

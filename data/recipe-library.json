@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "description": "32 skirtingi patiekalai; 8 kiekvienoje grupėje, tarp jų kepsniai, juostelės, sūriai ir įvairios daržovės",
+  "version": 3,
+  "description": "48 receptai: 32 esami, ėrienos, kiaulienos išpjovos, lašišos ir menkės po 4.",
   "variants": {
     "kalakutiena": [
       {
@@ -815,6 +815,357 @@
           "Jei 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais su ta pačia skarda. Gatavą maistą atvėsink per 2 val., vėlesnes porcijas užšaldyk, atitirpink šaldytuve."
         ],
         "tag": "Lėtai kepta jautiena",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      }
+    ],
+    "eriena": [
+      {
+        "id": "eriena_1",
+        "slot": "PIETŪS",
+        "title": "Ėrienos kepsneliai su feta ir paprikomis",
+        "subtitle": "Vienos skardos patiekalas · ėrieną",
+        "mins": 55,
+        "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "ingredients": {
+          "lamb": 255,
+          "potato": 180,
+          "pepper": 200,
+          "carrot": 150,
+          "tomato": 150,
+          "feta": 45,
+          "yogurt": 130,
+          "oil": 9
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Ėrieną pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk visą gabalą iki 63 °C ir 3 min. poilsio (maltą – 71 °C). Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "eriena_2",
+        "slot": "PIETŪS",
+        "title": "Marokietiška ėriena su morkomis",
+        "subtitle": "Vienos skardos patiekalas · ėrieną",
+        "mins": 55,
+        "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "ingredients": {
+          "lamb": 260,
+          "sweetpotato": 175,
+          "carrot": 190,
+          "pepper": 185,
+          "onion": 60,
+          "mushroom": 140,
+          "yogurt": 160,
+          "oil": 9
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Ėrieną pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk visą gabalą iki 63 °C ir 3 min. poilsio (maltą – 71 °C). Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "eriena_3",
+        "slot": "PIETŪS",
+        "title": "Ėriena su burokėliais ir pievagrybiais",
+        "subtitle": "Vienos skardos patiekalas · ėrieną",
+        "mins": 55,
+        "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "ingredients": {
+          "lamb": 260,
+          "potato": 180,
+          "beet": 170,
+          "mushroom": 180,
+          "pepper": 150,
+          "carrot": 100,
+          "yogurt": 160,
+          "oil": 9
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Ėrieną pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk visą gabalą iki 63 °C ir 3 min. poilsio (maltą – 71 °C). Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      }
+    ],
+    "kiauliena": [
+      {
+        "id": "kiauliena_1",
+        "slot": "PIETŪS",
+        "title": "Kiaulienos medalionai su grybais",
+        "subtitle": "Vienos skardos patiekalas · kiaulienos išpjovą",
+        "mins": 55,
+        "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "ingredients": {
+          "pork_tenderloin": 305,
+          "potato": 180,
+          "mushroom": 230,
+          "pepper": 180,
+          "carrot": 150,
+          "yogurt": 180,
+          "oil": 12
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Kiaulienos išpjovą pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C ir 3 min. poilsio. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "kiauliena_2",
+        "slot": "PIETŪS",
+        "title": "Kiaulienos išpjova su sūriu ir pomidorais",
+        "subtitle": "Vienos skardos patiekalas · kiaulienos išpjovą",
+        "mins": 55,
+        "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "ingredients": {
+          "pork_tenderloin": 300,
+          "sweetpotato": 180,
+          "tomato": 200,
+          "pepper": 190,
+          "carrot": 160,
+          "cheese": 35,
+          "yogurt": 145,
+          "oil": 10
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Kiaulienos išpjovą pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C ir 3 min. poilsio. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "kiauliena_3",
+        "slot": "PIETŪS",
+        "title": "Kiaulienos išpjova su kopūstais",
+        "subtitle": "Vienos skardos patiekalas · kiaulienos išpjovą",
+        "mins": 55,
+        "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
+        "ingredients": {
+          "pork_tenderloin": 310,
+          "potato": 180,
+          "cabbage": 270,
+          "carrot": 175,
+          "pepper": 155,
+          "yogurt": 180,
+          "oil": 12
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Kiaulienos išpjovą pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C ir 3 min. poilsio. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      }
+    ],
+    "lasisa": [
+      {
+        "id": "lasisa_1",
+        "slot": "VAKARIENĖ",
+        "title": "Citrininė lašiša su burokėliais",
+        "subtitle": "Vienos skardos patiekalas · lašišą",
+        "mins": 55,
+        "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "ingredients": {
+          "salmon": 285,
+          "beet": 180,
+          "pepper": 180,
+          "mushroom": 175,
+          "carrot": 100,
+          "cottage": 200,
+          "oil": 8
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Lašišą pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "lasisa_2",
+        "slot": "VAKARIENĖ",
+        "title": "Lašiša su sūrio plutele ir grybais",
+        "subtitle": "Vienos skardos patiekalas · lašišą",
+        "mins": 55,
+        "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "ingredients": {
+          "salmon": 225,
+          "cheese": 30,
+          "pepper": 175,
+          "mushroom": 180,
+          "tomato": 150,
+          "carrot": 100,
+          "cottage": 170,
+          "oil": 7
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Lašišą pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "lasisa_3",
+        "slot": "VAKARIENĖ",
+        "title": "Lašiša su kopūstais ir raugintomis daržovėmis",
+        "subtitle": "Vienos skardos patiekalas · lašišą",
+        "mins": 55,
+        "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "ingredients": {
+          "salmon": 280,
+          "cabbage": 240,
+          "pepper": 165,
+          "carrot": 160,
+          "sauerkraut": 100,
+          "cottage": 175,
+          "oil": 9
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Lašišą pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      }
+    ],
+    "menke": [
+      {
+        "id": "menke_1",
+        "slot": "VAKARIENĖ",
+        "title": "Menkė su sūrio plutele ir pievagrybiais",
+        "subtitle": "Vienos skardos patiekalas · menkę",
+        "mins": 55,
+        "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "ingredients": {
+          "cod": 360,
+          "cheese": 65,
+          "mushroom": 240,
+          "pepper": 190,
+          "carrot": 160,
+          "cottage": 200,
+          "oil": 14
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Menkę pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "menke_2",
+        "slot": "VAKARIENĖ",
+        "title": "Česnakinė menkė su burokėliais",
+        "subtitle": "Vienos skardos patiekalas · menkę",
+        "mins": 55,
+        "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "ingredients": {
+          "cod": 365,
+          "beet": 130,
+          "pepper": 195,
+          "mushroom": 190,
+          "carrot": 80,
+          "cottage": 245,
+          "walnut": 20,
+          "oil": 15
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Menkę pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
+        "method": "one_sheet_pan",
+        "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
+      },
+      {
+        "id": "menke_3",
+        "slot": "VAKARIENĖ",
+        "title": "Pomidorinė menkė su feta",
+        "subtitle": "Vienos skardos patiekalas · menkę",
+        "mins": 55,
+        "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
+        "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+        "ingredients": {
+          "cod": 360,
+          "tomato": 200,
+          "pepper": 190,
+          "mushroom": 170,
+          "carrot": 145,
+          "feta": 70,
+          "cottage": 205,
+          "oil": 14
+        },
+        "steps": [
+          "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+          "Menkę pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+          "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+          "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
+        ],
+        "tag": "Naujas patiekalas",
         "method": "one_sheet_pan",
         "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
       }
