@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-05",
+  "notes": "Nuorodos į realius paieškos / kategorijų puslapius; tai nėra patvirtinti 14 dienų produktų pasiūlymai, kainos ar atsargos. Nenaudoti kaip SKU optimizatoriuje be patikros.",
+  "products": {
+    "turkey": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Ieškoti kalakutienos „Farmlio“",
+        "url": "https://farmlio.lt/prekes",
+        "kind": "catalog_search",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Baltuonių kalakutai",
+          "url": "https://baltuoniu.kalakutai.lt/",
+          "kind": "farmer_home",
+          "priceVerified": false
+        }
+      ]
+    },
+    "chicken": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Ieškoti vištienos „Farmlio“",
+        "url": "https://farmlio.lt/prekes",
+        "kind": "catalog_search",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Farmlio ūkių sąrašas",
+          "url": "https://farmlio.lt/pardavejai",
+          "kind": "seller_directory",
+          "priceVerified": false
+        }
+      ]
+    },
+    "beef": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Smulkinta jautiena „Farmlio“ (šiuo metu nurodyta, kad išparduota)",
+        "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai/prekes/ekologiska-smulkinta-jautiena",
+        "kind": "exact_sku_unavailable",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Kazlauskų ekologinis ūkis",
+          "url": "https://kazlauskuekoukis.lt/",
+          "kind": "farmer_home",
+          "priceVerified": false
+        },
+        {
+          "name": "Kinderio limuzinai „Farmlio“",
+          "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai",
+          "kind": "farmlio_seller",
+          "priceVerified": false
+        }
+      ]
+    },
+    "catfish": {
+      "primary": "farmer",
+      "farmlio": {
+        "label": "Šamo filė „Farmlio“",
+        "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda",
+        "kind": "existing_catalog_sku",
+        "priceVerified": false
+      },
+      "farmers": [
+        {
+          "name": "Žuvėja „Farmlio“",
+          "url": "https://farmlio.lt/pardavejai/zuveja",
+          "kind": "farmlio_seller",
+          "priceVerified": false
+        }
+      ]
+    }
+  }
+}
