@@ -30,9 +30,11 @@ Svetainės `#dvi-savaites` skiltis nuo pasirinktos savaitės įkelia tos ir **ki
 
 **Griežtos ribos:** iki **2 atskirų parduotuvių visam 14 dienų laikotarpiui**, 2 savaičių biudžeto tikslas 200 € (tolerancija iki 220 €). Kol nepatikrintos kalakutienos, vištienos ir jautienos ūkių kainos arba bent vieno produkto kaina, svetainė rodo tik **dalinį senų katalogo kainų įvertį be pristatymo**, niekada nevadina jo galutiniu pirkinių krepšeliu ir nepatvirtina biudžeto ar parduotuvių ribos. Šviežios prekės perkamos savaitėmis, mėsa/žuvis į šaldiklį –18 °C. Jei pasirinkta paskutinė savaitė ir kitos nėra, skiltis rodo, kad pilnam 14 d. užsakymui trūksta plano. **Svetainė nenusiperka prekių pati**.
 
-## 32 patiekalų įvairovė (atnaujinta 2026-11-05)
+## 48 patiekalų įvairovė (atnaujinta 2026-11-05)
 
-Bibliotekoje yra **32 unikalūs receptai** – po 8 kiekvienoje kalakutienos, vištienos, šamo ir jautienos grupėje. Per pirmąsias 8 savaites **nei vienas tas pats receptas nepasikartoja** (4 per savaitę), vėlesniuose cikluose maišomi kiti deriniai. Jautiena neapsiriboja maltiniais: yra nugarinės kepsnys, juostelės, lėtai kepama mentė, rostbifas, burgerio paplotėliai ir sūriu užkepti kotletai. Yra kietojo sūrio bei fetos. Ir toliau galioja dvi gaminimo dienos, vienos skardos principas, daržovių ir maistingumo ribos.
+Bibliotekoje yra **48 unikalūs receptai** – po 8 kalakutienos, vištienos, šamo ir jautienos grupėse, po 4 ėrienos, kiaulienos išpjovos, lašišos ir menkės grupėse. Per pirmąsias 8 savaites **nei vienas tas pats receptas nepasikartoja** (4 per savaitę), vėlesniuose cikluose maišomi kiti deriniai. Jautiena neapsiriboja maltiniais: yra nugarinės kepsnys, juostelės, lėtai kepama mentė, rostbifas, burgerio paplotėliai ir sūriu užkepti kotletai. Yra kietojo sūrio bei fetos. Ir toliau galioja dvi gaminimo dienos, vienos skardos principas, daržovių ir maistingumo ribos.
+
+**Papildomos grupės:** ėriena, kiaulienos išpjova, lašiša ir menkė; jų gaminių konkrečios kainos nepatikrintos. 
 
 **Apsipirkimo būklė:** naujiems ingredientams (`cheese`, `feta`, `beef_steak`, `beef_strips`, `beef_roast`, `tomato`, `onion`, `cabbage`, `sauerkraut`) dar nėra patikrintų SKU kainų ir ūkio tiekimo, todėl planai lieka `purchaseReady=false` ir nepatvirtintų produktų krepšelyje nėra. `data/catalog.json` jų maistingumas – apytiksliai 100 g produktų įverčiai, ne gamintojų etikečių skaičiai. Griežta 2 parduotuvių riba išlieka.
 
@@ -40,7 +42,7 @@ Bibliotekoje yra **32 unikalūs receptai** – po 8 kiekvienoje kalakutienos, vi
 
 Nuo šiol nauji receptai ruošiami **orkaitėje, vienoje didelėje skardoje vienam kepimui**, be papildomo kepimo keptuvėje. Per sekmadienio ir trečiadienio gaminimą ruošiami du skirtingi patiekalai; kiekvienam patiekalui gali reikėti atskiro skardos kepimo arba kelių etapų su ta pačia skarda, jeigu vienu sluoksniu 3–4 porcijos netelpa. Maisto saugai būtinas termometras.
 
-Receptuose **nėra cukinijų ir artišokų**. Vienoje porcijoje bulvių ir batatų – ne daugiau kaip 200 g kiekvienų, brokolių – iki 150 g. Mėgstamiausios daržovės: paprikos, pievagrybiai, burokai, morkos, batatai, bulvės, pomidorai, agurkai, svogūnai, česnakai, kopūstai, rauginti produktai. Receptų katalogas išsaugo 16 skirtingų variantų; dar nerandamos kataloge daržovės gali būti įtrauktos tik pridėjus patikrintus produktų šaltinius.
+Receptuose **nėra cukinijų ir artišokų**. Vienoje porcijoje bulvių ir batatų – ne daugiau kaip 200 g kiekvienų, brokolių – iki 150 g. Mėgstamiausios daržovės: paprikos, pievagrybiai, burokai, morkos, batatai, bulvės, pomidorai, agurkai, svogūnai, česnakai, kopūstai, rauginti produktai. Receptų katalogas išsaugo 48 skirtingus variantus; dar nerandamos kataloge daržovės gali būti įtrauktos tik pridėjus patikrintus produktų šaltinius.
 
 `scripts/planner.mjs` tikrina šias naujų meniu taisykles prieš generavimą ir su `recipePreferencesApplied` žyma pakartotinai tikrina validuojant. **Ankstesnių savaičių archyvas neperrašomas**, todėl senose savaitėse dar gali matytis cukinijų ar daugiau brokolių.
 
@@ -53,10 +55,9 @@ GitHub grafikas gali vėluoti; po ilgo viešos saugyklos neaktyvumo gali būti i
 
 1. Testuojama planavimo ir kainų tikrinimo logika.
 2. Iš `data/catalog.json` ir `data/recipe-library.json` sudaroma artimiausio būsimo pirmadienio savaitė.
-   Bibliotekoje yra **16 skirtingų receptų** (4 baziniai + 12 alternatyvų).
+   Bibliotekoje yra **48 skirtingi receptai** (8 baltymų grupės).
    Kiekvieną savaitę parenkami **4 receptai**: 2 pietums ir 2 vakarienei.
-   Keturių variantų kiekvienoje grupėje deterministinis 4-ainių ciklas sudaro
-   **256 skirtingas savaitines kombinacijas**, todėl gretimos savaitės nesikartoja.
+   Per 8 savaites parenkamos skirtingos baltymų grupės ir receptai; vienas receptas tame laikotarpyje nekartojamas.
    Taip pat kaitaliojama, kuri pora ruošiama sekmadienį, o kuri trečiadienį.
    Tai yra **receptų bibliotekos rotacija, ne generatyvinis AI** – veikia be mokamų API.
 3. Tiesiogiai patikrinamos tik pasirinktiems receptams reikalingų prekių nuorodos, kainos ir pasirinktos iliustracijų nuotraukos.

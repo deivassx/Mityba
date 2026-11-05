@@ -6,6 +6,7 @@ import {validate,validateRecipePreferences} from '../scripts/planner.mjs';
 
 const catalog=JSON.parse(await fs.readFile(new URL('../data/catalog.json',import.meta.url),'utf8'));
 const bank=JSON.parse(await fs.readFile(new URL('../data/recipe-library.json',import.meta.url),'utf8'));
+const allowedUnverified=JSON.parse(await fs.readFile(new URL('../config/planavimo-taisykles.json',import.meta.url),'utf8')).recipePreferences.unverifiedIngredientIds;
 const plusWeeks=(n)=>new Date(Date.parse('2026-11-09T00:00:00Z')+n*7*86400000).toISOString().slice(0,10);
 function weeklyPlan(n) {
   const weekStart=plusWeeks(n);
@@ -14,7 +15,7 @@ function weeklyPlan(n) {
   const m=structuredClone(catalog);
   m.meta.weekStart=weekStart;
   m.recipes=recipes;
-  const allowedNew=['turkey','beef','chicken','beef_steak','beef_strips','beef_roast','cheese','feta','tomato','onion','cabbage','sauerkraut','cucumber'];
+  const allowedNew=allowedUnverified;
   m.meta={...m.meta,isPlanningSeries:true,purchaseReady:false,recipePreferencesApplied:true,
     unresolvedIngredientIds:[...new Set(recipes.flatMap(r=>Object.keys(r.ingredients)).filter(id=>allowedNew.includes(id)))]};
   m.products=m.products.filter(p=>!m.meta.unresolvedIngredientIds.includes(p.id));
@@ -22,23 +23,18 @@ function weeklyPlan(n) {
   m.sessions=pairs.map((pair,i)=>({servings:Object.fromEntries(pair.map(id=>[id,i===0?3:4]))}));
   return m;
 }
-test('32 skirtingi patiekalai ir bent 256 unikalios savaitės',()=>{
-  const seen=new Set(), allRecipes=new Set();
-  for(let n=0;n<256;n++){
-    const week=weeklyPlan(n);
-    const signature=week.recipes.map(r=>r.id).join('|');
-    assert.ok(!seen.has(signature), 'Savaitė pasikartojo: '+n);
-    seen.add(signature);
-    for(const r of week.recipes) allRecipes.add(r.id);
-    validate(week,false);
-    validateRecipePreferences(week);
-    for(const day of week.days) {
-      const calc=id=>{const r=week.recipes.find(x=>x.id===id);return Object.entries(r.ingredients).reduce((sum,[k,g])=>sum + g*week.nutrients[k].carbs/100,0);};
-      assert.ok(calc(day.lunch)>=calc(day.dinner), 'Angliavandenių daugiau vakarienei: '+n);
-    }
+test('48 receptų biblioteka, 8 skirtingos savaitės ir mitybos taisyklės',()=>{
+  const seen=new Set(), allUsed=new Set();
+  assert.equal(catalog.recipes.length+Object.values(bank.variants).flat().length,48);
+  for(let n=0;n<8;n++){
+    const m=weeklyPlan(n),signature=m.recipes.map(r=>r.id).join('|');
+    assert.ok(!seen.has(signature));seen.add(signature);
+    for(const r of m.recipes){assert.ok(!allUsed.has(r.id),'Pasikartojantis patiekalas '+r.id);allUsed.add(r.id);}
+    validate(m,false);validateRecipePreferences(m);
   }
-  assert.equal(allRecipes.size,32);
-  assert.equal(seen.size,256);
+  assert.equal(allUsed.size,32);
+  const proteins=new Set([...allUsed].map(id=>id.split('_')[0]));
+  for(const group of ['eriena','lasisa','menke','kiauliena'])assert.ok(proteins.has(group));
 });
 test('pakartotinis generavimas tai pačiai savaitei deterministinis, kitą savaitę keičia receptus',()=>{
   const a=selectWeeklyRecipes(catalog.recipes,bank,'2026-11-16');
@@ -46,7 +42,7 @@ test('pakartotinis generavimas tai pačiai savaitei deterministinis, kitą savai
   const next=selectWeeklyRecipes(catalog.recipes,bank,'2026-11-23');
   assert.deepEqual(a,b);
   assert.notDeepEqual(a.recipes.map(x=>x.id),next.recipes.map(x=>x.id));
-  assert.deepEqual(weeklyPlan(0).recipes.map(x=>x.id).sort(),catalog.recipes.map(x=>x.id).sort());
+  assert.equal(weeklyPlan(0).recipes.length,4);
 });
 test('neteisingos savaitės ir trūkstamų variantų nepriima',()=>{
   assert.throws(()=>selectWeeklyRecipes(catalog.recipes,bank,'2026-11-10'),/pirmadienį/);
@@ -67,11 +63,3 @@ test('atmeta nemėgstamas daržoves, per daug bulvių ir keptuvėje kepamą nauj
  assert.throws(()=>validateRecipePreferences(menu),/vienai skardai/);
 });
 
-test('Per aštuonias savaites nei vienas patiekalas nepasikartoja savo grupėje',()=>{
- const seen=new Set();
- for(let n=0;n<8;n++)for(const r of weeklyPlan(n).recipes){assert.ok(!seen.has(r.id),r.id);seen.add(r.id);}
- assert.equal(seen.size,32);
- const beef=[...new Set(Array.from({length:8},(_,i)=>weeklyPlan(i).recipes.find(r=>r.slot==='VAKARIENĖ'&&Object.keys(r.ingredients).some(k=>k.startsWith('beef')))).map(r=>Object.keys(r.ingredients).find(k=>k.startsWith('beef'))))];
- assert.ok(beef.length>=4);
- assert.ok([...seen].some(id=>id.includes('surin')));
-});

@@ -2,26 +2,26 @@
   "meta": {
     "name": "Sotus planas",
     "weekStart": "2026-12-28",
-    "generatedAt": "2026-11-05T14:38:00.000Z",
-    "status": "Įvairių receptų planas – kainos ir tiekėjai dar tikrinami",
+    "generatedAt": "2026-11-05T16:58:00.000Z",
+    "status": "48 receptų įvairovės planas – tiekėjai dar tikrinami",
     "kcalLimit": 2100,
     "maxStores": 2,
     "targetMealsPerDay": 2,
     "targetCookSessions": 2,
-    "pricingNotice": "32 receptų įvairovės planas. Sūrio, naujų jautienos gabalų, daržovių bei paukštienos kainos ir konkrečios ūkininkų prekės nepatvirtintos. Krepšelio suma tik dalinė, ne 100–110 EUR biudžeto įrodymas. Realus pirkimas – iš daugiausia 2 parduotuvių.",
+    "pricingNotice": "Nauji ėrienos, lašišos, menkės ir kiaulienos patiekalai. Nepatvirtintų produktų kainos ir nuorodos neįtrauktos; suma yra dalinė. Tikslas iki 100–110 € per savaitę, realus krepšelis iki 2 parduotuvių.",
     "recipePreferencesApplied": true,
     "isPlanningSeries": true,
     "isExample": false,
     "purchaseReady": false,
     "unresolvedIngredientIds": [
+      "lamb",
       "turkey",
-      "tomato",
       "onion",
-      "cheese",
-      "chicken",
-      "sauerkraut",
-      "beef_roast",
-      "cabbage"
+      "cod",
+      "tomato",
+      "feta",
+      "beef",
+      "cheese"
     ],
     "shoppingTotalEstimateEur": null
   },
@@ -175,6 +175,30 @@
       "protein": 0.9,
       "carbs": 4.3,
       "fat": 0.1
+    },
+    "lamb": {
+      "kcal": 190,
+      "protein": 20,
+      "carbs": 0,
+      "fat": 12
+    },
+    "salmon": {
+      "kcal": 208,
+      "protein": 20,
+      "carbs": 0,
+      "fat": 13
+    },
+    "cod": {
+      "kcal": 82,
+      "protein": 18,
+      "carbs": 0,
+      "fat": 0.7
+    },
+    "pork_tenderloin": {
+      "kcal": 130,
+      "protein": 22,
+      "carbs": 0,
+      "fat": 4
     }
   },
   "ingredientLabels": {
@@ -202,61 +226,64 @@
     "tomato": "Pomidorai",
     "onion": "Svogūnai",
     "cabbage": "Kopūstai",
-    "sauerkraut": "Rauginti kopūstai"
+    "sauerkraut": "Rauginti kopūstai",
+    "lamb": "Ėrienos kumpio mėsa",
+    "salmon": "Lašišos filė",
+    "cod": "Menkės filė",
+    "pork_tenderloin": "Kiaulienos išpjova"
   },
   "recipes": [
     {
-      "id": "kalakutiena_cesnakine",
+      "id": "eriena_3",
       "slot": "PIETŪS",
-      "title": "Mediteraninė kalakutiena su pomidorais",
-      "subtitle": "Čiobreliai, sūris · vienos skardos receptas",
+      "title": "Ėriena su burokėliais ir pievagrybiais",
+      "subtitle": "Vienos skardos patiekalas · ėrieną",
       "mins": 55,
       "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
-      "credit": "Gimme Delicious / paukštienos patiekimo iliustracija",
+      "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
       "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
       "ingredients": {
-        "turkey": 310,
-        "sweetpotato": 160,
-        "tomato": 160,
-        "mushroom": 140,
-        "pepper": 110,
-        "onion": 75,
-        "cheese": 30,
-        "yogurt": 155,
-        "oil": 10
+        "lamb": 260,
+        "potato": 180,
+        "beet": 170,
+        "mushroom": 180,
+        "pepper": 150,
+        "carrot": 100,
+        "yogurt": 160,
+        "oil": 9
       },
       "steps": [
-        "Orkaitę įkaitink iki 200 °C. Morkas, burokėlius, bulves ar batatus (jei yra) supjaustyk smulkiai; pradėk kepti vienoje skardoje 15–20 min. su dalimi aliejaus.",
-        "Kalakutieną supjaustyk gabalėliais arba suverk ant iešmelių, pagardink čiobreliai, sūris, pridėk skardoje ir kepk iki 74 °C vidinės temperatūros.",
-        "Į tą pačią skardą pridėk paprikas, pievagrybius, pomidorus ir svogūnus, jei jie yra recepte. Sūrį pridėk paskutinėms 3–5 min. arba patiek šaltą. Jogurtą, varškę, graikinius riešutus ir raugintus kopūstus patiek atskirai – jų nekepti.",
-        "Jei 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais su ta pačia skarda. Gatavą maistą atvėsink per 2 val., vėlesnes porcijas užšaldyk, atitirpink šaldytuve."
+        "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+        "Ėrieną pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk visą gabalą iki 63 °C ir 3 min. poilsio (maltą – 71 °C). Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+        "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+        "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
       ],
-      "tag": "Su sūriu",
+      "tag": "Naujas patiekalas",
       "method": "one_sheet_pan",
       "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
     },
     {
-      "id": "vistiena_rauginta",
+      "id": "kalakutiena_keptuve",
       "slot": "PIETŪS",
-      "title": "Vištienos iešmeliai su raugintomis daržovėmis",
-      "subtitle": "Česnakas, raugintos daržovės šalia · vienos skardos receptas",
+      "title": "Kalakutienos fajita su batatais",
+      "subtitle": "Rūkyta paprika, fajita prieskoniai · vienos skardos receptas",
       "mins": 55,
       "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
-      "credit": "Gimme Delicious / iliustracinė nuotrauka",
+      "credit": "Gimme Delicious / paukštienos patiekimo iliustracija (recepto varianto iliustracija)",
       "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
       "ingredients": {
-        "chicken": 300,
+        "turkey": 300,
         "sweetpotato": 170,
-        "pepper": 145,
-        "carrot": 170,
-        "mushroom": 100,
-        "sauerkraut": 100,
-        "yogurt": 190,
-        "oil": 11
+        "pepper": 180,
+        "onion": 75,
+        "mushroom": 140,
+        "carrot": 100,
+        "yogurt": 180,
+        "oil": 10
       },
       "steps": [
         "Orkaitę įkaitink iki 200 °C. Morkas, burokėlius, bulves ar batatus (jei yra) supjaustyk smulkiai; pradėk kepti vienoje skardoje 15–20 min. su dalimi aliejaus.",
-        "Vištieną supjaustyk gabalėliais arba suverk ant iešmelių, pagardink česnakas, raugintos daržovės šalia, pridėk skardoje ir kepk iki 74 °C vidinės temperatūros.",
+        "Kalakutieną supjaustyk gabalėliais arba suverk ant iešmelių, pagardink rūkyta paprika, fajita prieskoniai, pridėk skardoje ir kepk iki 74 °C vidinės temperatūros.",
         "Į tą pačią skardą pridėk paprikas, pievagrybius, pomidorus ir svogūnus, jei jie yra recepte. Sūrį pridėk paskutinėms 3–5 min. arba patiek šaltą. Jogurtą, varškę, graikinius riešutus ir raugintus kopūstus patiek atskirai – jų nekepti.",
         "Jei 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais su ta pačia skarda. Gatavą maistą atvėsink per 2 val., vėlesnes porcijas užšaldyk, atitirpink šaldytuve."
       ],
@@ -265,60 +292,60 @@
       "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
     },
     {
-      "id": "samas_darzoves",
+      "id": "menke_3",
       "slot": "VAKARIENĖ",
-      "title": "Šamas su burokėlių skiltelėmis ir sūriu",
-      "subtitle": "Rozmarinas · vienos skardos receptas",
+      "title": "Pomidorinė menkė su feta",
+      "subtitle": "Vienos skardos patiekalas · menkę",
       "mins": 55,
       "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
-      "credit": "Solin Fitness / iliustracinė nuotrauka",
+      "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
       "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
       "ingredients": {
-        "catfish": 330,
-        "beet": 140,
-        "carrot": 130,
-        "mushroom": 130,
-        "pepper": 125,
-        "cheese": 30,
-        "cottage": 200,
-        "oil": 12,
-        "walnut": 15
+        "cod": 360,
+        "tomato": 200,
+        "pepper": 190,
+        "mushroom": 170,
+        "carrot": 145,
+        "feta": 70,
+        "cottage": 205,
+        "oil": 14
       },
       "steps": [
-        "Orkaitę įkaitink iki 200 °C. Morkas, burokėlius, bulves ar batatus (jei yra) supjaustyk smulkiai; pradėk kepti vienoje skardoje 15–20 min. su dalimi aliejaus.",
-        "Šamo filė pagardink citrina ir krapais, pridėk skardos gale, kepk apie 15–20 min. iki 63 °C vidinės temperatūros.",
-        "Į tą pačią skardą pridėk paprikas, pievagrybius, pomidorus ir svogūnus, jei jie yra recepte. Sūrį pridėk paskutinėms 3–5 min. arba patiek šaltą. Jogurtą, varškę, graikinius riešutus ir raugintus kopūstus patiek atskirai – jų nekepti.",
-        "Jei 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais su ta pačia skarda. Gatavą maistą atvėsink per 2 val., vėlesnes porcijas užšaldyk, atitirpink šaldytuve."
+        "Įkaitink orkaitę iki 200 °C. Ant vienos skardos paskleisk smulkiai pjaustytus šakniavaisius, jeigu recepte jų yra, kepk 15–20 min. su trupučiu recepte nurodyto aliejaus.",
+        "Menkę pagardink česnaku ir žolelėmis. Dėk toje pačioje skardoje ir kepk iki 63 °C. Žuvį dėk tik paskutinėms 12–18 min., kad neperkeptų.",
+        "Paprikas, pievagrybius, pomidorus ir kopūstus pridėk pagal kepimo trukmę. Sūrį pridėk kepimo pabaigoje, jogurtą, varškę ir raugintas daržoves patiek atskirai.",
+        "3–4 porcijų skardos neperkrauk, prireikus kepk keliais etapais ta pačia skarda. Atvėsink per 2 val., vėlesnes porcijas užšaldyk."
       ],
-      "tag": "Su sūriu",
+      "tag": "Naujas patiekalas",
       "method": "one_sheet_pan",
       "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
     },
     {
-      "id": "jautiena_rostbifas",
+      "id": "jautiena_kotletukai",
       "slot": "VAKARIENĖ",
-      "title": "Orkaitės rostbifas su daržovėmis",
-      "subtitle": "Orkaitės kepsnys · vienos skardos receptas",
-      "mins": 210,
+      "title": "Sūriu įdaryti jautienos kotletai",
+      "subtitle": "Kietasis sūris · vienos skardos receptas",
+      "mins": 55,
       "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
-      "credit": "Solin Fitness / iliustracinė nuotrauka",
+      "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
       "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
       "ingredients": {
-        "beef_roast": 280,
-        "cabbage": 175,
-        "carrot": 140,
-        "mushroom": 160,
-        "pepper": 80,
-        "cottage": 210,
-        "oil": 12
+        "beef": 185,
+        "cheese": 40,
+        "pepper": 160,
+        "mushroom": 150,
+        "beet": 125,
+        "carrot": 75,
+        "cottage": 160,
+        "oil": 10
       },
       "steps": [
-        "Orkaitę įkaitink iki 160 °C; pasiruošk gilią skardą ir foliją.",
-        "Jautienos mentę sudėk į gilią orkaitės skardą su trupučiu vandens, uždenk folija ir kepk 155–165 °C apie 2,5–3,5 val. iki minkštumo; mėsą patikrink termometru. Paskutines 30 min. į tą pačią skardą pridėk šakniavaisius ir kopūstus, vėliau minkštas daržoves.",
+        "Orkaitę įkaitink iki 200 °C. Morkas, burokėlius, bulves ar batatus (jei yra) supjaustyk smulkiai; pradėk kepti vienoje skardoje 15–20 min. su dalimi aliejaus.",
+        "Iš maltos jautienos suformuok nedidelius kotletukus ar burgerio paplotėlius, kepk su daržovėmis iki 71 °C vidinės temperatūros.",
         "Į tą pačią skardą pridėk paprikas, pievagrybius, pomidorus ir svogūnus, jei jie yra recepte. Sūrį pridėk paskutinėms 3–5 min. arba patiek šaltą. Jogurtą, varškę, graikinius riešutus ir raugintus kopūstus patiek atskirai – jų nekepti.",
         "Jei 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais su ta pačia skarda. Gatavą maistą atvėsink per 2 val., vėlesnes porcijas užšaldyk, atitirpink šaldytuve."
       ],
-      "tag": "Lėtai kepta jautiena",
+      "tag": "Su sūriu",
       "method": "one_sheet_pan",
       "cookware": "Viena orkaitės skarda, kepimo popierius, termometras"
     }
@@ -326,38 +353,38 @@
   "days": [
     {
       "date": "2026-12-28",
-      "lunch": "vistiena_rauginta",
-      "dinner": "jautiena_rostbifas"
+      "lunch": "eriena_3",
+      "dinner": "menke_3"
     },
     {
       "date": "2026-12-29",
-      "lunch": "vistiena_rauginta",
-      "dinner": "jautiena_rostbifas"
+      "lunch": "eriena_3",
+      "dinner": "menke_3"
     },
     {
       "date": "2026-12-30",
-      "lunch": "vistiena_rauginta",
-      "dinner": "jautiena_rostbifas"
+      "lunch": "eriena_3",
+      "dinner": "menke_3"
     },
     {
       "date": "2026-12-31",
-      "lunch": "kalakutiena_cesnakine",
-      "dinner": "samas_darzoves"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "jautiena_kotletukai"
     },
     {
       "date": "2027-01-01",
-      "lunch": "kalakutiena_cesnakine",
-      "dinner": "samas_darzoves"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "jautiena_kotletukai"
     },
     {
       "date": "2027-01-02",
-      "lunch": "kalakutiena_cesnakine",
-      "dinner": "samas_darzoves"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "jautiena_kotletukai"
     },
     {
       "date": "2027-01-03",
-      "lunch": "kalakutiena_cesnakine",
-      "dinner": "samas_darzoves"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "jautiena_kotletukai"
     }
   ],
   "stores": [
@@ -411,12 +438,12 @@
   ],
   "products": [
     {
-      "id": "catfish",
+      "id": "potato",
       "store": "farmlio",
-      "name": "Afrikinio šamo filė su oda",
-      "packGrams": 300,
-      "priceEur": 3.88,
-      "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda"
+      "name": "Bulvės, 5 kg",
+      "packGrams": 5000,
+      "priceEur": 7.5,
+      "url": "https://farmlio.lt/pardavejai/sergejus-antuchevicius/prekes/bulves"
     },
     {
       "id": "carrot",
@@ -484,48 +511,38 @@
       "priceEur": 10.99,
       "url": "https://barbora.lt/produktai/alyvuogiu-aliejus-naturalisimo-0-2-proc-rugstingumas-500-ml",
       "packLitres": 0.5
-    },
-    {
-      "id": "walnut",
-      "store": "barbora",
-      "name": "Graikiniai riešutai, 200 g",
-      "packGrams": 200,
-      "priceEur": null,
-      "url": "https://barbora.lt/produktai/graikiniai-riesutai-well-done-200-g"
     }
   ],
   "sessions": [
     {
       "title": "Sekmadienis",
       "subtitle": "I–III dienoms",
-      "summary": "Vištienos iešmeliai su raugintomis daržovėmis + Orkaitės rostbifas su daržovėmis",
+      "summary": "Ėriena su burokėliais ir pievagrybiais + Pomidorinė menkė su feta",
       "servings": {
-        "vistiena_rauginta": 3,
-        "jautiena_rostbifas": 3
+        "eriena_3": 3,
+        "menke_3": 3
       },
       "steps": [
-        "Pasiruošk vieną didelę skardą kiekvienam patiekalui; porcijų ingredientus padaugink iš 3 arba 4.",
-        "Šakniavaisius kepk anksčiau, kitus ingredientus pridėk vėliau, pagal receptų tikslias instrukcijas; jautienos mentę lėtai kepk uždengtoje skardoje.",
-        "Vidinę temperatūrą tikrink termometru. Šaltą sūrį, varškę, jogurtą ir raugintas daržoves laikyk atskirai, jei recepte taip nurodyta.",
-        "Paruoštus valgius per 2 val. atvėsink; tolesnių dienų porcijas užšaldyk."
+        "Abu patiekalus ruošk pagal jų receptus – kiekvienam patiekalui viena didelė skarda, jei netelpa vienu sluoksniu, kepk keliais etapais.",
+        "Šakniavaisius dėk anksčiau, mėsą ar žuvį – vėliau. Naudok termometrą, sūrį dėk pabaigoje, šaltus priedus laikyk atskirai.",
+        "Maistą atvėsink per 2 val. ir tolesnėms dienoms užšaldyk. Ruošiant žuvį laikykis saugaus laikymo bei atitirpinimo."
       ],
-      "duration": "50–210 min. pagal pasirinktą receptą ir skardos talpą"
+      "duration": "Apie 60–120 min., gali būti daugiau, jei reikia kelių kepimų."
     },
     {
       "title": "Trečiadienis",
       "subtitle": "IV–VII dienoms",
-      "summary": "Mediteraninė kalakutiena su pomidorais + Šamas su burokėlių skiltelėmis ir sūriu",
+      "summary": "Kalakutienos fajita su batatais + Sūriu įdaryti jautienos kotletai",
       "servings": {
-        "kalakutiena_cesnakine": 4,
-        "samas_darzoves": 4
+        "kalakutiena_keptuve": 4,
+        "jautiena_kotletukai": 4
       },
       "steps": [
-        "Pasiruošk vieną didelę skardą kiekvienam patiekalui; porcijų ingredientus padaugink iš 3 arba 4.",
-        "Šakniavaisius kepk anksčiau, kitus ingredientus pridėk vėliau, pagal receptų tikslias instrukcijas; jautienos mentę lėtai kepk uždengtoje skardoje.",
-        "Vidinę temperatūrą tikrink termometru. Šaltą sūrį, varškę, jogurtą ir raugintas daržoves laikyk atskirai, jei recepte taip nurodyta.",
-        "Paruoštus valgius per 2 val. atvėsink; tolesnių dienų porcijas užšaldyk."
+        "Abu patiekalus ruošk pagal jų receptus – kiekvienam patiekalui viena didelė skarda, jei netelpa vienu sluoksniu, kepk keliais etapais.",
+        "Šakniavaisius dėk anksčiau, mėsą ar žuvį – vėliau. Naudok termometrą, sūrį dėk pabaigoje, šaltus priedus laikyk atskirai.",
+        "Maistą atvėsink per 2 val. ir tolesnėms dienoms užšaldyk. Ruošiant žuvį laikykis saugaus laikymo bei atitirpinimo."
       ],
-      "duration": "50–210 min. pagal pasirinktą receptą ir skardos talpą"
+      "duration": "Apie 60–120 min., gali būti daugiau, jei reikia kelių kepimų."
     }
   ]
 }
