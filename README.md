@@ -11,6 +11,8 @@ Svetainė: https://deivassx.github.io/Mityba/
 - `scripts/planner.mjs` kiekvieną kartą perskaito JSON ir vykdo automatiškai patikrinamas skaitines bei domenų taisykles. Kai kurie pirkinių optimizavimo pageidavimai dar įgyvendinti **tik kaip agento instrukcijos**.
 - **Farmlio → tiesioginis ūkis:** kai produktas rastas Farmlio, prieš renkantis būtina paieškoti jo gamintojo oficialios parduotuvės ir palyginti *visą krepšelio kainą*, ne tik prekės kainą. Tiksli taisyklė ir naudotojo pateiktas Šešuolėlių ūkio pavyzdys saugomi `shopping.farmlioDirectProducerComparison`. Automatinis Node.js planuoklis kol kas šios paieškos nevykdo – tai Codex / AI agento nurodymas.
 
+**Nauja apsipirkimo politika:** tiesioginiai ūkiai → Farmlio (su palyginimu) → Barbora tik daržovėms ir priedams, vištienai tik kai kitur nėra. Savaitės tikslas **100 EUR**, iki **110 EUR** tolerancija su visomis pakuotėmis ir pristatymu. `scripts/shopping-audit.mjs` per kiekvieną CI vykdymą suskaičiuoja numatomą krepšelį ir pažymi dabartinio katalogo neatitikimus, bet dar neieško alternatyvų internetu. Kad taisyklė būtų įvykdyta, turi būti pakeistos kataloge esančios kalakutienos ir jautienos nuorodos iš Barbora į patikrintus ūkius.
+
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 

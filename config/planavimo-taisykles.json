@@ -40,13 +40,15 @@
     ],
     "deliveryDestination": "Vilnius, Lietuva",
     "selectionPriorities": [
+      "Pirmiausia ieškoti produktu tiesioginiuose ūkininkų puslapiuose; jei negalima – Farmlio su privalomu palyginimu su ūkiu",
+      "Tikrinant kainą neapsiriboti pirmu rastu pasiūlymu: palyginti alternatyvas ir ar kokybės skirtumas pagrindžia permoką",
+      "Siekti iki 100 EUR savaitei, leidžiant iki 10% paklaidą; įtraukti visą realiai apmokamą krepšelį su pristatymu ir pakavimu",
+      "Barbora naudoti tik daržovėms ir priedams; vištienai tik kai nėra patikrinto tinkamo ūkininko pasiūlymo",
       "Patikrintas tinkamas produktas ir prieinamumas",
       "Produktas atitinka recepta ir mitybos taisykles",
       "Pries renkantis preke is Farmlio, palyginti to paties ukininko oficialaus puslapio ta pati produkta ir visa galutine krepselio kaina",
       "Krepselio pilna kaina: produktai, pristatymas ir pakavimas",
-      "Daugiausia 1-2 parduotuves",
-      "Ukio mesa, zuvis ir sezonines darzoves, kai kaina ir logistika racionali",
-      "Parduotuveje perkama vistiena, saldytos darzoves ir kiti patogus produktai, jei apsimoka"
+      "Daugiausia 1-2 parduotuves"
     ],
     "supplierCandidates": [
       {
@@ -94,7 +96,7 @@
       {
         "name": "Barbora",
         "url": "https://barbora.lt/",
-        "role": "mesos/darzoviu/pieno produktu atsarginis saltinis",
+        "role": "Daržovės ir priedai; vištiena – tik jei tinkamo varianto nerasta ūkiuose",
         "status": "esamas_kataloge"
       }
     ],
@@ -121,6 +123,71 @@
         "suppliedByUser": true,
         "note": "Nuorodos naudotojo pateiktos kaip galimai pigesnio tiesioginio tiekimo pavyzdys. Kainos, sutampanti sudetis, pakuotes ir pristatymas sio taisykliu atnaujinimo metu nepatvirtinti."
       }
+    },
+    "sourcingOrder": [
+      "farmer_official_websites",
+      "farmlio_with_direct_farm_comparison",
+      "barbora_restricted"
+    ],
+    "budget": {
+      "targetWeeklyTotalEur": 100,
+      "tolerancePercent": 10,
+      "softLimitEur": 110,
+      "includesDeliveryAndPackaging": true,
+      "includesFullPurchasePacks": true,
+      "surplusMayBeReusedNextWeek": true,
+      "overBudgetPolicy": "Prieš patvirtinant krepšelį ieškoti pigesnių alternatyvų ir mažinti nereikalingus pakuočių likučius. Jei viršija 110 EUR, negalima pateikti kaip biudžetą atitinkančio – nurodyti viršijimą, priežastis ir alternatyvas. Nekeisti maistingumo ir maisto saugos reikalavimų.",
+      "priceValueAssessment": [
+        "Tikrinant mėsą, žuvį ir brangius produktus surasti bent du palyginamus patikrintus pasiūlymus, jei įmanoma; jei nepavyksta, aiškiai pažymėti.",
+        "Lyginti EUR/kg, EUR/porcijai, tikrą pakuotės masę, kaulus/odą, riebumą, sudėtį, kilmę, šviežumą ir kainą už realiai sunaudojamą kiekį.",
+        "Lyginti viso krepšelio kainą, minimalų užsakymą, pristatymo ir pakavimo mokesčius; nepriimti pigesnės prekės, jei ji dėl atskiro pristatymo krepšelį pabrangina.",
+        "Įvertinti ar brangesnės prekės kokybė iš tiesų duoda vertę; jei ne – siūlyti pigesnę tinkamą alternatyvą.",
+        "Vengti labai didelių pakuočių dėl mažo savaitinio poreikio, nebent likutis tikrai bus sunaudotas ar saugiai užšaldytas.",
+        "Neaukoti minimalaus baltymų ar daržovių kiekio vien dėl kainos; nurodyti, jei tikslinio biudžeto pasiekti neįmanoma."
+      ]
+    },
+    "barboraRestriction": {
+      "enabled": true,
+      "allowedRoles": [
+        "daržovės",
+        "pieno produktai",
+        "aliejus",
+        "riešutai",
+        "priedai",
+        "prieskoniai",
+        "kiti receptų priedai"
+      ],
+      "allowedVegetableIngredientIds": [
+        "potato",
+        "sweetpotato",
+        "broccoli",
+        "carrot",
+        "beet",
+        "zucchini",
+        "pepper",
+        "mushroom"
+      ],
+      "allowedAddonIngredientIds": [
+        "oil",
+        "yogurt",
+        "cottage",
+        "walnut"
+      ],
+      "chickenIngredientIds": [
+        "chicken"
+      ],
+      "chickenOnlyIf": "Ūkių puslapiuose (tiesiogiai ir Farmlio) nerasta tinkamos, prieinamos vištienos; užfiksuoti, kas tikrinta",
+      "prohibitedMainProteins": [
+        "kalakutiena",
+        "jautiena",
+        "žuvys",
+        "elniena",
+        "ėriena",
+        "kiauliena",
+        "kitos pagrindinės mėsos"
+      ],
+      "fallbackEvidenceRequired": true,
+      "note": "Šis apribojimas taikomas naujai planuojamiems pirkiniams; istorinių meniu nekeisti. Dabartiniame kataloge dar yra kalakutiena ir jautiena iš Barbora – tai neatitikimas, kurį reikia ištaisyti, prieš teigiant, kad visa automatika laikosi taisyklės."
     }
   },
   "recipePreferences": {
@@ -155,7 +222,9 @@
       "nutrition.preferMoreCarbsAtLunch",
       "shopping.maxStoresPerWeek",
       "shopping.allowedProductDomains",
-      "shopping.verifiedPriceMaxAgeHours"
+      "shopping.verifiedPriceMaxAgeHours",
+      "shopping.budget (automatinis krepšelio perspėjimas, ne ribojantis validatorius)",
+      "shopping.barboraRestriction (automatinis neatitikimo perspėjimas)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
@@ -164,7 +233,10 @@
       "shopping.neverPurchaseWithoutExplicitUserApproval",
       "nutrition.avoidAddedSugar",
       "recipePreferences",
-      "shopping.farmlioDirectProducerComparison"
+      "shopping.farmlioDirectProducerComparison",
+      "shopping.sourcingOrder",
+      "shopping.budget.priceValueAssessment",
+      "shopping.barboraRestriction"
     ]
   }
 }

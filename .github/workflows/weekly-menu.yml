@@ -37,6 +37,8 @@ jobs:
       - name: Patikrinti išsaugotą meniu ir istoriją
         if: github.event_name == 'push'
         run: node scripts/planner.mjs archive
+      - name: Įvertinti savaitinį krepšelį ir pirkimo prioritetus
+        run: node scripts/shopping-audit.mjs
       - name: Git commit ir push į main
         run: |
           git config user.name 'github-actions[bot]'
