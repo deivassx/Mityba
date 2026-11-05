@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { archiveMenu } from './history.mjs';
 import { selectWeeklyRecipes } from './rotation.mjs';
@@ -6,40 +7,58 @@ import { selectWeeklyRecipes } from './rotation.mjs';
 export const vegetables = ['broccoli','carrot','beet','zucchini','pepper','mushroom'];
 const assert = (condition, message) => { if (!condition) throw Error(message); };
 const positive = n => Number.isFinite(n) && n > 0;
-export function validate(menu, verified = true) {
+export function readRules() {
+  // Tikrinant ir generuojant perskaitoma naujausia failo versija, o ne užkoduoti skaičiai.
+  const rules = JSON.parse(readFileSync(new URL('../config/planavimo-taisykles.json', import.meta.url),'utf8'));
+  assert(rules.schemaVersion === 1 && rules.mealPlan && rules.nutrition && rules.shopping,'Nėra galiojančių mitybos taisyklių');
+  const n=rules.nutrition, m=rules.mealPlan, s=rules.shopping;
+  for (const v of [m.days,m.mealsPerDay,m.cookSessions,m.minRecipes,m.maxRecipes,n.maxKcalPerDay,n.minKcalPerMeal,n.minProteinGramsPerDay,n.minNonStarchyVegetableGramsPerDay,s.maxStoresPerWeek,s.verifiedPriceMaxAgeHours])
+    assert(positive(v),'Blogas taisyklių skaitinis parametras');
+  assert(Array.isArray(s.allowedProductDomains) && s.allowedProductDomains.length>0,'Nėra leistinų produktų šaltinių');
+  return rules;
+}
+export function validate(menu, verified = true, rules = readRules()) {
   const ids = list => { const m = new Map(list.map(x => [x.id,x])); assert(m.size === list.length,'Pasikartojantys ID'); return m; };
   const recipes = ids(menu.recipes), products = ids(menu.products), stores = ids(menu.stores);
-  assert(menu.days.length === 7 && menu.sessions.length === 2,'Reikia 7 dienų ir 2 gaminimų');
-  assert(stores.size >= 1 && stores.size <= 2,'Leidžiamos 1–2 parduotuvės');
-  assert(menu.meta.kcalLimit === 2100,'Kalorijų riba turi būti 2100');
+  const {nutrition:n,mealPlan:m,shopping:s}=rules;
+  assert(menu.days.length===m.days && menu.sessions.length===m.cookSessions && m.mealsPerDay===2,'Neteisingas savaites dienų / valgių / gaminimų skaičius');
+  assert(stores.size>=1 && stores.size<=s.maxStoresPerWeek,'Per daug tiekėjų');
+  assert(menu.meta.kcalLimit===n.maxKcalPerDay,'Kalorijų riba nesutampa su taisyklėmis');
+  for (const p of products.values()) {
+    const hostname=new URL(p.url).hostname;
+    assert(s.allowedProductDomains.some(d=>hostname===d || hostname.endsWith('.'+d)),'Neleistina produkto parduotuvė: '+p.url);
+  }
   const start = new Date(menu.meta.weekStart+'T00:00:00Z');
   assert(start.getUTCDay() === 1,'Savaitė turi prasidėti pirmadienį');
   const used = new Set(), counts = {};
   for (const [i,day] of menu.days.entries()) {
     assert(day.date === new Date(+start+i*86400000).toISOString().slice(0,10),'Nenuoseklios dienų datos');
     let kcal=0, protein=0, veg=0;
+    const carbsByMeal=[];
     for (const id of [day.lunch,day.dinner]) {
       const r=recipes.get(id); assert(r,'Nežinomas receptas: '+id); used.add(id); counts[id]=(counts[id]||0)+1;
       assert(r.steps.length >= 3 && r.photo?.startsWith('https://'),'Trūksta instrukcijų / nuotraukos');
-      let mealKcal=0;
+      let mealKcal=0,mealCarbs=0;
       for(const [key,g] of Object.entries(r.ingredients)) {
         const n=menu.nutrients[key], p=products.get(key);
         assert(positive(g) && n && p && stores.has(p.store),'Trūksta ingrediento: '+key);
         assert(['kcal','protein','carbs','fat'].every(k=>Number.isFinite(n[k]) && n[k]>=0),'Blogas maistingumas: '+key);
         assert(positive(p.packGrams),'Bloga pakuotė: '+key);
-        mealKcal+=g*n.kcal/100; protein+=g*n.protein/100;
+        mealKcal+=g*n.kcal/100; mealCarbs+=g*n.carbs/100; protein+=g*n.protein/100;
         if(vegetables.includes(key)) veg+=g;
         if(verified) {
           assert(positive(p.priceEur) && p.verification?.url === p.url,'Nepatikrinta kaina: '+key);
           const age=Date.now()-Date.parse(p.verification.checkedAt);
-          assert(age>=-60000 && age<=86400000,'Pasenusi kainos patikra: '+key);
+          assert(age>=-60000 && age<=s.verifiedPriceMaxAgeHours*3600000,'Pasenusi kainos patikra: '+key);
         }
       }
-      assert(mealKcal>=600,'Valgis per mažas: '+id); kcal+=mealKcal;
+      assert(mealKcal>=n.minKcalPerMeal,'Valgis per mažas: '+id); kcal+=mealKcal;
+      carbsByMeal.push(mealCarbs);
     }
-    assert(kcal<=2100 && protein>=130 && veg>=800,`Netinka ${day.date}: ${kcal} kcal, ${protein} g baltymų, ${veg} g daržovių`);
+    assert(kcal<=n.maxKcalPerDay && protein>=n.minProteinGramsPerDay && veg>=n.minNonStarchyVegetableGramsPerDay,`Netinka ${day.date}: ${kcal} kcal, ${protein} g baltymų, ${veg} g daržovių`);
+    if(n.preferMoreCarbsAtLunch) assert(carbsByMeal[0]>=carbsByMeal[1], 'Pietums numatyta per mažai angliavandenių: '+day.date);
   }
-  assert(used.size>=2 && used.size<=4,'Reikia 2–4 patiekalų');
+  assert(used.size>=m.minRecipes && used.size<=m.maxRecipes,'Neteisingas patiekalų skaičius');
   const allocated={};
   for(const s of menu.sessions) for(const [id,count] of Object.entries(s.servings||{})) {
     assert(Number.isInteger(count) && count>0,'Blogas porcijų skaičius'); allocated[id]=(allocated[id]||0)+count;

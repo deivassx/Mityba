@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-05",
+  "purpose": "Savaites meniu vienam suaugusiajam Vilniuje: sotumas, svorio mazinimas, baltymai, kuo maziau planavimo ir gaminimo laiko.",
+  "mealPlan": {
+    "days": 7,
+    "mealsPerDay": 2,
+    "mealNames": [
+      "pietus",
+      "vakariene"
+    ],
+    "cookSessions": 2,
+    "cookDays": [
+      "sekmadienis",
+      "treciadienis"
+    ],
+    "minRecipes": 2,
+    "maxRecipes": 4
+  },
+  "nutrition": {
+    "maxKcalPerDay": 2100,
+    "minKcalPerMeal": 600,
+    "minProteinGramsPerDay": 130,
+    "minNonStarchyVegetableGramsPerDay": 800,
+    "preferMoreCarbsAtLunch": true,
+    "avoidAddedSugar": true,
+    "estimateFromRawIngredientWeights": true,
+    "note": "Maistingumo skaiciai yra apytiksliai, ne asmenine medicinine rekomendacija."
+  },
+  "shopping": {
+    "maxStoresPerWeek": 2,
+    "verifiedPriceMaxAgeHours": 24,
+    "allowedProductDomains": [
+      "farmlio.lt",
+      "barbora.lt",
+      "baltuoniu.kalakutai.lt",
+      "kazlauskuekoukis.lt",
+      "elnienosprodukcija.lt"
+    ],
+    "deliveryDestination": "Vilnius, Lietuva",
+    "selectionPriorities": [
+      "Patikrintas tinkamas produktas ir prieinamumas",
+      "Produktas atitinka recepta ir mitybos taisykles",
+      "Krepselio pilna kaina: produktai, pristatymas ir pakavimas",
+      "Daugiausia 1-2 parduotuves",
+      "Ukio mesa, zuvis ir sezonines darzoves, kai kaina ir logistika racionali",
+      "Parduotuveje perkama vistiena, saldytos darzoves ir kiti patogus produktai, jei apsimoka"
+    ],
+    "supplierCandidates": [
+      {
+        "name": "Farmlio",
+        "url": "https://farmlio.lt/",
+        "role": "ukininkai, zuvis, darzoves",
+        "status": "esamas_kataloge"
+      },
+      {
+        "name": "Baltuoniu kalakutai",
+        "url": "https://baltuoniu.kalakutai.lt/",
+        "role": "kalakutiena",
+        "status": "kandidatas_patvirtinti"
+      },
+      {
+        "name": "Kazlausku ekologinis ukis",
+        "url": "https://kazlauskuekoukis.lt/",
+        "role": "ekologiski ukio produktai",
+        "status": "kandidatas_patvirtinti"
+      },
+      {
+        "name": "Tuomu ukis",
+        "url": "https://www.facebook.com/p/Tuom%C5%B3-%C5%ABkis-100068950575066/",
+        "role": "ukio produkcija",
+        "status": "socialinis_profilis_reikia_patikrinti"
+      },
+      {
+        "name": "Elnienos produkcija",
+        "url": "https://elnienosprodukcija.lt/",
+        "role": "elniena",
+        "status": "kandidatas_patvirtinti"
+      },
+      {
+        "name": "Smaragdo slenis",
+        "url": "https://www.facebook.com/SmaragdoSlenis/",
+        "role": "ukio produkcija",
+        "status": "socialinis_profilis_reikia_patikrinti"
+      },
+      {
+        "name": "Barbora",
+        "url": "https://barbora.lt/",
+        "role": "mesos/darzoviu/pieno produktu atsarginis saltinis",
+        "status": "esamas_kataloge"
+      }
+    ],
+    "requireDirectProductLinks": true,
+    "doNotInventPricesOrDeliveryFees": true,
+    "accountForPackagingAndDelivery": true,
+    "neverPurchaseWithoutExplicitUserApproval": true
+  },
+  "recipePreferences": {
+    "primaryProteins": [
+      "kalakutiena",
+      "jautiena",
+      "zuvis",
+      "vistiena"
+    ],
+    "plentyOfVegetables": true,
+    "starchExamples": [
+      "bulves",
+      "saldziosios bulves",
+      "morkos",
+      "burokeliai"
+    ],
+    "largerStarchPortionAtLunch": true,
+    "minimizeFoodWaste": true,
+    "useFreezerForLaterServings": true,
+    "recipeImagesIllustrativeUnlessVerified": true
+  },
+  "implementationStatus": {
+    "enforcedByNodePlanner": [
+      "mealPlan.days",
+      "mealPlan.cookSessions",
+      "mealPlan.minRecipes",
+      "mealPlan.maxRecipes",
+      "nutrition.maxKcalPerDay",
+      "nutrition.minKcalPerMeal",
+      "nutrition.minProteinGramsPerDay",
+      "nutrition.minNonStarchyVegetableGramsPerDay",
+      "nutrition.preferMoreCarbsAtLunch",
+      "shopping.maxStoresPerWeek",
+      "shopping.allowedProductDomains",
+      "shopping.verifiedPriceMaxAgeHours"
+    ],
+    "agentGuidanceOnly": [
+      "shopping.selectionPriorities",
+      "shopping.supplierCandidates",
+      "shopping.accountForPackagingAndDelivery",
+      "shopping.neverPurchaseWithoutExplicitUserApproval",
+      "nutrition.avoidAddedSugar",
+      "recipePreferences"
+    ]
+  }
+}

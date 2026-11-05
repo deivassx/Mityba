@@ -2,6 +2,17 @@
 
 Svetainė: https://deivassx.github.io/Mityba/
 
+## Nuolatinės taisyklės (prieš kiekvieną generavimą)
+
+**Visos nuostatos laikomos GitHub saugykloje, ne ChatGPT atmintyje.**
+
+- [`AGENTS.md`](AGENTS.md) – instrukcijos Codex ir AI agentams: kiekvieną darbą pradėti nuo taisyklių perskaitymo.
+- [`config/planavimo-taisykles.json`](config/planavimo-taisykles.json) – vienas redaguojamas taisyklių šaltinis: mityba, produktai, tiekėjai, prioritetai ir kokybės patikra.
+- `scripts/planner.mjs` kiekvieną kartą perskaito JSON ir vykdo automatiškai patikrinamas skaitines bei domenų taisykles. Kai kurie pirkinių optimizavimo pageidavimai dar įgyvendinti **tik kaip agento instrukcijos**.
+
+Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
+Saugykla vieša, todėl nekelkite privačių duomenų.
+
 ## Automatinis ciklas
 
 `.github/workflows/weekly-menu.yml` vykdomas trečiadieniais 06:17 UTC
