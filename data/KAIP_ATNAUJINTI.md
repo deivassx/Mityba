@@ -1,16 +1,19 @@
-# Meniu atnaujinimo taisyklės
+# Katalogo priežiūra
 
-Pakeisk `menu.json` turinį, nekeisk JSON laukų struktūros. Galima keisti 2–4 receptus ir juos kartoti 7 dienų pietums/vakarienei.
+Redaguokite `data/catalog.json`, tada paleiskite `node scripts/planner.mjs generate`.
+`menu.json` – patikrintas rezultatas, kurį publikuoja workflow.
 
-- `meta.weekStart`: pirmadienio data, pvz., `2026-11-09` (atskira savaitė = naujos pirkinių varnelės).
-- `meta.generatedAt`: kada paruoštas pasiūlymas.
-- `days`: tiksliai 7 įrašai, su `date`, `lunch` ir `dinner`. `lunch` / `dinner` turi sutapti su `recipes[].id`.
-- `recipes[].ingredients`: kiekvieno žaliavinio produkto gramai **vienai porcijai**.
-- `nutrients`: kiekvieno ingrediento kcal / baltymų / angliavandenių / riebalų kiekis **100 gramų**. Svetainė perskaičiuoja energiją pagal recepto gramus.
-- `products`: ingredientų identifikatoriai `id`, parduotuvė `store`, tikra prekės nuoroda `url`, pakuotės dydis `packGrams`, orientacinė pakuotės kaina `priceEur` (`null`, jeigu nepatikrinta).
-- `stores`: `deliveryFeeEur`, `freeDeliveryFromEur`, `packingFeeEur` arba `packingTiers`, `notes`.
-- `sessions`: gaminimo diena, receptai ir žingsniai.
+- Ingredientų gramai recepte skirti vienai porcijai, maistingumas – 100 g.
+- Produkto `id` atitinka ingredientą; `store` – parduotuvės ID.
+- `url` – tiesioginė tikro produkto HTTPS nuoroda.
+- `packGrams` – vienos perkamos pakuotės masė. Aliejui `packLitres` tikrina
+  pardavėjo tūrio kainą, masė naudojama recepto gramams perskaičiuoti.
+- Farmlio `sourceName` turi tiksliai atitikti pardavėjo produkto pavadinimą.
+  Keičiant prekę peržiūrėkite pakuotės dydį ir maistingumą.
+- Katalogo `priceEur` generuojant visada pakeičiamas naujai patikrinta kaina.
+  Trūkstant patikros, naujas meniu neišsaugomas.
+- Receptų ID `kalakutiena`, `samas`, `vistiena`, `jautiena` naudojami
+  planuoklio rotacijoje; pakeitus juos keiskite ir planuoklį.
+- Nuotraukos turi būti HTTPS vaizdai su nurodytu šaltiniu.
 
-Patikrink, kad dienos kalorijos neviršytų 2100, būtų daug baltymų ir daržovių, o gaminimas tilptų į dvi sesijas. Kainų ar tiesioginių produktų nuorodų neišgalvok.
-
-**Svarbu:** šis tinklalapis pats neskaito parduotuvių katalogų. Kainas / nuorodas patikrinti ir pakeisti turi žmogus arba AI agentas su tinkama prieiga. Jokių API raktų ar slaptažodžių nedėk į viešą saugyklą.
+Niekuomet neįkelkite slaptažodžių, API raktų ar prisijungimo slapukų.

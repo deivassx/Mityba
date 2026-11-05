@@ -1,42 +1,62 @@
-# 🥗 Mityba · Sotus planas
+# Mityba · automatinis savaitės planas
 
-Nemokama asmeninė 7 dienų mitybos svetainė, pritaikyta **GitHub Pages**.
+Svetainė: https://deivassx.github.io/Mityba/
 
-**Viešas adresas:** https://deivassx.github.io/Mityba/
+## Automatinis ciklas
 
-## Kaip įdiegti
+`.github/workflows/weekly-menu.yml` vykdomas trečiadieniais 06:17 UTC
+(08:17 Lietuvos žiemą, 09:17 vasarą), po pakeitimų į `main` ir rankiniu būdu
+per **Actions → Savaitės meniu ir GitHub Pages → Run workflow**.
+GitHub grafikas gali vėluoti; po ilgo viešos saugyklos neaktyvumo gali būti išjungtas.
 
-1. Išarchyvuok `Mityba-GitHub-Pages.zip` kompiuteryje.
-2. Atidaryk https://github.com/deivassx/Mityba ir pasirink **Add file → Upload files**.
-3. Įkelk **išarchyvuotus failus ir aplankus** (`index.html`, `css/`, `js/`, `data/`, `.nojekyll`, `README.md`). *Ne patį ZIP failą.*
-4. Spausk **Commit changes** (jei reikia, į `main`).
-5. GitHub atidaryk **Settings → Pages → Build and deployment → Deploy from a branch → main → /(root) → Save**.
-6. Atidaryk https://deivassx.github.io/Mityba/ po GitHub Pages diegimo.
+1. Testuojama planavimo ir kainų tikrinimo logika.
+2. Iš `data/catalog.json` sudaroma artimiausio būsimo pirmadienio savaitė.
+   Keturi receptai kas savaitę sukeičia savo savaitės dalis.
+3. Tiesiogiai patikrinamos visos prekių nuorodos, kainos ir nuotraukos.
+   Barbora naudojami pagrindinės prekės duomenys, aktyvumo būsena, pakuotės
+   ir vieneto kainos santykis. Farmlio – Product/Offer pasiūlymas EUR valiuta,
+   InStock būsena ir peržiūrėtas prekės pavadinimas.
+4. Tikrinama: 7 dienos, 2 valgiai po bent 600 kcal, iki 2100 kcal per dieną,
+   bent 130 g baltymų ir 800 g nekrakmolingų daržovių per dieną,
+   2–4 receptai, 1–2 parduotuvės ir dvi gaminimo sesijos visoms 14 porcijų.
+5. Tik po visų patikrų pakeičiamas `data/menu.json`, atliekamas commit ir
+   push į `main`. Nepatikrintos kainos niekada nepakeičiamos spėjimais.
+6. Tame pačiame workflow publikuojama per GitHub Pages Actions, tada
+   tikrinamas viešas HTML, JS, CSS ir tikslus meniu sutapimas.
+   Atskiras push sukeltas workflow nereikalingas, pakanka GITHUB_TOKEN.
 
-### Kaip atnaujinti savaitės meniu
+Nuotraukos – aiškiai pažymėtos patiekimo iliustracijos, ne tiksliai šių receptų
+fotografijos. Maistingumas apskaičiuojamas pagal katalogo 100 g reikšmes ir
+žalių ingredientų svorį; jis apytikslis. Pristatymo ir pakavimo mokesčiai –
+atskiri orientaciniai dydžiai, ne patikrintos produkto kainos.
 
-Redaguok tik **`data/menu.json`**: čia yra dienų grafikas (`days`), receptai (`recipes`), ingredientų maistingumas 100 g (`nutrients`), produktų krepšelis (`products`), parduotuvės ir pristatymo sąlygos (`stores`), gaminimo sesijos (`sessions`).
+## GitHub nustatymai ir klaidos
 
-Svetainė automatiškai paskaičiuos reikalingus prekių gramus pagal 7 dienų pietų / vakarienės receptus, pakuočių skaičių, orientacines kainas, kalorijas ir makroelementus. Kiekvienam naujam meniu pakeisk `meta.weekStart` (YYYY-MM-DD); tada varnelės pradės naują savaitę.
+GitHub Actions turi būti leidžiamas. **Settings → Pages → Source** turi būti
+**GitHub Actions** (workflow mėgina įjungti Pages automatiškai). `main` apsauga
+turi leisti workflow botui įkelti meniu pakeitimus. Mokamų API ir paslapčių nereikia.
 
-> ⚠️ GitHub Pages **tik publikuoja GitHub pakeitimus**. ChatGPT suplanuota savaitinė užduotis savaime į GitHub nerašo. Tam reikia atskiros įgaliotos GitHub integracijos arba rankinio `menu.json` pakeitimo.
+Klaida sustabdo ciklą, matoma Actions vykdyme, jo santraukoje ir GitHub Issue
+„Mitybos automatikos klaida“ su nuoroda į žurnalą. Pakartotinė klaida atnaujina
+tą patį atvirą Issue. Pranešimai el. paštu priklauso nuo jūsų GitHub pranešimų
+nustatymų: įjunkite šios saugyklos Actions ir Issues pranešimus.
+Jei Issues išjungti, lieka Actions klaida ir santrauka.
 
-## Peržiūra kompiuteryje
+Jei prekė dingsta, duomenų struktūra pasikeičia ar kaina nepasiekiama,
+ankstesnis meniu nepakeičiamas. Pakeiskite katalogo prekę patikrinta alternatyva,
+jos pakuotę ir maistingumą, tada paleiskite workflow iš naujo.
+Po publikavimo patikros klaidos automatinio grąžinimo į ankstesnį leidimą nėra.
 
-Kadangi JavaScript skaito JSON failą per `fetch`, dėl naršyklės saugumo `index.html` negalima patikimai paleisti dukart spustelėjus (`file://`). Vietiniam testui naudok:
+## Vietinės komandos (Node.js 24+)
 
-```bash
-python -m http.server 8000
+```sh
+node --test
+node scripts/planner.mjs generate
+node scripts/planner.mjs validate
+node scripts/planner.mjs published https://deivassx.github.io/Mityba/
 ```
 
-ir atidaryk http://localhost:8000 (pasileisk komandą iš svetainės aplanko).
-
-## Kaina ir ribojimai
-
-- GitHub Pages ir viešas GitHub projektas nemokami asmeniniam naudojimui, pagal GitHub plano sąlygas.
-- Svetainė statiška, neprašo prisijungimo, nenaudoja mokamų API.
-- Prekių nuorodos tik atidaro pardavėjų tinklalapius – į krepšelius nededa.
-- Visas turinys viešas. Nelaikyk čia prisijungimų, tokenų ar kitų paslapčių.
-- Pirkinių varnelės veikia tik vienoje naršyklėje (saugomos `localStorage`).
-- Produktų kainos / siuntimas – orientaciniai. Patikrink prieš užsakydamas.
-- Nuotraukos yra išorinės iliustracijos; jų šaltiniai nurodyti prie kiekvieno recepto.
+Generavimui reikalingas internetas. Kainos šaltinis, laikas ir metodas saugomi
+produkto `verification` lauke; patikros galiojimo langas – 24 valandos.
+Senesnis publikuotas meniu lieka istoriniu pasiūlymu; kainos gali keistis vėliau.
+Pirkinių varnelės saugomos tik toje naršyklėje ir atskirai kiekvienai savaitei.

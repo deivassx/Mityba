@@ -1,0 +1,80 @@
+name: Savaitės meniu ir GitHub Pages
+on:
+  schedule:
+    - cron: '17 6 * * 3'
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+concurrency:
+  group: menu-pages
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      page_url: ${{ steps.deploy.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Testai
+        run: node --test
+      - name: Generuoti ir patikrinti naują meniu
+        run: node scripts/planner.mjs generate
+      - name: Git commit ir push į main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/menu.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Atnaujinti patikrintą savaitės meniu'
+            git push origin HEAD:main
+          fi
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Paruošti viešus failus
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r css js _site/
+          mkdir -p _site/data
+          cp data/menu.json _site/data/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deploy
+      - name: Patikrinti publikuotą svetainę
+        env:
+          PAGE_URL: ${{ steps.deploy.outputs.page_url }}
+        run: node scripts/planner.mjs published "$PAGE_URL"
+      - name: Klaidos pranešimas
+        if: failure()
+        run: |
+          echo '::error::Meniu generavimas, kainų patikra arba publikavimas nepavyko. Žr. nepavykusio žingsnio žurnalą.'
+          echo '## Mitybos sistemos klaida' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Nauja savaitė nepatvirtinta. Patikrinkite nepavykusį žingsnį ir pardavėjų duomenis. Ankstesnė publikacija gali likti aktyvi.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Užregistruoti klaidą GitHub Issues
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Mitybos automatikos klaida';
+            const body = `Meniu generavimas, patikra arba publikavimas nepavyko.\n\nŽurnalas: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\nPatikrinkite nepavykusį žingsnį ir paleiskite workflow iš naujo.`;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {...context.repo, state:'open', creator:'github-actions[bot]'});
+            const existing = issues.find(i => i.title === title && !i.pull_request);
+            if (existing) await github.rest.issues.update({...context.repo, issue_number:existing.number, body});
+            else await github.rest.issues.create({...context.repo, title, body});

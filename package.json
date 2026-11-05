@@ -1,0 +1,11 @@
+{
+  "name": "mityba",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "generate": "node scripts/planner.mjs generate",
+    "validate": "node scripts/planner.mjs validate"
+  },
+  "engines": { "node": ">=24" }
+}

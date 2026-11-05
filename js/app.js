@@ -10,6 +10,7 @@ let state = null;
 
 function makeData(input) {
   if (!input || !Array.isArray(input.days) || input.days.length !== 7) throw Error('Meniu faile privalo būti 7 dienos.');
+  if(input.meta.status === 'Automatiškai patikrinta savaitė' && input.products.some(p => !(p.priceEur > 0) || p.verification?.url !== p.url)) throw Error('Trūksta kainos patikros duomenų.');
   const recipesById = Object.fromEntries(input.recipes.map(r => [r.id, r]));
   const productsById = Object.fromEntries(input.products.map(p => [p.id, p]));
   const macros = {};
@@ -32,6 +33,7 @@ function makeData(input) {
       for (const [item,qty] of Object.entries(recipesById[id].ingredients)) needed[item]=(needed[item]||0)+qty;
       for (const key of Object.keys(sum)) sum[key]+=macros[id][key];
     }
+    if(sum.kcal > 2100) throw Error('Viršyta 2100 kcal dienos riba.');
     return sum;
   });
   const items = input.products.filter(p => needed[p.id]).map(p => {
@@ -84,7 +86,7 @@ function render() {
   const lim=input.meta.kcalLimit||2100;
   const mean = field => Math.round(daily.reduce((x,d)=>x+d[field],0)/7);
   const stat = document.getElementById('stats');
-  document.getElementById('plan-note').textContent = `7 dienos · 1 asmeniui · savaitė nuo ${input.meta.weekStart} · ${input.meta.status||'Savaitės planas'}`;
+  document.getElementById('plan-note').textContent = `7 dienos · 1 asmeniui · savaitė nuo ${input.meta.weekStart} · ${input.meta.status||'Savaitės planas'}${Date.now() > Date.parse(input.meta.weekStart)+7*86400000 ? ' · Planas pasenęs: laukiamas naujas patikrintas meniu' : ''}`;
   document.getElementById('recipe-pill').textContent = `Tik ${rlist.length} receptai`;
   document.getElementById('hero-chips').innerHTML = `<span class="chip"><b>≤ ${num(lim)} kcal</b> per dieną</span><span class="chip"><b>2</b> valgiai per dieną</span><span class="chip"><b>${input.sessions.length}</b> gaminimo sesijos</span><span class="chip"><b>${num(mean('protein'))} g</b> baltymų / d.</span><span class="chip"><b>${input.stores.length}</b> parduotuvės</span>`;
   const stats = [
