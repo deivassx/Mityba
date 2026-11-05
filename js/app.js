@@ -62,7 +62,7 @@ function copyList() {
     lines.push(`\n${st.name.toUpperCase()}`);
     for(const p of items.filter(x=>x.store===st.id)) lines.push(`${p.packs} × ${p.name} (reikia ${num(p.need)} g) — ${p.url||'nuorodos nėra'}`);
   }
-  if(state.missingProducts.length)lines.push('\nBE PARDUOTUVĖS: '+state.missingProducts.join(', '));
+  if(state.missingProducts.length)lines.push('\nREIKIA ŪKININKŲ TIEKĖJŲ (PIRKTI KOL KAS NEGALIMA): '+state.missingProducts.map(id=>input.ingredientLabels[id]||id).join(', '));
   const out=lines.join('\n');
   if(navigator.clipboard && location.protocol==='https:') navigator.clipboard.writeText(out).then(()=>alert('Pirkinių sąrašas nukopijuotas!')).catch(()=>prompt('Nukopijuok sąrašą:',out));
   else prompt('Nukopijuok sąrašą:',out);
@@ -122,8 +122,8 @@ function render() {
   const goods=round2(storeResults.reduce((s,t)=>s+t.subtotal,0));
   const fees=round2(storeResults.reduce((s,t)=>s+t.shipping.delivery+t.shipping.packing+t.shipping.small,0));
   const unknown=items.some(p=>p.cost==null) || missingProducts.length>0;
-  document.getElementById('budget').innerHTML=`<div class="totalbox"><small>Perkamos prekės* </small><strong>${euro(goods)}${unknown?'+':''}</strong><p>Pakuočių kiekiai gali likti kitoms savaitėms.</p></div><div class="totalbox"><small>Pristatymas ir pakavimas*</small><strong>${euro(fees)}</strong><p>Jei tiekėjų prekės atkeliauja kartu.</p></div><div class="totalbox"><small>Viso (orientacinė suma)*</small><strong>${euro(round2(goods+fees))}${unknown?'+':''}</strong><p>${unknown?'Ne visų produktų kaina įtraukta.':'Pristatymo ir prekių kainas patikrink prieš pirkdamas.'}</p></div>`;
-  if(missingProducts.length)document.getElementById('price-note').textContent=`${input.meta.pricingNotice||''} Trūksta prekių: ${missingProducts.join(', ')}.`;
+  document.getElementById('budget').innerHTML=`<div class="totalbox"><small>Perkamos prekės* </small><strong>${euro(goods)}${unknown?'+':''}</strong><p>Pakuočių kiekiai gali likti kitoms savaitėms.</p></div><div class="totalbox"><small>Pristatymas ir pakavimas*</small><strong>${euro(fees)}</strong><p>Jei tiekėjų prekės atkeliauja kartu.</p></div><div class="totalbox"><small>${unknown?'Dalinė suma (ne visas krepšelis)*':'Viso (orientacinė suma)*'}</small><strong>${euro(round2(goods+fees))}${unknown?'+':''}</strong><p>${unknown?'Ne visų produktų kaina įtraukta.':'Pristatymo ir prekių kainas patikrink prieš pirkdamas.'}</p></div>`;
+  if(missingProducts.length)document.getElementById('price-note').textContent=`${input.meta.pricingNotice||''} Dar neparinkta: ${missingProducts.map(id=>input.ingredientLabels[id]||id).join(', ')}. Rodoma suma yra dalinė, į ją neįtraukta trūkstama mėsa ir jos pristatymas.`;
   else document.getElementById('price-note').textContent=input.meta.pricingNotice||'Prieš užsakydamas patikrink kainas ir siuntimą.';
   document.getElementById('cook-sessions').innerHTML=input.sessions.map(session=>`<article class="card cook"><h3>${safe(session.title)} <span class="pillgreen">${safe(session.subtitle)}</span></h3><p>${safe(session.summary)}</p><ol class="timeline">${session.steps.map(step=>`<li>${safe(step)}</li>`).join('')}</ol><p>${safe(session.duration||'')}</p></article>`).join('');
   document.getElementById('logistics').innerHTML=input.stores.map((st,i)=>`<div class="card logistic"><span class="num">${String(i+1).padStart(2,'0')}</span><h3>${safe(st.name)}</h3><p>${safe(st.notes||'Pristatymo sąlygas patikrink parduotuvėje.')}</p></div>`).concat([`<div class="card logistic"><span class="num">${String(input.stores.length+1).padStart(2,'0')}</span><h3>Kada užsakinėti?</h3><p>Trečiadienio vakarą paruošk sąrašą, ketvirtadienį užsakyk. Patvirtink pristatymą iki gaminimo dienos.</p></div>`]).join('');
@@ -133,41 +133,55 @@ function render() {
 }
 let latestMenu, historyEntries=[], selectionRequest=0;
 const weekLabel = (start,end) => `${start} – ${end}`;
+function preferredWeek() {
+  const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'});
+  const sorted=[...historyEntries].sort((a,b)=>a.weekStart.localeCompare(b.weekStart));
+  return sorted.find(e=>e.weekStart<=today&&e.weekEnd>=today)?.weekStart
+    || sorted.find(e=>e.weekStart>today)?.weekStart
+    || sorted.at(-1)?.weekStart || latestMenu?.meta?.weekStart;
+}
 async function loadJson(path) {
   const response=await fetch(path,{cache:'no-store'});
   if(!response.ok) throw Error(`Nepavyko įkelti ${path} (${response.status}).`);
   return response.json();
 }
 function renderHistory() {
-  document.getElementById('history-list').innerHTML=historyEntries.map(entry=>{
-    const latest=entry.weekStart===latestMenu.meta.weekStart;
-    const current=entry.weekStart===state.input.meta.weekStart;
-    const exampleBadge=entry.isExample?'<span class="pillgreen">Pavyzdinis meniu</span>':'';
-    return `<a class="history-card" href="${latest?'./':'?week='+encodeURIComponent(entry.weekStart)}" data-week="${safe(entry.weekStart)}"${current?' aria-current="page"':''}>${entry.photo?`<img src="${safe(safeUrl(entry.photo))}" alt="" loading="lazy" onerror="this.hidden=true">`:''}<div class="history-card-body">${latest?'<span class="pillgreen">Naujausias meniu</span>':''}${exampleBadge}<strong>${safe(weekLabel(entry.weekStart,entry.weekEnd))}</strong><small>${safe(entry.recipes.length)} patiekalai · 7 dienos</small><small>${safe(entry.recipes.join(' · '))}</small></div></a>`;
-  }).join('');
+  const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'});
+  const preferred=preferredWeek();
+  document.getElementById('history-list').innerHTML=[...historyEntries]
+    .sort((a,b)=>a.weekStart.localeCompare(b.weekStart)).map(entry=>{
+      const current=entry.weekStart===state.input.meta.weekStart;
+      const isCurrent=entry.weekStart<=today&&entry.weekEnd>=today;
+      const label=entry.weekStart===preferred?'Artimiausias meniu':isCurrent?'Ši savaitė':entry.weekStart>today?'Būsima savaitė':'Praėjusi savaitė';
+      const badge=entry.isPlanningSeries?'<span class="pillgreen">Tiekėjai tikrinami</span>':entry.isExample?'<span class="pillgreen">Pavyzdinis</span>':'';
+      return `<a class="history-card" href="${entry.weekStart===preferred?'./':'?week='+encodeURIComponent(entry.weekStart)}" data-week="${safe(entry.weekStart)}"${current?' aria-current="page"':''}>${entry.photo?`<img src="${safe(safeUrl(entry.photo))}" alt="" loading="lazy" onerror="this.hidden=true">`:''}<div class="history-card-body"><span class="pillgreen">${safe(label)}</span>${badge}<strong>${safe(weekLabel(entry.weekStart,entry.weekEnd))}</strong><small>${safe(entry.recipes.length)} patiekalai · 7 dienos</small><small>${safe(entry.recipes.join(' · '))}</small></div></a>`;
+    }).join('');
 }
-async function selectWeek(week, updateUrl=true) {
+async function selectWeek(week,updateUrl=true) {
   const request=++selectionRequest;
   const message=document.getElementById('history-message');
   message.textContent='';
   try {
-    const latest=!week || week===latestMenu.meta.weekStart;
-    if(!latest && !historyEntries.some(entry=>entry.weekStart===week)) throw Error('Šios savaitės meniu istorijoje nėra.');
-    message.textContent=latest?'':'Kraunamas pasirinktos savaitės meniu…';
-    const menu=latest ? latestMenu : await loadJson('./data/history/'+week+'.json');
-    if(request!==selectionRequest) return;
-    const next=makeData(menu);
-    state=next; render(); renderHistory();
-    document.getElementById('selected-week').innerHTML=latest
-      ? `Naujausias meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}`
-      : `Ankstesnės savaitės meniu · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}<a href="./" data-latest>Grįžti į naujausią →</a><div class="sub">${menu.meta.isExample?'Pavyzdinis praeities meniu. Kainos nėra istorinės – jų patikros data nurodyta pirkinių skiltyje.':'Rodomos to meto kainos ir produktai.'}</div>`;
+    const selected=week||preferredWeek();
+    const fromBase=selected===latestMenu.meta.weekStart;
+    if(!fromBase&&!historyEntries.some(entry=>entry.weekStart===selected)) throw Error('Šios savaitės meniu istorijoje nėra.');
+    message.textContent=fromBase?'':'Kraunamas pasirinktos savaitės meniu…';
+    const menu=fromBase?latestMenu:await loadJson('./data/history/'+selected+'.json');
+    if(request!==selectionRequest)return;
+    state=makeData(menu);
+    render();renderHistory();
+    const preferred=selected===preferredWeek();
+    document.getElementById('selected-week').innerHTML =
+       `${preferred?'Artimiausia / einamoji savaitė':'Pasirinkta savaitė'} · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}
+       ${preferred?'':'<a href="./" data-latest>Grįžti į artimiausią savaitę →</a>'}
+       <div class="sub">${menu.meta.isPlanningSeries?'Vienas iš 8 naujų meniu. Ūkininkų produktų kainos ir pilnas pirkinių krepšelis dar nepatvirtinti.':menu.meta.isExample?'Pavyzdinis meniu.':'Rodomi to meto kainų įverčiai; patikrink juos prieš pirkdamas.'}</div>`;
     message.textContent='';
     if(updateUrl) {
-      const url=new URL(location.href); url.searchParams.delete('week');
-      if(!latest) url.searchParams.set('week',week);
-      url.hash=''; window.history.pushState({},'',url);
+      const url=new URL(location.href);url.searchParams.delete('week');
+      if(!preferred)url.searchParams.set('week',menu.meta.weekStart);
+      url.hash='';window.history.pushState({},'',url);
     }
-  } catch(error) { if(request===selectionRequest) message.textContent=error.message+' Rodomas ankstesnis pasirinkimas.'; }
+  } catch(error){if(request===selectionRequest)message.textContent=error.message+' Rodomas ankstesnis pasirinkimas.';}
 }
 document.getElementById('history-list').addEventListener('click',event=>{
   const card=event.target.closest('a[data-week]');

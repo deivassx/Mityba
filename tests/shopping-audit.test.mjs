@@ -1,18 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import * as fsSync from 'node:fs';
 import {auditShopping} from '../scripts/shopping-audit.mjs';
 const menu=JSON.parse(await fs.readFile(new URL('../data/menu.json',import.meta.url),'utf8'));
 const rules=JSON.parse(await fs.readFile(new URL('../config/planavimo-taisykles.json',import.meta.url),'utf8'));
-test('Pirkinių auditas apima pakuotes, pristatymą, pakavimą, biudžetą',()=>{
+test('Pirkinių auditas žymi nepatvirtintus tiekėjus ir dalinę kainą',()=>{
   const a=auditShopping(menu,rules);
   assert.equal(a.targetEur,100);
   assert.equal(a.softLimitEur,110);
-  assert.ok(a.estimatedTotalEur>110);
-  assert.ok(a.warnings.some(w=>w.includes('BARBORA_NETINKA: turkey')));
+  assert.equal(a.complete,false);
+  assert.deepEqual([...a.missing].sort(),['beef','chicken','turkey']);
+  assert.ok(a.estimatedTotalEur>0);
+  assert.ok(a.warnings.some(w=>w.includes('NEPILNAS_KREPSELIS')));
+  assert.ok(a.stores.length<=2);
+});
+test('Neįtraukia netinkamos jautienos iš Barbora',()=>{
+  const m=structuredClone(menu);
+  m.products.push({...JSON.parse(fsSync.readFileSync(new URL('../data/catalog.json',import.meta.url),'utf8')).products.find(p=>p.id==='beef')});
+  const a=auditShopping(m,rules);
   assert.ok(a.warnings.some(w=>w.includes('BARBORA_NETINKA: beef')));
-  assert.ok(a.warnings.some(w=>w.includes('BARBORA_VISTIENA: chicken')));
-  assert.ok(a.warnings.some(w=>w.includes('VIRS_TOLERANCIJOS')));
 });
 test('Biudžeto įspėjimai nedingsta jei trūksta kainos',()=>{
   const m=structuredClone(menu);

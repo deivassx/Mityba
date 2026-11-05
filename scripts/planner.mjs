@@ -146,6 +146,16 @@ export async function generate(now=new Date()) {
   const date=new Date(now.toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'})+'T00:00:00Z');
   date.setUTCDate(date.getUTCDate()+((8-date.getUTCDay())%7 || 7));
   const week=date.toISOString().slice(0,10);
+  // Jei ši savaitė jau priklauso iš anksto sudarytam 8 savaičių rinkiniui,
+  // nerašyti jos iš naujo ir negriauti vartotojo išsirinktos savaitės.
+  try {
+    const preplanned=JSON.parse(await fs.readFile('data/history/'+week+'.json','utf8'));
+    if(preplanned.meta?.isPlanningSeries===true) {
+      validate(preplanned,false);
+      console.log('Savaitė '+week+' jau parengta iš 8 savaičių rinkinio; negeneruojame iš naujo.');
+      return preplanned;
+    }
+  } catch(e) { if(e.code!=='ENOENT')throw e; }
   const bank=JSON.parse(await fs.readFile('data/recipe-library.json','utf8'));
   const {recipes,pairs}=selectWeeklyRecipes(menu.recipes,bank,week);
   menu.recipes=recipes;

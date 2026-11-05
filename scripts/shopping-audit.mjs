@@ -51,19 +51,22 @@ export function auditShopping(menu,rules){
     stores.push({name:v.name||v.id,subtotalEur:subtotal,estimatedDeliveryEur:delivery,estimatedPackingEur:packing,smallBasketFeeEur:smallFee,totalEur:total,items:v.items});
     grand=round(grand+total);
   }
+  const missing=Object.keys(grams).filter(id=>grams[id]>0 && !menu.products.some(p=>p.id===id));
+  const incomplete=missing.length>0;
+  if(incomplete)warnings.push('NEPILNAS_KREPSELIS: trūksta tiekėjų ir kainų: '+missing.join(', ')+'. Jokios išvados apie 100 EUR biudžeto atitikimą nedaryti.');
   if(unknown.length)warnings.push('NEPATIKRINTOS_KAINOS: '+unknown.join(', '));
   if(grand>budget.targetWeeklyTotalEur) warnings.push('BIUDZETAS: preliminarus krepšelis '+grand+' EUR viršija '+budget.targetWeeklyTotalEur+' EUR tikslą.');
   if(grand>budget.softLimitEur) warnings.push('VIRS_TOLERANCIJOS: viršija '+budget.softLimitEur+' EUR; ieškok pigesnių variantų ir nevadink biudžetą atitinkančiu.');
-  return {targetEur:budget.targetWeeklyTotalEur,softLimitEur:budget.softLimitEur,estimatedTotalEur:grand,costsEstimated:true,stores,warnings};
+  return {targetEur:budget.targetWeeklyTotalEur,softLimitEur:budget.softLimitEur,estimatedTotalEur:grand,complete:!incomplete,costsEstimated:true,missing,stores,warnings};
 }
 if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href){
   const rules=JSON.parse(await fs.readFile(new URL('../config/planavimo-taisykles.json',import.meta.url),'utf8'));
   const menu=JSON.parse(await fs.readFile(new URL('../data/menu.json',import.meta.url),'utf8'));
   const a=auditShopping(menu,rules);
-  console.log('Pirkinių krepšelis, orientacinės pristatymo sąlygos: '+a.estimatedTotalEur.toFixed(2)+' EUR (tikslas '+a.targetEur+' EUR; tolerancija '+a.softLimitEur+' EUR).');
+  console.log((a.complete?'Pirkinių krepšelis':'NEPILNO krepšelio dalinė suma')+': '+a.estimatedTotalEur.toFixed(2)+' EUR (tikslas '+a.targetEur+' EUR; tolerancija '+a.softLimitEur+' EUR).');
   for(const m of a.warnings)console.log('::warning::'+m);
   if(process.env.GITHUB_STEP_SUMMARY){
-    const lines=['### Pirkinių politikos patikra','','Preliminarus krepšelis: **'+a.estimatedTotalEur.toFixed(2)+' EUR** (tikslas '+a.targetEur+' EUR, tolerancija '+a.softLimitEur+' EUR).','Pristatymo ir pakavimo mokesčiai yra katalogo įverčiai, ne patikrinta atsiskaitymo suma.',''];
+    const lines=['### Pirkinių politikos patikra','','(a.complete?'Preliminarus krepšelis':'NEPILNAS krepšelis – tik dalinė suma')+': **'+a.estimatedTotalEur.toFixed(2)+' EUR** (tikslas '+a.targetEur+' EUR, tolerancija '+a.softLimitEur+' EUR).','Pristatymo ir pakavimo mokesčiai yra katalogo įverčiai, ne patikrinta atsiskaitymo suma.',''];
     for(const s of a.stores) lines.push('- '+s.name+': prekės '+s.subtotalEur.toFixed(2)+' EUR, kiti mokesčiai '+round(s.totalEur-s.subtotalEur).toFixed(2)+' EUR.');
     for(const m of a.warnings)lines.push('- ⚠️ '+m);
     await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
