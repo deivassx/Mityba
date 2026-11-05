@@ -11,6 +11,7 @@ export function classify(name){
 }
 export function weightGrams(name){
   const s=String(name||'');
+  if(/\d+(?:[.,]\d+)?\s*[-–]\s*\d+(?:[.,]\d+)?\s*(kg|g)/i.test(s))return null;
   const m=s.match(/(?:^|\s)(\d+(?:[.,]\d+)?)\s*(kg|g)(?:\b|\s|$)/i);
   if(!m)return null;
   const grams=Number(m[1].replace(',','.'))*(m[2].toLowerCase()==='kg'?1000:1);
