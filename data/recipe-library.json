@@ -15,9 +15,9 @@
         "ingredients": {
           "turkey": 310,
           "potato": 180,
-          "pepper": 250,
-          "carrot": 180,
-          "mushroom": 180,
+          "pepper": 180,
+          "carrot": 130,
+          "mushroom": 130,
           "yogurt": 200,
           "oil": 10
         },
@@ -43,10 +43,10 @@
         "ingredients": {
           "turkey": 320,
           "potato": 180,
-          "carrot": 230,
-          "beet": 200,
-          "mushroom": 160,
-          "broccoli": 100,
+          "carrot": 150,
+          "beet": 140,
+          "mushroom": 100,
+          "broccoli": 60,
           "yogurt": 200,
           "oil": 10
         },
@@ -72,9 +72,9 @@
         "ingredients": {
           "turkey": 310,
           "sweetpotato": 180,
-          "pepper": 230,
-          "mushroom": 230,
-          "carrot": 140,
+          "pepper": 160,
+          "mushroom": 160,
+          "carrot": 120,
           "yogurt": 180,
           "oil": 12
         },
@@ -102,9 +102,9 @@
         "ingredients": {
           "chicken": 320,
           "potato": 180,
-          "pepper": 250,
-          "mushroom": 230,
-          "carrot": 150,
+          "pepper": 170,
+          "mushroom": 150,
+          "carrot": 120,
           "yogurt": 170,
           "oil": 10
         },
@@ -130,10 +130,10 @@
         "ingredients": {
           "chicken": 330,
           "sweetpotato": 180,
-          "carrot": 230,
-          "beet": 180,
-          "broccoli": 100,
-          "mushroom": 120,
+          "carrot": 160,
+          "beet": 130,
+          "broccoli": 70,
+          "mushroom": 100,
           "yogurt": 180,
           "oil": 10
         },
@@ -159,9 +159,9 @@
         "ingredients": {
           "chicken": 310,
           "potato": 180,
-          "mushroom": 260,
-          "pepper": 220,
-          "carrot": 150,
+          "mushroom": 180,
+          "pepper": 160,
+          "carrot": 110,
           "yogurt": 220,
           "oil": 12
         },
@@ -188,10 +188,10 @@
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "ingredients": {
           "catfish": 320,
-          "broccoli": 100,
-          "mushroom": 200,
-          "pepper": 170,
-          "carrot": 150,
+          "broccoli": 80,
+          "mushroom": 150,
+          "pepper": 130,
+          "carrot": 110,
           "cottage": 220,
           "yogurt": 100,
           "oil": 10,
@@ -218,10 +218,10 @@
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "ingredients": {
           "catfish": 310,
-          "beet": 220,
-          "pepper": 230,
-          "broccoli": 100,
-          "mushroom": 150,
+          "beet": 160,
+          "pepper": 160,
+          "broccoli": 70,
+          "mushroom": 100,
           "cottage": 250,
           "oil": 12,
           "walnut": 12
@@ -247,10 +247,10 @@
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
         "ingredients": {
           "catfish": 320,
-          "mushroom": 260,
-          "pepper": 220,
-          "beet": 150,
-          "broccoli": 100,
+          "mushroom": 180,
+          "pepper": 160,
+          "beet": 100,
+          "broccoli": 70,
           "cottage": 230,
           "oil": 12,
           "walnut": 15
@@ -278,11 +278,11 @@
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "ingredients": {
           "beef": 200,
-          "mushroom": 220,
-          "beet": 200,
-          "pepper": 220,
-          "carrot": 120,
-          "broccoli": 100,
+          "mushroom": 130,
+          "beet": 120,
+          "pepper": 140,
+          "carrot": 70,
+          "broccoli": 50,
           "cottage": 200,
           "oil": 10
         },
@@ -307,11 +307,11 @@
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "ingredients": {
           "beef": 210,
-          "pepper": 260,
-          "mushroom": 220,
-          "carrot": 200,
-          "broccoli": 100,
-          "beet": 120,
+          "pepper": 150,
+          "mushroom": 120,
+          "carrot": 100,
+          "broccoli": 70,
+          "beet": 70,
           "cottage": 220,
           "oil": 10
         },
@@ -336,11 +336,11 @@
         "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
         "ingredients": {
           "beef": 200,
-          "broccoli": 100,
-          "pepper": 200,
-          "mushroom": 240,
-          "beet": 180,
-          "carrot": 130,
+          "broccoli": 70,
+          "pepper": 120,
+          "mushroom": 130,
+          "beet": 90,
+          "carrot": 90,
           "cottage": 230,
           "oil": 12
         },
