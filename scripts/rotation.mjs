@@ -5,7 +5,7 @@ const WEEK_MS = 7 * 86400000;
 const ensure = (ok, message) => { if (!ok) throw new Error(message); };
 
 export function selectWeeklyRecipes(baseRecipes, bank, weekStart) {
-  ensure(/^\\d{4}-\\d{2}-\\d{2}$/.test(weekStart), 'Neteisinga savaitės data');
+  ensure(/^\d{4}-\d{2}-\d{2}$/.test(weekStart), 'Neteisinga savaitės data');
   const date = Date.parse(weekStart + 'T00:00:00Z');
   const weekIndex = (date - ANCHOR) / WEEK_MS;
   ensure(Number.isInteger(weekIndex), 'Savaitė turi prasidėti pirmadienį');
