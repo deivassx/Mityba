@@ -2,28 +2,56 @@
   "meta": {
     "name": "Sotus planas",
     "weekStart": "2026-12-07",
-    "generatedAt": "2026-11-05T16:58:00.000Z",
-    "status": "48 receptų įvairovės planas – tiekėjai dar tikrinami",
+    "generatedAt": "2026-11-06T07:54:12.466Z",
+    "status": "Meniu pagal ūkininkų prekių prioritetą – pasiūlymai dar nepatvirtinti",
     "kcalLimit": 2100,
     "maxStores": 2,
     "targetMealsPerDay": 2,
     "targetCookSessions": 2,
-    "pricingNotice": "Nauji ėrienos, lašišos, menkės ir kiaulienos patiekalai. Nepatvirtintų produktų kainos ir nuorodos neįtrauktos; suma yra dalinė. Tikslas iki 100–110 € per savaitę, realus krepšelis iki 2 parduotuvių.",
+    "pricingNotice": "Patiekalai pirmiausia renkami pagal konkrečias ūkininkų prekių nuorodas, o likę – pagal Farmlio SKU ir įvairovę. Nuorodos nereiškia patvirtintos kainos, atsargų, pakuotės ar pristatymo. Pirkinių krepšelis NEPILNAS; 100–110 €/sav. ir 200–220 €/14 d. biudžetai nepatvirtinti. Ne daugiau kaip 2 realios atsiskaitymo parduotuvės.",
     "recipePreferencesApplied": true,
     "isPlanningSeries": true,
     "isExample": false,
     "purchaseReady": false,
     "unresolvedIngredientIds": [
       "chicken",
-      "lamb",
+      "tomato",
       "onion",
-      "cod",
-      "salmon",
       "cheese",
-      "tomato"
+      "lamb",
+      "beef_strips"
     ],
     "shoppingTotalEstimateEur": null,
-    "instructionsFollowIngredients": true
+    "instructionsFollowIngredients": true,
+    "sourcingPriority": {
+      "priorities": [
+        {
+          "group": "vistiena",
+          "ingredientId": "chicken",
+          "sourceTier": 3
+        },
+        {
+          "group": "eriena",
+          "ingredientId": "lamb",
+          "sourceTier": 4
+        },
+        {
+          "group": "samas",
+          "ingredientId": "catfish",
+          "sourceTier": 2
+        },
+        {
+          "group": "jautiena",
+          "ingredientId": "beef",
+          "sourceTier": 0
+        }
+      ],
+      "withProductLinks": 3,
+      "directFarmerCount": 1,
+      "farmViaResellerCount": 1,
+      "farmlioExactCount": 1,
+      "disclaimer": "Prioritetas pagal konkrečių produktų nuorodas; kainos, likučiai ir pristatymas nepatvirtinti."
+    }
   },
   "nutrients": {
     "turkey": {
@@ -265,6 +293,40 @@
       "instructionsFollowIngredients": true
     },
     {
+      "id": "samas_surinis",
+      "slot": "VAKARIENĖ",
+      "title": "Šamas su kietojo sūrio plutele",
+      "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
+      "mins": 55,
+      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "credit": "Solin Fitness / iliustracinė nuotrauka",
+      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "ingredients": {
+        "catfish": 310,
+        "tomato": 145,
+        "mushroom": 165,
+        "pepper": 165,
+        "onion": 40,
+        "cheese": 35,
+        "cottage": 180,
+        "oil": 11,
+        "walnut": 10
+      },
+      "steps": [
+        "Vienai porcijai pasiruošk: 310 g šamo filė, 145 g pomidorų, 165 g pievagrybių, 165 g paprikų, 40 g svogūnų, 35 g kietojo sūrio, 180 g grūdėtos varškės, 11 g alyvuogių aliejaus, 10 g graikinių riešutų. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
+        "Įkaitink orkaitę iki 200 °C ir pasiruošk vieną didelę skardą. 11 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Toliau laikykis tikslios kepimo sekos.",
+        "Paruošk minkštesnes daržoves: 165 g paprikų supjaustyk juostelėmis, 165 g pievagrybių supjaustyk puselėmis, 145 g pomidorų supjaustyk skiltelėmis, 40 g svogūnų supjaustyk pusžiedžiais. Sudėk jas ant skardos vienu sluoksniu. Pakepk 10–12 min., tada pridėk pagrindinį ingredientą.",
+        "310 g šamo filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre.",
+        "Likus 3–5 min. iki kepimo pabaigos, užberk 35 g kietojo sūrio ir kaitink, kol išsilydys.",
+        "Patiekiant, atskirai ir be kaitinimo pridėk 180 g grūdėtos varškės, 10 g graikinių riešutų. Graikinius riešutus paskleisk ant patiekalo.",
+        "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
+      ],
+      "tag": "Su sūriu",
+      "method": "one_sheet_pan",
+      "cookware": "Viena orkaitės skarda, kepimo popierius, termometras",
+      "instructionsFollowIngredients": true
+    },
+    {
       "id": "eriena_2",
       "slot": "PIETŪS",
       "title": "Ėriena su batatais, morkomis ir svogūnais",
@@ -297,66 +359,32 @@
       "instructionsFollowIngredients": true
     },
     {
-      "id": "menke_2",
+      "id": "jautiena_troskinys",
       "slot": "VAKARIENĖ",
-      "title": "Menkė su burokėliais ir graikiniais riešutais",
+      "title": "Jautienos juostelės su paprika",
       "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
       "mins": 55,
-      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
-      "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
-      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
+      "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
+      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_800%2Cq_auto%2Cf_auto/single-meal-images/og9iosoz8di8blynl0il",
       "ingredients": {
-        "cod": 365,
-        "beet": 130,
-        "pepper": 195,
-        "mushroom": 190,
-        "carrot": 80,
-        "cottage": 245,
-        "walnut": 20,
-        "oil": 15
-      },
-      "steps": [
-        "Vienai porcijai pasiruošk: 365 g menkės filė, 130 g burokėlių, 195 g paprikų, 190 g pievagrybių, 80 g morkų, 245 g grūdėtos varškės, 20 g graikinių riešutų, 15 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
-        "Įkaitink orkaitę iki 200 °C. 80 g morkų supjaustyk plonais griežinėliais, 130 g burokėlių supjaustyk smulkiais kubeliais (apie 1 cm) ir paskleisk vienu sluoksniu ant vienos didelės skardos. 15 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
-        "Paruošk minkštesnes daržoves: 195 g paprikų supjaustyk juostelėmis, 190 g pievagrybių supjaustyk puselėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
-        "365 g menkės filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre. Menkę tikrink anksčiau, kad neišsausėtų.",
-        "Patiekiant, atskirai ir be kaitinimo pridėk 245 g grūdėtos varškės, 20 g graikinių riešutų. Graikinius riešutus paskleisk ant patiekalo.",
-        "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
-      ],
-      "tag": "Naujas patiekalas",
-      "method": "one_sheet_pan",
-      "cookware": "Viena orkaitės skarda, kepimo popierius, termometras",
-      "instructionsFollowIngredients": true
-    },
-    {
-      "id": "lasisa_2",
-      "slot": "VAKARIENĖ",
-      "title": "Lašiša su sūrio plutele ir grybais",
-      "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
-      "mins": 55,
-      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
-      "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
-      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
-      "ingredients": {
-        "salmon": 225,
-        "cheese": 30,
+        "beef_strips": 260,
         "pepper": 175,
         "mushroom": 180,
-        "tomato": 150,
         "carrot": 100,
-        "cottage": 170,
-        "oil": 7
+        "onion": 45,
+        "cottage": 220,
+        "oil": 12
       },
       "steps": [
-        "Vienai porcijai pasiruošk: 225 g lašišos filė, 30 g kietojo sūrio, 175 g paprikų, 180 g pievagrybių, 150 g pomidorų, 100 g morkų, 170 g grūdėtos varškės, 7 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
-        "Įkaitink orkaitę iki 200 °C. 100 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 7 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
-        "Paruošk minkštesnes daržoves: 175 g paprikų supjaustyk juostelėmis, 180 g pievagrybių supjaustyk puselėmis, 150 g pomidorų supjaustyk skiltelėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
-        "225 g lašišos filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre.",
-        "Likus 3–5 min. iki kepimo pabaigos, užberk 30 g kietojo sūrio ir kaitink, kol išsilydys.",
-        "Patiekiant, atskirai ir be kaitinimo pridėk 170 g grūdėtos varškės.",
+        "Vienai porcijai pasiruošk: 260 g jautienos juostelių, 175 g paprikų, 180 g pievagrybių, 100 g morkų, 45 g svogūnų, 220 g grūdėtos varškės, 12 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
+        "Įkaitink orkaitę iki 200 °C. 100 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 12 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
+        "Paruošk minkštesnes daržoves: 175 g paprikų supjaustyk juostelėmis, 180 g pievagrybių supjaustyk puselėmis, 45 g svogūnų supjaustyk pusžiedžiais. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
+        "260 g jautienos juostelių vienu sluoksniu paskleisk laisvoje skardos dalyje. Kepk apie 12–18 min. pagal storį iki bent 63 °C ir palik 3 min. pailsėti.",
+        "Patiekiant, atskirai ir be kaitinimo pridėk 220 g grūdėtos varškės.",
         "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
-      "tag": "Naujas patiekalas",
+      "tag": "Jautienos juostelės",
       "method": "one_sheet_pan",
       "cookware": "Viena orkaitės skarda, kepimo popierius, termometras",
       "instructionsFollowIngredients": true
@@ -366,37 +394,37 @@
     {
       "date": "2026-12-07",
       "lunch": "vistiena_citrinine",
-      "dinner": "menke_2"
+      "dinner": "samas_surinis"
     },
     {
       "date": "2026-12-08",
       "lunch": "vistiena_citrinine",
-      "dinner": "menke_2"
+      "dinner": "samas_surinis"
     },
     {
       "date": "2026-12-09",
       "lunch": "vistiena_citrinine",
-      "dinner": "menke_2"
+      "dinner": "samas_surinis"
     },
     {
       "date": "2026-12-10",
       "lunch": "eriena_2",
-      "dinner": "lasisa_2"
+      "dinner": "jautiena_troskinys"
     },
     {
       "date": "2026-12-11",
       "lunch": "eriena_2",
-      "dinner": "lasisa_2"
+      "dinner": "jautiena_troskinys"
     },
     {
       "date": "2026-12-12",
       "lunch": "eriena_2",
-      "dinner": "lasisa_2"
+      "dinner": "jautiena_troskinys"
     },
     {
       "date": "2026-12-13",
       "lunch": "eriena_2",
-      "dinner": "lasisa_2"
+      "dinner": "jautiena_troskinys"
     }
   ],
   "stores": [
@@ -449,6 +477,14 @@
     }
   ],
   "products": [
+    {
+      "id": "catfish",
+      "store": "farmlio",
+      "name": "Afrikinio šamo filė su oda",
+      "packGrams": 300,
+      "priceEur": 3.88,
+      "url": "https://farmlio.lt/pardavejai/zuveja/prekes/afrikinio-samo-file-su-oda"
+    },
     {
       "id": "carrot",
       "store": "farmlio",
@@ -529,34 +565,34 @@
     {
       "title": "Sekmadienis",
       "subtitle": "I–III dienoms",
-      "summary": "Vištiena su burokėliais ir batatais + Menkė su burokėliais ir graikiniais riešutais",
+      "summary": "Vištiena su burokėliais ir batatais + Šamas su kietojo sūrio plutele",
       "servings": {
         "vistiena_citrinine": 3,
-        "menke_2": 3
+        "samas_surinis": 3
       },
       "steps": [
-        "Padaugink kiekvieno recepto ingredientus iš nurodyto porcijų skaičiaus. Papildomų maisto produktų nedėk.",
-        "Kiekvieną patiekalą gamink tik pagal jo skiltyje „Kaip pagaminti“ esančią tikslią instrukciją; du receptus kepk atskirais vienos skardos etapais.",
-        "Vidinę mėsos arba žuvies temperatūrą patikrink termometru, šaltus priedus patiek nekaitintus.",
-        "Maistą atvėsink per 2 val.; vėlesnes porcijas užšaldyk."
+        "Tiksliai pasverk tik receptų ingredientų sąraše nurodytus produktus ir padaugink kiekius iš 3 porcijų.",
+        "Kiekvieną patiekalą gamink pagal atskiras recepto skilties „Kaip pagaminti“ instrukcijas. Kiekvienam receptui – viena didelė orkaitės skarda; jei netelpa, kepk keliais etapais.",
+        "Vidinę mėsos arba žuvies temperatūrą tikrink termometru, šaltus priedus patiek tik taip, kaip nurodyta recepte.",
+        "Gatavą maistą per 2 val. atvėsink, vėlesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
-      "duration": "Apie 60–120 min., gali būti daugiau, jei reikia kelių kepimų."
+      "duration": "Apie 60–120 min., priklausomai nuo skardos talpos."
     },
     {
       "title": "Trečiadienis",
       "subtitle": "IV–VII dienoms",
-      "summary": "Ėriena su batatais, morkomis ir svogūnais + Lašiša su sūrio plutele ir grybais",
+      "summary": "Ėriena su batatais, morkomis ir svogūnais + Jautienos juostelės su paprika",
       "servings": {
         "eriena_2": 4,
-        "lasisa_2": 4
+        "jautiena_troskinys": 4
       },
       "steps": [
-        "Padaugink kiekvieno recepto ingredientus iš nurodyto porcijų skaičiaus. Papildomų maisto produktų nedėk.",
-        "Kiekvieną patiekalą gamink tik pagal jo skiltyje „Kaip pagaminti“ esančią tikslią instrukciją; du receptus kepk atskirais vienos skardos etapais.",
-        "Vidinę mėsos arba žuvies temperatūrą patikrink termometru, šaltus priedus patiek nekaitintus.",
-        "Maistą atvėsink per 2 val.; vėlesnes porcijas užšaldyk."
+        "Tiksliai pasverk tik receptų ingredientų sąraše nurodytus produktus ir padaugink kiekius iš 4 porcijų.",
+        "Kiekvieną patiekalą gamink pagal atskiras recepto skilties „Kaip pagaminti“ instrukcijas. Kiekvienam receptui – viena didelė orkaitės skarda; jei netelpa, kepk keliais etapais.",
+        "Vidinę mėsos arba žuvies temperatūrą tikrink termometru, šaltus priedus patiek tik taip, kaip nurodyta recepte.",
+        "Gatavą maistą per 2 val. atvėsink, vėlesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
-      "duration": "Apie 60–120 min., gali būti daugiau, jei reikia kelių kepimų."
+      "duration": "Apie 60–120 min., priklausomai nuo skardos talpos."
     }
   ]
 }

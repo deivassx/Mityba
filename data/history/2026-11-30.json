@@ -2,24 +2,56 @@
   "meta": {
     "name": "Sotus planas",
     "weekStart": "2026-11-30",
-    "generatedAt": "2026-11-05T16:58:00.000Z",
-    "status": "48 receptų įvairovės planas – tiekėjai dar tikrinami",
+    "generatedAt": "2026-11-06T07:54:12.466Z",
+    "status": "Meniu pagal ūkininkų prekių prioritetą – pasiūlymai dar nepatvirtinti",
     "kcalLimit": 2100,
     "maxStores": 2,
     "targetMealsPerDay": 2,
     "targetCookSessions": 2,
-    "pricingNotice": "Nauji ėrienos, lašišos, menkės ir kiaulienos patiekalai. Nepatvirtintų produktų kainos ir nuorodos neįtrauktos; suma yra dalinė. Tikslas iki 100–110 € per savaitę, realus krepšelis iki 2 parduotuvių.",
+    "pricingNotice": "Patiekalai pirmiausia renkami pagal konkrečias ūkininkų prekių nuorodas, o likę – pagal Farmlio SKU ir įvairovę. Nuorodos nereiškia patvirtintos kainos, atsargų, pakuotės ar pristatymo. Pirkinių krepšelis NEPILNAS; 100–110 €/sav. ir 200–220 €/14 d. biudžetai nepatvirtinti. Ne daugiau kaip 2 realios atsiskaitymo parduotuvės.",
     "recipePreferencesApplied": true,
     "isPlanningSeries": true,
     "isExample": false,
     "purchaseReady": false,
     "unresolvedIngredientIds": [
-      "pork_tenderloin",
+      "lamb",
+      "tomato",
+      "feta",
       "turkey",
-      "salmon"
+      "onion",
+      "cod"
     ],
     "shoppingTotalEstimateEur": null,
-    "instructionsFollowIngredients": true
+    "instructionsFollowIngredients": true,
+    "sourcingPriority": {
+      "priorities": [
+        {
+          "group": "eriena",
+          "ingredientId": "lamb",
+          "sourceTier": 4
+        },
+        {
+          "group": "kalakutiena",
+          "ingredientId": "turkey",
+          "sourceTier": 3
+        },
+        {
+          "group": "samas",
+          "ingredientId": "catfish",
+          "sourceTier": 2
+        },
+        {
+          "group": "menke",
+          "ingredientId": "cod",
+          "sourceTier": 0
+        }
+      ],
+      "withProductLinks": 3,
+      "directFarmerCount": 1,
+      "farmViaResellerCount": 1,
+      "farmlioExactCount": 1,
+      "disclaimer": "Prioritetas pagal konkrečių produktų nuorodas; kainos, likučiai ir pristatymas nepatvirtinti."
+    }
   },
   "nutrients": {
     "turkey": {
@@ -230,29 +262,31 @@
   },
   "recipes": [
     {
-      "id": "kiauliena_1",
+      "id": "eriena_1",
       "slot": "PIETŪS",
-      "title": "Kiaulienos medalionai su grybais",
+      "title": "Ėrienos kepsneliai su feta ir paprikomis",
       "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
       "mins": 55,
       "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
       "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
       "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
       "ingredients": {
-        "pork_tenderloin": 305,
+        "lamb": 255,
         "potato": 180,
-        "mushroom": 230,
-        "pepper": 180,
+        "pepper": 200,
         "carrot": 150,
-        "yogurt": 180,
-        "oil": 12
+        "tomato": 150,
+        "feta": 45,
+        "yogurt": 130,
+        "oil": 9
       },
       "steps": [
-        "Vienai porcijai pasiruošk: 305 g kiaulienos išpjovos, 180 g bulvių, 230 g pievagrybių, 180 g paprikų, 150 g morkų, 180 g graikiško jogurto, 12 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
-        "Įkaitink orkaitę iki 200 °C. 180 g bulvių supjaustyk skiltelėmis (iki 1,5 cm), 150 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 12 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
-        "Paruošk minkštesnes daržoves: 180 g paprikų supjaustyk juostelėmis, 230 g pievagrybių supjaustyk puselėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
-        "305 g kiaulienos išpjovos supjaustyk 2–3 cm medalionais, dėk laisvoje skardos dalyje ir kepk apie 15–22 min. iki bent 63 °C viduje. Palik 3 min. pailsėti.",
-        "Patiekiant, atskirai ir be kaitinimo pridėk 180 g graikiško jogurto. Jogurtą naudok kaip vieno ingrediento padažą.",
+        "Vienai porcijai pasiruošk: 255 g ėrienos kumpio, 180 g bulvių, 200 g paprikų, 150 g morkų, 150 g pomidorų, 45 g fetos, 130 g graikiško jogurto, 9 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
+        "Įkaitink orkaitę iki 200 °C. 180 g bulvių supjaustyk skiltelėmis (iki 1,5 cm), 150 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 9 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
+        "Paruošk minkštesnes daržoves: 200 g paprikų supjaustyk juostelėmis, 150 g pomidorų supjaustyk skiltelėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
+        "255 g ėrienos kumpio supjaustyk 3 cm gabaliukais, paskleisk skardos laisvoje dalyje ir kepk apie 18–25 min. iki bent 63 °C viduje. Palik 3 min. pailsėti.",
+        "Išėmus skardą iš orkaitės ant patiekalo užtrupink 45 g fetos; fetos papildomai nekepti nereikia.",
+        "Patiekiant, atskirai ir be kaitinimo pridėk 130 g graikiško jogurto. Jogurtą naudok kaip vieno ingrediento padažą.",
         "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
       "tag": "Naujas patiekalas",
@@ -261,28 +295,60 @@
       "instructionsFollowIngredients": true
     },
     {
-      "id": "kalakutiena_iesmeliai",
+      "id": "samas_grybai",
+      "slot": "VAKARIENĖ",
+      "title": "Šamas su pievagrybiais ir paprikomis",
+      "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
+      "mins": 55,
+      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
+      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
+      "ingredients": {
+        "catfish": 330,
+        "mushroom": 225,
+        "pepper": 135,
+        "carrot": 110,
+        "cottage": 220,
+        "oil": 13,
+        "walnut": 20
+      },
+      "steps": [
+        "Vienai porcijai pasiruošk: 330 g šamo filė, 225 g pievagrybių, 135 g paprikų, 110 g morkų, 220 g grūdėtos varškės, 13 g alyvuogių aliejaus, 20 g graikinių riešutų. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
+        "Įkaitink orkaitę iki 200 °C. 110 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 13 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
+        "Paruošk minkštesnes daržoves: 135 g paprikų supjaustyk juostelėmis, 225 g pievagrybių supjaustyk puselėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
+        "330 g šamo filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre.",
+        "Patiekiant, atskirai ir be kaitinimo pridėk 220 g grūdėtos varškės, 20 g graikinių riešutų. Graikinius riešutus paskleisk ant patiekalo.",
+        "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
+      ],
+      "tag": "Orkaitės patiekalas",
+      "method": "one_sheet_pan",
+      "cookware": "Viena orkaitės skarda, kepimo popierius, termometras",
+      "instructionsFollowIngredients": true
+    },
+    {
+      "id": "kalakutiena_keptuve",
       "slot": "PIETŪS",
-      "title": "Kalakutienos iešmeliai su pievagrybiais",
+      "title": "Kalakutiena su batatais, paprika ir svogūnais",
       "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
       "mins": 55,
       "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
       "credit": "Gimme Delicious / paukštienos patiekimo iliustracija (recepto varianto iliustracija)",
       "image_link": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg",
       "ingredients": {
-        "turkey": 310,
-        "potato": 170,
-        "pepper": 170,
-        "mushroom": 170,
+        "turkey": 300,
+        "sweetpotato": 170,
+        "pepper": 180,
+        "onion": 75,
+        "mushroom": 140,
         "carrot": 100,
         "yogurt": 180,
         "oil": 10
       },
       "steps": [
-        "Vienai porcijai pasiruošk: 310 g kalakutienos filė, 170 g bulvių, 170 g paprikų, 170 g pievagrybių, 100 g morkų, 180 g graikiško jogurto, 10 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
-        "Įkaitink orkaitę iki 200 °C. 170 g bulvių supjaustyk skiltelėmis (iki 1,5 cm), 100 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 10 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
-        "Paruošk minkštesnes daržoves: 170 g paprikų supjaustyk juostelėmis, 170 g pievagrybių supjaustyk puselėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
-        "310 g kalakutienos filė supjaustyk 2–3 cm gabaliukais. Sudėk į laisvą tos pačios skardos dalį ir kepk apie 18–25 min., kol viduje bus bent 74 °C.",
+        "Vienai porcijai pasiruošk: 300 g kalakutienos filė, 170 g saldžiųjų bulvių, 180 g paprikų, 75 g svogūnų, 140 g pievagrybių, 100 g morkų, 180 g graikiško jogurto, 10 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
+        "Įkaitink orkaitę iki 200 °C. 170 g saldžiųjų bulvių supjaustyk kubeliais (iki 1,5 cm), 100 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 10 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
+        "Paruošk minkštesnes daržoves: 180 g paprikų supjaustyk juostelėmis, 140 g pievagrybių supjaustyk puselėmis, 75 g svogūnų supjaustyk pusžiedžiais. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
+        "300 g kalakutienos filė supjaustyk 2–3 cm gabaliukais. Sudėk į laisvą tos pačios skardos dalį ir kepk apie 18–25 min., kol viduje bus bent 74 °C.",
         "Patiekiant, atskirai ir be kaitinimo pridėk 180 g graikiško jogurto. Jogurtą naudok kaip vieno ingrediento padažą.",
         "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
@@ -292,61 +358,31 @@
       "instructionsFollowIngredients": true
     },
     {
-      "id": "samas_jogurtinis",
+      "id": "menke",
       "slot": "VAKARIENĖ",
-      "title": "Šamas su jogurtu ir paprikomis",
-      "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
-      "mins": 55,
-      "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
-      "credit": "Solin Fitness / iliustracinė nuotrauka (recepto varianto iliustracija)",
-      "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
-      "ingredients": {
-        "catfish": 320,
-        "mushroom": 170,
-        "pepper": 155,
-        "carrot": 125,
-        "cottage": 200,
-        "yogurt": 120,
-        "oil": 11,
-        "walnut": 10
-      },
-      "steps": [
-        "Vienai porcijai pasiruošk: 320 g šamo filė, 170 g pievagrybių, 155 g paprikų, 125 g morkų, 200 g grūdėtos varškės, 120 g graikiško jogurto, 11 g alyvuogių aliejaus, 10 g graikinių riešutų. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
-        "Įkaitink orkaitę iki 200 °C. 125 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 11 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
-        "Paruošk minkštesnes daržoves: 155 g paprikų supjaustyk juostelėmis, 170 g pievagrybių supjaustyk puselėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
-        "320 g šamo filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre.",
-        "Patiekiant, atskirai ir be kaitinimo pridėk 120 g graikiško jogurto, 200 g grūdėtos varškės, 10 g graikinių riešutų. Jogurtą naudok kaip vieno ingrediento padažą. Graikinius riešutus paskleisk ant patiekalo.",
-        "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
-      ],
-      "tag": "Orkaitės patiekalas",
-      "method": "one_sheet_pan",
-      "cookware": "Viena orkaitės skarda, kepimo popierius, termometras",
-      "instructionsFollowIngredients": true
-    },
-    {
-      "id": "lasisa_1",
-      "slot": "VAKARIENĖ",
-      "title": "Lašiša su burokėliais ir pievagrybiais",
+      "title": "Menkė su feta ir keptomis paprikomis",
       "subtitle": "Tik nurodyti ingredientai · vienos skardos gaminimas",
       "mins": 55,
       "photo": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
       "credit": "Iliustracinė nuotrauka, nėra tikslus patiekalo vaizdas",
       "image_link": "https://res.cloudinary.com/solin-fitness/image/upload/c_scale%2Cw_500%2Cq_auto%2Cf_auto/single-meal-images/tdngx9eqwvvoqopqyxmh",
       "ingredients": {
-        "salmon": 285,
-        "beet": 180,
-        "pepper": 180,
-        "mushroom": 175,
-        "carrot": 100,
-        "cottage": 200,
-        "oil": 8
+        "cod": 360,
+        "feta": 75,
+        "pepper": 220,
+        "mushroom": 180,
+        "carrot": 145,
+        "tomato": 135,
+        "cottage": 195,
+        "oil": 14
       },
       "steps": [
-        "Vienai porcijai pasiruošk: 285 g lašišos filė, 180 g burokėlių, 180 g paprikų, 175 g pievagrybių, 100 g morkų, 200 g grūdėtos varškės, 8 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
-        "Įkaitink orkaitę iki 200 °C. 100 g morkų supjaustyk plonais griežinėliais, 180 g burokėlių supjaustyk smulkiais kubeliais (apie 1 cm) ir paskleisk vienu sluoksniu ant vienos didelės skardos. 8 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
-        "Paruošk minkštesnes daržoves: 180 g paprikų supjaustyk juostelėmis, 175 g pievagrybių supjaustyk puselėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
-        "285 g lašišos filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre.",
-        "Patiekiant, atskirai ir be kaitinimo pridėk 200 g grūdėtos varškės.",
+        "Vienai porcijai pasiruošk: 360 g menkės filė, 75 g fetos, 220 g paprikų, 180 g pievagrybių, 145 g morkų, 135 g pomidorų, 195 g grūdėtos varškės, 14 g alyvuogių aliejaus. Gaminant 3–4 porcijas, kiekvieną kiekį padaugink iš porcijų skaičiaus. Jokių papildomų maisto produktų nenaudok.",
+        "Įkaitink orkaitę iki 200 °C. 145 g morkų supjaustyk plonais griežinėliais ir paskleisk vienu sluoksniu ant vienos didelės skardos. 14 g alyvuogių aliejaus tolygiai paskirstyk ant kepamų daržovių. Kepk 15–20 min., kad pradėtų minkštėti.",
+        "Paruošk minkštesnes daržoves: 220 g paprikų supjaustyk juostelėmis, 180 g pievagrybių supjaustyk puselėmis, 135 g pomidorų supjaustyk skiltelėmis. Sudėk jas prie apkeptų daržovių vienu sluoksniu. Dabar pridėk pagrindinį ingredientą ir kepk kartu.",
+        "360 g menkės filė į laisvą tos pačios skardos dalį dėk tik paskutinėms maždaug 12–20 min. Kepk iki 63 °C filė centre. Menkę tikrink anksčiau, kad neišsausėtų.",
+        "Išėmus skardą iš orkaitės ant patiekalo užtrupink 75 g fetos; fetos papildomai nekepti nereikia.",
+        "Patiekiant, atskirai ir be kaitinimo pridėk 195 g grūdėtos varškės.",
         "Jei 3–4 porcijų produktai netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda. Gatavą maistą per 2 val. atvėsink, tolesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
       "tag": "Naujas patiekalas",
@@ -358,38 +394,38 @@
   "days": [
     {
       "date": "2026-11-30",
-      "lunch": "kiauliena_1",
-      "dinner": "samas_jogurtinis"
+      "lunch": "eriena_1",
+      "dinner": "samas_grybai"
     },
     {
       "date": "2026-12-01",
-      "lunch": "kiauliena_1",
-      "dinner": "samas_jogurtinis"
+      "lunch": "eriena_1",
+      "dinner": "samas_grybai"
     },
     {
       "date": "2026-12-02",
-      "lunch": "kiauliena_1",
-      "dinner": "samas_jogurtinis"
+      "lunch": "eriena_1",
+      "dinner": "samas_grybai"
     },
     {
       "date": "2026-12-03",
-      "lunch": "kalakutiena_iesmeliai",
-      "dinner": "lasisa_1"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "menke"
     },
     {
       "date": "2026-12-04",
-      "lunch": "kalakutiena_iesmeliai",
-      "dinner": "lasisa_1"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "menke"
     },
     {
       "date": "2026-12-05",
-      "lunch": "kalakutiena_iesmeliai",
-      "dinner": "lasisa_1"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "menke"
     },
     {
       "date": "2026-12-06",
-      "lunch": "kalakutiena_iesmeliai",
-      "dinner": "lasisa_1"
+      "lunch": "kalakutiena_keptuve",
+      "dinner": "menke"
     }
   ],
   "stores": [
@@ -468,15 +504,6 @@
       "sourceName": "Morkos"
     },
     {
-      "id": "beet",
-      "store": "farmlio",
-      "name": "Burokai, 1 kg",
-      "packGrams": 1000,
-      "priceEur": 1.5,
-      "url": "https://farmlio.lt/pardavejai/andzej/prekes/burokai",
-      "sourceName": "Burokėliai"
-    },
-    {
       "id": "cottage",
       "store": "barbora",
       "name": "Varškė grūdeliais FARM MILK, 500 g",
@@ -491,6 +518,14 @@
       "packGrams": 370,
       "priceEur": 1.69,
       "url": "https://barbora.lt/produktai/baltyminis-graikisko-stiliaus-jogurtas-alma-2-5-proc-rieb-370-g"
+    },
+    {
+      "id": "sweetpotato",
+      "store": "barbora",
+      "name": "Saldžiosios bulvės, 1 kg",
+      "packGrams": 1000,
+      "priceEur": 2.39,
+      "url": "https://barbora.lt/produktai/saldziosios-bulves-1-kg"
     },
     {
       "id": "pepper",
@@ -530,34 +565,34 @@
     {
       "title": "Sekmadienis",
       "subtitle": "I–III dienoms",
-      "summary": "Kiaulienos medalionai su grybais + Šamas su jogurtu ir paprikomis",
+      "summary": "Ėrienos kepsneliai su feta ir paprikomis + Šamas su pievagrybiais ir paprikomis",
       "servings": {
-        "kiauliena_1": 3,
-        "samas_jogurtinis": 3
+        "eriena_1": 3,
+        "samas_grybai": 3
       },
       "steps": [
-        "Padaugink kiekvieno recepto ingredientus iš nurodyto porcijų skaičiaus. Papildomų maisto produktų nedėk.",
-        "Kiekvieną patiekalą gamink tik pagal jo skiltyje „Kaip pagaminti“ esančią tikslią instrukciją; du receptus kepk atskirais vienos skardos etapais.",
-        "Vidinę mėsos arba žuvies temperatūrą patikrink termometru, šaltus priedus patiek nekaitintus.",
-        "Maistą atvėsink per 2 val.; vėlesnes porcijas užšaldyk."
+        "Tiksliai pasverk tik receptų ingredientų sąraše nurodytus produktus ir padaugink kiekius iš 3 porcijų.",
+        "Kiekvieną patiekalą gamink pagal atskiras recepto skilties „Kaip pagaminti“ instrukcijas. Kiekvienam receptui – viena didelė orkaitės skarda; jei netelpa, kepk keliais etapais.",
+        "Vidinę mėsos arba žuvies temperatūrą tikrink termometru, šaltus priedus patiek tik taip, kaip nurodyta recepte.",
+        "Gatavą maistą per 2 val. atvėsink, vėlesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
-      "duration": "Apie 60–120 min., gali būti daugiau, jei reikia kelių kepimų."
+      "duration": "Apie 60–120 min., priklausomai nuo skardos talpos."
     },
     {
       "title": "Trečiadienis",
       "subtitle": "IV–VII dienoms",
-      "summary": "Kalakutienos iešmeliai su pievagrybiais + Lašiša su burokėliais ir pievagrybiais",
+      "summary": "Kalakutiena su batatais, paprika ir svogūnais + Menkė su feta ir keptomis paprikomis",
       "servings": {
-        "kalakutiena_iesmeliai": 4,
-        "lasisa_1": 4
+        "kalakutiena_keptuve": 4,
+        "menke": 4
       },
       "steps": [
-        "Padaugink kiekvieno recepto ingredientus iš nurodyto porcijų skaičiaus. Papildomų maisto produktų nedėk.",
-        "Kiekvieną patiekalą gamink tik pagal jo skiltyje „Kaip pagaminti“ esančią tikslią instrukciją; du receptus kepk atskirais vienos skardos etapais.",
-        "Vidinę mėsos arba žuvies temperatūrą patikrink termometru, šaltus priedus patiek nekaitintus.",
-        "Maistą atvėsink per 2 val.; vėlesnes porcijas užšaldyk."
+        "Tiksliai pasverk tik receptų ingredientų sąraše nurodytus produktus ir padaugink kiekius iš 4 porcijų.",
+        "Kiekvieną patiekalą gamink pagal atskiras recepto skilties „Kaip pagaminti“ instrukcijas. Kiekvienam receptui – viena didelė orkaitės skarda; jei netelpa, kepk keliais etapais.",
+        "Vidinę mėsos arba žuvies temperatūrą tikrink termometru, šaltus priedus patiek tik taip, kaip nurodyta recepte.",
+        "Gatavą maistą per 2 val. atvėsink, vėlesnių dienų porcijas užšaldyk ir atitirpink šaldytuve."
       ],
-      "duration": "Apie 60–120 min., gali būti daugiau, jei reikia kelių kepimų."
+      "duration": "Apie 60–120 min., priklausomai nuo skardos talpos."
     }
   ]
 }
