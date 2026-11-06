@@ -6,7 +6,7 @@ import vm from 'node:vm';
 const script=await fs.readFile(new URL('../js/weekly-order.js',import.meta.url),'utf8');
 const win={};
 vm.runInNewContext(script,{window:win,URL,Intl,Date,localStorage:{getItem(){return null}}});
-const {build,demand,copyText,farmerProductLinks,choose}=win.WeeklyShop;
+const {build,demand,copyText,farmerProductLinks}=win.WeeklyShop;
 const load=async week=>JSON.parse(await fs.readFile(new URL('../data/history/'+week+'.json',import.meta.url),'utf8'));
 const rules=JSON.parse(await fs.readFile(new URL('../config/planavimo-taisykles.json',import.meta.url),'utf8'));
 const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
@@ -28,9 +28,7 @@ test('7 dienų užsakymas sumuoja tik vieną savaitę (14 valgių), ne dvi',()=>
   const needed=demand(week1);
   for(const item of plan.items)assert.equal(item.grams,needed[item.id],item.id);
   const catfish=plan.items.find(x=>x.id==='catfish');
-  assert.equal(catfish.packs,null,'Pakuočių skaičius neapskaičiuojamas be tiekėjo pasirinkimo');
   const catfishOffer=catfish.choices.find(c=>c.kind==='catalog');
-  assert.ok(choose(plan,'catfish',catfishOffer.key));
   assert.equal(catfish.packs,Math.ceil(needed.catfish/catfishOffer.packGrams));
   assert.equal(plan.orderReady,false);
   assert.equal(plan.priceIncludesDelivery,false);
@@ -52,7 +50,7 @@ test('Nepatikrintos kainos ir ūkininkų nuorodos nėra laikomos patvirtintais u
   const plan=build(week1,sources,rules);
   const turkey=plan.items.find(p=>p.id==='turkey');
   assert.equal(turkey.cost,null);
-  assert.equal(turkey.packs,null);
+  assert.equal(turkey.packs,Math.ceil(turkey.grams/1000));
   assert.equal(turkey.unavailable,true);
   assert.equal(turkey.sourcing.farmers[0].kind,'farmer_product');
   assert.ok(farmerProductLinks(turkey.sourcing).some(p=>p.url.includes('baltuoniu.kalakutai.lt/product/')));
@@ -82,41 +80,34 @@ test('Barbora atsarginė nuoroda neišgalvoja trečio tiekėjo arba kainos',()=>
   assert.ok(plan.unknownPrice.length>0);
 });
 
-test('Trečias tiekėjas nepasirenkamas: riba skaičiuojama pagal sąmoningai pasirinktas prekes',()=>{
+test('Prekių nuorodos nepasirenka atsiskaitymo parduotuvės ir išsaugo daugiausia 2 parduotuvių taisyklę',()=>{
   const plan=build(week1,sources,rules);
-  assert.deepEqual([...plan.suppliers],[],'Pasenę katalogo tiekėjai nepasirenkami iš anksto');
-  const fish=plan.items.find(x=>x.id==='catfish').choices.find(x=>x.store==='farmlio');
-  const yogurt=plan.items.find(x=>x.id==='yogurt').choices.find(x=>x.store==='barbora');
-  const turkey=plan.items.find(x=>x.id==='turkey').choices.find(x=>x.kind==='farmer');
-  assert.ok(fish&&yogurt&&turkey);
-  assert.equal(choose(plan,'catfish',fish.key),true);
-  assert.equal(choose(plan,'yogurt',yogurt.key),true);
-  assert.equal(plan.suppliers.length,2);
-  assert.equal(choose(plan,'turkey',turkey.key),false,'Trečia atskira parduotuvė atmetama');
-  assert.equal(plan.items.find(x=>x.id==='turkey').selectedKey,'');
-  assert.equal(plan.suppliers.length,2);
-  assert.equal(plan.tooManyStores,false);
+  assert.deepEqual([...plan.suppliers],[]);
+  assert.equal(plan.maxStores,2);
   assert.equal(plan.orderReady,false);
+  assert.equal(plan.tooManyStores,false);
+  assert.equal(plan.grandTotalEur,null);
+  assert.ok(plan.items.some(x=>x.reference?.kind==='farmer'));
+  assert.ok(plan.items.some(x=>x.reference?.kind==='catalog'));
+  assert.match(copyText(plan),/daugiausia 2 atsiskaitymo parduotuvės/);
 });
 
-test('Senos katalogo kainos nėra patikrinta suma; kaina skaičiuojama tik patvirtintai prekei',()=>{
+test('Istorinės katalogo kainos neįskaitomos, o atnaujinta kaina matoma informaciškai',()=>{
   const plan=build(week1,sources,rules);
   const fish=plan.items.find(x=>x.id==='catfish');
-  assert.equal(choose(plan,'catfish',fish.choices[0].key),true);
+  assert.equal(fish.reference.kind,'catalog');
   assert.equal(fish.priceFresh,false);
   assert.equal(fish.cost,null);
   assert.equal(plan.pricedCount,0);
   assert.equal(plan.grandTotalEur,null);
-
   const verified=structuredClone(week1);
   const catfish=verified.products.find(x=>x.id==='catfish');
   catfish.priceEur=4;
   catfish.verification={url:catfish.url,checkedAt:new Date().toISOString(),method:'test only'};
   const fresh=build(verified,sources,rules);
-  assert.equal(choose(fresh,'catfish',fresh.items.find(x=>x.id==='catfish').choices.find(x=>x.kind==='catalog').key),true);
   assert.equal(fresh.items.find(x=>x.id==='catfish').cost,16);
   assert.equal(fresh.partialGoodsEstimateEur,16);
-  assert.equal(fresh.grandTotalEur,null,'Be patikrinto pristatymo negalima rodyti galutinės sumos');
+  assert.equal(fresh.grandTotalEur,null,'Be pilnos krepšelio ir pristatymo patikros nėra galutinės sumos');
 });
 
 test('Neleidžia 14 dienų taisyklių ir sugadinto savaitės kalendoriaus',()=>{
@@ -157,7 +148,7 @@ test('Viename pirkinių rodinyje yra visi ingredientai ir vienas kopijavimo bei 
   const plan=demoWindow.WeeklyShop.build(week1,sources,rules);
   demoWindow.WeeklyShop.render(plan);
   assert.equal((output.innerHTML.match(/class="fortnight-check"/g)||[]).length,plan.items.length);
-  assert.equal((output.innerHTML.match(/class="weekly-source"/g)||[]).length,plan.items.length);
+  assert.doesNotMatch(output.innerHTML,/class="weekly-source"|Pasirink tiekėją|<select/);
   assert.equal((output.innerHTML.match(/id="weekly-copy"/g)||[]).length,1);
   assert.equal((output.innerHTML.match(/id="weekly-clear"/g)||[]).length,1);
   assert.match(output.innerHTML,/Ūkio prekė: Kalakutų krūtinėlių file/);
