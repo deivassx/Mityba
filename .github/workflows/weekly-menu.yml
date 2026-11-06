@@ -48,6 +48,8 @@ jobs:
       - name: Patikrinti išsaugotą meniu ir istoriją
         if: github.event_name == 'push'
         run: node scripts/planner.mjs archive
+      - name: Nuskaityti viešas ūkininkų konkrečių prekių kainas
+        run: node scripts/refresh-farm-prices.mjs
       - name: Įvertinti savaitinį krepšelį ir pirkimo prioritetus
         run: node scripts/shopping-audit.mjs
       - name: Git commit ir push į main
@@ -73,6 +75,7 @@ jobs:
           cp data/menu.json _site/data/
           cp data/sourcing-links.json _site/data/
           cp data/catalog.json _site/data/
+          cp data/price-observations.json _site/data/
           cp -r data/history _site/data/
       - uses: actions/upload-pages-artifact@v3
         with:
