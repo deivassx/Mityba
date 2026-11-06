@@ -25,9 +25,9 @@ test('Keičiant ingredientus be instrukcijų atnaujinimo, atmetama',()=>{
  delete r.instructionsFollowIngredients;
  assert.throws(()=>validateRecipePreferences({recipes:[r]}),/Trūksta ingredientų ir gaminimo instrukcijų patikros/);
 });
-test('Aštuonios savaitės ir aktyvus meniu naudoja vienodą receptų tekstą',async()=>{
+test('Devynios savaitės ir aktyvus meniu naudoja vienodą receptų tekstą',async()=>{
  const canonical=new Map(all.map(r=>[r.id,r])),index=await read('data/history/index.json');
- assert.equal(index.length,8);
+ assert.equal(index.length,9);
  for(const path of ['data/menu.json',...index.map(e=>'data/history/'+e.weekStart+'.json')]){
   const m=await read(path);
   for(const r of m.recipes){
