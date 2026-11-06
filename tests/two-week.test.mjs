@@ -10,6 +10,7 @@ vm.runInContext(source,context);
 const {build,demand,copyText}=win.TwoWeekShop;
 const load=async week=>JSON.parse(await fs.readFile(new URL('../data/history/'+week+'.json',import.meta.url),'utf8'));
 const a=await load('2026-11-09'),b=await load('2026-11-16'),c=await load('2026-11-23');
+const d=await load('2026-11-30');
 
 test('14 dienų užsakymas sumuoja tikrą 2 savaičių meniu ir mėsą perka vienu kartu',()=>{
   const plan=build(a,b);
@@ -27,7 +28,8 @@ test('14 dienų užsakymas sumuoja tikrą 2 savaičių meniu ir mėsą perka vie
   for(const product of proteins) {
     assert.equal(grams[product.id],(demand(a)[product.id]||0)+(demand(b)[product.id]||0));
   }
-  assert.ok(grams.turkey>0 && grams.chicken>0 && grams.catfish>0 && grams.salmon>0 && grams.lamb>0 && grams.cod>0 && grams.pork_tenderloin>0);
+  assert.ok(grams.turkey>0 && grams.chicken>0 && grams.catfish>0 && grams.cod>0 && grams.pork_tenderloin>0);
+  assert.ok(!grams.salmon && !grams.lamb,'Pirmos 2 savaitės pakeistos ir nebeturi lašišos arba ėrienos');
   assert.ok(grams.beef>0);
   assert.equal(proteins.find(p=>p.id==='catfish').packs,Math.ceil(grams.catfish/300));
   assert.ok(!proteins.find(p=>p.id==='turkey').url);
@@ -97,7 +99,7 @@ test('Be kainos rodomos Farmlio ir ūkininko nuorodos, ne išgalvotas SKU',async
 
 test('Jei ūkininkų SKU ar kaina nepatvirtinti, prie lašišos rodoma tikra Barbora filė nuoroda (ne krepšelio kaina)',async()=>{
  const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
- const plan=build(a,b,sources), salmon=plan.groups[0].lines.find(x=>x.id==='salmon');
+ const plan=build(c,d,sources), salmon=plan.groups[0].lines.find(x=>x.id==='salmon');
  assert.ok(salmon,'Salmon planned for the first two weeks');
  assert.equal(salmon.cost,null);
  assert.equal(salmon.needsReview,true);
@@ -106,7 +108,7 @@ test('Jei ūkininkų SKU ar kaina nepatvirtinti, prie lašišos rodoma tikra Bar
  assert.match(salmon.sourcing.barbora.url,/^https:\/\/barbora\.lt\/produktai\/sviezia-atlantiniu-lasisu-file/);
  assert.equal(salmon.sourcing.barbora.priceObservedEurPerKg,13.99);
  assert.equal(plan.suppliers.length,2,'Barbora fallback does not become a third checkout store');
- assert.equal(plan.partialGoodsEstimateEur,build(a,b).partialGoodsEstimateEur,'Observation price must not enter totals');
+ assert.equal(plan.partialGoodsEstimateEur,build(c,d).partialGoodsEstimateEur,'Observation price must not enter totals');
  assert.match(copyText(plan),/BARBORA ATSARGINIS VARIANTAS: Šviežia atlantinių lašišų filė/);
  assert.match(copyText(plan),/2026-11-05/);
  assert.equal(plan.orderReady,false);
@@ -114,7 +116,7 @@ test('Jei ūkininkų SKU ar kaina nepatvirtinti, prie lašišos rodoma tikra Bar
 
 test('Nepatikrinta pakaitinė žuvis ir kategorijos nėra laikomos patvirtintais SKU',async()=>{
  const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
- const plan=build(a,b,sources),cod=plan.items.find(x=>x.id==='cod');
+ const plan=build(b,c,sources),cod=plan.items.find(x=>x.id==='cod');
  assert.equal(cod.sourcing.barbora.kind,'similar_sku');
  assert.equal(cod.unavailable,true);
  assert.equal(cod.cost,null);
