@@ -30,7 +30,7 @@ test('puslapis atidaro naujausią, perjungia visą meniu ir grįžta iš istorij
   assert.match(node('history-list').innerHTML,/aria-current="page"/);
   await vm.runInContext("selectWeek('2026-10-26')",context);
   assert.match(node('recipes').innerHTML,/Ankstesnės savaitės receptas/);
-  assert.match(node('selected-week').innerHTML,/8 savaičių|Vienas iš 8/);
+  assert.match(node('selected-week').innerHTML,/Savaitės meniu juodraštis/);
   await vm.runInContext('selectWeek()',context);
   assert.ok(!node('recipes').innerHTML.includes('Ankstesnės savaitės receptas'));
   await vm.runInContext("selectWeek('2020-01-01')",context);
