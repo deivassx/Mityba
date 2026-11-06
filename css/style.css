@@ -10,8 +10,8 @@
 @media print{.page-shell{display:block}.selected-week a{display:none}}
 .history-sidebar{position:sticky;top:0}@media(max-width:800px){.history-sidebar{position:static}}
 
-/* Two-week procurement planner: accessible, mobile-first, scoped cards */
-#dvi-savaites .fortnight-loading,#dvi-savaites .fortnight-empty{padding:24px;color:var(--muted)}
+/* Weekly procurement planner: accessible, mobile-first, scoped cards */
+#savaites-uzsakymas .fortnight-loading,#savaites-uzsakymas .fortnight-empty{padding:24px;color:var(--muted)}
 .fortnight-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
 .fortnight-metric{border-radius:16px;background:#fff;border:1px solid var(--line);padding:17px}
 .fortnight-metric small{display:block;color:var(--muted);font-size:12px}
@@ -36,7 +36,7 @@
 .fortnight-table a{font-size:12px;font-weight:800;white-space:nowrap}
 .fortnight-notice{margin:14px 0;background:#fff3e4;padding:14px 17px;border-left:4px solid #c59453;border-radius:0 12px 12px 0;font-size:13px}
 @media(max-width:670px){.fortnight-overview{grid-template-columns:1fr}.fortnight-group{padding:15px 13px}.fortnight-table th,.fortnight-table td{padding:8px 6px}.fortnight-table .product-name{min-width:110px}.fortnight-toolbar .btn{width:100%}}
-@media print{#dvi-savaites .fortnight-toolbar{display:none}.fortnight-group{break-inside:avoid}}
+@media print{#savaites-uzsakymas .fortnight-toolbar{display:none}.fortnight-group{break-inside:avoid}}
 
 /* Separate verified product links from fallback discovery links. */
 .fortnight-links{display:flex;flex-direction:column;gap:6px;min-width:105px}
