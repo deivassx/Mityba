@@ -86,11 +86,11 @@ test('Be kainos rodomos Farmlio ir ūkininko nuorodos, ne išgalvotas SKU',async
  assert.equal(turkey.url,null);
  assert.equal(turkey.packs,null);
  assert.match(turkey.sourcing.farmlio.url,/farmlio.lt\/prekes/);
- assert.ok(turkey.sourcing.farmers.some(p=>p.url.includes('pilnaspuodas.lt/preke/kalakuto-krutineles-file')));
+ assert.equal(turkey.sourcing.farmers.length,0);
  assert.match(beef.sourcing.farmlio.url,/smulkinta-jautiena/);
  assert.equal(plan.suppliers.length,2);
  assert.match(copyText(plan),/Farmlio/);
- assert.match(copyText(plan),/Baltuonių krūtinėlės filė/);
+ assert.match(copyText(plan),/Tiesioginės ūkininko prekės nuorodos nerasta/);
  assert.equal(plan.orderReady,false);
 });
 
@@ -133,10 +133,10 @@ test('Mėsos ir žuvies ūkių nuorodos rodo konkrečius produktus, ne pradžios
    }
  }
  assert.ok(sources.products.lamb.farmers.some(x=>x.url.includes('eriuko-kumpis-be-kaulo')));
- assert.ok(sources.products.turkey.farmers.some(x=>x.url.includes('kalakuto-krutineles-file')));
+ assert.equal(sources.products.turkey.farmers.length,0);
  assert.equal(sources.products.beef.farmers.length,0);
  const plan=build(a,b,sources),list=copyText(plan);
- assert.match(list,/Ūkio prekė per pardavėją/);
+ assert.doesNotMatch(list,/Ūkio prekė per pardavėją/);
  assert.ok(!list.includes('https://kazlauskuekoukis.lt/'));
  assert.ok(!list.includes('https://baltuoniu.kalakutai.lt/'));
  assert.match(list,/Tiesioginės ūkininko prekės nuorodos nerasta/);
@@ -145,10 +145,21 @@ test('Bendri ūkio puslapiai atsitiktinai grįžę į duomenis vis tiek nebus ro
  const fake={farmers:[
   {name:'Ūkio pradžia',url:'https://sesuoleliuukis.lt/',kind:'farmer_home'},
   {name:'Netikra SKU žyma',url:'https://sesuoleliuukis.lt/',kind:'farmer_product'},
-  {name:'Kategorija',url:'https://pilnaspuodas.lt/kategorija/mesa/kalakutiena/',kind:'producer_product_reseller'},
-  {name:'Tikra prekė',url:'https://pilnaspuodas.lt/preke/kiaulienos-ispjova-be-kaulo/',kind:'retailer_product'}
+  {name:'Kategorija',url:'https://example.org/kategorija/mesa/kalakutiena/',kind:'producer_product_reseller'},
+  {name:'Pašalinto pardavėjo prekė',url:'https://pilnaspuodas.lt/preke/kiaulienos-ispjova-be-kaulo/',kind:'retailer_product'},
+  {name:'Tikra prekė',url:'https://pavyzdys.lt/preke/kiaulienos-ispjova-be-kaulo/',kind:'retailer_product'}
  ]};
  const found=win.TwoWeekShop.farmerProductLinks(fake);
  assert.equal(found.length,1);
  assert.equal(found[0].name,'Tikra prekė');
+});
+
+test('14 dienų produktų sąraše nelieka pašalinto pardavėjo nuorodų',async()=>{
+ const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ const plan=build(a,b,sources),list=copyText(plan);
+ assert.ok(!list.includes('pilnaspuodas.lt'));
+ const sample=structuredClone(sources);
+ sample.products.turkey.farmers=[{name:'Netinkamas pardavėjas',url:'https://pilnaspuodas.lt/preke/kalakuto-krutineles-file/',kind:'producer_product_reseller',producer:'Ūkis'}];
+ const filtered=win.TwoWeekShop.farmerProductLinks(sample.products.turkey);
+ assert.equal(filtered.length,0);
 });

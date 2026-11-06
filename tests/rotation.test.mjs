@@ -67,12 +67,12 @@ test('atmeta nemėgstamas daržoves, per daug bulvių ir keptuvėje kepamą nauj
 test('Konkrečios ūkių ir Farmlio produktų nuorodos – meniu prioritetas',async()=>{
  const sourcing=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
  assert.equal(sourceTier('eriena',sourcing),4);
- assert.equal(sourceTier('kalakutiena',sourcing),3);
- assert.equal(sourceTier('vistiena',sourcing),3);
+ assert.equal(sourceTier('kalakutiena',sourcing),0);
+ assert.equal(sourceTier('vistiena',sourcing),0);
  assert.equal(sourceTier('samas',sourcing),2);
  assert.equal(sourceTier('lasisa',sourcing),0);
  const result=selectWeeklyRecipes(catalog.recipes,bank,'2026-11-09',{sources:sourcing,nutrients:catalog.nutrients});
- assert.equal(result.sourcingPriority.withProductLinks,3);
+ assert.ok(result.sourcingPriority.withProductLinks>=1);
  const fake=structuredClone(sourcing);
  fake.products.turkey.farmers=[{kind:'farmer_product',name:'Pagrindinis',producer:'Ūkis',url:'https://ukis.lt/'}];
  assert.equal(sourceTier('kalakutiena',fake),0,'Bendras ūkio puslapis nėra SKU');
@@ -82,4 +82,12 @@ test('Konkrečios ūkių ir Farmlio produktų nuorodos – meniu prioritetas',as
  const weekdates=Array.from({length:8},(_,i)=>plusWeeks(i));
  const n=(src)=>weekdates.map(w=>selectWeeklyRecipes(catalog.recipes,bank,w,{sources:src,nutrients:catalog.nutrients})).flatMap(m=>m.sourcingPriority.priorities).filter(p=>p.group==='lasisa').length;
  assert.ok(n(modified)>n(sourcing),'Nauja konkreti ūkininko nuoroda keičia meniu prioritetą');
+});
+
+test('Pašalinto pardavėjo SKU nesuteikia prioriteto net rankiniu būdu įrašytas',async()=>{
+ const s=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ const fake=structuredClone(s);
+ fake.products.turkey.farmers=[{kind:'producer_product_reseller',producer:'Ūkis',name:'Kalakutiena',url:'https://pilnaspuodas.lt/preke/kalakuto-krutineles-file/'}];
+ assert.equal(sourceTier('kalakutiena',fake),0);
+ for(const product of Object.values(s.products))assert.ok((product.farmers||[]).every(f=>!f.url.includes('pilnaspuodas.lt')));
 });

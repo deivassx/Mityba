@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "updatedAt": "2026-11-06",
-  "notes": "2026-11-06: Mėsai ir žuviai šaltiniai pateikiami tik kaip konkrečių produktų URL; jei tiesioginio ūkininko SKU nerasta, nerodomas ūkio pradinis puslapis ar bendras pardavėjų sąrašas. Kai prekė parduodama per tarpininką, tai aiškiai pažymima. Nuoroda nėra patvirtintas įsigijimas, kaina, pakuotė ar prieinamumas. Barbora tik papildoma alternatyva, iki 2 pasirinkto atsiskaitymo parduotuvių visam 14 d. užsakymui.",
+  "notes": "Pirkinių šaltiniai: tiesioginis konkretus ūkininko produktas, tada konkretus Farmlio SKU, po jų papildoma Barbora nuoroda. Pašalinto pardavėjo domenas atmetamas iš visų paieškos rezultatų. Bendri ūkio puslapiai nėra konkrečios prekės, o nuorodos nėra patvirtinti užsakymai ar kainos.",
   "products": {
     "turkey": {
       "primary": "farmer",
@@ -11,17 +11,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Baltuonių krūtinėlės filė (per „Pilną puodą“)",
-          "url": "https://pilnaspuodas.lt/preke/kalakuto-krutineles-file/",
-          "kind": "producer_product_reseller",
-          "producer": "Baltuonių kalakutų ūkis",
-          "priceVerified": false,
-          "availabilityVerified": false,
-          "note": "Konkreti ūkininko produkcijos prekė parduodama per kitą parduotuvę. Pakuotės svoris kinta; tikrinti, ar galima užsisakyti Vilniuje."
-        }
-      ],
+      "farmers": [],
       "barbora": {
         "name": "Kalakutienos filė gabaliukai WELL DONE, 250 g",
         "url": "https://barbora.lt/produktai/kalakutienos-file-gabaliukai-well-done-250-g",
@@ -39,17 +29,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "P. Dijoko viščiuko krūtinėlės filė (per „Pilną puodą“)",
-          "url": "https://pilnaspuodas.lt/preke/visciuko-krutineles-file/",
-          "kind": "producer_product_reseller",
-          "producer": "Ūkininkas Paulius Dijokas",
-          "priceVerified": false,
-          "availabilityVerified": false,
-          "note": "Žalia filė, parduoda tarpininkas; kaina ir pasiekiamumas nepatvirtinti."
-        }
-      ],
+      "farmers": [],
       "barbora": {
         "name": "Šviežia viščiukų broilerių filė be vidinės filė, 1 kg",
         "url": "https://barbora.lt/produktai/sv-visc-broil-file-be-vidines-file-uzauginta-be-antib-1-kg",
@@ -224,16 +204,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Kiaulienos išpjova be kaulo („Pilnas puodas“)",
-          "url": "https://pilnaspuodas.lt/preke/kiaulienos-ispjova-be-kaulo/",
-          "kind": "retailer_product",
-          "priceVerified": false,
-          "availabilityVerified": false,
-          "note": "Konkreti pardavėjo prekė; gamintojas nenurodytas kaip konkrečiai patvirtintas ūkis."
-        }
-      ],
+      "farmers": [],
       "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
       "barbora": {
         "name": "LIETUVIŠKA kiaulienos išpjova, atšaldyta, 1 kg",

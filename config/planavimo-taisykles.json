@@ -36,8 +36,7 @@
       "baltuoniu.kalakutai.lt",
       "kazlauskuekoukis.lt",
       "elnienosprodukcija.lt",
-      "sesuoleliuukis.lt",
-      "pilnaspuodas.lt"
+      "sesuoleliuukis.lt"
     ],
     "deliveryDestination": "Vilnius, Lietuva",
     "selectionPriorities": [
@@ -259,7 +258,10 @@
           "verifiedCheckoutPrice": false
         },
         "showOnlyExactFarmerProductLinks": true,
-        "noFarmerHomepageFallback": true
+        "noFarmerHomepageFallback": true,
+        "excludedDomains": [
+          "pilnaspuodas.lt"
+        ]
       }
     },
     "farmerProductLinkPolicy": {
@@ -267,7 +269,7 @@
       "sourceFile": "data/sourcing-links.json",
       "requirement": "Mėsos ir žuvies skiltyje ūkininkų nuorodose rodyti TIK tikrą konkretaus produkto puslapį, niekada ne ūkio pagrindinį puslapį, kategoriją ar pardavėjų sąrašą.",
       "missingExactProductUrl": "Nerodyti neegzistuojančios / bendros nuorodos; pažymėti, kad konkreti ūkininko prekė nerasta. Farmlio ir Barbora atsarginių nuorodų politika lieka galioti.",
-      "sellerChannel": "Jei produktas tikras, bet parduodamas per tarpininką (pvz., Pilnas puodas), pažymėti, kad tai ūkininko produkcija PER PARDAVĖJĄ, o ne tiesioginis ūkis. Jei gamintojas neįvardytas, aiškiai vadinti pardavėjo preke.",
+      "sellerChannel": "Pardavėjų / tarpininkų konkrečius SKU galima žymėti tik jei nurodytas faktinis gamintojas; nenaudoti pašalintų pardavėjų ir jų domenų.",
       "evidence": "URL turi turėti prekės kelią; kainos ar likučio nevadinti patvirtintu, kol nepatikrintas SKU bei pristatymas."
     },
     "menuProteinSourcingPriority": {
@@ -297,8 +299,14 @@
           "source": "only_catalog_or_unavailable_or_Barbora_fallback"
         }
       ],
-      "rules": "Pirmiausia sudarinėti savaitinius meniu iš konkrečiose ūkininkų ir Farmlio produktų nuorodose rastų mėsos bei žuvies ingredientų. Niekada nevertinti ūkio pagrindinio puslapio ar bendro katalogo kaip konkrečios prekės. Išlaikyti visas 8 baltymų grupes per 8 savaites ir nė karto nekartoti recepto. Nuoroda nėra patvirtinta kaina, atsargos ar galimybė įsigyti; pirkimo parengtis vertinama atskirai pagal tikrus SKU, kainas, pristatymą ir 2 parduotuves."
-    }
+      "rules": "Pirmiausia sudarinėti savaitinius meniu iš konkrečiose ūkininkų ir Farmlio produktų nuorodose rastų mėsos bei žuvies ingredientų. Niekada nevertinti ūkio pagrindinio puslapio ar bendro katalogo kaip konkrečios prekės. Išlaikyti visas 8 baltymų grupes per 8 savaites ir nė karto nekartoti recepto. Nuoroda nėra patvirtinta kaina, atsargos ar galimybė įsigyti; pirkimo parengtis vertinama atskirai pagal tikrus SKU, kainas, pristatymą ir 2 parduotuves. Pašalintas pardavėjas ir jo domenas nesuteikia prioriteto ir negali būti siūlomas kaip šaltinis.",
+      "excludedDomains": [
+        "pilnaspuodas.lt"
+      ]
+    },
+    "excludedMerchantDomains": [
+      "pilnaspuodas.lt"
+    ]
   },
   "recipePreferences": {
     "primaryProteins": [

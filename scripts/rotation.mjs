@@ -4,17 +4,19 @@ import {readFileSync} from 'node:fs';
 const GROUPS={lunch:['kalakutiena','vistiena','eriena','kiauliena'],dinner:['samas','jautiena','lasisa','menke']};
 const INGREDIENTS={kalakutiena:'turkey',vistiena:'chicken',eriena:'lamb',kiauliena:'pork_tenderloin',
   samas:'catfish',jautiena:'beef',lasisa:'salmon',menke:'cod'};
+const BLOCKED_MERCHANTS=new Set(['pilnaspuodas.lt']);
+const permitted=url=>{try{const host=new URL(url).hostname;return ![...BLOCKED_MERCHANTS].some(d=>host===d||host.endsWith('.'+d));}catch{return false}};
 const VEG=new Set(['broccoli','carrot','beet','pepper','mushroom','tomato','onion','cabbage','sauerkraut']);
 const assert=(c,m)=>{if(!c)throw Error(m)};
 const isProductUrl=u=>typeof u==='string'&&/^https:\/\/[^/?#]+\/(produktas|product|preke)\/[^/?#]+\/?$/i.test(u);
 export function sourceTier(group,sources){
   const entry=sources?.products?.[INGREDIENTS[group]]||{};
-  const links=(entry.farmers||[]).filter(x=>isProductUrl(x.url)&&x.available!==false);
+  const links=(entry.farmers||[]).filter(x=>isProductUrl(x.url)&&permitted(x.url)&&x.available!==false);
   if(links.some(x=>x.kind==='farmer_product'&&x.producer))return 4;
   if(links.some(x=>x.kind==='producer_product_reseller'&&x.producer))return 3;
   const f=entry.farmlio;
   if(f&&['existing_catalog_sku','exact_sku'].includes(f.kind)&&f.available!==false
-     &&typeof f.url==='string'&&/^https:\/\/farmlio\.lt\/pardavejai\/[^/]+\/prekes\/[^/?#]+\/?$/.test(f.url))return 2;
+     &&typeof f.url==='string'&&permitted(f.url)&&/^https:\/\/farmlio\.lt\/pardavejai\/[^/]+\/prekes\/[^/?#]+\/?$/.test(f.url))return 2;
   return 0;
 }
 function computeSchedule(groups,bank,bases,sources){

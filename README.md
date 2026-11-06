@@ -20,9 +20,13 @@ Svetainė: https://deivassx.github.io/Mityba/
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 
+## Pašalintas tiekėjas
+
+`Pilnas puodas` (`pilnaspuodas.lt`) pašalintas iš produktų paieškos, ūkio prekių nuorodų, meniu prioritetų, kandidatų krepšelio ir ūkių atradimo. Jei ūkininko SKU po pašalinimo nėra, rodoma, kad konkretus pasiūlymas nerastas. Paieška tęsiama kituose ūkiuose, „Farmlio“ ir, kai reikia, „Barbora“. Kainos ir likučiai tebelieka nepatvirtinti.
+
 ## Ūkininkų nuorodos tik į konkrečias prekes
 
-Skiltyje `#dvi-savaites`, grupėje **Mėsa ir žuvis**, ūkininko nuorodos nuo 2026-11-06 yra **tik SKU produktų puslapiai**, ne bendras ūkio pradinis puslapis. `data/sourcing-links.json` `farmers[]` turi nurodyti `kind` (`farmer_product`, `producer_product_reseller` arba `retailer_product`), konkretų produkto URL ir produkto pavadinimą. `js/two-week.js` atmeta bendrus ūkių puslapius ir kategorijas – kai ūkininko SKU nerastas, rodo tekstą „Tiesioginės ūkininko prekės nuorodos nerasta“. Pavyzdžiai: Šešuolėlių ūkio ėriuko kumpis (`sesuoleliuukis.lt/produktas/...`), Baltuonių kalakutienos filė per „Pilną puodą“ (`pilnaspuodas.lt/preke/...`). Tarpininkų nuorodos **nėra** tiesioginis užsakymas ūkyje. Nuorodos nepatvirtina kainos, atsargų, pakuotės ar pristatymo. Nei `Farmlio`, nei `Barbora` nuorodos automatiškai neįtraukiamos į patvirtintą dviejų savaičių krepšelį; ribojimas iki 2 realių atsiskaitymo vietų lieka galioti.
+Skiltyje `#dvi-savaites`, grupėje **Mėsa ir žuvis**, ūkininko nuorodos nuo 2026-11-06 yra **tik SKU produktų puslapiai**, ne bendras ūkio pradinis puslapis. `data/sourcing-links.json` `farmers[]` turi nurodyti `kind` (`farmer_product`, `producer_product_reseller` arba `retailer_product`), konkretų produkto URL ir produkto pavadinimą. `js/two-week.js` atmeta bendrus ūkių puslapius ir kategorijas – kai ūkininko SKU nerastas, rodo tekstą „Tiesioginės ūkininko prekės nuorodos nerasta“. Pavyzdys: Šešuolėlių ūkio ėriuko kumpis (`sesuoleliuukis.lt/produktas/...`). Tarpininkų nuorodos **nėra** tiesioginis užsakymas ūkyje. Nuorodos nepatvirtina kainos, atsargų, pakuotės ar pristatymo. Nei `Farmlio`, nei `Barbora` nuorodos automatiškai neįtraukiamos į patvirtintą dviejų savaičių krepšelį; ribojimas iki 2 realių atsiskaitymo vietų lieka galioti.
 
 ## Barbora atsarginės produktų nuorodos
 

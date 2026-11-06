@@ -36,7 +36,7 @@ function sameHost(url,root) {
  try{return new URL(url).hostname===new URL(root).hostname && new URL(url).protocol==='https:';}catch{return false;}
 }
 export async function discoverFarms(rules) {
- const suppliers=rules.shopping.supplierCandidates.filter(s=>s.name!=='Farmlio'&&s.name!=='Barbora'&&s.url?.startsWith('https://')&&!new URL(s.url).hostname.includes('facebook.com'));
+ const suppliers=rules.shopping.supplierCandidates.filter(s=>s.name!=='Farmlio'&&s.name!=='Barbora'&&s.url?.startsWith('https://')&&!new URL(s.url).hostname.includes('facebook.com')&&!(rules.shopping.excludedMerchantDomains||[]).some(d=>new URL(s.url).hostname===d||new URL(s.url).hostname.endsWith('.'+d)));
  const farms=[];
  for (const f of suppliers) {
   const root=new URL(f.url).origin;

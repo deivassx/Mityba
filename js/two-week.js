@@ -17,6 +17,7 @@
     return (sourcing?.farmers||[]).filter(p=>{
       const href=link(p.url);
       if(!FARM_PRODUCT_TYPES.has(p.kind)||!href||!p.name)return false;
+      if(new URL(href).hostname==='pilnaspuodas.lt'||new URL(href).hostname.endsWith('.pilnaspuodas.lt'))return false;
       return /^\/(produktas|product|preke)\/[^/?#]+\/?$/i.test(new URL(href).pathname);
     });
   }
