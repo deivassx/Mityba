@@ -104,12 +104,13 @@ async function renderWeeklyShopping(menu,request) {
   output.setAttribute('aria-busy','true');
   output.innerHTML='<div class="card fortnight-loading">Skaičiuojamas pasirinktos savaitės užsakymas…</div>';
   try {
-    const [sources,rules]=await Promise.all([
+    const [sources,rules,catalog]=await Promise.all([
       loadJson('./data/sourcing-links.json').catch(()=>({products:{}})),
-      loadJson('./config/planavimo-taisykles.json')
+      loadJson('./config/planavimo-taisykles.json'),
+      loadJson('./data/catalog.json').catch(()=>({products:[],stores:[]}))
     ]);
     if(request!==selectionRequest)return;
-    const plan=window.WeeklyShop.build(menu,sources,rules);
+    const plan=window.WeeklyShop.build(menu,sources,rules,catalog);
     window.WeeklyShop.render(plan);
   }catch(error){
     if(request===selectionRequest)output.innerHTML='<div class="card fortnight-empty">Vienos savaitės pirkinių sąrašo nepavyko atidaryti: '+safe(error.message)+'.</div>';
