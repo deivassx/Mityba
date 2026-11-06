@@ -6,7 +6,7 @@ import vm from 'node:vm';
 const script=await fs.readFile(new URL('../js/weekly-order.js',import.meta.url),'utf8');
 const win={};
 vm.runInNewContext(script,{window:win,URL,Intl,Date,localStorage:{getItem(){return null}}});
-const {build,demand,copyText,farmerProductLinks}=win.WeeklyShop;
+const {build,demand,copyText,farmerProductLinks,choose}=win.WeeklyShop;
 const load=async week=>JSON.parse(await fs.readFile(new URL('../data/history/'+week+'.json',import.meta.url),'utf8'));
 const rules=JSON.parse(await fs.readFile(new URL('../config/planavimo-taisykles.json',import.meta.url),'utf8'));
 const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
@@ -28,7 +28,10 @@ test('7 dienų užsakymas sumuoja tik vieną savaitę (14 valgių), ne dvi',()=>
   const needed=demand(week1);
   for(const item of plan.items)assert.equal(item.grams,needed[item.id],item.id);
   const catfish=plan.items.find(x=>x.id==='catfish');
-  assert.equal(catfish.packs,Math.ceil(needed.catfish/catfish.packGrams));
+  assert.equal(catfish.packs,null,'Pakuočių skaičius neapskaičiuojamas be tiekėjo pasirinkimo');
+  const catfishOffer=catfish.choices.find(c=>c.kind==='catalog');
+  assert.ok(choose(plan,'catfish',catfishOffer.key));
+  assert.equal(catfish.packs,Math.ceil(needed.catfish/catfishOffer.packGrams));
   assert.equal(plan.orderReady,false);
   assert.equal(plan.priceIncludesDelivery,false);
   const copied=copyText(plan);
@@ -79,14 +82,41 @@ test('Barbora atsarginė nuoroda neišgalvoja trečio tiekėjo arba kainos',()=>
   assert.ok(plan.unknownPrice.length>0);
 });
 
-test('Užkerta kelią daugiau nei dviem pasirinktiems pardavėjams',()=>{
-  const modified=structuredClone(week1);
-  const p={id:'turkey',store:'trecias-ukis',url:'https://example.org/product/kalakutiena',name:'Kalakutiena',packGrams:1000,priceEur:15};
-  modified.products.push(p);
-  const plan=build(modified,sources,rules);
-  assert.equal(plan.tooManyStores,true);
-  assert.equal(plan.suppliers.length,3);
+test('Trečias tiekėjas nepasirenkamas: riba skaičiuojama pagal sąmoningai pasirinktas prekes',()=>{
+  const plan=build(week1,sources,rules);
+  assert.deepEqual([...plan.suppliers],[],'Pasenę katalogo tiekėjai nepasirenkami iš anksto');
+  const fish=plan.items.find(x=>x.id==='catfish').choices.find(x=>x.store==='farmlio');
+  const yogurt=plan.items.find(x=>x.id==='yogurt').choices.find(x=>x.store==='barbora');
+  const turkey=plan.items.find(x=>x.id==='turkey').choices.find(x=>x.kind==='farmer');
+  assert.ok(fish&&yogurt&&turkey);
+  assert.equal(choose(plan,'catfish',fish.key),true);
+  assert.equal(choose(plan,'yogurt',yogurt.key),true);
+  assert.equal(plan.suppliers.length,2);
+  assert.equal(choose(plan,'turkey',turkey.key),false,'Trečia atskira parduotuvė atmetama');
+  assert.equal(plan.items.find(x=>x.id==='turkey').selectedKey,'');
+  assert.equal(plan.suppliers.length,2);
+  assert.equal(plan.tooManyStores,false);
   assert.equal(plan.orderReady,false);
+});
+
+test('Senos katalogo kainos nėra patikrinta suma; kaina skaičiuojama tik patvirtintai prekei',()=>{
+  const plan=build(week1,sources,rules);
+  const fish=plan.items.find(x=>x.id==='catfish');
+  assert.equal(choose(plan,'catfish',fish.choices[0].key),true);
+  assert.equal(fish.priceFresh,false);
+  assert.equal(fish.cost,null);
+  assert.equal(plan.pricedCount,0);
+  assert.equal(plan.grandTotalEur,null);
+
+  const verified=structuredClone(week1);
+  const catfish=verified.products.find(x=>x.id==='catfish');
+  catfish.priceEur=4;
+  catfish.verification={url:catfish.url,checkedAt:new Date().toISOString(),method:'test only'};
+  const fresh=build(verified,sources,rules);
+  assert.equal(choose(fresh,'catfish',fresh.items.find(x=>x.id==='catfish').choices.find(x=>x.kind==='catalog').key),true);
+  assert.equal(fresh.items.find(x=>x.id==='catfish').cost,16);
+  assert.equal(fresh.partialGoodsEstimateEur,16);
+  assert.equal(fresh.grandTotalEur,null,'Be patikrinto pristatymo negalima rodyti galutinės sumos');
 });
 
 test('Neleidžia 14 dienų taisyklių ir sugadinto savaitės kalendoriaus',()=>{
