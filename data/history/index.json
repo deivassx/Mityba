@@ -1,5 +1,19 @@
 [
   {
+    "weekStart": "2027-01-04",
+    "weekEnd": "2027-01-10",
+    "generatedAt": "2026-11-06T08:45:55.402Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Kalakutiena su feta ir pomidorais",
+      "Lašiša su sūrio plutele ir grybais",
+      "Orkaitės vištiena su traškiais kopūstais",
+      "Jautienos burgerio paplotėliai be bandelės"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
     "weekStart": "2026-12-28",
     "weekEnd": "2027-01-03",
     "generatedAt": "2026-11-06T08:01:35.644Z",
