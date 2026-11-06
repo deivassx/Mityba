@@ -236,7 +236,7 @@
       "temperatureStorage": "Mėsą ir žuvį pirk tik 7 dienų meniu; vėlesnėms dienoms skirtas porcijas saugiai užšaldyk –18 °C ar žemiau, atitirpink šaldytuve. Daržoves ir šviežius priedus pirk tos pačios savaitės poreikiui.",
       "productEvidence": "Nepatikrintos mėsos/žuvies prekės rodomos su vienos savaitės tiksliais gramais, bet be išgalvotos kainos, pakuotės, pardavėjo ar atsiskaitymo nuorodos.",
       "priceVerification": "Prieš perkant patikrink vienos savaitės SKU, kainas, minimalų užsakymą, pristatymą, pakavimą ir ne daugiau kaip 2 parduotuvių ribą. Seno katalogo kainos nėra patvirtinta savaitės suma.",
-      "uiBehavior": "Vienintelė pirkinių skiltis #pirkiniai ir #weekly-output, valdoma tik js/weekly-order.js. Vienas 7 dienų / 14 valgių produktų sąrašas, suskirstytas į dvi produktų grupes. Jokių „Pasirink tiekėją“ laukų ar rankinio tiekėjo pasirinkimo saugojimo. Rodyti ūkių konkrečių produktų nuorodas pirmiausia, tada Farmlio, o Barbora tik kaip alternatyvą; šios nuorodos nėra automatiškai pasirinktos atsiskaitymo vietos. Pakuotėms naudoti tik identifikuotą SKU, istorines kainas pateikti kaip nepatvirtintas. Patikrintų SKU dalinė suma leidžiama, bet pilna savaitės kaina tik po visų SKU bei pristatymo/pakavimo patikros. Daugiausia 2 faktinės parduotuvės galutiniame krepšelyje; UI alternatyvų skaičius nėra parduotuvių skaičius.",
+      "uiBehavior": "Vienintelė pirkinių skiltis #pirkiniai ir #weekly-output, valdoma tik js/weekly-order.js. Vienas 7 dienų / 14 valgių produktų sąrašas, suskirstytas į dvi produktų grupes. Jokių „Pasirink tiekėją“ laukų ar rankinio tiekėjo pasirinkimo saugojimo. Rodyti ūkių konkrečių produktų nuorodas pirmiausia, tada Farmlio, o Barbora tik kaip alternatyvą; šios nuorodos nėra automatiškai pasirinktos atsiskaitymo vietos. Pakuotėms naudoti tik identifikuotą SKU, istorines kainas pateikti kaip nepatvirtintas. Patikrintų SKU dalinė suma leidžiama, bet pilna savaitės kaina tik po visų SKU bei pristatymo/pakavimo patikros. Daugiausia 2 faktinės parduotuvės galutiniame krepšelyje; UI alternatyvų skaičius nėra parduotuvių skaičius. Kainas būtinai rodyk iš viešų ūkininkų prekės puslapių (€/kg su matymo data), periodiškai atnaujintų data/price-observations.json, arba istorinėmis katalogo pakuotės kainomis. Greta rodyk vienos savaitės orientacinę produkto ir žinomų kainų dalinę sumą, bet neišgalvok galutinio pirkimo kainos.",
       "farmlioFallback": {
         "enabled": true,
         "priority": [
@@ -282,6 +282,22 @@
         "noAutomaticCheckoutAssignment": true,
         "persistChecksPerWeek": true,
         "twoCheckoutStoreRuleAppliesAtFinalBasket": true
+      },
+      "priceDisplay": {
+        "showSourcePricePerKg": true,
+        "showSourcePricePerPack": true,
+        "showLastSeenDate": true,
+        "showWeeklyEstimatedLineCost": true,
+        "variableWeightUsesGramsTimesEurPerKg": true,
+        "packagedUsesCeilingFullPacks": true,
+        "historicalCatalogPricesAllowedAsClearlyLabeledEstimates": true,
+        "snapshotFile": "data/price-observations.json",
+        "refreshScript": "scripts/refresh-farm-prices.mjs",
+        "fallbackWhenScrapingUnavailable": "last_observed_price_with_date",
+        "promotionExpiryPolicy": "not_applicable_to_week_after_end_date",
+        "partialSumShowsHowManyItemsHavePrices": true,
+        "neverRepresentPartialEstimatedGoodsAsCheckoutTotal": true,
+        "deliveryVerificationStillRequired": true
       }
     },
     "farmerProductLinkPolicy": {
