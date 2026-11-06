@@ -254,8 +254,9 @@
     const rows=group.lines.map(line=>{
       const done=checked(line),suggested=line.reference;
       const status=!suggested?'Nėra konkrečios prekės nuorodos'
-        :line.packGrams==null?'Pakuotė / kaina nepatvirtinta'
-        :line.priceFresh?'Kaina patikrinta':'Reikia patikrinti kainą';
+        :line.quote?.verified?'SKU kaina patikrinta'
+        :line.quote?'Kaina orientacinė · žiūrėti datą'
+        :line.packGrams==null?'Pakuotė / kaina nerasta':'Kaina nerasta';
       const packs=line.packs==null?(line.reference?.priceBasis==='variable_weight'?'Pagal faktinį svorį':'Pakuotė nepatvirtinta')
         :num(line.packs)+' × '+num(line.packGrams)+' g';
       return '<tr class="'+(done?'is-complete':'')+'"><td><input type="checkbox" class="fortnight-check" '
