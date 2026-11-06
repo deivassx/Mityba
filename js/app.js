@@ -65,7 +65,7 @@ function render() {
   document.getElementById('logistics').innerHTML=[
     ['01','Patikrink ūkininko prekę','Pirmiausia konkrečiam receptui ieškok tinkamo ūkininko SKU. Jei kaina, dalis ar pakuotė nepatikrinta, produktas nėra patvirtintas pirkimui.'],
     ['02','Palygink visą krepšelį','Farmlio ir Barbora yra alternatyvos, ne iš anksto pasirinktos parduotuvės. Palygink pakuotes, minimalų užsakymą ir pristatymo kainą.'],
-    ['03','Rinkis daugiausia du tiekėjus','Pirkinių sąraše pats pasirink pardavėją. Trečias tiekėjas blokuojamas; krepšelio suma patvirtinama tik patikrinus visus SKU ir pristatymą.']
+    ['03','Rinkis daugiausia du tiekėjus','Pirkinių sąraše pateiktos konkrečių prekių nuorodos be atskiro tiekėjo rinkiklio. Galutiniame užsakyme naudok daugiausia 2 parduotuves; krepšelio sumą tvirtink tik patikrinęs visus SKU ir pristatymą.']
   ].map(([n,title,description])=>'<div class="card logistic"><span class="num">'+n+'</span><h3>'+title+'</h3><p>'+description+'</p></div>').join('');
 }
 let latestMenu, historyEntries=[], selectionRequest=0;
