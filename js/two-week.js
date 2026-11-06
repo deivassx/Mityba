@@ -11,6 +11,15 @@
     try { const p=new URL(url);return p.protocol==='https:'?p.href:null; }
     catch{return null;}
   }
+  // Ūkininko nuoroda turi vesti į konkretų SKU – jokių pradinių puslapių ar kategorijų.
+  const FARM_PRODUCT_TYPES=new Set(['farmer_product','producer_product_reseller','retailer_product']);
+  function farmerProductLinks(sourcing) {
+    return (sourcing?.farmers||[]).filter(p=>{
+      const href=link(p.url);
+      if(!FARM_PRODUCT_TYPES.has(p.kind)||!href||!p.name)return false;
+      return /^\/(produktas|product|preke)\/[^/?#]+\/?$/i.test(new URL(href).pathname);
+    });
+  }
   function demand(menu) {
     if(!menu || menu.days?.length!==7)throw Error('14 dienų užsakymui būtinos dvi pilnos 7 dienų savaitės.');
     const recipes=new Map(menu.recipes.map(r=>[r.id,r]));
@@ -107,9 +116,19 @@
       if(line.sourcing?.farmlio?.url && link(line.sourcing.farmlio.url) && line.sourcing.farmlio.url!==line.url){
         links.push('<a href="'+escapeHtml(link(line.sourcing.farmlio.url))+'" target="_blank" rel="noopener noreferrer">Farmlio ↗</a>');
       }
-      for(const farm of line.sourcing?.farmers||[]){
-        const href=link(farm.url);
-        if(href&&href!==line.url)links.push('<a href="'+escapeHtml(href)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(farm.name)+' ↗</a>');
+      const productLinks=farmerProductLinks(line.sourcing);
+      for(const offer of productLinks) {
+        const href=link(offer.url);
+        if(href===line.url)continue;
+        const channel=offer.kind==='farmer_product'?'Ūkio prekė'
+          :offer.kind==='producer_product_reseller'?'Ūkio prekė per pardavėją'
+          :'Pardavėjo prekė';
+        links.push('<span class="fortnight-farm-product"><a href="'+escapeHtml(href)+'" target="_blank" rel="noopener noreferrer">'
+          +escapeHtml(channel+': '+offer.name)+' ↗</a>'
+          +'<small>Konkretaus produkto nuoroda. Kainą ir prieinamumą patikrink.</small></span>');
+      }
+      if(line.group==='baltymai' && line.sourcing && !productLinks.some(p=>p.kind!=='retailer_product')) {
+        links.push('<small class="fortnight-farm-missing">Tiesioginės ūkininko prekės nuorodos nerasta.</small>');
       }
       // Barbora yra tik atsarginis kanalas: rodome nuorodą,
       // bet neatliekame jokio automatinio trečios parduotuvės pasirinkimo.
@@ -145,7 +164,14 @@
           (p.url?' · katalogas: '+p.url:' · konkretaus SKU nėra')+
           (p.cost===null?' · KAINA NEŽINOMA':' · sena katalogo kaina ~'+eur(p.cost)));
         if(p.sourcing?.farmlio?.url)out.push('    Farmlio: '+p.sourcing.farmlio.url+' (kaina / likutis nepatvirtinti)');
-        for(const farm of p.sourcing?.farmers||[])out.push('    Ūkis: '+farm.name+' – '+farm.url+' (kaina nepatvirtinta)');
+        const farmProducts=farmerProductLinks(p.sourcing);
+        for(const offer of farmProducts){
+          const channel=offer.kind==='farmer_product'?'Ūkio prekė'
+            :offer.kind==='producer_product_reseller'?'Ūkio prekė per pardavėją':'Pardavėjo prekė';
+          out.push('    '+channel+': '+offer.name+' – '+offer.url+' (kaina ir likutis nepatvirtinti)');
+        }
+        if(p.group==='baltymai' && p.sourcing && !farmProducts.some(x=>x.kind!=='retailer_product'))
+          out.push('    Tiesioginės ūkininko prekės nuorodos nerasta.');
         if(p.needsReview&&p.sourcing?.barbora?.url){
           const option=p.sourcing.barbora;
           out.push('    BARBORA ATSARGINIS VARIANTAS: '+option.name+' – '+option.url
@@ -201,5 +227,5 @@
       container.dataset.fortnightBound='yes';
     }
   }
-  root.TwoWeekShop={build,render,copyText,demand};
+  root.TwoWeekShop={build,render,copyText,demand,farmerProductLinks};
 })(window);

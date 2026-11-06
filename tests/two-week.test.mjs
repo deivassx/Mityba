@@ -121,3 +121,34 @@ test('Nepatikrinta pakaitinė žuvis ir kategorijos nėra laikomos patvirtintais
  assert.match(cod.sourcing.barbora.confidence,/ne ta pati rūšis/);
  assert.ok(plan.items.find(x=>x.id==='lamb').sourcing.barbora.kind==='category');
 });
+
+test('Mėsos ir žuvies ūkių nuorodos rodo konkrečius produktus, ne pradžios puslapius',async()=>{
+ const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ for(const [id,source] of Object.entries(sources.products)){
+   const matched=win.TwoWeekShop.farmerProductLinks(source);
+   assert.equal(matched.length,source.farmers.length,id+' - ne produkto puslapis');
+   for(const entry of matched){
+     assert.match(new URL(entry.url).pathname,/^\\/(produktas|product|preke)\\/[^/]+\\/?$/i, id);
+     assert.ok(!['farmer_home','seller_directory','farmlio_seller'].includes(entry.kind),id);
+   }
+ }
+ assert.ok(sources.products.lamb.farmers.some(x=>x.url.includes('eriuko-kumpis-be-kaulo')));
+ assert.ok(sources.products.turkey.farmers.some(x=>x.url.includes('kalakuto-krutineles-file')));
+ assert.equal(sources.products.beef.farmers.length,0);
+ const plan=build(a,b,sources),list=copyText(plan);
+ assert.match(list,/Ūkio prekė per pardavėją/);
+ assert.doesNotMatch(list,/https:\\/\\/kazlauskuekoukis\\.lt\\//);
+ assert.doesNotMatch(list,/https:\\/\\/baltuoniu\\.kalakutai\\.lt\\/\\s/);
+ assert.match(list,/Tiesioginės ūkininko prekės nuorodos nerasta/);
+});
+test('Bendri ūkio puslapiai atsitiktinai grįžę į duomenis vis tiek nebus rodomi',()=>{
+ const fake={farmers:[
+  {name:'Ūkio pradžia',url:'https://sesuoleliuukis.lt/',kind:'farmer_home'},
+  {name:'Netikra SKU žyma',url:'https://sesuoleliuukis.lt/',kind:'farmer_product'},
+  {name:'Kategorija',url:'https://pilnaspuodas.lt/kategorija/mesa/kalakutiena/',kind:'producer_product_reseller'},
+  {name:'Tikra prekė',url:'https://pilnaspuodas.lt/preke/kiaulienos-ispjova-be-kaulo/',kind:'retailer_product'}
+ ]};
+ const found=win.TwoWeekShop.farmerProductLinks(fake);
+ assert.equal(found.length,1);
+ assert.equal(found[0].name,'Tikra prekė');
+});

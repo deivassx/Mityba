@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-05",
-  "notes": "Pirmiausia tikrink ūkininko tiesioginę parduotuvę ir Farmlio. Jei ten nepatvirtintas tikslus SKU ar kaina, gali pateikti atsarginę Barbora nuorodą, net pagrindiniams baltymams. Nuorodos ir kainų pavyzdžiai nereiškia realaus laiko patvirtinto pirkinių krepšelio; iki dviejų pasirinktų parduotuvių visam 14 d. užsakymui.",
+  "updatedAt": "2026-11-06",
+  "notes": "2026-11-06: Mėsai ir žuviai šaltiniai pateikiami tik kaip konkrečių produktų URL; jei tiesioginio ūkininko SKU nerasta, nerodomas ūkio pradinis puslapis ar bendras pardavėjų sąrašas. Kai prekė parduodama per tarpininką, tai aiškiai pažymima. Nuoroda nėra patvirtintas įsigijimas, kaina, pakuotė ar prieinamumas. Barbora tik papildoma alternatyva, iki 2 pasirinkto atsiskaitymo parduotuvių visam 14 d. užsakymui.",
   "products": {
     "turkey": {
       "primary": "farmer",
@@ -13,10 +13,13 @@
       },
       "farmers": [
         {
-          "name": "Baltuonių kalakutai",
-          "url": "https://baltuoniu.kalakutai.lt/",
-          "kind": "farmer_home",
-          "priceVerified": false
+          "name": "Baltuonių krūtinėlės filė (per „Pilną puodą“)",
+          "url": "https://pilnaspuodas.lt/preke/kalakuto-krutineles-file/",
+          "kind": "producer_product_reseller",
+          "producer": "Baltuonių kalakutų ūkis",
+          "priceVerified": false,
+          "availabilityVerified": false,
+          "note": "Konkreti ūkininko produkcijos prekė parduodama per kitą parduotuvę. Pakuotės svoris kinta; tikrinti, ar galima užsisakyti Vilniuje."
         }
       ],
       "barbora": {
@@ -38,10 +41,13 @@
       },
       "farmers": [
         {
-          "name": "Farmlio ūkių sąrašas",
-          "url": "https://farmlio.lt/pardavejai",
-          "kind": "seller_directory",
-          "priceVerified": false
+          "name": "P. Dijoko viščiuko krūtinėlės filė (per „Pilną puodą“)",
+          "url": "https://pilnaspuodas.lt/preke/visciuko-krutineles-file/",
+          "kind": "producer_product_reseller",
+          "producer": "Ūkininkas Paulius Dijokas",
+          "priceVerified": false,
+          "availabilityVerified": false,
+          "note": "Žalia filė, parduoda tarpininkas; kaina ir pasiekiamumas nepatvirtinti."
         }
       ],
       "barbora": {
@@ -61,20 +67,7 @@
         "kind": "exact_sku_unavailable",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Kazlauskų ekologinis ūkis",
-          "url": "https://kazlauskuekoukis.lt/",
-          "kind": "farmer_home",
-          "priceVerified": false
-        },
-        {
-          "name": "Kinderio limuzinai „Farmlio“",
-          "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai",
-          "kind": "farmlio_seller",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "barbora": {
         "name": "Smulkinta jautiena, riebumas ne daugiau kaip 15 %, 1 kg",
         "url": "https://barbora.lt/produktai/sviezia-smulkinta-jautiena-riebumas-ne-didesnis-kaip-15-proc-1-kg",
@@ -92,14 +85,7 @@
         "kind": "existing_catalog_sku",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Žuvėja „Farmlio“",
-          "url": "https://farmlio.lt/pardavejai/zuveja",
-          "kind": "farmlio_seller",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "barbora": {
         "name": "Šviežių afrikinių šamų filė su oda – šviežios žuvies kategorija",
         "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-zuvis-juru-gerybes-ir-zuvu-gaminiai/sviezia-zuvis-ir-juros-gerybes",
@@ -116,20 +102,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Kazlauskų ekologinis ūkis",
-          "url": "https://kazlauskuekoukis.lt/",
-          "kind": "farmer_home",
-          "priceVerified": false
-        },
-        {
-          "name": "Kinderio limuzinai (Farmlio pardavėjas)",
-          "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai",
-          "kind": "farmlio_seller",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos.",
       "barbora": {
         "name": "Mėsos skyrius – ieškoti jautienos nugarinės",
@@ -147,20 +120,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Kazlauskų ekologinis ūkis",
-          "url": "https://kazlauskuekoukis.lt/",
-          "kind": "farmer_home",
-          "priceVerified": false
-        },
-        {
-          "name": "Kinderio limuzinai (Farmlio pardavėjas)",
-          "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai",
-          "kind": "farmlio_seller",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos.",
       "barbora": {
         "name": "Mėsos skyrius – ieškoti jautienos juostelių",
@@ -178,20 +138,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Kazlauskų ekologinis ūkis",
-          "url": "https://kazlauskuekoukis.lt/",
-          "kind": "farmer_home",
-          "priceVerified": false
-        },
-        {
-          "name": "Kinderio limuzinai (Farmlio pardavėjas)",
-          "url": "https://farmlio.lt/pardavejai/uab-kinderio-limuzinai",
-          "kind": "farmlio_seller",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "note": "Nepatvirtinta, ar ūkis turi būtent šią jautienos dalį. Tik paieškos nuorodos.",
       "barbora": {
         "name": "Mėsos skyrius – ieškoti jautienos mentės",
@@ -211,10 +158,13 @@
       },
       "farmers": [
         {
-          "name": "Šešuolėlių ūkis",
-          "url": "https://sesuoleliuukis.lt/",
-          "kind": "farmer_home",
-          "priceVerified": false
+          "name": "Šešuolėlių ūkio ėriuko kumpis be kaulo",
+          "url": "https://sesuoleliuukis.lt/produktas/eriuko-kumpis-be-kaulo/",
+          "kind": "farmer_product",
+          "producer": "Šešuolėlių ūkis",
+          "priceVerified": false,
+          "availabilityVerified": false,
+          "note": "Prekės nuoroda pateikta ūkininko produktų kataloge; atskiro puslapio atsidarymas tikrinant strigo. Kainą ir prieinamumą būtina pakartotinai patikrinti."
         }
       ],
       "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
@@ -234,14 +184,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Farmlio tiekėjų sąrašas",
-          "url": "https://farmlio.lt/pardavejai",
-          "kind": "seller_directory",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
       "barbora": {
         "name": "Šviežia atlantinių lašišų filė su oda, 1 kg",
@@ -262,14 +205,7 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [
-        {
-          "name": "Farmlio tiekėjų sąrašas",
-          "url": "https://farmlio.lt/pardavejai",
-          "kind": "seller_directory",
-          "priceVerified": false
-        }
-      ],
+      "farmers": [],
       "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
       "barbora": {
         "name": "Atšildyta ledjūrio menkės filė WELL DONE, 250 g",
@@ -290,10 +226,12 @@
       },
       "farmers": [
         {
-          "name": "Farmlio tiekėjų sąrašas",
-          "url": "https://farmlio.lt/pardavejai",
-          "kind": "seller_directory",
-          "priceVerified": false
+          "name": "Kiaulienos išpjova be kaulo („Pilnas puodas“)",
+          "url": "https://pilnaspuodas.lt/preke/kiaulienos-ispjova-be-kaulo/",
+          "kind": "retailer_product",
+          "priceVerified": false,
+          "availabilityVerified": false,
+          "note": "Konkreti pardavėjo prekė; gamintojas nenurodytas kaip konkrečiai patvirtintas ūkis."
         }
       ],
       "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",

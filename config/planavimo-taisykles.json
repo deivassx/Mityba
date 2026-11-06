@@ -257,8 +257,18 @@
           "observedOn": "2026-11-05",
           "availability": "Patikrink prieš pirkdamas",
           "verifiedCheckoutPrice": false
-        }
+        },
+        "showOnlyExactFarmerProductLinks": true,
+        "noFarmerHomepageFallback": true
       }
+    },
+    "farmerProductLinkPolicy": {
+      "enforcedInWebsite": true,
+      "sourceFile": "data/sourcing-links.json",
+      "requirement": "Mėsos ir žuvies skiltyje ūkininkų nuorodose rodyti TIK tikrą konkretaus produkto puslapį, niekada ne ūkio pagrindinį puslapį, kategoriją ar pardavėjų sąrašą.",
+      "missingExactProductUrl": "Nerodyti neegzistuojančios / bendros nuorodos; pažymėti, kad konkreti ūkininko prekė nerasta. Farmlio ir Barbora atsarginių nuorodų politika lieka galioti.",
+      "sellerChannel": "Jei produktas tikras, bet parduodamas per tarpininką (pvz., Pilnas puodas), pažymėti, kad tai ūkininko produkcija PER PARDAVĖJĄ, o ne tiesioginis ūkis. Jei gamintojas neįvardytas, aiškiai vadinti pardavėjo preke.",
+      "evidence": "URL turi turėti prekės kelią; kainos ar likučio nevadinti patvirtintu, kol nepatikrintas SKU bei pristatymas."
     }
   },
   "recipePreferences": {
@@ -405,7 +415,8 @@
       "recipePreferences.maxGramsPerServing (generuojamiems meniu)",
       "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)",
       "shopping.bulkPurchase (14 dienu saraso ir kiekiu formavimas interneto svetaines JavaScript, tik su zinomais kandidatais)",
-      "recipePreferences.menuDiversity (32 receptai, nevienodi 8 savaičių planai)"
+      "recipePreferences.menuDiversity (32 receptai, nevienodi 8 savaičių planai)",
+      "shopping.farmerProductLinkPolicy (14 dienų svetainėje rodo tik konkrečius ūkių produktų URL ir aiškiai žymi tarpininkus)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",

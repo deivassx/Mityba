@@ -20,6 +20,10 @@ Svetainė: https://deivassx.github.io/Mityba/
 Pakeitus JSON ir įkėlus į `main`, kita GitHub Actions užduotis naudos atnaujintas taisykles.
 Saugykla vieša, todėl nekelkite privačių duomenų.
 
+## Ūkininkų nuorodos tik į konkrečias prekes
+
+Skiltyje `#dvi-savaites`, grupėje **Mėsa ir žuvis**, ūkininko nuorodos nuo 2026-11-06 yra **tik SKU produktų puslapiai**, ne bendras ūkio pradinis puslapis. `data/sourcing-links.json` `farmers[]` turi nurodyti `kind` (`farmer_product`, `producer_product_reseller` arba `retailer_product`), konkretų produkto URL ir produkto pavadinimą. `js/two-week.js` atmeta bendrus ūkių puslapius ir kategorijas – kai ūkininko SKU nerastas, rodo tekstą „Tiesioginės ūkininko prekės nuorodos nerasta“. Pavyzdžiai: Šešuolėlių ūkio ėriuko kumpis (`sesuoleliuukis.lt/produktas/...`), Baltuonių kalakutienos filė per „Pilną puodą“ (`pilnaspuodas.lt/preke/...`). Tarpininkų nuorodos **nėra** tiesioginis užsakymas ūkyje. Nuorodos nepatvirtina kainos, atsargų, pakuotės ar pristatymo. Nei `Farmlio`, nei `Barbora` nuorodos automatiškai neįtraukiamos į patvirtintą dviejų savaičių krepšelį; ribojimas iki 2 realių atsiskaitymo vietų lieka galioti.
+
 ## Barbora atsarginės produktų nuorodos
 
 Kai nei tiesioginio ūkio puslapyje, nei „Farmlio“ nepavyksta patvirtinti konkretaus SKU ir jo kainos, dviejų savaičių skiltyje papildomai rodomas **Barbora konkretus produkto pasiūlymas** (`data/sourcing-links.json` laukas `barbora`) arba aiškiai pažymėtas kategorijos puslapis. Pvz., `salmon` turi tiesioginę šviežios lašišos filė su oda 1 kg nuorodą. 2026-11-05 kategorijoje matyta **13,99 €/kg** – tai tik kainos pavyzdys, o ne garantuota šios minutės ar būsimos savaitės kaina. Pasiūlymai **nepridedami prie krepšelio automatiškai**, neįskaičiuojami į dalinę sumą ir nekeičia faktiškai pasirinktų parduotuvių skaičiaus (maks. dvi). Nėra automatinio svetainės prisijungimo prie Barbora ar realiojo laiko kainų patikros; naujus patvirtintus SKU/nuorodas turi papildyti planavimo agentas arba duomenų rinkimo procesas.
