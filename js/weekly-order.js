@@ -205,100 +205,145 @@
   let active=null;
   const key=line=>'mityba-7dienu-'+active.weekStart+'-'+line.group+'-'+line.id;
   const checked=line=>{try{return localStorage.getItem(key(line))==='1';}catch{return false;}};
+
   function linksFor(line){
-    const links=[];
-    if(line.url)links.push('<a href="'+esc(line.url)+'" target="_blank" rel="noopener noreferrer">Katalogo prekė ↗</a>');
-    const farm=farmerProductLinks(line.sourcing);
-    for(const offer of farm){
-      const href=url(offer.url);
-      if(href===line.url)continue;
+    const result=[],seen=new Set();
+    const linkItem=(href,label,hint='',css='')=>{
+      const safe=url(href);
+      if(!safe||blocked(safe)||seen.has(safe))return;
+      seen.add(safe);
+      result.push('<span class="'+css+'"><a href="'+esc(safe)+'" target="_blank" rel="noopener noreferrer">'
+        +esc(label)+' ↗</a>'+(hint?'<small>'+esc(hint)+'</small>':'')+'</span>');
+    };
+    for(const offer of farmerProductLinks(line.sourcing)){
       const channel=offer.kind==='farmer_product'?'Ūkio prekė'
-        :offer.kind==='farmer_product_candidate'?'Ūkio kandidatas (patikrinti mėsos dalį)'
-        :offer.kind==='producer_product_reseller'?'Ūkio prekė per pardavėją':'Pardavėjo prekė';
-      links.push('<span class="fortnight-farm-product"><a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'
-        +esc(channel+': '+offer.name)+' ↗</a><small>Nuoroda negarantuoja kainos, likučio ar pristatymo.</small></span>');
+        :offer.kind==='farmer_product_candidate'?'Ūkininko kandidatas (filė atitiktį patikrinti)'
+        :offer.kind==='producer_product_reseller'?'Ūkio prekė per tarpininką':'Pardavėjo prekė';
+      linkItem(offer.url,channel+': '+offer.name,'Kaina, likutis ir pristatymas nepatvirtinti.','fortnight-farm-product');
     }
-    if(line.group==='baltymai'&&line.sourcing&&!farm.some(p=>p.kind==='farmer_product'||p.kind==='producer_product_reseller')){
-      links.push('<small class="fortnight-farm-missing">Tikslios ūkininko prekės atitiktis nepatvirtinta.</small>');
+    for(const offer of line.choices){
+      const label=offer.kind==='catalog'?'Katalogo SKU: '+offer.name
+        :offer.kind==='farmer'?'Ūkio prekė: '+offer.name
+        :offer.kind==='farmlio'?'Farmlio SKU: '+offer.name
+        :'Barbora atsarginė prekė: '+offer.name;
+      linkItem(offer.url,label,'Patikrink kainą ir prekės tinkamumą.');
     }
     const farmlio=line.sourcing?.farmlio;
-    if(farmlio?.url&&url(farmlio.url)&&farmlio.url!==line.url)
-      links.push('<a href="'+esc(url(farmlio.url))+'" target="_blank" rel="noopener noreferrer">'
-        +(farmlio.kind==='catalog_search'?'Farmlio katalogas ↗':'Farmlio prekė ↗')+'</a>');
-    const barbora=line.needsReview&&line.sourcing?.barbora;
-    if(barbora?.url&&url(barbora.url)&&barbora.url!==line.url){
-      const label=barbora.kind==='exact_sku'?'Barbora – prekė ↗'
-        :barbora.kind==='similar_sku'?'Barbora – panaši prekė ↗':'Barbora – paieška ↗';
-      links.push('<span class="fortnight-fallback"><a href="'+esc(url(barbora.url))+'" target="_blank" rel="noopener noreferrer">'
-        +label+'</a><small>Atsarginė nuoroda – neįtraukta į pirkinių kainą ar parduotuvių skaičių.</small></span>');
+    if(farmlio?.kind==='catalog_search'&&farmlio.url)
+      linkItem(farmlio.url,'Farmlio katalogas','Tai nėra konkretus SKU.');
+    const bar=line.sourcing?.barbora;
+    if(bar?.url&&bar.kind!=='exact_sku'){
+      const label=bar.kind==='similar_sku'?'Barbora – panaši prekė':'Barbora – paieška';
+      linkItem(bar.url,label,'Nėra tikslus patvirtintas produkto SKU.','fortnight-fallback');
     }
-    return links.length?'<div class="fortnight-links">'+links.join('')+'</div>':'Dar reikia rasti SKU';
+    if(!result.length)result.push('<small>Nerasta tinkamos konkrečios prekės nuorodos.</small>');
+    return '<div class="fortnight-links">'+result.join('')+'</div>';
+  }
+
+  function priceHtml(line){
+    if(line.cost!==null)return '<strong>'+eur(line.cost)+'</strong><small>Patikrinta šiam SKU</small>';
+    const chosen=line.selected;
+    const old=chosen?.kind==='catalog'?chosen.historicalUnitPrice:null;
+    if(Number.isFinite(old)&&old>0)
+      return '<strong>—</strong><small>Istorinė kaina: '+eur(old)+'/pakuotę. Neįskaičiuota.</small>';
+    if(Number.isFinite(chosen?.historicalEurPerKg)&&chosen.historicalEurPerKg>0)
+      return '<strong>—</strong><small>Anksčiau matyta: '+eur(chosen.historicalEurPerKg)+'/kg'+(chosen.observedOn?' ('+esc(chosen.observedOn)+')':'')+'. Neįskaičiuota.</small>';
+    return '<strong>—</strong><small>Kaina nepatvirtinta</small>';
   }
   function groupHtml(group){
     const rows=group.lines.map(line=>{
-      const done=checked(line);
-      const state=line.unavailable?'SKU ir pakuotė nepatvirtinti'
-        :line.priceFresh?'Kaina patikrinta – pakartok prieš pirkdamas':'Kaina nepatvirtinta';
+      const done=checked(line),selected=line.selected;
+      const status=!selected?'Nepasirinktas tiekėjas'
+        :line.packGrams==null?'Pakuotė ir kaina nepatvirtintos'
+        :line.priceFresh?'Prekės kaina patikrinta':'Reikia atnaujinti kainą ir likutį';
       const packs=line.packs==null?'Pakuotė nepatvirtinta':num(line.packs)+' × '+num(line.packGrams)+' g';
+      const options=line.choices.map(o=>'<option value="'+esc(o.key)+'"'+(o.key===line.selectedKey?' selected':'')+'>'
+        +esc(o.storeName+' · '+o.name)+(o.kind==='farmer'?' (ūkininkas)':o.kind==='fallback'?' (atsarginis)':'')+'</option>').join('');
       return '<tr class="'+(done?'is-complete':'')+'"><td><input type="checkbox" class="fortnight-check" '
         +'data-group="'+esc(line.group)+'" data-id="'+esc(line.id)+'" aria-label="Įsigyta: '+esc(line.name)+'" '+(done?'checked':'')+'></td>'
         +'<td><div class="product-name">'+esc(line.name)+'</div><div class="product-sub">Reikia '+num(line.grams)+' g</div>'
-        +'<span class="fortnight-pill">'+esc(state)+'</span></td>'
-        +'<td>'+packs+'</td><td><strong>'+(line.cost==null?'—':eur(line.cost))+'</strong></td><td>'+linksFor(line)+'</td></tr>';
+        +'<span class="fortnight-pill">'+esc(status)+'</span></td>'
+        +'<td><label class="source-label" for="source-'+esc(line.id)+'">Pasirink tiekėją</label>'
+        +'<select class="weekly-source" id="source-'+esc(line.id)+'" data-id="'+esc(line.id)+'">'
+        +'<option value="">— Nepasirinkta —</option>'+options+'</select>'
+        +'<small class="source-note">Pasirinkimas nėra užsakymo patvirtinimas.</small>'+linksFor(line)+'</td>'
+        +'<td>'+packs+'</td><td class="weekly-cost">'+priceHtml(line)+'</td></tr>';
     }).join('');
     return '<article class="card fortnight-group"><h3>'+esc(group.name)+'</h3><p>'+esc(group.description)+'</p>'
-      +'<div class="table-wrap"><table class="fortnight-table"><thead><tr><th>✓</th><th>Produktas ir poreikis</th><th>Pakuotės</th><th>Suma*</th><th>Nuorodos</th></tr></thead>'
-      +'<tbody>'+rows+'</tbody></table></div></article>';
+      +'<div class="table-wrap"><table class="fortnight-table"><thead><tr><th>✓</th><th>Produktas / poreikis</th><th>Tiekėjas ir nuorodos</th><th>Pakuotės</th><th>Kaina*</th></tr></thead><tbody>'+rows+'</tbody></table></div></article>';
   }
   function copyText(plan){
     const lines=['PIRKINIŲ PLANAS 7 DIENOMS: '+plan.weekStart+' – '+plan.lastDay,
-      'Visos prekės apskaičiuotos tik pasirinktai savaitei, 14 valgių.',
-      'Ne daugiau kaip '+plan.maxStores+' faktinės atsiskaitymo vietos. Kainą ir pristatymą patikrinti.',''];
+      '14 valgių. Faktinė pasirinkta atsiskaitymo vieta: '+(plan.suppliers.join(', ')||'nėra')+'. Maks. '+plan.maxStores+'.',
+      'Neįtraukti pasenusių kainų ir nepatvirtintų pristatymo mokesčių.',''];
     for(const group of plan.groups){
       lines.push(group.name.toUpperCase());
-      for(const p of group.lines){
-        lines.push('☐ '+p.name+' – '+p.grams+' g'
-          +(p.packs!==null?' · '+p.packs+' × '+p.packGrams+' g':' · pakuotė nepatvirtinta')
-          +' · '+(p.cost===null?'KAINA NEPATVIRTINTA':eur(p.cost)+' (tikrinta neseniai)')
-          +(p.url?' · katalogas: '+p.url:''));
-        for(const f of farmerProductLinks(p.sourcing)){
-          lines.push('    '+(f.kind==='farmer_product_candidate'?'Ūkio kandidatas, atitiktis nepatvirtinta':'Ūkininko SKU')
-            +': '+f.name+' – '+f.url);
+      for(const line of group.lines){
+        lines.push('☐ '+line.name+' – '+line.grams+' g'
+          +(line.packs==null?' · PAKUOTĖ NEPATVIRTINTA':' · '+line.packs+' × '+line.packGrams+' g')
+          +' · '+(line.cost==null?'KAINA NEPATVIRTINTA':eur(line.cost)+' (patikrinta)')
+          +' · '+(line.selected?'Pasirinkta: '+line.selected.storeName+' – '+line.selected.url:'TIEKĖJAS NEPASIRINKTAS'));
+        for(const f of farmerProductLinks(line.sourcing)){
+          if(f.url===line.selected?.url)continue;
+          lines.push('    '+(f.kind==='farmer_product_candidate'?'Ūkio kandidatas, atitiktis nepatvirtinta':'Ūkininko prekė')+': '+f.url);
         }
-        if(p.sourcing?.farmlio?.url)lines.push('    Farmlio: '+p.sourcing.farmlio.url+' (kaina / likutis nepatvirtinti)');
-        if(p.needsReview&&p.sourcing?.barbora?.url)lines.push('    BARBORA ATSARGINIS VARIANTAS: '+p.sourcing.barbora.name+' – '+p.sourcing.barbora.url+' (nepasirinkta, kaina nepatvirtinta)');
+        if(line.sourcing?.farmlio?.url&&line.sourcing.farmlio.url!==line.selected?.url)
+          lines.push('    Farmlio: '+line.sourcing.farmlio.url+' (kaina / likutis nepatvirtinti)');
+        if(line.sourcing?.barbora?.url&&line.sourcing.barbora.url!==line.selected?.url)
+          lines.push('    BARBORA ATSARGINIS VARIANTAS: '+line.sourcing.barbora.name+' – '+line.sourcing.barbora.url+' (alternatyva, neįskaičiuota)');
       }
       lines.push('');
     }
-    lines.push('Tik patikrintų kainų dalinė prekių suma, be pristatymo: '+(plan.unknownPrice.length===plan.items.length?'nėra':eur(plan.partialGoodsEstimateEur)));
-    lines.push('Savaitės biudžetas: '+eur(plan.budgetTargetEur)+' (tolerancija iki '+eur(plan.budgetToleranceEur)+').');
-    lines.push('Pilna kaina ir galutiniai 1–2 tiekėjai NEPATVIRTINTI. Tai nėra pateiktas užsakymas.');
+    lines.push('Patikrintų pasirinktų prekių dalinė suma (be pristatymo): '
+      +(plan.pricedCount?eur(plan.partialGoodsEstimateEur):'nėra patikrintų kainų'));
+    lines.push('Savaitės biudžetas '+eur(plan.budgetTargetEur)+'; tolerancija iki '+eur(plan.budgetToleranceEur)+'.');
+    if(plan.grandTotalEur!==null)
+      lines.push('Patikrinta visų prekių ir pristatymo suma: '+eur(plan.grandTotalEur));
+    else lines.push('Visa savaitės suma su pristatymu NEPATVIRTINTA.');
+    lines.push('Tai nėra pateiktas užsakymas.');
     return lines.join('\n');
   }
   function render(plan){
     active=plan;
     const target=document.getElementById('weekly-output');
     if(!target)return;
-    const message=plan.tooManyStores
-      ?'Dėmesio: katalogo prekės dabar priklauso '+plan.suppliers.length+' parduotuvėms. Prieš perkant sumažink iki '+plan.maxStores+'.'
-      :plan.incomplete?'Dar nepatvirtintos visų prekių kainos arba tiekimas. Nuorodos į ūkius ir Barbora nėra automatinis prekių pasirinkimas.'
-      :'Patikrink galutinį atsiskaitymą, pristatymą ir pakuotes.';
+    const notice=plan.tooManyStores?'Pasirinkta daugiau kaip '+plan.maxStores+' parduotuvės.'
+      :plan.missing.length?'Parink tiekėją kiekvienai prekei. Atskiri alternatyvūs pasiūlymai savaime nėra pasirinkti.'
+      :plan.unknownPrice.length?'Trūksta patvirtintų prekių kainų ar pakuočių. Istorinės kainos į sumą neįtrauktos.'
+      :plan.grandTotalEur===null?'Trūksta patvirtintų pristatymo / pakavimo išlaidų ir minimalių užsakymų.':
+       'Patikrink prekės prieinamumą ir atsiskaitymo informaciją tiesiogiai parduotuvėje.';
+    const price=plan.grandTotalEur!==null?eur(plan.grandTotalEur)
+      :plan.pricedCount?eur(plan.partialGoodsEstimateEur):'—';
     target.innerHTML='<div class="fortnight-overview">'
       +'<div class="fortnight-metric"><small>Pasirinkta savaitė</small><strong>'+esc(plan.weekStart)+' – '+esc(plan.lastDay)+'</strong><small>14 valgių · 7 dienos</small></div>'
-      +'<div class="fortnight-metric"><small>Patikrintų prekių suma*</small><strong>'
-      +(plan.items.every(x=>x.cost===null)?'—':eur(plan.partialGoodsEstimateEur))+'</strong><small>Be nepatvirtintų prekių ir pristatymo</small></div>'
-      +'<div class="fortnight-metric"><small>Biudžetas savaitei</small><strong>'+eur(plan.budgetTargetEur)
-      +' <small>(iki '+eur(plan.budgetToleranceEur)+')</small></strong><small>Galutinė suma nepatvirtinta</small></div>'
-      +'</div><div class="fortnight-notice" role="status"><b>Užsakymas dar neparuoštas.</b> '+esc(message)+'</div>'
+      +'<div class="fortnight-metric"><small>Tiekėjų pasirinkimas</small><strong>'+num(plan.suppliers.length)+' / '+num(plan.maxStores)+'</strong>'
+      +'<small>Patikrintos kainos: '+num(plan.pricedCount)+' / '+num(plan.items.length)+' produktų</small></div>'
+      +'<div class="fortnight-metric"><small>'+(plan.grandTotalEur===null?'Dalinė patikrintų prekių suma*':'Patikrinta bendra suma*')+'</small>'
+      +'<strong>'+price+'</strong><small>Biudžetas '+eur(plan.budgetTargetEur)+' (iki '+eur(plan.budgetToleranceEur)+')</small></div>'
+      +'</div><div class="fortnight-notice" role="status" id="weekly-choice-warning">'
+      +'<b>'+(plan.grandTotalEur===null?'Užsakymas dar neparuoštas.':'Krepšelis suskaičiuotas, bet neužsakytas.')+'</b> '+esc(notice)+'</div>'
       +'<div class="fortnight-toolbar"><p id="weekly-count">Pažymėta: '+plan.items.filter(checked).length+'/'+plan.items.length+'</p>'
-      +'<button type="button" id="weekly-copy" class="btn">⧉ Kopijuoti 7 dienų pirkinių sąrašą</button></div>'
+      +'<div class="weekly-actions"><button type="button" id="weekly-copy" class="btn">⧉ Kopijuoti sąrašą</button>'
+      +'<button type="button" id="weekly-clear" class="btn ghost">Atžymėti</button></div></div>'
       +plan.groups.map(groupHtml).join('')
-      +'<div class="fortnight-summary"><b>Dar trūksta:</b> '+(plan.missing.length?esc(plan.missing.map(p=>p.name).join(', ')):'Ne visos kainos, likučiai ir pristatymas patvirtinti.')
-      +'<br>Žinomos parduotuvės: '+esc(plan.suppliers.join(', ')||'nėra')+' (maks. '+plan.maxStores+' per savaitę).'
-      +'<br>* Suma skaičiuojama iš patvirtintų prekių vienos savaitės pakuočių be pristatymo; ji nėra galutinė užsakymo suma.</div>';
+      +'<div class="fortnight-summary"><b>Suvestinė:</b> '
+      +(plan.grandTotalEur===null?'Galutinė savaitės krepšelio suma su pristatymu nepatvirtinta.':'Patikrinta bendra suma su pristatymu: '+eur(plan.grandTotalEur)+'.')
+      +'<br>Pasirinktos parduotuvės: '+esc(plan.suppliers.join(', ')||'kol kas nėra')+' (maks. '+plan.maxStores+').'
+      +'<br>* Neįskaičiuotos nepatvirtintos ir istorinės kainos. Nepatvirtintos prekės nėra laikomos nupirktomis. Kiekvieną nuorodą patikrink prieš pirkdamas.</div>';
     if(target.dataset.weeklyBound==='yes')return;
     target.addEventListener('change',event=>{
-      if(!event.target.classList?.contains('fortnight-check')||!active)return;
+      if(!active)return;
+      if(event.target.classList?.contains('weekly-source')){
+        const id=event.target.dataset.id;
+        if(!choose(active,id,event.target.value)){
+          render(active);
+          document.getElementById('weekly-choice-warning').textContent='Negalima pasirinkti trečios parduotuvės. Iš pradžių pakeisk kitų prekių tiekėjus (maks. 2 per savaitę).';
+          return;
+        }
+        render(active);
+        return;
+      }
+      if(!event.target.classList?.contains('fortnight-check'))return;
       const line=active.items.find(x=>x.group===event.target.dataset.group&&x.id===event.target.dataset.id);
       if(!line)return;
       try{localStorage.setItem(key(line),event.target.checked?'1':'0');}catch{}
@@ -306,13 +351,20 @@
       document.getElementById('weekly-count').textContent='Pažymėta: '+active.items.filter(checked).length+'/'+active.items.length;
     });
     target.addEventListener('click',event=>{
-      if(event.target.id!=='weekly-copy'||!active)return;
+      if(!active)return;
+      if(event.target.id==='weekly-clear'){
+        for(const line of active.items)try{localStorage.removeItem(key(line));}catch{}
+        render(active);
+        return;
+      }
+      if(event.target.id!=='weekly-copy')return;
       const output=copyText(active);
       if(navigator.clipboard&&location.protocol==='https:'){
-        navigator.clipboard.writeText(output).then(()=>alert('7 dienų sąrašas nukopijuotas!')).catch(()=>prompt('Nukopijuok sąrašą:',output));
-      } else prompt('Nukopijuok sąrašą:',output);
+        navigator.clipboard.writeText(output).then(()=>alert('7 dienų sąrašas nukopijuotas!'))
+          .catch(()=>prompt('Nukopijuok sąrašą:',output));
+      }else prompt('Nukopijuok sąrašą:',output);
     });
     target.dataset.weeklyBound='yes';
   }
-  root.WeeklyShop={build,render,copyText,demand,farmerProductLinks};
+  root.WeeklyShop={build,render,copyText,demand,farmerProductLinks,choose};
 })(window);
