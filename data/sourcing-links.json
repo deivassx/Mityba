@@ -22,7 +22,7 @@
           "priceSeenOn": "2026-11-06",
           "priceVerified": false,
           "availabilityVerified": false,
-          "note": "2026-11-06 atidarytas oficialus konkretus SKU: matyta laikina 13,50 €/kg akcijos kaina (įprasta 15,00 €; akcija skelbiama iki 11-06). Kaina negalioja kaip patvirtinimas kitai savaitei. Puslapyje skelbiama min. 40 € užsakymo suma, pristatymas 4,99 €, nuo 100 € nemokamai. Faktinį likutį, datą, pakavimą ir 14 dienų <=2 parduotuvių suderinamumą patikrinti prieš įtraukiant į užsakomą krepšelį."
+          "note": "2026-11-06 atidarytas oficialus konkretus SKU: matyta laikina 13,50 €/kg akcijos kaina (įprasta 15,00 €; akcija skelbiama iki 11-06). Kaina negalioja kaip patvirtinimas kitai savaitei. Puslapyje skelbiama min. 40 € užsakymo suma, pristatymas 4,99 €, nuo 100 € nemokamai. Faktinį likutį, datą, pakavimą ir 7 dienų <=2 parduotuvių suderinamumą patikrinti prieš įtraukiant į užsakomą krepšelį."
         }
       ],
       "barbora": {
@@ -33,7 +33,7 @@
         "confidence": "100 % kalakutų krūtinėlė, tinkama gabaliukų receptams, prieš perkant patikrinti kainą.",
         "priceVerified": false
       },
-      "note": "Rastas konkretus Baltuonių ūkio kalakutų krūtinėlių file SKU. Prioritetas ūkininko prekei, tačiau akcijos kaina / atsargos / galutinis 14 d. krepšelis prieš pirkimą tikrinami iš naujo; Barbora tik atsarginė alternatyva."
+      "note": "Rastas konkretus Baltuonių ūkio kalakutų krūtinėlių file SKU. Prioritetas ūkininko prekei, tačiau akcijos kaina / atsargos / galutinis 7 dienų krepšelis prieš pirkimą tikrinami iš naujo; Barbora tik atsarginė alternatyva."
     },
     "chicken": {
       "primary": "farmer",
