@@ -42,55 +42,164 @@
     return quantities;
   }
 
+
+  // Išsaugoma tik sąmoningai pasirinkta atsiskaitymo vieta, o ne katalogo numatytasis tiekėjas.
+  const selectionStorageKey=(week,id)=>'mityba-7dienu-tiekejas-'+week+'-'+id;
+  const savedSelection=(week,id)=>{try{return localStorage.getItem(selectionStorageKey(week,id))||'';}catch{return '';}};
+  function isRecent(checkedAt,maxAge){
+    const timestamp=Date.parse(checkedAt);
+    const age=Date.now()-timestamp;
+    return Number.isFinite(timestamp)&&age>=-60000&&age<=maxAge;
+  }
+  const exactFarmlio=x=>['existing_catalog_sku','exact_sku'].includes(x?.kind)
+    && /^https:\/\/farmlio\.lt\/pardavejai\/[^/]+\/prekes\/[^/?#]+\/?$/i.test(x?.url||'');
+  function candidates(product,sourcing,stores,maxAge) {
+    const offers=[],seen=new Set();
+    const add=(o)=>{
+      const link=url(o.url);
+      if(!link||blocked(link)||seen.has(link))return;
+      seen.add(link);
+      offers.push({...o,key:link,url:link});
+    };
+    // Oficialios tiksliai atitinkančios prekės pirmiau nei tarpininkai.
+    for(const farm of farmerProductLinks(sourcing)){
+      if(!['farmer_product','producer_product_reseller'].includes(farm.kind))continue;
+      const link=url(farm.url),hostname=new URL(link).hostname;
+      add({url:link,name:farm.name,store:hostname,storeName:farm.producer||hostname,
+        packGrams: Number.isFinite(farm.packGrams)?farm.packGrams:null,
+        priceEur:null,verified:false,kind:'farmer',historicalEurPerKg:farm.priceObservedEurPerKg||null,
+        observedOn:farm.priceSeenOn||null});
+    }
+    if(product?.url&&product?.store){
+      const shop=stores.find(x=>x.id===product.store);
+      const verified=Number.isFinite(product.priceEur)&&product.priceEur>0
+        &&product.available!==false&&product.verification?.url===product.url
+        &&isRecent(product.verification.checkedAt,maxAge);
+      add({url:product.url,name:product.name||'Katalogo prekė',store:product.store,
+        storeName:shop?.name||product.store,packGrams:product.packGrams||null,
+        priceEur:verified?product.priceEur:null,verified:!!verified,kind:'catalog',
+        historicalUnitPrice:!verified&&Number.isFinite(product.priceEur)?product.priceEur:null});
+    }
+    if(exactFarmlio(sourcing?.farmlio)){
+      const x=sourcing.farmlio;
+      add({url:x.url,name:x.label||'Farmlio prekė',store:'farmlio',storeName:'Farmlio',
+        packGrams:null,priceEur:null,verified:false,kind:'farmlio'});
+    }
+    // Tik tikslus SKU leidžiama pasirinkti. Panašūs produktai ir kategorijos – tik nuorodos.
+    if(sourcing?.barbora?.kind==='exact_sku'){
+      const x=sourcing.barbora;
+      add({url:x.url,name:x.name,store:'barbora',storeName:'Barbora (atsarginis)',
+        packGrams:x.packGrams||null,priceEur:null,verified:false,kind:'fallback',
+        historicalEurPerKg:x.priceObservedEurPerKg||null,observedOn:x.priceSeenOn||null});
+    }
+    return offers;
+  }
+  function evaluate(plan){
+    for(const line of plan.items){
+      const choice=line.choices.find(o=>o.key===line.selectedKey)||null;
+      line.selected=choice;
+      line.store=choice?.store||null;
+      line.productName=choice?.name||null;
+      line.url=choice?.url||null;
+      line.packGrams=choice?.packGrams||null;
+      line.packs=line.packGrams>0?Math.ceil(line.grams/line.packGrams):null;
+      line.cost=choice?.verified&&line.packs&&choice.priceEur>0?round(choice.priceEur*line.packs):null;
+      line.priceFresh=!!choice?.verified;
+      line.needsReview=line.cost===null;
+    }
+    plan.suppliers=[...new Set(plan.items.map(p=>p.store).filter(Boolean))];
+    plan.tooManyStores=plan.suppliers.length>plan.maxStores;
+    plan.missing=plan.items.filter(p=>!p.selected);
+    plan.unknownPrice=plan.items.filter(p=>p.cost===null);
+    const priced=plan.items.filter(p=>p.cost!==null);
+    plan.partialGoodsEstimateEur=round(priced.reduce((v,p)=>v+p.cost,0));
+    plan.pricedCount=priced.length;
+    plan.incomplete=plan.missing.length>0||plan.unknownPrice.length>0;
+    plan.deliveryEstimateEur=null;
+    plan.grandTotalEur=null;
+    plan.priceIncludesDelivery=false;
+    // Senos katalogo pristatymo kainos nėra realaus atsiskaitymo patikrinimas.
+    // Pilną sumą pateikiame tik patikrinę kiekvieną prekę ir visus tiekėjų mokesčius.
+    if(!plan.incomplete&&!plan.tooManyStores&&plan.suppliers.length){
+      let allFeesVerified=true,fees=0;
+      for(const id of plan.suppliers){
+        const store=plan.stores.find(s=>s.id===id);
+        const sum=round(plan.items.filter(p=>p.store===id).reduce((n,p)=>n+p.cost,0));
+        if(!store||store.feesVerified!==true||!isRecent(store.feesCheckedAt,plan.maxAge)
+          ||!Number.isFinite(store.deliveryFeeEur)||!Number.isFinite(store.packingFeeEur)
+          ||(store.minOrderEur!=null&&sum<store.minOrderEur)){allFeesVerified=false;break;}
+        const delivery=store.freeDeliveryFromEur!=null&&sum>=store.freeDeliveryFromEur?0:store.deliveryFeeEur;
+        let packing=store.packingFeeEur;
+        if(store.packingTiers)for(const tier of store.packingTiers)if(sum>=tier.from)packing=tier.fee;
+        const small=store.smallBasketFeeBelowEur!=null&&sum<store.smallBasketFeeBelowEur?store.smallBasketFeeEur||0:0;
+        fees+=delivery+packing+small;
+      }
+      if(allFeesVerified){
+        plan.deliveryEstimateEur=round(fees);
+        plan.grandTotalEur=round(plan.partialGoodsEstimateEur+fees);
+        plan.priceIncludesDelivery=true;
+      }
+    }
+    // Rodymas nėra pirkimo atlikimas; svetainė niekada automatiškai neperka.
+    plan.orderReady=false;
+    return plan;
+  }
+  function choose(plan,id,key){
+    const line=plan.items.find(x=>x.id===id);
+    if(!line)return false;
+    if(key!==''&&!line.choices.some(c=>c.key===key))return false;
+    const previous=line.selectedKey;
+    line.selectedKey=key;
+    evaluate(plan);
+    if(plan.tooManyStores){
+      line.selectedKey=previous;
+      evaluate(plan);
+      return false;
+    }
+    try{
+      if(key)localStorage.setItem(selectionStorageKey(plan.weekStart,id),key);
+      else localStorage.removeItem(selectionStorageKey(plan.weekStart,id));
+    }catch{}
+    return true;
+  }
   function build(menu,sources={products:{}},rules={}){
     const needed=demand(menu);
     const policy=rules.shopping||{},bulk=policy.bulkPurchase||{},budget=policy.budget||{};
     if(bulk.planningHorizonDays!=null&&bulk.planningHorizonDays!==7)throw Error('Užsakymo taisyklės turi numatyti 7 dienas.');
-    const start=menu.meta?.weekStart, startTime=Date.parse(start+'T00:00:00Z');
+    const start=menu.meta?.weekStart,startTime=Date.parse(start+'T00:00:00Z');
     if(!Number.isFinite(startTime)||menu.days[0]?.date!==start)throw Error('Neteisinga pirmoji savaitės diena.');
     for(let i=0;i<7;i++){
       const expected=new Date(startTime+i*86400000).toISOString().slice(0,10);
       if(menu.days[i].date!==expected)throw Error('Savaitės dienos turi eiti iš eilės.');
     }
     const maxStores=Math.min(policy.maxStoresPerWeek??2,bulk.maxDistinctCheckoutStoresAcrossHorizon??2);
-    const budgetTargetEur=budget.targetWeeklyTotalEur??100;
-    const budgetToleranceEur=budget.softLimitEur??110;
+    const budgetTargetEur=budget.targetWeeklyTotalEur??100,budgetToleranceEur=budget.softLimitEur??110;
     const maxAge=(policy.verifiedPriceMaxAgeHours??24)*3600000;
     const groups=[
-      {id:'baltymai',name:'Mėsa ir žuvis · 7 dienoms',description:'Kiekiai apskaičiuoti tik pasirinktai savaitei. Pirk pagal patvirtintus SKU ir pakuotes.',lines:[]},
-      {id:'priedai',name:'Daržovės, pieno produktai ir priedai · 7 dienoms',description:'Švieži produktai perkami tik pasirinktai savaitei.',lines:[]}
+      {id:'baltymai',name:'Mėsa ir žuvis · 7 dienoms',description:'Ūkių SKU pirmiau. Jei kaina, pakuotė ar pristatymas nepatikrinti, pažymima aiškiai.',lines:[]},
+      {id:'priedai',name:'Daržovės, pieno produktai ir priedai · 7 dienoms',description:'Vienos savaitės reikalingi kiekiai, be išankstinio priskyrimo parduotuvei.',lines:[]}
     ];
     for(const id of Object.keys(needed).sort((a,b)=>a.localeCompare(b))){
       const product=menu.products.find(p=>p.id===id)||null;
-      const grams=needed[id],packs=product?.packGrams>0?Math.ceil(grams/product.packGrams):null;
-      const verified=product&&Number.isFinite(product.priceEur)&&product.priceEur>0
-        &&product.available!==false&&product.verification?.url===product.url
-        &&Number.isFinite(Date.parse(product.verification.checkedAt))
-        &&Date.now()-Date.parse(product.verification.checkedAt)>=-60000
-        &&Date.now()-Date.parse(product.verification.checkedAt)<=maxAge;
+      const sourcing=PROTEINS.has(id)?(sources.products?.[id]||null):null;
+      const choices=candidates(product,sourcing,menu.stores||[],maxAge);
+      const previous=savedSelection(start,id);
+      const selectedKey=choices.some(o=>o.key===previous)?previous
+        :menu.meta?.purchaseReady===true&&choices.some(o=>o.kind==='catalog'&&o.verified)
+          ?choices.find(o=>o.kind==='catalog'&&o.verified).key:'';
       const group=PROTEINS.has(id)?groups[0]:groups[1];
       group.lines.push({
-        id,group:group.id,name:menu.ingredientLabels[id]||id,grams,
-        productName:product?.name||null,store:product?.store||null,
-        url:product?url(product.url):null,packGrams:product?.packGrams||null,packs,
-        cost:verified&&packs?round(product.priceEur*packs):null,
-        priceFresh:!!verified,unavailable:!product,needsReview:!verified,
-        sourcing:PROTEINS.has(id)?(sources.products?.[id]||null):null
+        id,group:group.id,name:menu.ingredientLabels[id]||id,grams:needed[id],choices,selectedKey,
+        sourcing,unavailable:!product,referenceProduct:product
       });
     }
     const items=groups.flatMap(g=>g.lines);
-    const suppliers=[...new Set(items.map(x=>x.store).filter(Boolean))];
-    const missing=items.filter(x=>x.unavailable);
-    const unknownPrice=items.filter(x=>x.cost===null);
-    const partialGoodsEstimateEur=round(items.filter(x=>x.cost!==null).reduce((s,x)=>s+x.cost,0));
-    const incomplete=unknownPrice.length>0||menu.meta.purchaseReady!==true;
-    return {
+    const plan={
       weekStart:start,lastDay:menu.days.at(-1).date,days:7,meals:14,
-      groups,items,suppliers,missing,unknownPrice,partialGoodsEstimateEur,
-      maxStores,tooManyStores:suppliers.length>maxStores,incomplete,
-      budgetTargetEur,budgetToleranceEur,priceIncludesDelivery:false,
-      orderReady:false // Pristatymas ir faktinis atsiskaitymas tikrinami pardavėjo krepšelyje.
+      groups,items,maxStores,maxAge,stores:menu.stores||[],
+      budgetTargetEur,budgetToleranceEur,purchaseReady:menu.meta.purchaseReady===true
     };
+    return evaluate(plan);
   }
 
   let active=null;
