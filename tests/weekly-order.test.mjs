@@ -76,7 +76,7 @@ test('Barbora atsarginė nuoroda neišgalvoja trečio tiekėjo arba kainos',()=>
   assert.ok(plan.items.find(x=>x.id==='salmon').sourcing.barbora.url.includes('barbora.lt'));
   assert.equal(plan.items.find(x=>x.id==='salmon').cost,null);
   assert.ok(plan.suppliers.length<=2);
-  assert.match(copyText(plan),/BARBORA ATSARGINIS VARIANTAS/);
+  assert.match(copyText(plan),/Barbora \\(atsarginis\\)/);
   assert.ok(plan.unknownPrice.length>0);
 });
 
