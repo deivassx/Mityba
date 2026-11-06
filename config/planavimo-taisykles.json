@@ -236,7 +236,7 @@
       "temperatureStorage": "Mėsą ir žuvį pirk tik 7 dienų meniu; vėlesnėms dienoms skirtas porcijas saugiai užšaldyk –18 °C ar žemiau, atitirpink šaldytuve. Daržoves ir šviežius priedus pirk tos pačios savaitės poreikiui.",
       "productEvidence": "Nepatikrintos mėsos/žuvies prekės rodomos su vienos savaitės tiksliais gramais, bet be išgalvotos kainos, pakuotės, pardavėjo ar atsiskaitymo nuorodos.",
       "priceVerification": "Prieš perkant patikrink vienos savaitės SKU, kainas, minimalų užsakymą, pristatymą, pakavimą ir ne daugiau kaip 2 parduotuvių ribą. Seno katalogo kainos nėra patvirtinta savaitės suma.",
-      "uiBehavior": "Vienintelė pirkinių ir kainų skiltis yra #pirkiniai su #weekly-output, valdoma tik js/weekly-order.js. Skaičiuojami tik pasirinktos 7 dienų savaitės 14 valgių produktų gramai. Ingredientas rodomas vieną kartą (mėsa/žuvis arba daržovės/priedai), su tiksliais SKU pasiūlymais ir viena kopijavimo/pažymėjimo sąsaja. Nėra atskirų Farmlio/Barbora preliminarių krepšelių, o istorinės katalogo parduotuvės automatiškai nelaikomos pasirinktomis. Tiekėjas pasirenkamas sąmoningai, jo pasirinkimas saugomas per savaitę; trečia parduotuvė blokuojama. Istorinės kainos tik informacinės, į sumą įtraukti tik aktualiai patikrinti pasirinkti SKU. Pilna savaitės suma su pristatymu tik po galiojančio visų produktų ir pardavėjų mokesčių patvirtinimo. Jokio automatinio pirkimo.",
+      "uiBehavior": "Vienintelė pirkinių skiltis #pirkiniai ir #weekly-output, valdoma tik js/weekly-order.js. Vienas 7 dienų / 14 valgių produktų sąrašas, suskirstytas į dvi produktų grupes. Jokių „Pasirink tiekėją“ laukų ar rankinio tiekėjo pasirinkimo saugojimo. Rodyti ūkių konkrečių produktų nuorodas pirmiausia, tada Farmlio, o Barbora tik kaip alternatyvą; šios nuorodos nėra automatiškai pasirinktos atsiskaitymo vietos. Pakuotėms naudoti tik identifikuotą SKU, istorines kainas pateikti kaip nepatvirtintas. Patikrintų SKU dalinė suma leidžiama, bet pilna savaitės kaina tik po visų SKU bei pristatymo/pakavimo patikros. Daugiausia 2 faktinės parduotuvės galutiniame krepšelyje; UI alternatyvų skaičius nėra parduotuvių skaičius.",
       "farmlioFallback": {
         "enabled": true,
         "priority": [
@@ -271,12 +271,17 @@
         "outputId": "weekly-output",
         "script": "js/weekly-order.js",
         "noDuplicatePreliminaryShopping": true,
-        "manualSourceSelection": true,
+        "manualSourceSelection": false,
         "maxSelectedCheckoutStores": 2,
         "neverPreselectStaleCatalogSources": true,
         "excludeUnverifiedPricesFromTotals": true,
         "requireVerifiedDeliveryAndPackingBeforeGrandTotal": true,
-        "persistSelectionAndChecksPerWeek": true
+        "persistSelectionAndChecksPerWeek": false,
+        "showSupplierSelectionDropdown": false,
+        "showDirectProductLinks": true,
+        "noAutomaticCheckoutAssignment": true,
+        "persistChecksPerWeek": true,
+        "twoCheckoutStoreRuleAppliesAtFinalBasket": true
       }
     },
     "farmerProductLinkPolicy": {
@@ -513,7 +518,7 @@
       "recipePreferences.menuDiversity (32 receptai, nevienodi 8 savaičių planai)",
       "shopping.farmerProductLinkPolicy (vienos savaitės svetainėje rodo tik konkrečius ūkių produktų URL ir aiškiai žymi tarpininkus)",
       "shopping.menuProteinSourcingPriority (ūkių prekių nuorodų prioritetinė 8 savaičių receptų rotacija)",
-      "shopping.bulkPurchase.singleShoppingSection (svetainės JavaScript: viena skiltis, savaitinis kiekis, rankinis 2 parduotuvių pasirinkimas, patikrintų kainų dalinė suma)"
+      "shopping.bulkPurchase.singleShoppingSection (svetainės JavaScript: viena skiltis, savaitinis kiekis, tiesioginės nuorodos be tiekėjo rinkiklio, patikrintų kainų dalinė suma)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",
@@ -529,11 +534,11 @@
       "shopping.comparison.farmerRegistry",
       "shopping.comparison.knownLimitations",
       "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)",
-      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI atmeta trečią pasirinktą tiekėją, bet atsiskaitymo rezervacijos nevykdo)",
+      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (ne daugiau kaip 2 atsiskaitymo parduotuvės tikrinama sudarant patvirtintą krepšelį; nuorodos UI nėra tiekėjų pasirinkimas)",
       "shopping.bulkPurchase.farmlioFallback (naujų SKU paieška ir kainų tikrinimas neautomatizuoti)",
       "shopping.farmerCatalogDiscovery (agento atliekama keliu saltiniu paieska; esamas farm-discovery.mjs automatiskai nepadengia visu siu kanalu / puslapiavimo)",
       "shopping.farmerCatalogDiscovery.productEquivalenceRule ir additionalTestCases (agentas privalo atskirti krutinele nuo smulkintos vistienos)",
-      "shopping.bulkPurchase.singleShoppingSection.requireVerifiedDeliveryAndPackingBeforeGrandTotal (svetainės JS rodo pilną sumą tik pateikus visų SKU ir mokesčių patikrą; pati neveikia kaip gyva tiekėjų kainų paieška)"
+      "shopping.bulkPurchase.singleShoppingSection.requireVerifiedDeliveryAndPackingBeforeGrandTotal (svetainė be realaus užsakymo patvirtinimo rodo tik dalines patikrintas kainas, o ne gyvą galutinį krepšelį)"
     ]
   }
 }
