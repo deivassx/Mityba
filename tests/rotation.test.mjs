@@ -67,7 +67,7 @@ test('atmeta nemėgstamas daržoves, per daug bulvių ir keptuvėje kepamą nauj
 test('Konkrečios ūkių ir Farmlio produktų nuorodos – meniu prioritetas',async()=>{
  const sourcing=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
  assert.equal(sourceTier('eriena',sourcing),4);
- assert.equal(sourceTier('kalakutiena',sourcing),0);
+ assert.equal(sourceTier('kalakutiena',sourcing),4);
  assert.equal(sourceTier('vistiena',sourcing),0);
  assert.equal(sourceTier('samas',sourcing),2);
  assert.equal(sourceTier('lasisa',sourcing),0);
