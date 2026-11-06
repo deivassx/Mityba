@@ -137,3 +137,29 @@ test('Ūkininkų produkto nuorodos filtruoja pradžios puslapius ir pašalintą 
   assert.equal(found.length,1);
   assert.equal(found[0].name,'Prekė');
 });
+
+test('Svetainėje tik viena pirkinių skiltis ir vienas pirkinių skaičiuotuvas',async()=>{
+  const html=await fs.readFile(new URL('../index.html',import.meta.url),'utf8');
+  const app=await fs.readFile(new URL('../js/app.js',import.meta.url),'utf8');
+  assert.equal((html.match(/id="pirkiniai"/g)||[]).length,1);
+  assert.equal((html.match(/id="weekly-output"/g)||[]).length,1);
+  assert.match(html,/Savaitės pirkinių sąrašas/);
+  assert.doesNotMatch(html,/Preliminarus apsipirkimas|id="shops"|id="budget"|id="savaites-uzsakymas"|js\/two-week\.js/);
+  assert.doesNotMatch(app,/getElementById\('shops'\)|getElementById\('budget'\)|function copyList\(/);
+});
+
+test('Viename pirkinių rodinyje yra visi ingredientai ir vienas kopijavimo bei žymėjimo valdymas',()=>{
+  const output={innerHTML:'',dataset:{},addEventListener(){}};
+  const demoWindow={};
+  const fakeDocument={getElementById(id){return id==='weekly-output'?output:null;}};
+  vm.runInNewContext(script,{window:demoWindow,document:fakeDocument,URL,Intl,Date,
+    localStorage:{getItem(){return null}}});
+  const plan=demoWindow.WeeklyShop.build(week1,sources,rules);
+  demoWindow.WeeklyShop.render(plan);
+  assert.equal((output.innerHTML.match(/class="fortnight-check"/g)||[]).length,plan.items.length);
+  assert.equal((output.innerHTML.match(/class="weekly-source"/g)||[]).length,plan.items.length);
+  assert.equal((output.innerHTML.match(/id="weekly-copy"/g)||[]).length,1);
+  assert.equal((output.innerHTML.match(/id="weekly-clear"/g)||[]).length,1);
+  assert.match(output.innerHTML,/Ūkio prekė: Kalakutų krūtinėlių file/);
+  assert.doesNotMatch(output.innerHTML,/Preliminarus apsipirkimas/);
+});
