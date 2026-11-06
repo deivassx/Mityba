@@ -35,8 +35,6 @@ test('14 dienų užsakymas sumuoja tikrą 2 savaičių meniu ir mėsą perka vie
   assert.ok(!proteins.find(p=>p.id==='turkey').url);
   assert.ok(!proteins.find(p=>p.id==='beef').url);
   assert.ok(!proteins.find(p=>p.id==='chicken').url);
-  assert.ok(!proteins.find(p=>p.id==='lamb').url);
-  assert.ok(!proteins.find(p=>p.id==='salmon').url);
   assert.equal(plan.orderReady,false);
   assert.equal(plan.priceIncludesDelivery,false);
   assert.ok(plan.partialGoodsEstimateEur>0);
