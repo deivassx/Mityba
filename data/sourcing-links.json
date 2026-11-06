@@ -22,7 +22,10 @@
           "priceSeenOn": "2026-11-06",
           "priceVerified": false,
           "availabilityVerified": false,
-          "note": "2026-11-06 atidarytas oficialus konkretus SKU: matyta laikina 13,50 €/kg akcijos kaina (įprasta 15,00 €; akcija skelbiama iki 11-06). Kaina negalioja kaip patvirtinimas kitai savaitei. Puslapyje skelbiama min. 40 € užsakymo suma, pristatymas 4,99 €, nuo 100 € nemokamai. Faktinį likutį, datą, pakavimą ir 7 dienų <=2 parduotuvių suderinamumą patikrinti prieš įtraukiant į užsakomą krepšelį."
+          "note": "2026-11-06 oficialiame puslapyje rodoma 13,50 €/kg akcija iki 2026-11-06, įprasta 15,00 €/kg. Būsimai savaitei akcijos kaina negali būti laikoma galiojančia; vėlesniam laikotarpiui naudoti tik 15,00 €/kg istorinį orientyrą, kol naujai nepatikrinta. Min. 40 € užsakymas; pristatymas 4,99 €, nuo 100 € nemokamai. Atsargos ir galutinė suma nepatvirtintos.",
+          "regularPriceObservedEurPerKg": 15,
+          "discountPriceValidUntil": "2026-11-06",
+          "pricingUnit": "kg"
         }
       ],
       "barbora": {
@@ -183,10 +186,14 @@
           "producer": "Šešuolėlių ūkis",
           "priceVerified": false,
           "availabilityVerified": false,
-          "note": "Prekės nuoroda pateikta ūkininko produktų kataloge; atskiro puslapio atsidarymas tikrinant strigo. Kainą ir prieinamumą būtina pakartotinai patikrinti."
+          "note": "2026-11-06 oficialiame puslapyje viešai skelbiama 31 €/kg. Kumpis be kaulo yra sveriamas, galutinė suma priklauso nuo faktinio svorio ir mokėjimo nuorodos po suruošimo. Prekės kaina – tik vienos savaitės orientyras, o ne patvirtinta užsakymo suma; faktinį svorį, likutį, pristatymą ir kainą patikrinti.",
+          "priceObservedEurPerKg": 31,
+          "priceSeenOn": "2026-11-06",
+          "pricingUnit": "kg",
+          "soldByWeight": true
         }
       ],
-      "note": "Nėra patvirtintos kainos, tik preliminarios paieškos nuorodos.",
+      "note": "Rasta konkreti prekė su 31 €/kg viešai matyta 2026-11-06; tai sveriama ėriena, ne fiksuotas 1 kg įpakavimas.",
       "barbora": {
         "name": "Mėsos ir paukštienos skyrius – ieškoti ėrienos",
         "url": "https://barbora.lt/mesa-zuvis-ir-kulinarija/sviezia-mesa-ir-paukstiena",
