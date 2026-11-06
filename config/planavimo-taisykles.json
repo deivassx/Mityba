@@ -321,7 +321,7 @@
         "Jei viesai prieinama, tikrinti WooCommerce /wp-json/wc/store/products puslapiuojant per visus rezultatus, ne vien per pirma 100.",
         "Jei viesai prieinama, tikrinti produkto XML sitemap; jei atidaromas tik sitemap_index.xml, sekti jame nurodytus produkto sitemap ir tikrinti ju URL.",
         "Atidaryti rasta konkretaus SKU URL ir patikrinti, ar tikrai atitinka recepto mesa / zuvi, dalį, apdorojimą ir pakuotę; tik po to įrašyti kandidata i data/sourcing-links.json.",
-        "Atskirai tikrinti ir data zymeti aktualia kaina, akcijos pabaiga, atsargas, pristatyma i Vilniu, min. uzsakyma, pakuote bei 14 dienu krepselio 2 parduotuviu limita."
+        "Atskirai tikrinti ir data zymeti aktualia kaina, akcijos pabaiga, atsargas, pristatyma i Vilniu, min. uzsakyma, pakuote bei vienos savaites krepselio 2 parduotuviu limita."
       ],
       "negativeResultPolicy": "Jei bent vienas katalogas ar paieskos budas neveike arba nebuvo pakankamai patikrintas, rezultatas yra 'nepavyko patikrinti', o ne 'prekes nera'. 'Nerasta' galima tik po visu prieinamu oficialios parduotuves paieskos kanalu; Barbora gali buti rodoma kaip papildoma alternatyva, o ne neteisingai paskelbta vienintele parduotuve.",
       "discoveredLinkPolicy": "Konkrecias atitinkanciu produktu tiesiogines nuorodas fiksuoti data/sourcing-links.json su kind=farmer_product, packGrams, producer, priceVerified ir availabilityVerified atskirai. Pasenusi kaina ar akcija laikyti istoriniu pastebejimu, ne siandienos patvirtinimu.",
