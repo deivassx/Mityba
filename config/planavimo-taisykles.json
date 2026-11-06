@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-05",
+  "updatedAt": "2026-11-06",
   "purpose": "Savaites meniu vienam suaugusiajam Vilniuje: sotumas, svorio mazinimas, baltymai, kuo maziau planavimo ir gaminimo laiko.",
   "mealPlan": {
     "days": 7,
@@ -40,6 +40,7 @@
     ],
     "deliveryDestination": "Vilnius, Lietuva",
     "selectionPriorities": [
+      "Pries konstatuojant, kad ukio mesos / zuvies SKU nerastas, vykdyti shopping.farmerCatalogDiscovery: perziureti oficialaus ukio parduotuves kategorijas, sinonimus, vidine paieska, WooCommerce puslapius ir sitemap, jei prieinami; atskirti 'nerasta' nuo 'nepavyko patikrinti'.",
       "Pirmiausia ieškoti produktu tiesioginiuose ūkininkų puslapiuose; jei negalima – Farmlio su privalomu palyginimu su ūkiu",
       "Tikrinant kainą neapsiriboti pirmu rastu pasiūlymu: palyginti alternatyvas ir ar kokybės skirtumas pagrindžia permoką",
       "Siekti iki 100 EUR savaitei, leidžiant iki 10% paklaidą; įtraukti visą realiai apmokamą krepšelį su pristatymu ir pakavimu",
@@ -306,7 +307,37 @@
     },
     "excludedMerchantDomains": [
       "pilnaspuodas.lt"
-    ]
+    ],
+    "farmerCatalogDiscovery": {
+      "enabled": true,
+      "requiredBeforeMarkingProductNotFound": true,
+      "requiredBeforeBarboraFallback": true,
+      "scope": "Kiekviena meniu naudojama mesa / zuvis, kiekvienas tinkamas shopping.supplierCandidates ukis su oficialia parduotuve; vertinti pagal konkretu ingrediento gabala, o ne vien bendra rusies pavadinima.",
+      "methodsInOrder": [
+        "Atverti oficialia ukio parduotuve, visas aktualias mesos ar zuvies kategorijas ir naudoti vidine produkto paieska.",
+        "Kartoti paieska su linksniais, vienaskaita / daugiskaita, sinonimais, dalies pavadinimu, 'file' / 'filė', su lietuviskomis raidemis ir be ju, svorio bei pakuotes variacijomis.",
+        "Ieškoti Google/Bing su site:ukio-domenas ir keliais pilnais ar sutrumpintais pavadinimo variantais; vien neigiamas indeksavimo rezultatas nera irodymas, kad prekes nera.",
+        "Jei viesai prieinama, tikrinti WooCommerce /wp-json/wc/store/products puslapiuojant per visus rezultatus, ne vien per pirma 100.",
+        "Jei viesai prieinama, tikrinti produkto XML sitemap; jei atidaromas tik sitemap_index.xml, sekti jame nurodytus produkto sitemap ir tikrinti ju URL.",
+        "Atidaryti rasta konkretaus SKU URL ir patikrinti, ar tikrai atitinka recepto mesa / zuvi, dalį, apdorojimą ir pakuotę; tik po to įrašyti kandidata i data/sourcing-links.json.",
+        "Atskirai tikrinti ir data zymeti aktualia kaina, akcijos pabaiga, atsargas, pristatyma i Vilniu, min. uzsakyma, pakuote bei 14 dienu krepselio 2 parduotuviu limita."
+      ],
+      "negativeResultPolicy": "Jei bent vienas katalogas ar paieskos budas neveike arba nebuvo pakankamai patikrintas, rezultatas yra 'nepavyko patikrinti', o ne 'prekes nera'. 'Nerasta' galima tik po visu prieinamu oficialios parduotuves paieskos kanalu; Barbora gali buti rodoma kaip papildoma alternatyva, o ne neteisingai paskelbta vienintele parduotuve.",
+      "discoveredLinkPolicy": "Konkrecias atitinkanciu produktu tiesiogines nuorodas fiksuoti data/sourcing-links.json su kind=farmer_product, packGrams, producer, priceVerified ir availabilityVerified atskirai. Pasenusi kaina ar akcija laikyti istoriniu pastebejimu, ne siandienos patvirtinimu.",
+      "testCase": {
+        "ingredient": "kalakutienos file",
+        "alternateSearches": [
+          "kalakutų krūtinėlių file 1kg",
+          "kalakutienos krūtinėlė",
+          "kalakutų filė",
+          "kalakutienos file",
+          "turkey breast fillet"
+        ],
+        "supplier": "Baltuoniu kalakutai",
+        "officialExactProductUrl": "https://baltuoniu.kalakutai.lt/product/kalakutu-krutineliu-file-1kg/",
+        "expectation": "Nesvarbu, ar Google indeksuoja puslapi: turi atpazinti kaip tikslu kalakutienos file SKU, isaugoti tiesiogini URL ir kaina / prieinamuma patikrinti atskirai."
+      }
+    }
   },
   "recipePreferences": {
     "primaryProteins": [
@@ -472,7 +503,8 @@
       "shopping.comparison.knownLimitations",
       "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)",
       "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI patikra ir uzsakymo blokavimas kai nepatvirtinta, ne automatine tiekėju paieska)",
-      "shopping.bulkPurchase.farmlioFallback (naujų SKU paieška ir kainų tikrinimas neautomatizuoti)"
+      "shopping.bulkPurchase.farmlioFallback (naujų SKU paieška ir kainų tikrinimas neautomatizuoti)",
+      "shopping.farmerCatalogDiscovery (agento atliekama keliu saltiniu paieska; esamas farm-discovery.mjs automatiskai nepadengia visu siu kanalu / puslapiavimo)"
     ]
   }
 }
