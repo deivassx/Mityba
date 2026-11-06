@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {validate,validateRecipePreferences} from '../scripts/planner.mjs';
 const file=async p=>JSON.parse(await fs.readFile(new URL('../'+p,import.meta.url),'utf8'));
-test('Liko tiksliai 8 skirtingos savaites nuo 2026-11-09',async()=>{
+test('Išsaugotos 9 skirtingos savaitės nuo 2026-11-09',async()=>{
  const ix=await file('data/history/index.json');
- assert.equal(ix.length,8);
+ assert.equal(ix.length,9);
  const names=(await fs.readdir(new URL('../data/history/',import.meta.url))).filter(f=>/^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort();
- assert.equal(names.length,8);
+ assert.equal(names.length,9);
  const signatures=new Set();
- for(let i=0;i<8;i++){
+ for(let i=0;i<9;i++){
   const week=new Date(Date.parse('2026-11-09T00:00:00Z')+i*7*86400000).toISOString().slice(0,10);
   assert.equal(names[i],week+'.json');
   const m=await file('data/history/'+week+'.json');
