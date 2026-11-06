@@ -55,7 +55,11 @@ test('Nepatikrintos kainos ir ūkininkų nuorodos nėra laikomos patvirtintais u
   assert.equal(turkey.sourcing.farmers[0].kind,'farmer_product');
   assert.ok(farmerProductLinks(turkey.sourcing).some(p=>p.url.includes('baltuoniu.kalakutai.lt/product/')));
   assert.match(copyText(plan),/baltuoniu\.kalakutai\.lt\/product\/kalakutu-krutineliu-file-1kg/);
-  assert.match(copyText(plan),/KAINA NEPATVIRTINTA/);
+  assert.match(copyText(plan),/31,00|15,00/);
+  assert.equal(plan.items.find(p=>p.id==='lamb').quote.unitPrice,31);
+  assert.equal(plan.items.find(p=>p.id==='lamb').estimatedCost,32.24);
+  assert.equal(turkey.quote.unitPrice,15,'Būsimai savaitei akcijos kaina pasibaigusi');
+  assert.equal(turkey.estimatedCost,15);
   assert.equal(plan.orderReady,false);
 });
 
@@ -153,4 +157,16 @@ test('Viename pirkinių rodinyje yra visi ingredientai ir vienas kopijavimo bei 
   assert.equal((output.innerHTML.match(/id="weekly-clear"/g)||[]).length,1);
   assert.match(output.innerHTML,/Ūkio prekė: Kalakutų krūtinėlių file/);
   assert.doesNotMatch(output.innerHTML,/Preliminarus apsipirkimas/);
+});
+
+test('Kai savaitės archyvo kaina neįrašyta, bazinis katalogas leidžia rodyti tik orientacinius senus įverčius',async()=>{
+  const catalog=JSON.parse(await fs.readFile(new URL('../data/catalog.json',import.meta.url),'utf8'));
+  const plan=build(week1,sources,rules,catalog);
+  const beef=plan.items.find(p=>p.id==='beef');
+  assert.equal(beef.quote.unitPrice,8.45);
+  assert.equal(beef.estimatedCost,8.45);
+  assert.equal(beef.cost,null);
+  assert.ok(plan.estimatedCount>=12);
+  assert.ok(plan.estimatedGoodsEur>100);
+  assert.equal(plan.grandTotalEur,null);
 });
