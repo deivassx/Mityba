@@ -43,7 +43,19 @@
         "kind": "catalog_search",
         "priceVerified": false
       },
-      "farmers": [],
+      "farmers": [
+        {
+          "name": "Ekologiška vištienos krūtinėlė (šviežia atvėsinta)",
+          "url": "https://kazlauskuekoukis.lt/ekologiska-vistienos-krutinele",
+          "kind": "farmer_product_candidate",
+          "producer": "Kazlauskų eko ūkis",
+          "productMatchVerified": false,
+          "packGrams": null,
+          "priceVerified": false,
+          "availabilityVerified": false,
+          "note": "Rastas oficialus vištienos krūtinėlės produkto puslapis. Neaišku, ar būtent krūtinėlės filė be kaulo / odos; nereikia automatiškai laikyti tiksliu filė SKU, kol tiekėjas arba puslapis nepatvirtina dalies, pakuotės, kainos ir prieinamumo."
+        }
+      ],
       "barbora": {
         "name": "Šviežia viščiukų broilerių filė be vidinės filė, 1 kg",
         "url": "https://barbora.lt/produktai/sv-visc-broil-file-be-vidines-file-uzauginta-be-antib-1-kg",
@@ -51,7 +63,20 @@
         "packGrams": 1000,
         "confidence": "Žalia vištienos filė, kaina ir likutis prieš užsakymą tikrinami.",
         "priceVerified": false
-      }
+      },
+      "relatedDifferentCutProducts": [
+        {
+          "name": "Ekologiška smulkinta vištiena (šviežia atvėsinta)",
+          "url": "https://kazlauskuekoukis.lt/ekologiska-smulkinta-vistiena",
+          "kind": "farmer_product_other_form",
+          "producer": "Kazlauskų eko ūkis",
+          "suitableFor": "Tik receptams, kuriuose yra smulkinta vištiena; ne tiesioginis krūtinėlės filė pakaitalas.",
+          "priceVerified": false,
+          "availabilityVerified": false,
+          "note": "Naudotojo pateikta tiesioginė nuoroda, tačiau produkto forma yra smulkinta vištiena, o ne vištienos krūtinėlės filė. Nenaudoti automatinėje filė receptų rotacijoje."
+        }
+      ],
+      "note": "Kazlauskų eko ūkis turi atskirus 'vištienos krūtinėlė' ir 'smulkinta vištiena' produkto puslapius. Pirmas yra galimas filė kandidatas (be kaulo statusas nepatvirtintas), antras netinka filė receptui be pakeitimų. Tikslus SKU prioritetas neteikiamas, kol dalis nepatikrinta. Barbora lieka atsarginė nuoroda."
     },
     "beef": {
       "primary": "farmer",
