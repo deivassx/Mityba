@@ -126,10 +126,11 @@
         const store=plan.stores.find(s=>s.id===id);
         const sum=round(plan.items.filter(p=>p.store===id).reduce((n,p)=>n+p.cost,0));
         if(!store||store.feesVerified!==true||!isRecent(store.feesCheckedAt,plan.maxAge)
-          ||!Number.isFinite(store.deliveryFeeEur)||!Number.isFinite(store.packingFeeEur)
+          ||!Number.isFinite(store.deliveryFeeEur)
+          ||!(Number.isFinite(store.packingFeeEur)||(Array.isArray(store.packingTiers)&&store.packingTiers.some(t=>t.from===0&&Number.isFinite(t.fee))))
           ||(store.minOrderEur!=null&&sum<store.minOrderEur)){allFeesVerified=false;break;}
         const delivery=store.freeDeliveryFromEur!=null&&sum>=store.freeDeliveryFromEur?0:store.deliveryFeeEur;
-        let packing=store.packingFeeEur;
+        let packing=store.packingFeeEur??0;
         if(store.packingTiers)for(const tier of store.packingTiers)if(sum>=tier.from)packing=tier.fee;
         const small=store.smallBasketFeeBelowEur!=null&&sum<store.smallBasketFeeBelowEur?store.smallBasketFeeEur||0:0;
         fees+=delivery+packing+small;
