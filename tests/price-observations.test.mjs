@@ -20,7 +20,7 @@ test('Kai puslapyje pirmiau yra antraštė ir susijusi prekė, kaina imama iš p
 });
 test('Kitas SKU ar nepatikimas produkto pavadinimas negali turėti šios kainos',()=>{
  assert.throws(()=>extractPrice(pageLamb,'https://sesuoleliuukis.lt/produktas/sviezios-erienos-desreles/'),/Tik pažįstami/);
- assert.throws(()=>extractPrice(pageTurkey,lambUrl),/Nesutampa pagrindinis/);
+ assert.throws(()=>extractPrice(pageTurkey,lambUrl),/Nesutampa produkto pavadinimas/);
  assert.throws(()=>extractPrice('<h1>Kalakutų krūtinėlių file 1kg.</h1><p>€15</p>',turkeyUrl),/Nerasta vienareikšmė/);
 });
 test('Patvirtintos oficialaus puslapio kainos rodomos kaip orientacinės vienos savaitės kainos',async()=>{
