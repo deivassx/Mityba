@@ -10,7 +10,7 @@ vm.runInContext(source,context);
 const {build,demand,copyText}=win.TwoWeekShop;
 const load=async week=>JSON.parse(await fs.readFile(new URL('../data/history/'+week+'.json',import.meta.url),'utf8'));
 const a=await load('2026-11-09'),b=await load('2026-11-16'),c=await load('2026-11-23');
-const d=await load('2026-11-30');
+const d=await load('2026-11-30'),e=await load('2026-12-07');
 
 test('14 dienų užsakymas sumuoja tikrą 2 savaičių meniu ir mėsą perka vienu kartu',()=>{
   const plan=build(a,b);
@@ -28,8 +28,8 @@ test('14 dienų užsakymas sumuoja tikrą 2 savaičių meniu ir mėsą perka vie
   for(const product of proteins) {
     assert.equal(grams[product.id],(demand(a)[product.id]||0)+(demand(b)[product.id]||0));
   }
-  assert.ok(grams.turkey>0 && grams.chicken>0 && grams.catfish>0 && grams.cod>0 && grams.pork_tenderloin>0);
-  assert.ok(!grams.salmon && !grams.lamb,'Pirmos 2 savaitės pakeistos ir nebeturi lašišos arba ėrienos');
+  assert.ok(grams.turkey>0 && grams.chicken>0 && grams.catfish>0 && grams.lamb>0);
+  assert.ok(!grams.salmon && !grams.cod && !grams.pork_tenderloin,'Pirmos 2 savaitės be šių produktų');
   assert.ok(grams.beef>0);
   assert.equal(proteins.find(p=>p.id==='catfish').packs,Math.ceil(grams.catfish/300));
   assert.ok(!proteins.find(p=>p.id==='turkey').url);
@@ -114,7 +114,7 @@ test('Jei ūkininkų SKU ar kaina nepatvirtinti, prie lašišos rodoma tikra Bar
 
 test('Nepatikrinta pakaitinė žuvis ir kategorijos nėra laikomos patvirtintais SKU',async()=>{
  const sources=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
- const plan=build(b,c,sources),cod=plan.items.find(x=>x.id==='cod');
+ const plan=build(d,e,sources),cod=plan.items.find(x=>x.id==='cod');
  assert.equal(cod.sourcing.barbora.kind,'similar_sku');
  assert.equal(cod.unavailable,true);
  assert.equal(cod.cost,null);
