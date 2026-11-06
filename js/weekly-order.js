@@ -51,7 +51,7 @@
   }
   const exactFarmlio=x=>['existing_catalog_sku','exact_sku'].includes(x?.kind)
     && /^https:\/\/farmlio\.lt\/pardavejai\/[^/]+\/prekes\/[^/?#]+\/?$/i.test(x?.url||'');
-  function candidates(product,sourcing,stores,maxAge) {
+  function candidates(product,sourcing,stores,maxAge,targetWeekStart) {
     const offers=[],seen=new Set();
     const add=(o)=>{
       const link=url(o.url);
@@ -63,10 +63,15 @@
     for(const farm of farmerProductLinks(sourcing)){
       if(!['farmer_product','producer_product_reseller'].includes(farm.kind))continue;
       const link=url(farm.url),hostname=new URL(link).hostname;
+      const promoExpired=!!farm.discountPriceValidUntil&&targetWeekStart>farm.discountPriceValidUntil;
+      const observed=promoExpired&&Number.isFinite(farm.regularPriceObservedEurPerKg)
+        ?farm.regularPriceObservedEurPerKg:farm.priceObservedEurPerKg;
       add({url:link,name:farm.name,store:hostname,storeName:farm.producer||hostname,
         packGrams: Number.isFinite(farm.packGrams)?farm.packGrams:null,
-        priceEur:null,verified:false,kind:'farmer',historicalEurPerKg:farm.priceObservedEurPerKg||null,
-        observedOn:farm.priceSeenOn||null});
+        priceEur:null,verified:false,kind:'farmer',
+        historicalEurPerKg:Number.isFinite(observed)?observed:null,
+        priceBasis:farm.soldByWeight===true?'variable_weight':'per_kg',
+        promoExpired,observedOn:farm.priceSeenOn||null});
     }
     if(product?.url&&product?.store){
       const shop=stores.find(x=>x.id===product.store);
@@ -76,7 +81,8 @@
       add({url:product.url,name:product.name||'Katalogo prekė',store:product.store,
         storeName:shop?.name||product.store,packGrams:product.packGrams||null,
         priceEur:verified?product.priceEur:null,verified:!!verified,kind:'catalog',
-        historicalUnitPrice:!verified&&Number.isFinite(product.priceEur)?product.priceEur:null});
+        historicalUnitPrice:!verified&&Number.isFinite(product.priceEur)?product.priceEur:null,
+        observedOn:product.verification?.checkedAt||null});
     }
     if(exactFarmlio(sourcing?.farmlio)){
       const x=sourcing.farmlio;
@@ -88,9 +94,33 @@
       const x=sourcing.barbora;
       add({url:x.url,name:x.name,store:'barbora',storeName:'Barbora (atsarginis)',
         packGrams:x.packGrams||null,priceEur:null,verified:false,kind:'fallback',
-        historicalEurPerKg:x.priceObservedEurPerKg||null,observedOn:x.priceSeenOn||null});
+        historicalEurPerKg:Number.isFinite(x.priceObservedEurPerKg)?x.priceObservedEurPerKg:null,
+        observedOn:x.priceSeenOn||null});
     }
     return offers;
+  }
+  // Kaina yra informacinė: fiksuota pakuotė arba faktiniu svoriu parduodama prekė.
+  function indicative(offer,grams){
+    if(!offer)return null;
+    if(offer.verified&&Number.isFinite(offer.priceEur)&&offer.priceEur>0&&offer.packGrams>0){
+      return {amount:round(Math.ceil(grams/offer.packGrams)*offer.priceEur),
+        unitPrice:offer.priceEur,unit:'pack',note:'Patikrinta konkretaus SKU pakuotės kaina',verified:true};
+    }
+    if(Number.isFinite(offer.historicalEurPerKg)&&offer.historicalEurPerKg>0){
+      const gramsCharged=offer.priceBasis==='variable_weight'?grams
+        :offer.packGrams>0?Math.ceil(grams/offer.packGrams)*offer.packGrams:grams;
+      return {amount:round(gramsCharged/1000*offer.historicalEurPerKg),
+        unitPrice:offer.historicalEurPerKg,unit:'kg',
+        note:offer.promoExpired?'Įprasta kaina, matyta '+(offer.observedOn||'anksčiau')+'; akcija jau pasibaigusi':
+          'Matyta '+(offer.observedOn||'anksčiau')+'; tik orientyras',
+        verified:false};
+    }
+    if(Number.isFinite(offer.historicalUnitPrice)&&offer.historicalUnitPrice>0&&offer.packGrams>0){
+      return {amount:round(Math.ceil(grams/offer.packGrams)*offer.historicalUnitPrice),
+        unitPrice:offer.historicalUnitPrice,unit:'pack',
+        note:'Ankstesnė katalogo kaina; patikrink prieš užsakymą',verified:false};
+    }
+    return null;
   }
   function evaluate(plan){
     for(const line of plan.items){
@@ -98,34 +128,38 @@
         ||line.choices.find(o=>o.kind==='catalog')
         ||line.choices.find(o=>o.kind==='farmlio')
         ||line.choices.find(o=>o.kind==='fallback')||null;
-      // Rekomenduojama šaltinio nuoroda nėra pasirinktas pirkimo tiekėjas.
       line.reference=reference;
-      line.selected=null;
-      line.store=null;
+      line.selected=null;line.store=null;
       line.productName=reference?.name||null;
       line.url=reference?.url||null;
       line.packGrams=reference?.packGrams||null;
       line.packs=line.packGrams>0?Math.ceil(line.grams/line.packGrams):null;
-      line.cost=reference?.verified&&line.packs&&reference.priceEur>0?round(reference.priceEur*line.packs):null;
-      line.priceFresh=!!reference?.verified;
+      // Jei pagrindinio ūkininko kainos nėra, galima parodyti kito TIKSLAUS SKU
+      // alternatyvos kainą, aiškiai atskiriant nuo pagrindinio produkto.
+      line.priceOffer=line.choices.find(o=>o===reference&&indicative(o,line.grams))
+        ||line.choices.find(o=>indicative(o,line.grams))||null;
+      line.quote=indicative(line.priceOffer,line.grams);
+      line.estimatedCost=line.quote?.amount??null;
+      line.estimateFromAlternative=!!line.priceOffer&&line.priceOffer!==reference;
+      line.cost=line.quote?.verified===true&&!line.estimateFromAlternative?line.quote.amount:null;
+      line.priceFresh=line.quote?.verified===true;
       line.needsReview=line.cost===null;
     }
-    plan.suppliers=[]; // Iki atsiskaitymo patikros prekių nuorodos nėra pasirinktos parduotuvės.
-    plan.tooManyStores=false;
+    plan.suppliers=[];plan.tooManyStores=false;
     plan.missing=plan.items.filter(p=>!p.reference);
-    plan.unknownPrice=plan.items.filter(p=>p.cost===null);
+    plan.unknownPrice=plan.items.filter(p=>p.quote===null);
+    const estimates=plan.items.filter(p=>p.estimatedCost!==null);
+    plan.estimatedGoodsEur=round(estimates.reduce((n,p)=>n+p.estimatedCost,0));
+    plan.estimatedCount=estimates.length;
     const priced=plan.items.filter(p=>p.cost!==null);
     plan.partialGoodsEstimateEur=round(priced.reduce((n,p)=>n+p.cost,0));
     plan.pricedCount=priced.length;
     plan.linkedCount=plan.items.filter(p=>p.choices.length>0).length;
-    plan.incomplete=true;
-    plan.deliveryEstimateEur=null;
-    plan.grandTotalEur=null;
-    plan.priceIncludesDelivery=false;
-    plan.orderReady=false;
+    plan.incomplete=true;plan.deliveryEstimateEur=null;plan.grandTotalEur=null;
+    plan.priceIncludesDelivery=false;plan.orderReady=false;
     return plan;
   }
-  function build(menu,sources={products:{}},rules={}){
+  function build(menu,sources={products:{}},rules={},catalog={}){
     const needed=demand(menu);
     const policy=rules.shopping||{},bulk=policy.bulkPurchase||{},budget=policy.budget||{};
     if(bulk.planningHorizonDays!=null&&bulk.planningHorizonDays!==7)throw Error('Užsakymo taisyklės turi numatyti 7 dienas.');
@@ -143,9 +177,11 @@
       {id:'priedai',name:'Daržovės, pieno produktai ir priedai · 7 dienoms',description:'Vienos savaitės reikalingi kiekiai, be išankstinio priskyrimo parduotuvei.',lines:[]}
     ];
     for(const id of Object.keys(needed).sort((a,b)=>a.localeCompare(b))){
-      const product=menu.products.find(p=>p.id===id)||null;
+      const product=menu.products.find(p=>p.id===id)
+        ||(catalog.products||[]).find(p=>p.id===id)||null;
       const sourcing=PROTEINS.has(id)?(sources.products?.[id]||null):null;
-      const choices=candidates(product,sourcing,menu.stores||[],maxAge);
+      const stores=[...(menu.stores||[]),...(catalog.stores||[]).filter(s=>!(menu.stores||[]).some(t=>t.id===s.id))];
+      const choices=candidates(product,sourcing,stores,maxAge,start);
       const group=PROTEINS.has(id)?groups[0]:groups[1];
       group.lines.push({
         id,group:group.id,name:menu.ingredientLabels[id]||id,grams:needed[id],choices,
