@@ -67,6 +67,8 @@ jobs:
           mkdir -p _site
           cp index.html _site/
           cp -r css js _site/
+          mkdir -p _site/config
+          cp config/planavimo-taisykles.json _site/config/
           mkdir -p _site/data
           cp data/menu.json _site/data/
           cp data/sourcing-links.json _site/data/
