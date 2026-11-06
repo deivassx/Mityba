@@ -12,6 +12,12 @@ test('Ūkininkų pagrindinių SKU vieša kaina nuskaitoma be rekomenduojamų pre
  assert.deepEqual(extractPrice(pageLamb,lambUrl),{priceEur:31,unit:'kg',method:'Produkto puslapio EUR/kg'});
  assert.deepEqual(extractPrice(pageTurkey,turkeyUrl),{priceEur:13.5,unit:'kg',method:'WooCommerce pagrindinės prekės kaina'});
 });
+test('Kai puslapyje pirmiau yra antraštė ir susijusi prekė, kaina imama iš pagrindinės prekės',()=>{
+ const page='<h1>Parduotuvė</h1><p class="price">€2.00</p>'
+  +'<h1 class="product_title">Kalakutų krūtinėlių file 1kg.</h1>'
+  +'<p class="price"><del>€15.00</del><ins>€13.50</ins></p>';
+ assert.equal(extractPrice(page,turkeyUrl).priceEur,13.5);
+});
 test('Kitas SKU ar nepatikimas produkto pavadinimas negali turėti šios kainos',()=>{
  assert.throws(()=>extractPrice(pageLamb,'https://sesuoleliuukis.lt/produktas/sviezios-erienos-desreles/'),/Tik pažįstami/);
  assert.throws(()=>extractPrice(pageTurkey,lambUrl),/Nesutampa pagrindinis/);
