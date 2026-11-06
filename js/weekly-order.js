@@ -51,7 +51,7 @@
   }
   const exactFarmlio=x=>['existing_catalog_sku','exact_sku'].includes(x?.kind)
     && /^https:\/\/farmlio\.lt\/pardavejai\/[^/]+\/prekes\/[^/?#]+\/?$/i.test(x?.url||'');
-  function candidates(product,sourcing,stores,maxAge,targetWeekStart) {
+  function candidates(product,sourcing,stores,maxAge,targetWeekStart,observations={}) {
     const offers=[],seen=new Set();
     const add=(o)=>{
       const link=url(o.url);
@@ -63,15 +63,19 @@
     for(const farm of farmerProductLinks(sourcing)){
       if(!['farmer_product','producer_product_reseller'].includes(farm.kind))continue;
       const link=url(farm.url),hostname=new URL(link).hostname;
-      const promoExpired=!!farm.discountPriceValidUntil&&targetWeekStart>farm.discountPriceValidUntil;
-      const observed=promoExpired&&Number.isFinite(farm.regularPriceObservedEurPerKg)
-        ?farm.regularPriceObservedEurPerKg:farm.priceObservedEurPerKg;
+      const observation=(observations.offers||[]).find(o=>o.url===farm.url&&o.unit==='kg'
+        &&Number.isFinite(o.priceEur)&&o.priceEur>0);
+      const promoEnd=observation?.offerValidUntil||farm.discountPriceValidUntil||null;
+      const promoExpired=!!promoEnd&&targetWeekStart>promoEnd;
+      const ordinary=observation?.regularPriceEur??farm.regularPriceObservedEurPerKg;
+      const raw=observation?.priceEur??farm.priceObservedEurPerKg;
+      const observed=promoExpired&&Number.isFinite(ordinary)?ordinary:raw;
       add({url:link,name:farm.name,store:hostname,storeName:farm.producer||hostname,
-        packGrams: Number.isFinite(farm.packGrams)?farm.packGrams:null,
+        packGrams:Number.isFinite(farm.packGrams)?farm.packGrams:null,
         priceEur:null,verified:false,kind:'farmer',
         historicalEurPerKg:Number.isFinite(observed)?observed:null,
         priceBasis:farm.soldByWeight===true?'variable_weight':'per_kg',
-        promoExpired,observedOn:farm.priceSeenOn||null});
+        promoExpired,observedOn:observation?.observedAt?.slice(0,10)||farm.priceSeenOn||null});
     }
     if(product?.url&&product?.store){
       const shop=stores.find(x=>x.id===product.store);
@@ -159,7 +163,7 @@
     plan.priceIncludesDelivery=false;plan.orderReady=false;
     return plan;
   }
-  function build(menu,sources={products:{}},rules={},catalog={}){
+  function build(menu,sources={products:{}},rules={},catalog={},observations={}){
     const needed=demand(menu);
     const policy=rules.shopping||{},bulk=policy.bulkPurchase||{},budget=policy.budget||{};
     if(bulk.planningHorizonDays!=null&&bulk.planningHorizonDays!==7)throw Error('Užsakymo taisyklės turi numatyti 7 dienas.');
@@ -181,7 +185,7 @@
         ||(catalog.products||[]).find(p=>p.id===id)||null;
       const sourcing=PROTEINS.has(id)?(sources.products?.[id]||null):null;
       const stores=[...(menu.stores||[]),...(catalog.stores||[]).filter(s=>!(menu.stores||[]).some(t=>t.id===s.id))];
-      const choices=candidates(product,sourcing,stores,maxAge,start);
+      const choices=candidates(product,sourcing,stores,maxAge,start,observations);
       const group=PROTEINS.has(id)?groups[0]:groups[1];
       group.lines.push({
         id,group:group.id,name:menu.ingredientLabels[id]||id,grams:needed[id],choices,
