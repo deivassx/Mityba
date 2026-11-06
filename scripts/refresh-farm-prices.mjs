@@ -20,9 +20,19 @@ export function extractPrice(html,url){
   const u=new URL(url),farm=KNOWN_FARMS[u.hostname];
   if(!farm||!u.pathname.includes(farm.productSlug))throw Error('Tik pažįstami konkretaus produkto URL');
   const titles=[...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
-  // Temos, logotipai ir lipnūs meniu gali turėti kitus h1 prieš prekės h1.
-  const title=titles.find(m=>farm.expected.test(text(m[1])));
-  if(!title)throw Error('Nesutampa pagrindinis produkto pavadinimas');
+  // Produktų temos gali pavadinimą pateikti ne h1, o title/og:title (taip pat HTML entities).
+  const normalize=raw=>text(raw).replace(/&#(x[0-9a-f]+|\d+);/gi,(_,v)=>{
+      try{return String.fromCodePoint(v[0].toLowerCase()==='x'?parseInt(v.slice(1),16):Number(v))}catch{return ''}
+    }).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,'');
+  const looksRight=value=>farm.expected.test(value)
+    ||(u.hostname==='baltuoniu.kalakutai.lt'&&/kalakut/.test(normalize(value))
+      &&/krutinel/.test(normalize(value))&&/fil/.test(normalize(value)));
+  const matchingTitle=titles.find(m=>looksRight(m[1]));
+  const pageTitle=html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'';
+  const social=html.match(/<meta\b[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1]||'';
+  const title=matchingTitle||(looksRight(pageTitle)||looksRight(social)
+    ?{index:html.indexOf('product'),0:'',1:pageTitle||social}:null);
+  if(!title)throw Error('Nesutampa produkto pavadinimas nei h1, nei title/og:title');
   if(u.hostname==='sesuoleliuukis.lt'){
     // Oficialus pardavėjas nurodo €/kg ir galutinę sumą nustato pagal tikrą svorį.
     const region=text(html.slice(title.index,title.index+9000));
@@ -33,7 +43,7 @@ export function extractPrice(html,url){
   }
   if(u.hostname==='baltuoniu.kalakutai.lt'){
     // Pirmiausia pagrindinės prekės WooCommerce kaina, o ne šoninės rekomendacijos.
-    const around=html.slice(title.index,title.index+15000);
+    const around=html.slice(Math.max(0,title.index),Math.max(0,title.index)+15000);
     const p=around.match(/<p\b[^>]*class=["'][^"']*\bprice\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/i);
     if(p){
       const sale=p[1].match(/<ins\b[^>]*>([\s\S]*?)<\/ins>/i);
