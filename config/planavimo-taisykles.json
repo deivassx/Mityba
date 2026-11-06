@@ -215,7 +215,7 @@
     },
     "bulkPurchase": {
       "enabled": true,
-      "planningHorizonDays": 14,
+      "planningHorizonDays": 7,
       "proteinIngredientIds": [
         "turkey",
         "chicken",
@@ -229,16 +229,14 @@
         "cod",
         "pork_tenderloin"
       ],
-      "purchaseProteinAndFishOnceForTwoWeeks": true,
+      "purchaseProteinAndFishOnceForTwoWeeks": false,
       "purchaseFreshVegetablesAndAddonsWeekly": true,
       "maxDistinctCheckoutStoresAcrossHorizon": 2,
-      "twoWeekBudgetTargetEur": 200,
-      "twoWeekBudgetToleranceEur": 220,
-      "budgetInterpretation": "Bendra realiai perkamu 2 savaiciu produktu pakuociu, pristatymo ir pakavimo suma. Jau turimi produktai/likuciai gali mazinti moketina suma, bet juos reikia suvesti ir tiksliai atskaityti. Nepilno krepselio daline suma NIEKADA nera visu 2 sav. kaina.",
-      "temperatureStorage": "Mėsa ir žuvis 2 savaitems gali būti perkamos iškart TIK jei atsargiai ir laiku užšaldomos -18 C ar žemiau. Atitirpinti šaldytuve. Daržoves ir šviežius priedus planuoti atskirai kiekvienai savaitei.",
-      "productEvidence": "Nepatikrintos mesos/zuves prekes turi buti parodytos su bendru 14 dienu kiekiu, bet be isgalvotos kainos, pakuotes, pardavejo arba atsiskaitymo nuorodos.",
-      "priceVerification": "Prieš užsakant patikrink SKU ir galutinį prekių bei pristatymo krepšelį; orientacinės katalogo kainos netampa patvirtintomis 2 savaičių kainomis.",
-      "uiBehavior": "2 savaiciu pirkiniu skiltis turi pradeti nuo siuo metu pasirinktos savaites ir apimti kita turima savaite. Jei kitos savaites meniu nera, nerodyti apsimetamo 14 dienu krepselio. Produktus skirstyti i 14 dienu baltymus ir atskirus svieziu prekiu savaitinius pirkinius. Vien tik spaudziamos prekiu nuorodos nieko neuzsako.",
+      "budgetInterpretation": "Bendra realiai perkamų VIENOS pasirinktos savaitės (7 dienų, 14 valgių) produktų pilnų pakuočių, pristatymo ir pakavimo suma. Siekti 100 EUR, tolerancija iki 110 EUR. Nepilno krepšelio dalinės sumos nevadinti visa savaitės kaina. Kitos savaitės poreikio prie šio užsakymo nepridėti.",
+      "temperatureStorage": "Mėsą ir žuvį pirk tik 7 dienų meniu; vėlesnėms dienoms skirtas porcijas saugiai užšaldyk –18 °C ar žemiau, atitirpink šaldytuve. Daržoves ir šviežius priedus pirk tos pačios savaitės poreikiui.",
+      "productEvidence": "Nepatikrintos mėsos/žuvies prekės rodomos su vienos savaitės tiksliais gramais, bet be išgalvotos kainos, pakuotės, pardavėjo ar atsiskaitymo nuorodos.",
+      "priceVerification": "Prieš perkant patikrink vienos savaitės SKU, kainas, minimalų užsakymą, pristatymą, pakavimą ir ne daugiau kaip 2 parduotuvių ribą. Seno katalogo kainos nėra patvirtinta savaitės suma.",
+      "uiBehavior": "Savaitinio užsakymo skiltis visada naudoja TIK naršyklėje pasirinktą 7 dienų meniu. Neieško ir nekrauna kitos savaitės. Mėsą/žuvį ir daržoves/priedus grupuoja atskirai, tačiau visų produktų poreikį ir pakuočių apvalinimą skaičiuoja per tą pačią vieną savaitę. Rodo ūkių konkrečių produktų ir Barbora atsargines nuorodas, nepasirenka nepagrįstų kainų, neperka automatiškai.",
       "farmlioFallback": {
         "enabled": true,
         "priority": [
@@ -248,7 +246,7 @@
         ],
         "sourceFile": "data/sourcing-links.json",
         "showBothDirectFarmerAndFarmlioUrls": true,
-        "description": "Jei tiesioginiuose ūkiuose ir Farmlio nepavyksta rasti tikslaus konkretaus produkto ir patikimos kainos, rasti Barbora tokio pat žaliavinio produkto SKU ir pateikti jo nuorodą PAPILDOMAI (pvz. šviežia lašišos filė). Jeigu Barbora rasta tik kategorija, pažymėti, kad nėra konkretaus SKU. Parodyti matytą orientacinę kainą ir datą, bet niekada nevadinti realiojo laiko patvirtinta kaina ir neįtraukti į pirkimo sumą be patvirtinimo. Barbora alternatyva pati savaime neužima papildomos atsiskaitymo vietos – tik pasirinktas pasiūlymas. 14 dienų apsipirkimui ne daugiau kaip 2 parduotuvės.",
+        "description": "Jei tiesioginiuose ūkiuose ir Farmlio nepavyksta rasti tikslaus konkretaus produkto ir patikimos kainos, rasti Barbora tokio pat žaliavinio produkto SKU ir pateikti jo nuorodą PAPILDOMAI (pvz. šviežia lašišos filė). Jeigu Barbora rasta tik kategorija, pažymėti, kad nėra konkretaus SKU. Parodyti matytą orientacinę kainą ir datą, bet niekada nevadinti realiojo laiko patvirtinta kaina ir neįtraukti į pirkimo sumą be patvirtinimo. Barbora alternatyva pati savaime neužima papildomos atsiskaitymo vietos – tik pasirinktas pasiūlymas. Vienos savaitės apsipirkimui ne daugiau kaip 2 atsiskaitymo parduotuvės.",
         "showBarboraProductUrlWhenFarmerAndFarmlioUnverified": true,
         "example": {
           "ingredientId": "salmon",
@@ -263,7 +261,10 @@
         "excludedDomains": [
           "pilnaspuodas.lt"
         ]
-      }
+      },
+      "purchaseAllIngredientsForOneWeek": true,
+      "weeklyBudgetTargetEur": 100,
+      "weeklyBudgetToleranceEur": 110
     },
     "farmerProductLinkPolicy": {
       "enforcedInWebsite": true,
@@ -495,9 +496,9 @@
       "recipePreferences.excludedIngredientIds (generuojamiems meniu)",
       "recipePreferences.maxGramsPerServing (generuojamiems meniu)",
       "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)",
-      "shopping.bulkPurchase (14 dienu saraso ir kiekiu formavimas interneto svetaines JavaScript, tik su zinomais kandidatais)",
+      "shopping.bulkPurchase (7 dienų pasirinktos savaitės krepšelio skaičiavimas js/weekly-order.js, be kitos savaitės)",
       "recipePreferences.menuDiversity (32 receptai, nevienodi 8 savaičių planai)",
-      "shopping.farmerProductLinkPolicy (14 dienų svetainėje rodo tik konkrečius ūkių produktų URL ir aiškiai žymi tarpininkus)",
+      "shopping.farmerProductLinkPolicy (vienos savaitės svetainėje rodo tik konkrečius ūkių produktų URL ir aiškiai žymi tarpininkus)",
       "shopping.menuProteinSourcingPriority (ūkių prekių nuorodų prioritetinė 8 savaičių receptų rotacija)"
     ],
     "agentGuidanceOnly": [
@@ -514,7 +515,7 @@
       "shopping.comparison.farmerRegistry",
       "shopping.comparison.knownLimitations",
       "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)",
-      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI patikra ir uzsakymo blokavimas kai nepatvirtinta, ne automatine tiekėju paieska)",
+      "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (7 dienų UI įspėjimas, o ne reali krepšelio rezervacija)",
       "shopping.bulkPurchase.farmlioFallback (naujų SKU paieška ir kainų tikrinimas neautomatizuoti)",
       "shopping.farmerCatalogDiscovery (agento atliekama keliu saltiniu paieska; esamas farm-discovery.mjs automatiskai nepadengia visu siu kanalu / puslapiavimo)",
       "shopping.farmerCatalogDiscovery.productEquivalenceRule ir additionalTestCases (agentas privalo atskirti krutinele nuo smulkintos vistienos)"
