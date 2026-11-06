@@ -38,6 +38,10 @@ Svetainės `#dvi-savaites` skiltis nuo pasirinktos savaitės įkelia tos ir **ki
 
 **Griežtos ribos:** iki **2 atskirų parduotuvių visam 14 dienų laikotarpiui**, 2 savaičių biudžeto tikslas 200 € (tolerancija iki 220 €). Kol nepatikrintos kalakutienos, vištienos ir jautienos ūkių kainos arba bent vieno produkto kaina, svetainė rodo tik **dalinį senų katalogo kainų įvertį be pristatymo**, niekada nevadina jo galutiniu pirkinių krepšeliu ir nepatvirtina biudžeto ar parduotuvių ribos. Šviežios prekės perkamos savaitėmis, mėsa/žuvis į šaldiklį –18 °C. Jei pasirinkta paskutinė savaitė ir kitos nėra, skiltis rodo, kad pilnam 14 d. užsakymui trūksta plano. **Svetainė nenusiperka prekių pati**.
 
+## Prioritetinis meniu pagal ūkininkų mėsos ir žuvies produktus
+
+`scripts/rotation.mjs` prieš parinkdamas receptus skaito `data/sourcing-links.json`. Pirmenybė suteikiama **tiksliai ūkininko produkto nuorodai**, paskui ūkininko prekei per tarpininką, paskui tiksliai `Farmlio` produkto nuorodai. Prekės kategorija, pradinis ūkininko puslapis, išparduotas pasiūlymas arba atsarginė `Barbora` nuoroda prioriteto nesuteikia. 8 savaitėse kiekvienas receptas unikalus, naudojamos visos 8 baltymų grupės, maistingumo ribos išsaugotos. **Kainos, likučiai, pristatymas ir 2 parduotuvių krepšelis lieka nepatvirtinti**, kol nėra naujų patikrintų SKU. Papildžius konkrečias ūkininkų prekes, būsimi automatiškai generuojami meniu joms suteiks aukštesnį prioritetą.
+
 ## 48 patiekalų įvairovė (atnaujinta 2026-11-05)
 
 Bibliotekoje yra **48 unikalūs receptai** – po 8 kalakutienos, vištienos, šamo ir jautienos grupėse, po 4 ėrienos, kiaulienos išpjovos, lašišos ir menkės grupėse. Per pirmąsias 8 savaites **nei vienas tas pats receptas nepasikartoja** (4 per savaitę), vėlesniuose cikluose maišomi kiti deriniai. Jautiena neapsiriboja maltiniais: yra nugarinės kepsnys, juostelės, lėtai kepama mentė, rostbifas, burgerio paplotėliai ir sūriu užkepti kotletai. Yra kietojo sūrio bei fetos. Ir toliau galioja dvi gaminimo dienos, vienos skardos principas, daržovių ir maistingumo ribos.

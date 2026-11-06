@@ -269,6 +269,35 @@
       "missingExactProductUrl": "Nerodyti neegzistuojančios / bendros nuorodos; pažymėti, kad konkreti ūkininko prekė nerasta. Farmlio ir Barbora atsarginių nuorodų politika lieka galioti.",
       "sellerChannel": "Jei produktas tikras, bet parduodamas per tarpininką (pvz., Pilnas puodas), pažymėti, kad tai ūkininko produkcija PER PARDAVĖJĄ, o ne tiesioginis ūkis. Jei gamintojas neįvardytas, aiškiai vadinti pardavėjo preke.",
       "evidence": "URL turi turėti prekės kelią; kainos ar likučio nevadinti patvirtintu, kol nepatikrintas SKU bei pristatymas."
+    },
+    "menuProteinSourcingPriority": {
+      "enabled": true,
+      "sourceFile": "data/sourcing-links.json",
+      "appliedBy": "scripts/rotation.mjs",
+      "tieBreakers": [
+        "meal_nutrition",
+        "eight_week_uniqueness",
+        "diverse_proteins"
+      ],
+      "tiers": [
+        {
+          "tier": 4,
+          "source": "direct_farmer_exact_product_url"
+        },
+        {
+          "tier": 3,
+          "source": "named_farmer_product_via_reseller_exact_url"
+        },
+        {
+          "tier": 2,
+          "source": "farmlio_exact_product_url"
+        },
+        {
+          "tier": 0,
+          "source": "only_catalog_or_unavailable_or_Barbora_fallback"
+        }
+      ],
+      "rules": "Pirmiausia sudarinėti savaitinius meniu iš konkrečiose ūkininkų ir Farmlio produktų nuorodose rastų mėsos bei žuvies ingredientų. Niekada nevertinti ūkio pagrindinio puslapio ar bendro katalogo kaip konkrečios prekės. Išlaikyti visas 8 baltymų grupes per 8 savaites ir nė karto nekartoti recepto. Nuoroda nėra patvirtinta kaina, atsargos ar galimybė įsigyti; pirkimo parengtis vertinama atskirai pagal tikrus SKU, kainas, pristatymą ir 2 parduotuves."
     }
   },
   "recipePreferences": {
@@ -382,7 +411,8 @@
       ],
       "noRecipeRepeatedWithinEightWeeks": true,
       "details": "2 pietų patiekalai iš kalakutienos, vištienos, ėrienos ar kiaulienos; 2 vakarienės iš šamo, jautienos, lašišos ar menkės",
-      "priceNote": "Nauji produktai be realių kainų yra tik planavimo juodraščiai"
+      "priceNote": "Nauji produktai be realių kainų yra tik planavimo juodraščiai",
+      "prioritySourcing": "shopping.menuProteinSourcingPriority"
     },
     "instructionIngredientIntegrity": {
       "enabled": true,
@@ -416,7 +446,8 @@
       "recipePreferences.foodPreparation.preferredMethod (generuojamiems meniu)",
       "shopping.bulkPurchase (14 dienu saraso ir kiekiu formavimas interneto svetaines JavaScript, tik su zinomais kandidatais)",
       "recipePreferences.menuDiversity (32 receptai, nevienodi 8 savaičių planai)",
-      "shopping.farmerProductLinkPolicy (14 dienų svetainėje rodo tik konkrečius ūkių produktų URL ir aiškiai žymi tarpininkus)"
+      "shopping.farmerProductLinkPolicy (14 dienų svetainėje rodo tik konkrečius ūkių produktų URL ir aiškiai žymi tarpininkus)",
+      "shopping.menuProteinSourcingPriority (ūkių prekių nuorodų prioritetinė 8 savaičių receptų rotacija)"
     ],
     "agentGuidanceOnly": [
       "shopping.selectionPriorities",

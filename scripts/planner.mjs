@@ -160,13 +160,14 @@ export async function generate(now=new Date()) {
     }
   } catch(e) { if(e.code!=='ENOENT')throw e; }
   const bank=JSON.parse(await fs.readFile('data/recipe-library.json','utf8'));
-  const {recipes,pairs}=selectWeeklyRecipes(menu.recipes,bank,week);
+  const sourceOffers=JSON.parse(await fs.readFile('data/sourcing-links.json','utf8'));
+  const {recipes,pairs,sourcingPriority}=selectWeeklyRecipes(menu.recipes,bank,week,{sources:sourceOffers,nutrients:menu.nutrients});
   menu.recipes=recipes;
   // Tikrinamos tik šiai savaitei reikalingos prekės: nebūtinos prekės negali sustabdyti plano.
   const usedProducts=new Set(recipes.flatMap(r=>Object.keys(r.ingredients)));
   menu.products=menu.products.filter(p=>usedProducts.has(p.id));
   menu.days=Array.from({length:7},(_,i)=>({date:new Date(+date+i*86400000).toISOString().slice(0,10),lunch:pairs[i<3?0:1][0],dinner:pairs[i<3?0:1][1]}));
-  menu.meta={...menu.meta,recipePreferencesApplied:true,weekStart:week,generatedAt:now.toISOString(),status:'Automatiškai patikrinta savaitė',pricingNotice:'Prekių kainos patikrintos '+now.toISOString()+'. Galutinės kainos ir pristatymo sąlygos gali pasikeisti.'};
+  menu.meta={...menu.meta,recipePreferencesApplied:true,sourcingPriority,weekStart:week,generatedAt:now.toISOString(),status:'Automatiškai patikrinta savaitė',pricingNotice:'Prekių kainos patikrintos '+now.toISOString()+'. Galutinės kainos ir pristatymo sąlygos gali pasikeisti.'};
   menu.sessions=pairs.map((pair,i)=>({title:i?'Trečiadienis':'Sekmadienis',subtitle:i?'IV–VII dienoms':'I–III dienoms',summary:pair.map(id=>menu.recipes.find(r=>r.id===id).title).join(' + '),servings:Object.fromEntries(pair.map(id=>[id,i?4:3])),steps:['Padaugink kiekvieno recepto ingredientus iš jo porcijų skaičiaus.','Kiekvieną receptą iškepk orkaitėje vienoje didelėje skardoje; jeigu 3–4 porcijos netelpa vienu sluoksniu, kepk keliais etapais ta pačia skarda, be keptuvės.','Gatavas porcijas per 2 val. atvėsink; vėlesnėms dienoms skirtas porcijas užšaldyk ir atitirpink šaldytuve.'],duration:'Apie 70–90 min.'}));
   validate(menu,false);
   // Tikrinti esamus ir kitų ūkių patvirtintus SKU, apskaičiuoti visas pakuotes ir

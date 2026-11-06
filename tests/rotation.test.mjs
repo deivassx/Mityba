@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {selectWeeklyRecipes} from '../scripts/rotation.mjs';
+import {selectWeeklyRecipes,sourceTier} from '../scripts/rotation.mjs';
 import {validate,validateRecipePreferences} from '../scripts/planner.mjs';
 
 const catalog=JSON.parse(await fs.readFile(new URL('../data/catalog.json',import.meta.url),'utf8'));
@@ -63,3 +63,23 @@ test('atmeta nemėgstamas daržoves, per daug bulvių ir keptuvėje kepamą nauj
  assert.throws(()=>validateRecipePreferences(menu),/vienai skardai/);
 });
 
+
+test('Konkrečios ūkių ir Farmlio produktų nuorodos – meniu prioritetas',async()=>{
+ const sourcing=JSON.parse(await fs.readFile(new URL('../data/sourcing-links.json',import.meta.url),'utf8'));
+ assert.equal(sourceTier('eriena',sourcing),4);
+ assert.equal(sourceTier('kalakutiena',sourcing),3);
+ assert.equal(sourceTier('vistiena',sourcing),3);
+ assert.equal(sourceTier('samas',sourcing),2);
+ assert.equal(sourceTier('lasisa',sourcing),0);
+ const result=selectWeeklyRecipes(catalog.recipes,bank,'2026-11-09',{sources:sourcing,nutrients:catalog.nutrients});
+ assert.equal(result.sourcingPriority.withProductLinks,3);
+ const fake=structuredClone(sourcing);
+ fake.products.turkey.farmers=[{kind:'farmer_product',name:'Pagrindinis',producer:'Ūkis',url:'https://ukis.lt/'}];
+ assert.equal(sourceTier('kalakutiena',fake),0,'Bendras ūkio puslapis nėra SKU');
+ const modified=structuredClone(sourcing);
+ modified.products.salmon.farmers=[{kind:'farmer_product',name:'Lašišos filė',producer:'Žuvininkas',url:'https://ukis.lt/produktas/lasisos-file/'}];
+ assert.equal(sourceTier('lasisa',modified),4);
+ const weekdates=Array.from({length:8},(_,i)=>plusWeeks(i));
+ const n=(src)=>weekdates.map(w=>selectWeeklyRecipes(catalog.recipes,bank,w,{sources:src,nutrients:catalog.nutrients})).flatMap(m=>m.sourcingPriority.priorities).filter(p=>p.group==='lasisa').length;
+ assert.ok(n(modified)>n(sourcing),'Nauja konkreti ūkininko nuoroda keičia meniu prioritetą');
+});
