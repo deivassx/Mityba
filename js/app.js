@@ -161,28 +161,21 @@ function renderHistory() {
       return `<a class="history-card" href="${entry.weekStart===preferred?'./':'?week='+encodeURIComponent(entry.weekStart)}" data-week="${safe(entry.weekStart)}"${current?' aria-current="page"':''}>${entry.photo?`<img src="${safe(safeUrl(entry.photo))}" alt="" loading="lazy" onerror="this.hidden=true">`:''}<div class="history-card-body"><span class="pillgreen">${safe(label)}</span>${badge}<strong>${safe(weekLabel(entry.weekStart,entry.weekEnd))}</strong><small>${safe(entry.recipes.length)} patiekalai · 7 dienos</small><small>${safe(entry.recipes.join(' · '))}</small></div></a>`;
     }).join('');
 }
-async function renderTwoWeekShopping(menu,request) {
-  const output=document.getElementById('fortnight-output');
-  if(!output || !window.TwoWeekShop)return;
-  const nextDate=new Date(Date.parse(menu.meta.weekStart+'T00:00:00Z')+7*86400000).toISOString().slice(0,10);
-  const second=historyEntries.find(entry=>entry.weekStart===nextDate);
-  if(!second) {
-    output.setAttribute('aria-busy','false');
-    output.innerHTML='<div class="card fortnight-empty">Pilnam 14 dienų užsakymui trūksta kitos savaitės meniu. Pasirink ankstesnę savaitę arba papildyk planą.</div>';
-    return;
-  }
+async function renderWeeklyShopping(menu,request) {
+  const output=document.getElementById('weekly-output');
+  if(!output || !window.WeeklyShop)return;
   output.setAttribute('aria-busy','true');
-  output.innerHTML='<div class="card fortnight-loading">Skaičiuojami dviejų savaičių produktai…</div>';
+  output.innerHTML='<div class="card fortnight-loading">Skaičiuojamas pasirinktos savaitės užsakymas…</div>';
   try {
-    const [nextMenu,sources]=await Promise.all([
-      loadJson('./data/history/'+nextDate+'.json'),
-      loadJson('./data/sourcing-links.json').catch(()=>({products:{}}))
+    const [sources,rules]=await Promise.all([
+      loadJson('./data/sourcing-links.json').catch(()=>({products:{}})),
+      loadJson('./config/planavimo-taisykles.json')
     ]);
     if(request!==selectionRequest)return;
-    const plan=window.TwoWeekShop.build(menu,nextMenu,sources);
-    window.TwoWeekShop.render(plan);
+    const plan=window.WeeklyShop.build(menu,sources,rules);
+    window.WeeklyShop.render(plan);
   }catch(error){
-    if(request===selectionRequest)output.innerHTML='<div class="card fortnight-empty">Dviejų savaičių sąrašo nepavyko atidaryti: '+safe(error.message)+'.</div>';
+    if(request===selectionRequest)output.innerHTML='<div class="card fortnight-empty">Vienos savaitės pirkinių sąrašo nepavyko atidaryti: '+safe(error.message)+'.</div>';
   }finally {
     if(request===selectionRequest)output.setAttribute('aria-busy','false');
   }
@@ -200,12 +193,12 @@ async function selectWeek(week,updateUrl=true) {
     if(request!==selectionRequest)return;
     state=makeData(menu);
     render();renderHistory();
-    renderTwoWeekShopping(menu,request);
+    renderWeeklyShopping(menu,request);
     const preferred=selected===preferredWeek();
     document.getElementById('selected-week').innerHTML =
        `${preferred?'Artimiausia / einamoji savaitė':'Pasirinkta savaitė'} · ${safe(weekLabel(menu.meta.weekStart,menu.days.at(-1).date))}
        ${preferred?'':'<a href="./" data-latest>Grįžti į artimiausią savaitę →</a>'}
-       <div class="sub">${menu.meta.isPlanningSeries?'Vienas iš 8 naujų meniu. Ūkininkų produktų kainos ir pilnas pirkinių krepšelis dar nepatvirtinti.':menu.meta.isExample?'Pavyzdinis meniu.':'Rodomi to meto kainų įverčiai; patikrink juos prieš pirkdamas.'}</div>`;
+       <div class="sub">${menu.meta.isPlanningSeries?'Savaitės meniu juodraštis. Ūkininkų produktų kainos ir pilnas pirkinių krepšelis dar nepatvirtinti.':menu.meta.isExample?'Pavyzdinis meniu.':'Rodomi to meto kainų įverčiai; patikrink juos prieš pirkdamas.'}</div>`;
     message.textContent='';
     if(updateUrl) {
       const url=new URL(location.href);url.searchParams.delete('week');
