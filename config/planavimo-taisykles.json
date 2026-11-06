@@ -336,7 +336,19 @@
         "supplier": "Baltuoniu kalakutai",
         "officialExactProductUrl": "https://baltuoniu.kalakutai.lt/product/kalakutu-krutineliu-file-1kg/",
         "expectation": "Nesvarbu, ar Google indeksuoja puslapi: turi atpazinti kaip tikslu kalakutienos file SKU, isaugoti tiesiogini URL ir kaina / prieinamuma patikrinti atskirai."
-      }
+      },
+      "productEquivalenceRule": "Ieskomo ingrediento 1:1 atitikti vertink pagal gyvuno rusi, mesa dali (krutinele, slaunele ir kt.), kaulo/odos buvima, apdorojima (file vs smulkinta, marinuota), svori ir maistinguma. Ta pati gyvuno rusis ar panasus pavadinimas nera pakankamas. Kandidatus su neaiskiu atitikimu laikyti farmer_product_candidate ir nesuteikti exact SKU prioriteto; konkreti medziaga ir tikslus recepto ingredientas turi sutapti.",
+      "additionalTestCases": [
+        {
+          "searchIngredient": "vištienos krūtinėlės filė",
+          "seller": "Kazlauskų ekologinis ūkis",
+          "suppliedByUserUrl": "https://kazlauskuekoukis.lt/ekologiska-smulkinta-vistiena",
+          "suppliedByUserUrlClassification": "smulkinta_vistiena_ne_file",
+          "discoveredBreastUrl": "https://kazlauskuekoukis.lt/ekologiska-vistienos-krutinele",
+          "discoveredBreastClassification": "vistienos_krutinele_kandidatas_be_kaulo_nepatvirtinta",
+          "expectation": "Abu oficialus SKU turi buti atpazinti ir issaugoti atskirai. Smulkinta vistiena negali buti palaikyta krutineles file; krutineles kandidatas negali gauti tikslaus SKU prioriteto, kol nera patvirtinta, kad tai receptui tinkama file be kaulo. Kaina ir prieinamumas tikrinami atskirai."
+        }
+      ]
     }
   },
   "recipePreferences": {
@@ -504,7 +516,8 @@
       "recipePreferences.preferredVegetablesNotYetCatalogued (reikia patikrintų parduotuvių produktų nuorodų)",
       "shopping.bulkPurchase.maxDistinctCheckoutStoresAcrossHorizon (UI patikra ir uzsakymo blokavimas kai nepatvirtinta, ne automatine tiekėju paieska)",
       "shopping.bulkPurchase.farmlioFallback (naujų SKU paieška ir kainų tikrinimas neautomatizuoti)",
-      "shopping.farmerCatalogDiscovery (agento atliekama keliu saltiniu paieska; esamas farm-discovery.mjs automatiskai nepadengia visu siu kanalu / puslapiavimo)"
+      "shopping.farmerCatalogDiscovery (agento atliekama keliu saltiniu paieska; esamas farm-discovery.mjs automatiskai nepadengia visu siu kanalu / puslapiavimo)",
+      "shopping.farmerCatalogDiscovery.productEquivalenceRule ir additionalTestCases (agentas privalo atskirti krutinele nuo smulkintos vistienos)"
     ]
   }
 }
