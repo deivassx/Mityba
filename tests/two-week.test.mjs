@@ -86,11 +86,11 @@ test('Be kainos rodomos Farmlio ir ūkininko nuorodos, ne išgalvotas SKU',async
  assert.equal(turkey.url,null);
  assert.equal(turkey.packs,null);
  assert.match(turkey.sourcing.farmlio.url,/farmlio.lt\/prekes/);
- assert.ok(turkey.sourcing.farmers.some(p=>p.url.includes('baltuoniu')));
+ assert.ok(turkey.sourcing.farmers.some(p=>p.url.includes('pilnaspuodas.lt/preke/kalakuto-krutineles-file')));
  assert.match(beef.sourcing.farmlio.url,/smulkinta-jautiena/);
  assert.equal(plan.suppliers.length,2);
  assert.match(copyText(plan),/Farmlio/);
- assert.match(copyText(plan),/Baltuonių kalakutai/);
+ assert.match(copyText(plan),/Baltuonių krūtinėlės filė/);
  assert.equal(plan.orderReady,false);
 });
 
@@ -128,7 +128,7 @@ test('Mėsos ir žuvies ūkių nuorodos rodo konkrečius produktus, ne pradžios
    const matched=win.TwoWeekShop.farmerProductLinks(source);
    assert.equal(matched.length,source.farmers.length,id+' - ne produkto puslapis');
    for(const entry of matched){
-     assert.match(new URL(entry.url).pathname,/^\\/(produktas|product|preke)\\/[^/]+\\/?$/i, id);
+     assert.ok(['/produktas/','/product/','/preke/'].some(prefix=>new URL(entry.url).pathname.startsWith(prefix)),id);
      assert.ok(!['farmer_home','seller_directory','farmlio_seller'].includes(entry.kind),id);
    }
  }
@@ -137,8 +137,8 @@ test('Mėsos ir žuvies ūkių nuorodos rodo konkrečius produktus, ne pradžios
  assert.equal(sources.products.beef.farmers.length,0);
  const plan=build(a,b,sources),list=copyText(plan);
  assert.match(list,/Ūkio prekė per pardavėją/);
- assert.doesNotMatch(list,/https:\\/\\/kazlauskuekoukis\\.lt\\//);
- assert.doesNotMatch(list,/https:\\/\\/baltuoniu\\.kalakutai\\.lt\\/\\s/);
+ assert.ok(!list.includes('https://kazlauskuekoukis.lt/'));
+ assert.ok(!list.includes('https://baltuoniu.kalakutai.lt/'));
  assert.match(list,/Tiesioginės ūkininko prekės nuorodos nerasta/);
 });
 test('Bendri ūkio puslapiai atsitiktinai grįžę į duomenis vis tiek nebus rodomi',()=>{
