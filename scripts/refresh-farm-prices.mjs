@@ -19,8 +19,10 @@ const euroPrice=s=>{const m=String(s).match(/(?:€\s*(\d{1,4}(?:[.,]\d{1,2})?)|
 export function extractPrice(html,url){
   const u=new URL(url),farm=KNOWN_FARMS[u.hostname];
   if(!farm||!u.pathname.includes(farm.productSlug))throw Error('Tik pažįstami konkretaus produkto URL');
-  const title=html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
-  if(!title||!farm.expected.test(text(title[1])))throw Error('Nesutampa pagrindinis produkto pavadinimas');
+  const titles=[...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+  // Temos, logotipai ir lipnūs meniu gali turėti kitus h1 prieš prekės h1.
+  const title=titles.find(m=>farm.expected.test(text(m[1])));
+  if(!title)throw Error('Nesutampa pagrindinis produkto pavadinimas');
   if(u.hostname==='sesuoleliuukis.lt'){
     // Oficialus pardavėjas nurodo €/kg ir galutinę sumą nustato pagal tikrą svorį.
     const region=text(html.slice(title.index,title.index+9000));
@@ -31,7 +33,8 @@ export function extractPrice(html,url){
   }
   if(u.hostname==='baltuoniu.kalakutai.lt'){
     // Pirmiausia pagrindinės prekės WooCommerce kaina, o ne šoninės rekomendacijos.
-    const p=html.match(/<p\b[^>]*class=["'][^"']*\bprice\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/i);
+    const around=html.slice(title.index,title.index+15000);
+    const p=around.match(/<p\b[^>]*class=["'][^"']*\bprice\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/i);
     if(p){
       const sale=p[1].match(/<ins\b[^>]*>([\s\S]*?)<\/ins>/i);
       const value=euroPrice(text(sale?.[1]||p[1]));
