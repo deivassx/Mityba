@@ -144,18 +144,30 @@ export function extractOffer(html, url) {
   return found[0];
 }
 
-export async function generate(now=new Date()) {
-  const menu=JSON.parse(await fs.readFile('data/catalog.json','utf8'));
+export function nextWeekStart(now=new Date()) {
   const date=new Date(now.toLocaleDateString('en-CA',{timeZone:'Europe/Vilnius'})+'T00:00:00Z');
   date.setUTCDate(date.getUTCDate()+((8-date.getUTCDay())%7 || 7));
-  const week=date.toISOString().slice(0,10);
+  return date.toISOString().slice(0,10);
+}
+export function assertTargetWeek(menu, week) {
+  assert(menu.meta.weekStart===week, 'Aktyvus meniu neatitinka tikslinės savaitės: '+week);
+}
+export async function generate(now=new Date()) {
+  const menu=JSON.parse(await fs.readFile('data/catalog.json','utf8'));
+  const week=nextWeekStart(now);
+  const date=new Date(week+'T00:00:00Z');
   // Jei ši savaitė jau priklauso iš anksto sudarytam 8 savaičių rinkiniui,
-  // nerašyti jos iš naujo ir negriauti vartotojo išsirinktos savaitės.
+  // išsaugoti receptus, bet aktyvuoti ją pagrindiniame puslapyje.
   try {
     const preplanned=JSON.parse(await fs.readFile('data/history/'+week+'.json','utf8'));
     if(preplanned.meta?.isPlanningSeries===true) {
       validate(preplanned,false);
-      console.log('Savaitė '+week+' jau parengta iš 8 savaičių rinkinio; negeneruojame iš naujo.');
+      assertTargetWeek(preplanned,week);
+      try { await archiveMenu(JSON.parse(await fs.readFile('data/menu.json','utf8'))); }
+      catch(e) { if(e.code!=='ENOENT')throw e; }
+      await archiveMenu(preplanned);
+      await fs.writeFile('data/menu.json',JSON.stringify(preplanned,null,2)+'\n');
+      console.log('Aktyvuotas suplanuotas savaitės '+week+' meniu; pirkimo patvirtinimo būsena nepakeista.');
       return preplanned;
     }
   } catch(e) { if(e.code!=='ENOENT')throw e; }
@@ -192,8 +204,9 @@ export async function generate(now=new Date()) {
   return menu;
 }
 
-export async function verifyPublished(base, attempts=20) {
+export async function verifyPublished(base, attempts=20, expectedWeek) {
   const expected=await fs.readFile('data/menu.json','utf8');
+  if(expectedWeek)assertTargetWeek(JSON.parse(expected),expectedWeek);
   let error;
   for(let i=0;i<attempts;i++) {
     try {
@@ -223,7 +236,7 @@ if(process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
       if(!isDraft)assert(menu.products.every(p=>positive(p.priceEur) && p.verification?.url===p.url),'Išsaugotame meniu nėra kainų patikros įrodymų');
       await archiveMenu(menu);
     }
-    else if(process.argv[2]==='published') await verifyPublished(process.argv[3]);
+    else if(process.argv[2]==='published') await verifyPublished(process.argv[3],20,process.env.EXPECTED_WEEK);
     else {
       const menu=JSON.parse(await fs.readFile('data/menu.json','utf8'));
       validate(menu,!menu.meta?.isPlanningSeries);

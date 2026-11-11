@@ -17,7 +17,7 @@ test('Pirkinių auditas žymi nepatvirtintus tiekėjus ir dalinę kainą',()=>{
   assert.ok(a.stores.length<=2);
 });
 test('Neįtraukia netinkamos jautienos iš Barbora',()=>{
-  const m=structuredClone(menu);
+  const m=JSON.parse(fsSync.readFileSync(new URL('../data/history/2026-11-09.json',import.meta.url),'utf8'));
   m.products.push({...JSON.parse(fsSync.readFileSync(new URL('../data/catalog.json',import.meta.url),'utf8')).products.find(p=>p.id==='beef')});
   const a=auditShopping(m,rules);
   assert.ok(a.warnings.some(w=>w.includes('BARBORA_NETINKA: beef')));

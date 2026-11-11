@@ -39,7 +39,11 @@ jobs:
         run: node --test
       - name: Generuoti ir patikrinti naują meniu
         if: github.event_name != 'push'
-        run: node scripts/planner.mjs generate
+        run: |
+          EXPECTED_WEEK=$(node --input-type=module -e "import {nextWeekStart} from './scripts/planner.mjs'; console.log(nextWeekStart())")
+          echo "EXPECTED_WEEK=$EXPECTED_WEEK" >> "$GITHUB_ENV"
+          node scripts/planner.mjs generate
+          node --input-type=module -e "import fs from 'node:fs'; import {assertTargetWeek} from './scripts/planner.mjs'; assertTargetWeek(JSON.parse(fs.readFileSync('data/menu.json','utf8')), '$EXPECTED_WEEK')"
       - name: Surasti kitų ūkių viešus pasiūlymus be mokamo API
         run: node scripts/farm-discovery.mjs
       - name: Palyginti ūkių pasiūlymus ir paskelbti trūkstamų SKU ataskaitą
@@ -56,7 +60,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/menu.json data/history
+          git add data/menu.json data/history data/price-observations.json
           if ! git diff --cached --quiet; then
             git commit -m 'Atnaujinti patikrintą savaitės meniu'
             git push origin HEAD:main

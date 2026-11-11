@@ -29,7 +29,7 @@ test('Išsaugotos 9 skirtingos savaitės nuo 2026-11-09',async()=>{
   assert.ok(!signatures.has(signature));signatures.add(signature);
  }
  const main=await file('data/menu.json');
- assert.equal(main.meta.weekStart,'2026-11-09');
+ assert.ok(ix.some(entry=>entry.weekStart===main.meta.weekStart));
  assert.throws(()=>validate(main,true),/Trūksta ingrediento/);
  const invalid=structuredClone(main);invalid.meta.purchaseReady=true;
  assert.throws(()=>validate(invalid,false),/Juodraštis/);

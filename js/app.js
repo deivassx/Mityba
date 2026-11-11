@@ -71,6 +71,8 @@ function render() {
 let latestMenu, historyEntries=[], selectionRequest=0;
 const weekLabel = (start,end) => `${start} – ${end}`;
 function preferredWeek() {
+  // Automatikos aktyvuota savaitė turi būti matoma iš karto po publikavimo.
+  if(latestMenu?.meta?.weekStart)return latestMenu.meta.weekStart;
   const dateParts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Vilnius',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
   const parts=Object.fromEntries(dateParts.map(p=>[p.type,p.value]));
   const today=`${parts.year}-${parts.month}-${parts.day}`;
