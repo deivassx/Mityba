@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-06T09:30:00Z",
+  "updatedAt": "2026-11-11T19:45:19.644Z",
   "offers": [
     {
       "url": "https://sesuoleliuukis.lt/produktas/eriuko-kumpis-be-kaulo/",
-      "name": "Ėriuko kumpis (be kaulo)",
+      "name": "Šešuolėlių ūkio ėriuko kumpis be kaulo",
       "priceEur": 31,
       "unit": "kg",
-      "observedAt": "2026-11-06T09:30:00Z",
-      "method": "Oficialaus produkto puslapio 31 €/kg peržiūra",
+      "observedAt": "2026-11-11T19:45:19.644Z",
+      "method": "Produkto puslapio EUR/kg",
       "availabilityVerified": false,
-      "note": "Galutinė suma po svėrimo, o ne fiksuotos 1 kg pakuotės kaina."
+      "note": "Viešai matyta prekės kaina; tikrą galutinę sumą, atsargas ir pristatymą reikia patikrinti."
     },
     {
       "url": "https://baltuoniu.kalakutai.lt/product/kalakutu-krutineliu-file-1kg/",
