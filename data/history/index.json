@@ -1,5 +1,19 @@
 [
   {
+    "weekStart": "2027-01-11",
+    "weekEnd": "2027-01-17",
+    "generatedAt": "2026-11-18T12:00:00.000Z",
+    "isExample": false,
+    "isPlanningSeries": true,
+    "recipes": [
+      "Vištienos iešmeliai su raugintomis daržovėmis",
+      "Pomidorinė menkė su feta",
+      "Kalakutiena su pomidorais ir kietuoju sūriu",
+      "Lašiša su kopūstais ir raugintomis daržovėmis"
+    ],
+    "photo": "https://gimmedelicious.com/wp-content/uploads/2020/02/Healthy-Sheet-Pan-Chicken-Sweet-Potato-and-Broccoli-20.jpg"
+  },
+  {
     "weekStart": "2027-01-04",
     "weekEnd": "2027-01-10",
     "generatedAt": "2026-11-06T08:45:55.402Z",
